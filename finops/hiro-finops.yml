@@ -5,18 +5,19 @@ provider: Hiro
 providerId: hiro
 created: '2026-05-08'
 modified: '2026-05-08'
-reconciled: false
+reconciled: true
 tags:
 - Web3
+- Blockchain
 - Bitcoin
 - Stacks
-- RPC
-- Smart Contracts
+- sBTC
+- Indexing
 - FinOps
-- Cost Management
 - FOCUS
-description: FOCUS-aligned FinOps placeholder for Hiro. Pipeline will replace with real billing details.
-notes: Initial scaffold — billing model has not yet been reconciled.
+description: Hiro public APIs are free; paid usage flows through the Hiro Platform
+  subscription.
+notes: Bills issued by Hiro Systems for the Platform.
 sources:
 - https://www.hiro.so/
 - https://focus.finops.org/focus-specification/v1-3/
@@ -26,41 +27,52 @@ alignedWith:
   dataSpec: FOCUS
   dataSpecVersion: '1.3'
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
-publisherName: Hiro
+publisherName: Hiro Systems PBC
 serviceCategory: Web3
 billingModel:
-  pricingCategory: To Be Reconciled
+  pricingCategory: Free + Subscription
   billingFrequency: Monthly
   billingCurrency: USD
   chargeCategories:
   - Usage
   - Purchase
-  - Adjustment
 focusColumns:
   ServiceName: Hiro
   ServiceCategory: Web3
   ProviderName: Hiro
-  PublisherName: Hiro
-  InvoiceIssuerName: Hiro
+  PublisherName: Hiro Systems
+  InvoiceIssuerName: Hiro Systems
   BillingCurrency: USD
   ChargeCategory: Usage
 meters:
-- name: api_usage
-  description: Catch-all meter pending reconciliation.
-  unit: varies
+- name: api_requests
+  description: Stacks API request count.
+  unit: request
   aggregation: sum
   dimensions:
-  - account
-  - resource
+  - api_key
+  - endpoint
+- name: chainhook_events
+  description: Chainhook events delivered.
+  unit: event
+  aggregation: sum
+  dimensions:
+  - predicate
+- name: devnet_hours
+  description: Managed devnet runtime hours.
+  unit: hour
+  aggregation: sum
+  dimensions:
+  - devnet
 principles:
 - name: Visibility
-  description: Pull provider invoices or usage exports until a self-serve usage feed is documented.
+  description: Monitor API usage in the Hiro Platform dashboard.
 - name: Allocation
-  description: Tag invoice line items to consuming business units in your FinOps store.
+  description: Tag projects/devnets per team.
 - name: Optimization
-  description: Levers depend on the provider's billing model; review at renewal once reconciled.
+  description: Use chainhooks instead of polling; cache token metadata.
 - name: Accountability
-  description: Assign a contract owner to review billing against negotiated terms.
+  description: Project owners review monthly usage.
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

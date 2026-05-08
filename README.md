@@ -1,6 +1,8 @@
 # Hiro (hiro)
 
-Hiro builds developer tools for Bitcoin, including the Stacks API, Bitcoin RPC, ordinals indexing, Clarity smart contract tooling, and the Hiro Wallet.
+Hiro builds developer tooling for Bitcoin and the Stacks layer. Provides REST APIs (Stacks Blockchain API, Token Metadata API, Signer Metrics API, Chainhooks API, Platform API), Stacks Node JSON-RPC, plus the Hiro Platform for managing devnets and chainhooks.
+
+OpenAPI specs for the Stacks Blockchain API, Stacks Node RPC, Token Metadata API, and Signer Metrics API are captured in [`openapi/`](openapi/).
 
 **URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/hiro/refs/heads/main/apis.yml)
 
@@ -9,8 +11,16 @@ Hiro builds developer tools for Bitcoin, including the Stacks API, Bitcoin RPC, 
 ## Type
 - **x-type:** company
 
-## Tags:
- - Web3, Bitcoin, Stacks, RPC, Smart Contracts
+## APIs
+- **Stacks Blockchain API** - REST API for Stacks blockchain data: blocks, transactions, mempool, accounts, smart contracts, BNS names, fungible/non-fungible tokens, microblocks, faucets, fee rates.
+- **Stacks Node RPC API** - JSON-RPC interface to a Stacks node: submit transactions, call read-only contracts, query mempool/state.
+- **Hiro Token Metadata API** - REST API for fungible and non-fungible token metadata on Stacks.
+- **Hiro Signer Metrics API** - REST API to monitor and analyze signer behavior and performance on the Stacks Nakamoto network.
+- **Hiro Chainhooks API** - REST API for Chainhook predicate registration and event streaming for Bitcoin and Stacks.
+- **Hiro Platform API** - REST API to programmatically manage Hiro Platform devnets and chainhooks.
+
+## Tags
+ - Web3, Blockchain, Bitcoin, Stacks, sBTC, Indexing
 
 ## Timestamps
 - **Created:** 2026-05-08
@@ -18,9 +28,9 @@ Hiro builds developer tools for Bitcoin, including the Stacks API, Bitcoin RPC, 
 
 ## Common Properties
 - [Website](https://www.hiro.so/)
-- [Plans](plans/hiro-plans-pricing.yml) — placeholder, pipeline reconciles later
-- [RateLimits](rate-limits/hiro-rate-limits.yml) — placeholder
-- [FinOps](finops/hiro-finops.yml) — FOCUS-aligned placeholder
+- [Plans](plans/hiro-plans-pricing.yml)
+- [RateLimits](rate-limits/hiro-rate-limits.yml)
+- [FinOps](finops/hiro-finops.yml)
 
 ## Maintainers
 **FN:** Kin Lane

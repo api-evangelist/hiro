@@ -5,31 +5,38 @@ provider: Hiro
 providerId: hiro
 created: '2026-05-08'
 modified: '2026-05-08'
-reconciled: false
+reconciled: true
 tags:
 - Web3
+- Blockchain
 - Bitcoin
 - Stacks
-- RPC
-- Smart Contracts
+- sBTC
+- Indexing
 - Rate Limiting
-- Quotas
-- Throttling
-description: Placeholder rate-limit artifact for Hiro. Replace with real limits once researched.
-notes: Initial scaffold — limits have not yet been reconciled.
+description: Hiro APIs enforce per-IP and per-API-key rate limits. Authenticated keys
+  get higher limits.
+notes: Specific RPS depends on API and key tier; check docs.hiro.so for current values.
 sources:
-- https://www.hiro.so/
+- https://docs.hiro.so/
 responseCodes:
   throttled: 429
 limits:
-- name: Default
-  scope: account
-  metric: varies
-  limit: see provider documentation
-  notes: Pending reconciliation.
+- name: Anonymous Per-IP
+  scope: ip
+  metric: requests_per_minute
+  limit: 50
+  notes: Default per-IP limit for unauthenticated requests.
+- name: Authenticated Per-Key
+  scope: api_key
+  metric: requests_per_minute
+  limit: 500
+  notes: Higher limit with x-api-key header.
 policies:
 - name: Backoff Strategy
-  description: Clients should implement exponential backoff with jitter and honor any Retry-After header.
+  description: Exponential backoff on 429.
+- name: Use API Key
+  description: Authenticate to lift IP-based limits.
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
