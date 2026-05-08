@@ -1,0 +1,29 @@
+aid: hiro
+url: https://raw.githubusercontent.com/api-evangelist/hiro/refs/heads/main/apis.yml
+name: Hiro
+x-type: company
+description: >-
+  Hiro builds developer tools for Bitcoin, including the Stacks API, Bitcoin RPC, ordinals indexing, Clarity smart contract tooling, and the Hiro Wallet.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Web3
+  - Bitcoin
+  - Stacks
+  - RPC
+  - Smart Contracts
+created: '2026-05-08'
+modified: '2026-05-08'
+specificationVersion: '0.19'
+apis: []
+common:
+  - type: Website
+    url: https://www.hiro.so/
+  - type: Plans
+    url: plans/hiro-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/hiro-rate-limits.yml
+  - type: FinOps
+    url: finops/hiro-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
