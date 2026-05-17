@@ -1,7 +1,7 @@
 aid: hiro
 url: https://raw.githubusercontent.com/api-evangelist/hiro/refs/heads/main/apis.yml
 name: Hiro
-x-type: company
+kind: company
 description: Hiro builds developer tooling for Bitcoin and the Stacks layer. Provides
   REST APIs (Stacks Blockchain API, Token Metadata API, Signer Metrics API, Chainhooks
   API, Platform API), Stacks Node JSON-RPC, plus the Hiro Platform for managing devnets
