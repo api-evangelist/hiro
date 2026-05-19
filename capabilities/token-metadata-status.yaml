@@ -1,0 +1,67 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Token Metadata API — Status
+  description: 'Token Metadata API — Status. 1 operations. Lead operation: API Status. Self-contained Naftiko capability covering
+    one Hiro business surface.'
+  tags:
+  - Hiro
+  - Status
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    HIRO_API_KEY: HIRO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: token-metadata-status
+    baseUri: https://api.hiro.so
+    description: Token Metadata API — Status business capability. Self-contained, no shared references.
+    resources:
+    - name: metadata-v1
+      path: /metadata/v1/
+      operations:
+      - name: getapistatus
+        method: GET
+        description: API Status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: token-metadata-status-rest
+    port: 8080
+    description: REST adapter for Token Metadata API — Status. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/metadata/v1
+      name: metadata-v1
+      description: REST surface for metadata-v1.
+      operations:
+      - method: GET
+        name: getapistatus
+        description: API Status
+        call: token-metadata-status.getapistatus
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: token-metadata-status-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Token Metadata API — Status. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: api-status
+      description: API Status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: token-metadata-status.getapistatus
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,152 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Signer Metrics API — Signers
+  description: 'Signer Metrics API — Signers. 2 operations. Lead operation: PoX Cycle Signers. Self-contained Naftiko capability
+    covering one Hiro business surface.'
+  tags:
+  - Hiro
+  - Signers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    HIRO_API_KEY: HIRO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: signer-metrics-signers
+    baseUri: https://api.hiro.so
+    description: Signer Metrics API — Signers business capability. Self-contained, no shared references.
+    resources:
+    - name: signer-metrics-v1-cycles-cycle_number-signers
+      path: /signer-metrics/v1/cycles/{cycle_number}/signers
+      operations:
+      - name: getpoxcyclesigners
+        method: GET
+        description: PoX Cycle Signers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: from
+          in: query
+          type: string
+          description: Start of time range (e.g., now-2h or ISO timestamp)
+        - name: to
+          in: query
+          type: string
+          description: End of time range (e.g., now or ISO timestamp)
+        - name: limit
+          in: query
+          type: integer
+          description: 'Number of results to return (default: 100)'
+          required: true
+        - name: offset
+          in: query
+          type: integer
+          description: 'Number of results to skip (default: 0)'
+          required: true
+        - name: cycle_number
+          in: path
+          type: integer
+          description: PoX cycle number
+          required: true
+    - name: signer-metrics-v1-cycles-cycle_number-signers-signer_id
+      path: /signer-metrics/v1/cycles/{cycle_number}/signers/{signer_id}
+      operations:
+      - name: getpoxcyclesigner
+        method: GET
+        description: PoX Cycle Signer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cycle_number
+          in: path
+          type: integer
+          description: PoX cycle number
+          required: true
+        - name: signer_id
+          in: path
+          type: string
+          description: Signer public key (hex encoded)
+          required: true
+  exposes:
+  - type: rest
+    namespace: signer-metrics-signers-rest
+    port: 8080
+    description: REST adapter for Signer Metrics API — Signers. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/signer-metrics/v1/cycles/{cycle-number}/signers
+      name: signer-metrics-v1-cycles-cycle-number-signers
+      description: REST surface for signer-metrics-v1-cycles-cycle_number-signers.
+      operations:
+      - method: GET
+        name: getpoxcyclesigners
+        description: PoX Cycle Signers
+        call: signer-metrics-signers.getpoxcyclesigners
+        with:
+          from: rest.from
+          to: rest.to
+          limit: rest.limit
+          offset: rest.offset
+          cycle_number: rest.cycle_number
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/signer-metrics/v1/cycles/{cycle-number}/signers/{signer-id}
+      name: signer-metrics-v1-cycles-cycle-number-signers-signer-id
+      description: REST surface for signer-metrics-v1-cycles-cycle_number-signers-signer_id.
+      operations:
+      - method: GET
+        name: getpoxcyclesigner
+        description: PoX Cycle Signer
+        call: signer-metrics-signers.getpoxcyclesigner
+        with:
+          cycle_number: rest.cycle_number
+          signer_id: rest.signer_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: signer-metrics-signers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Signer Metrics API — Signers. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: pox-cycle-signers
+      description: PoX Cycle Signers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: signer-metrics-signers.getpoxcyclesigners
+      with:
+        from: tools.from
+        to: tools.to
+        limit: tools.limit
+        offset: tools.offset
+        cycle_number: tools.cycle_number
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pox-cycle-signer
+      description: PoX Cycle Signer
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: signer-metrics-signers.getpoxcyclesigner
+      with:
+        cycle_number: tools.cycle_number
+        signer_id: tools.signer_id
+      outputParameters:
+      - type: object
+        mapping: $.

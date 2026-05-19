@@ -1,0 +1,282 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Stacks Blockchain API — Stacking Rewards
+  description: 'Stacks Blockchain API — Stacking Rewards. 5 operations. Lead operation: Get recent reward slot holders. Self-contained
+    Naftiko capability covering one Hiro business surface.'
+  tags:
+  - Hiro
+  - Stacking Rewards
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    HIRO_API_KEY: HIRO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stacks-blockchain-stacking-rewards
+    baseUri: https://api.hiro.so
+    description: Stacks Blockchain API — Stacking Rewards business capability. Self-contained, no shared references.
+    resources:
+    - name: extended-v1-burnchain-reward_slot_holders
+      path: /extended/v1/burnchain/reward_slot_holders
+      operations:
+      - name: getburnchainrewardslotholders
+        method: GET
+        description: Get recent reward slot holders
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          description: max number of items to fetch
+        - name: offset
+          in: query
+          type: integer
+          description: Result offset
+    - name: extended-v1-burnchain-reward_slot_holders-address
+      path: /extended/v1/burnchain/reward_slot_holders/{address}
+      operations:
+      - name: getburnchainrewardslotholdersbyaddress
+        method: GET
+        description: Get recent reward slot holder entries for the given address
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          description: Results per page
+        - name: offset
+          in: query
+          type: integer
+          description: Result offset
+        - name: address
+          in: path
+          type: string
+          description: Reward slot holder recipient address. Should either be in the native burnchain's format (e.g. B58 for
+            Bitcoin), or if a STX principal address is provided it wil
+          required: true
+    - name: extended-v1-burnchain-rewards
+      path: /extended/v1/burnchain/rewards
+      operations:
+      - name: getburnchainrewardlist
+        method: GET
+        description: Get recent burnchain reward recipients
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          description: Results per page
+        - name: offset
+          in: query
+          type: integer
+          description: Result offset
+    - name: extended-v1-burnchain-rewards-address
+      path: /extended/v1/burnchain/rewards/{address}
+      operations:
+      - name: getburnchainrewardlistbyaddress
+        method: GET
+        description: Get recent burnchain reward for the given recipient
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          description: Results per page
+        - name: offset
+          in: query
+          type: integer
+          description: Result offset
+        - name: address
+          in: path
+          type: string
+          description: Reward recipient address. Should either be in the native burnchain's format (e.g. B58 for Bitcoin),
+            or if a STX principal address is provided it will be encoded
+          required: true
+    - name: extended-v1-burnchain-rewards-address-total
+      path: /extended/v1/burnchain/rewards/{address}/total
+      operations:
+      - name: getburnchainrewardstotalbyaddress
+        method: GET
+        description: Get total burnchain rewards for the given recipient
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: address
+          in: path
+          type: string
+          description: Reward recipient address. Should either be in the native burnchain's format (e.g. B58 for Bitcoin),
+            or if a STX principal address is provided it will be encoded
+          required: true
+  exposes:
+  - type: rest
+    namespace: stacks-blockchain-stacking-rewards-rest
+    port: 8080
+    description: REST adapter for Stacks Blockchain API — Stacking Rewards. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/extended/v1/burnchain/reward-slot-holders
+      name: extended-v1-burnchain-reward-slot-holders
+      description: REST surface for extended-v1-burnchain-reward_slot_holders.
+      operations:
+      - method: GET
+        name: getburnchainrewardslotholders
+        description: Get recent reward slot holders
+        call: stacks-blockchain-stacking-rewards.getburnchainrewardslotholders
+        with:
+          limit: rest.limit
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v1/burnchain/reward-slot-holders/{address}
+      name: extended-v1-burnchain-reward-slot-holders-address
+      description: REST surface for extended-v1-burnchain-reward_slot_holders-address.
+      operations:
+      - method: GET
+        name: getburnchainrewardslotholdersbyaddress
+        description: Get recent reward slot holder entries for the given address
+        call: stacks-blockchain-stacking-rewards.getburnchainrewardslotholdersbyaddress
+        with:
+          limit: rest.limit
+          offset: rest.offset
+          address: rest.address
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v1/burnchain/rewards
+      name: extended-v1-burnchain-rewards
+      description: REST surface for extended-v1-burnchain-rewards.
+      operations:
+      - method: GET
+        name: getburnchainrewardlist
+        description: Get recent burnchain reward recipients
+        call: stacks-blockchain-stacking-rewards.getburnchainrewardlist
+        with:
+          limit: rest.limit
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v1/burnchain/rewards/{address}
+      name: extended-v1-burnchain-rewards-address
+      description: REST surface for extended-v1-burnchain-rewards-address.
+      operations:
+      - method: GET
+        name: getburnchainrewardlistbyaddress
+        description: Get recent burnchain reward for the given recipient
+        call: stacks-blockchain-stacking-rewards.getburnchainrewardlistbyaddress
+        with:
+          limit: rest.limit
+          offset: rest.offset
+          address: rest.address
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v1/burnchain/rewards/{address}/total
+      name: extended-v1-burnchain-rewards-address-total
+      description: REST surface for extended-v1-burnchain-rewards-address-total.
+      operations:
+      - method: GET
+        name: getburnchainrewardstotalbyaddress
+        description: Get total burnchain rewards for the given recipient
+        call: stacks-blockchain-stacking-rewards.getburnchainrewardstotalbyaddress
+        with:
+          address: rest.address
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stacks-blockchain-stacking-rewards-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Stacks Blockchain API — Stacking Rewards. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-recent-reward-slot-holders
+      description: Get recent reward slot holders
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-stacking-rewards.getburnchainrewardslotholders
+      with:
+        limit: tools.limit
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-recent-reward-slot-holder
+      description: Get recent reward slot holder entries for the given address
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-stacking-rewards.getburnchainrewardslotholdersbyaddress
+      with:
+        limit: tools.limit
+        offset: tools.offset
+        address: tools.address
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-recent-burnchain-reward-recipients
+      description: Get recent burnchain reward recipients
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-stacking-rewards.getburnchainrewardlist
+      with:
+        limit: tools.limit
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-recent-burnchain-reward-given
+      description: Get recent burnchain reward for the given recipient
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-stacking-rewards.getburnchainrewardlistbyaddress
+      with:
+        limit: tools.limit
+        offset: tools.offset
+        address: tools.address
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-total-burnchain-rewards-given
+      description: Get total burnchain rewards for the given recipient
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-stacking-rewards.getburnchainrewardstotalbyaddress
+      with:
+        address: tools.address
+      outputParameters:
+      - type: object
+        mapping: $.

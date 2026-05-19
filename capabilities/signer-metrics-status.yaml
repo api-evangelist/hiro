@@ -1,0 +1,67 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Signer Metrics API — Status
+  description: 'Signer Metrics API — Status. 1 operations. Lead operation: API Status. Self-contained Naftiko capability covering
+    one Hiro business surface.'
+  tags:
+  - Hiro
+  - Status
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    HIRO_API_KEY: HIRO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: signer-metrics-status
+    baseUri: https://api.hiro.so
+    description: Signer Metrics API — Status business capability. Self-contained, no shared references.
+    resources:
+    - name: signer-metrics
+      path: /signer-metrics/
+      operations:
+      - name: getapistatus
+        method: GET
+        description: API Status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: signer-metrics-status-rest
+    port: 8080
+    description: REST adapter for Signer Metrics API — Status. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/signer-metrics
+      name: signer-metrics
+      description: REST surface for signer-metrics.
+      operations:
+      - method: GET
+        name: getapistatus
+        description: API Status
+        call: signer-metrics-status.getapistatus
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: signer-metrics-status-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Signer Metrics API — Status. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: api-status
+      description: API Status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: signer-metrics-status.getapistatus
+      outputParameters:
+      - type: object
+        mapping: $.

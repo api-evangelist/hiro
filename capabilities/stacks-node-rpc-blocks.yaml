@@ -1,0 +1,1100 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Stacks 3.0+ RPC API — Blocks
+  description: 'Stacks 3.0+ RPC API — Blocks. 25 operations. Lead operation: Get Stacks 2.x block by ID. Self-contained Naftiko
+    capability covering one Hiro business surface.'
+  tags:
+  - Hiro
+  - Blocks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    HIRO_API_KEY: HIRO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stacks-node-rpc-blocks
+    baseUri: http://localhost:20443
+    description: Stacks 3.0+ RPC API — Blocks business capability. Self-contained, no shared references.
+    resources:
+    - name: v2-blocks-block_id
+      path: /v2/blocks/{block_id}
+      operations:
+      - name: getlegacyblockbyid
+        method: GET
+        description: Get Stacks 2.x block by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: block_id
+          in: path
+          type: string
+          description: Hex-encoded block ID (64 characters)
+          required: true
+    - name: v2-headers-quantity
+      path: /v2/headers/{quantity}
+      operations:
+      - name: getblockheaders
+        method: GET
+        description: Get recent 2.x block headers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: quantity
+          in: path
+          type: integer
+          description: Number of headers to return (max 256)
+          required: true
+    - name: v2-microblocks
+      path: /v2/microblocks
+      operations:
+      - name: postmicroblock
+        method: POST
+        description: Submit a microblock (Epoch 2.x)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v2-microblocks-confirmed-block_id
+      path: /v2/microblocks/confirmed/{block_id}
+      operations:
+      - name: getconfirmedmicroblocks
+        method: GET
+        description: Get stream of confirmed microblocks (Epoch 2.x)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: block_id
+          in: path
+          type: string
+          description: Hex-encoded Stacks block ID (64 characters)
+          required: true
+    - name: v2-microblocks-unconfirmed-block_id-seq
+      path: /v2/microblocks/unconfirmed/{block_id}/{seq}
+      operations:
+      - name: getunconfirmedmicroblocks
+        method: GET
+        description: Get stream of unconfirmed microblocks (Epoch 2.x)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: block_id
+          in: path
+          type: string
+          description: Hex-encoded parent block ID (64 characters)
+          required: true
+        - name: seq
+          in: path
+          type: integer
+          description: Starting sequence number (0-65535)
+          required: true
+    - name: v2-microblocks-microblock_id
+      path: /v2/microblocks/{microblock_id}
+      operations:
+      - name: getmicroblockbyid
+        method: GET
+        description: Get a stream of microblocks beginning
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: microblock_id
+          in: path
+          type: string
+          description: Hex-encoded microblock hash (64 characters)
+          required: true
+    - name: v3-blocks-height-block_height
+      path: /v3/blocks/height/{block_height}
+      operations:
+      - name: getnakamotoblockbyheight
+        method: GET
+        description: Fetch a Nakamoto block by its height and optional tip
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: block_height
+          in: path
+          type: integer
+          description: The block's height (max 4294967295)
+          required: true
+    - name: v3-blocks-replay-block_id
+      path: /v3/blocks/replay/{block_id}
+      operations:
+      - name: blockreplay
+        method: GET
+        description: Replay mining of a block and returns its content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: block_id
+          in: path
+          type: string
+          description: The block ID hash
+          required: true
+    - name: v3-blocks-simulate-block_id
+      path: /v3/blocks/simulate/{block_id}
+      operations:
+      - name: blocksimulate
+        method: GET
+        description: Simulate mining of a block with the specified transactions and returns its content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: block_id
+          in: path
+          type: string
+          description: The block ID hash
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v3-blocks-upload
+      path: /v3/blocks/upload
+      operations:
+      - name: uploadnakamotoblock
+        method: POST
+        description: Upload a Nakamoto block
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: broadcast
+          in: query
+          type: string
+          description: If set to `"1"` the node will broadcast the uploaded block to peers.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v3-blocks-block_id
+      path: /v3/blocks/{block_id}
+      operations:
+      - name: getnakamotoblockbyid
+        method: GET
+        description: Get Nakamoto block by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: block_id
+          in: path
+          type: string
+          description: The block's ID hash (64-character hex string)
+          required: true
+    - name: v3-signer-signer_pubkey-cycle_number
+      path: /v3/signer/{signer_pubkey}/{cycle_number}
+      operations:
+      - name: getsignerblockssigned
+        method: GET
+        description: Get number of blocks signed by signer during a given reward cycle
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: signer_pubkey
+          in: path
+          type: string
+          description: Hex-encoded compressed Secp256k1 public key of signer
+          required: true
+        - name: cycle_number
+          in: path
+          type: integer
+          description: Reward cycle number
+          required: true
+    - name: v3-sortitions
+      path: /v3/sortitions
+      operations:
+      - name: getlatestsortitions
+        method: GET
+        description: Get latest sortition information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v3-sortitions-burn-burn_header_hash
+      path: /v3/sortitions/burn/{burn_header_hash}
+      operations:
+      - name: getsortitionbyburnheaderhash
+        method: GET
+        description: Get sortition by burn header hash
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: burn_header_hash
+          in: path
+          type: string
+          description: Hex-encoded burn header hash (64 characters)
+          required: true
+    - name: v3-sortitions-burn_height-height
+      path: /v3/sortitions/burn_height/{height}
+      operations:
+      - name: getsortitionbyburnblockheight
+        method: GET
+        description: Get sortition by burn block height
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: height
+          in: path
+          type: integer
+          description: Burn block height (integer, max 4294967295)
+          required: true
+    - name: v3-sortitions-consensus-consensus_hash
+      path: /v3/sortitions/consensus/{consensus_hash}
+      operations:
+      - name: getsortitionbyconsensushash
+        method: GET
+        description: Get sortition by consensus hash
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: consensus_hash
+          in: path
+          type: string
+          description: Hex-encoded consensus hash (40 characters)
+          required: true
+    - name: v3-sortitions-latest_and_last
+      path: /v3/sortitions/latest_and_last
+      operations:
+      - name: getlatestandlastwinningsortitions
+        method: GET
+        description: Get latest and last winning sortitions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v3-tenures-blocks-hash-burnchain_block_hash
+      path: /v3/tenures/blocks/hash/{burnchain_block_hash}
+      operations:
+      - name: gettenureblocksbyhash
+        method: GET
+        description: Get the list of Nakamoto Stacks blocks in a tenure given Bitcoin block hash
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: burnchain_block_hash
+          in: path
+          type: string
+          description: The hex-encoded Bitcoin block hash of the tenure to query (64 hexadecimal characters, without 0x prefix)
+          required: true
+    - name: v3-tenures-blocks-height-burnchain_block_height
+      path: /v3/tenures/blocks/height/{burnchain_block_height}
+      operations:
+      - name: gettenureblocksbyheight
+        method: GET
+        description: Get the list of Nakamoto Stacks blocks in a tenure given Bitcoin block height
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: burnchain_block_height
+          in: path
+          type: integer
+          description: The Bitcoin block height of the tenure to query
+          required: true
+    - name: v3-tenures-blocks-consensus_hash
+      path: /v3/tenures/blocks/{consensus_hash}
+      operations:
+      - name: gettenureblocks
+        method: GET
+        description: Get the list of Stacks blocks in a tenure
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: consensus_hash
+          in: path
+          type: string
+          description: The hex-encoded consensus hash of the tenure to query (40 hexadecimal characters, without 0x prefix)
+          required: true
+    - name: v3-tenures-fork_info-start-stop
+      path: /v3/tenures/fork_info/{start}/{stop}
+      operations:
+      - name: gettenureforkinfo
+        method: GET
+        description: Get tenure fork information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: start
+          in: path
+          type: string
+          description: Starting consensus hash (40 hexadecimal characters, without 0x prefix)
+          required: true
+        - name: stop
+          in: path
+          type: string
+          description: Stopping consensus hash (40 hexadecimal characters, without 0x prefix)
+          required: true
+    - name: v3-tenures-info
+      path: /v3/tenures/info
+      operations:
+      - name: gettenureinfo
+        method: GET
+        description: Fetch metadata about the ongoing Nakamoto tenure
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v3-tenures-tip-consensus_hash
+      path: /v3/tenures/tip/{consensus_hash}
+      operations:
+      - name: gettenuretip
+        method: GET
+        description: Get tenure tip
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: consensus_hash
+          in: path
+          type: string
+          description: Consensus hash (40 characters)
+          required: true
+    - name: v3-tenures-tip_metadata-consensus_hash
+      path: /v3/tenures/tip_metadata/{consensus_hash}
+      operations:
+      - name: gettenuretipmetadata
+        method: GET
+        description: Get tenure tip with metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: consensus_hash
+          in: path
+          type: string
+          description: Consensus hash (40 characters)
+          required: true
+    - name: v3-tenures-block_id
+      path: /v3/tenures/{block_id}
+      operations:
+      - name: gettenures
+        method: GET
+        description: Fetch a sequence of Nakamoto blocks in a tenure
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: block_id
+          in: path
+          type: string
+          description: The tenure-start block ID of the tenure to query (64-character hex string)
+          required: true
+        - name: stop
+          in: query
+          type: string
+          description: The block ID hash of the highest block in this tenure that is already
+    authentication:
+      type: apikey
+      key: authorization
+      value: '{{env.HIRO_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: stacks-node-rpc-blocks-rest
+    port: 8080
+    description: REST adapter for Stacks 3.0+ RPC API — Blocks. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/v2/blocks/{block-id}
+      name: v2-blocks-block-id
+      description: REST surface for v2-blocks-block_id.
+      operations:
+      - method: GET
+        name: getlegacyblockbyid
+        description: Get Stacks 2.x block by ID
+        call: stacks-node-rpc-blocks.getlegacyblockbyid
+        with:
+          block_id: rest.block_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v2/headers/{quantity}
+      name: v2-headers-quantity
+      description: REST surface for v2-headers-quantity.
+      operations:
+      - method: GET
+        name: getblockheaders
+        description: Get recent 2.x block headers
+        call: stacks-node-rpc-blocks.getblockheaders
+        with:
+          quantity: rest.quantity
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v2/microblocks
+      name: v2-microblocks
+      description: REST surface for v2-microblocks.
+      operations:
+      - method: POST
+        name: postmicroblock
+        description: Submit a microblock (Epoch 2.x)
+        call: stacks-node-rpc-blocks.postmicroblock
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v2/microblocks/confirmed/{block-id}
+      name: v2-microblocks-confirmed-block-id
+      description: REST surface for v2-microblocks-confirmed-block_id.
+      operations:
+      - method: GET
+        name: getconfirmedmicroblocks
+        description: Get stream of confirmed microblocks (Epoch 2.x)
+        call: stacks-node-rpc-blocks.getconfirmedmicroblocks
+        with:
+          block_id: rest.block_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v2/microblocks/unconfirmed/{block-id}/{seq}
+      name: v2-microblocks-unconfirmed-block-id-seq
+      description: REST surface for v2-microblocks-unconfirmed-block_id-seq.
+      operations:
+      - method: GET
+        name: getunconfirmedmicroblocks
+        description: Get stream of unconfirmed microblocks (Epoch 2.x)
+        call: stacks-node-rpc-blocks.getunconfirmedmicroblocks
+        with:
+          block_id: rest.block_id
+          seq: rest.seq
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v2/microblocks/{microblock-id}
+      name: v2-microblocks-microblock-id
+      description: REST surface for v2-microblocks-microblock_id.
+      operations:
+      - method: GET
+        name: getmicroblockbyid
+        description: Get a stream of microblocks beginning
+        call: stacks-node-rpc-blocks.getmicroblockbyid
+        with:
+          microblock_id: rest.microblock_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/blocks/height/{block-height}
+      name: v3-blocks-height-block-height
+      description: REST surface for v3-blocks-height-block_height.
+      operations:
+      - method: GET
+        name: getnakamotoblockbyheight
+        description: Fetch a Nakamoto block by its height and optional tip
+        call: stacks-node-rpc-blocks.getnakamotoblockbyheight
+        with:
+          block_height: rest.block_height
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/blocks/replay/{block-id}
+      name: v3-blocks-replay-block-id
+      description: REST surface for v3-blocks-replay-block_id.
+      operations:
+      - method: GET
+        name: blockreplay
+        description: Replay mining of a block and returns its content
+        call: stacks-node-rpc-blocks.blockreplay
+        with:
+          block_id: rest.block_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/blocks/simulate/{block-id}
+      name: v3-blocks-simulate-block-id
+      description: REST surface for v3-blocks-simulate-block_id.
+      operations:
+      - method: GET
+        name: blocksimulate
+        description: Simulate mining of a block with the specified transactions and returns its content
+        call: stacks-node-rpc-blocks.blocksimulate
+        with:
+          block_id: rest.block_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/blocks/upload
+      name: v3-blocks-upload
+      description: REST surface for v3-blocks-upload.
+      operations:
+      - method: POST
+        name: uploadnakamotoblock
+        description: Upload a Nakamoto block
+        call: stacks-node-rpc-blocks.uploadnakamotoblock
+        with:
+          broadcast: rest.broadcast
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/blocks/{block-id}
+      name: v3-blocks-block-id
+      description: REST surface for v3-blocks-block_id.
+      operations:
+      - method: GET
+        name: getnakamotoblockbyid
+        description: Get Nakamoto block by ID
+        call: stacks-node-rpc-blocks.getnakamotoblockbyid
+        with:
+          block_id: rest.block_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/signer/{signer-pubkey}/{cycle-number}
+      name: v3-signer-signer-pubkey-cycle-number
+      description: REST surface for v3-signer-signer_pubkey-cycle_number.
+      operations:
+      - method: GET
+        name: getsignerblockssigned
+        description: Get number of blocks signed by signer during a given reward cycle
+        call: stacks-node-rpc-blocks.getsignerblockssigned
+        with:
+          signer_pubkey: rest.signer_pubkey
+          cycle_number: rest.cycle_number
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/sortitions
+      name: v3-sortitions
+      description: REST surface for v3-sortitions.
+      operations:
+      - method: GET
+        name: getlatestsortitions
+        description: Get latest sortition information
+        call: stacks-node-rpc-blocks.getlatestsortitions
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/sortitions/burn/{burn-header-hash}
+      name: v3-sortitions-burn-burn-header-hash
+      description: REST surface for v3-sortitions-burn-burn_header_hash.
+      operations:
+      - method: GET
+        name: getsortitionbyburnheaderhash
+        description: Get sortition by burn header hash
+        call: stacks-node-rpc-blocks.getsortitionbyburnheaderhash
+        with:
+          burn_header_hash: rest.burn_header_hash
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/sortitions/burn-height/{height}
+      name: v3-sortitions-burn-height-height
+      description: REST surface for v3-sortitions-burn_height-height.
+      operations:
+      - method: GET
+        name: getsortitionbyburnblockheight
+        description: Get sortition by burn block height
+        call: stacks-node-rpc-blocks.getsortitionbyburnblockheight
+        with:
+          height: rest.height
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/sortitions/consensus/{consensus-hash}
+      name: v3-sortitions-consensus-consensus-hash
+      description: REST surface for v3-sortitions-consensus-consensus_hash.
+      operations:
+      - method: GET
+        name: getsortitionbyconsensushash
+        description: Get sortition by consensus hash
+        call: stacks-node-rpc-blocks.getsortitionbyconsensushash
+        with:
+          consensus_hash: rest.consensus_hash
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/sortitions/latest-and-last
+      name: v3-sortitions-latest-and-last
+      description: REST surface for v3-sortitions-latest_and_last.
+      operations:
+      - method: GET
+        name: getlatestandlastwinningsortitions
+        description: Get latest and last winning sortitions
+        call: stacks-node-rpc-blocks.getlatestandlastwinningsortitions
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/tenures/blocks/hash/{burnchain-block-hash}
+      name: v3-tenures-blocks-hash-burnchain-block-hash
+      description: REST surface for v3-tenures-blocks-hash-burnchain_block_hash.
+      operations:
+      - method: GET
+        name: gettenureblocksbyhash
+        description: Get the list of Nakamoto Stacks blocks in a tenure given Bitcoin block hash
+        call: stacks-node-rpc-blocks.gettenureblocksbyhash
+        with:
+          burnchain_block_hash: rest.burnchain_block_hash
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/tenures/blocks/height/{burnchain-block-height}
+      name: v3-tenures-blocks-height-burnchain-block-height
+      description: REST surface for v3-tenures-blocks-height-burnchain_block_height.
+      operations:
+      - method: GET
+        name: gettenureblocksbyheight
+        description: Get the list of Nakamoto Stacks blocks in a tenure given Bitcoin block height
+        call: stacks-node-rpc-blocks.gettenureblocksbyheight
+        with:
+          burnchain_block_height: rest.burnchain_block_height
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/tenures/blocks/{consensus-hash}
+      name: v3-tenures-blocks-consensus-hash
+      description: REST surface for v3-tenures-blocks-consensus_hash.
+      operations:
+      - method: GET
+        name: gettenureblocks
+        description: Get the list of Stacks blocks in a tenure
+        call: stacks-node-rpc-blocks.gettenureblocks
+        with:
+          consensus_hash: rest.consensus_hash
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/tenures/fork-info/{start}/{stop}
+      name: v3-tenures-fork-info-start-stop
+      description: REST surface for v3-tenures-fork_info-start-stop.
+      operations:
+      - method: GET
+        name: gettenureforkinfo
+        description: Get tenure fork information
+        call: stacks-node-rpc-blocks.gettenureforkinfo
+        with:
+          start: rest.start
+          stop: rest.stop
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/tenures/info
+      name: v3-tenures-info
+      description: REST surface for v3-tenures-info.
+      operations:
+      - method: GET
+        name: gettenureinfo
+        description: Fetch metadata about the ongoing Nakamoto tenure
+        call: stacks-node-rpc-blocks.gettenureinfo
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/tenures/tip/{consensus-hash}
+      name: v3-tenures-tip-consensus-hash
+      description: REST surface for v3-tenures-tip-consensus_hash.
+      operations:
+      - method: GET
+        name: gettenuretip
+        description: Get tenure tip
+        call: stacks-node-rpc-blocks.gettenuretip
+        with:
+          consensus_hash: rest.consensus_hash
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/tenures/tip-metadata/{consensus-hash}
+      name: v3-tenures-tip-metadata-consensus-hash
+      description: REST surface for v3-tenures-tip_metadata-consensus_hash.
+      operations:
+      - method: GET
+        name: gettenuretipmetadata
+        description: Get tenure tip with metadata
+        call: stacks-node-rpc-blocks.gettenuretipmetadata
+        with:
+          consensus_hash: rest.consensus_hash
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/tenures/{block-id}
+      name: v3-tenures-block-id
+      description: REST surface for v3-tenures-block_id.
+      operations:
+      - method: GET
+        name: gettenures
+        description: Fetch a sequence of Nakamoto blocks in a tenure
+        call: stacks-node-rpc-blocks.gettenures
+        with:
+          block_id: rest.block_id
+          stop: rest.stop
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stacks-node-rpc-blocks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Stacks 3.0+ RPC API — Blocks. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-stacks-2-x-block-id
+      description: Get Stacks 2.x block by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-node-rpc-blocks.getlegacyblockbyid
+      with:
+        block_id: tools.block_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-recent-2-x-block-headers
+      description: Get recent 2.x block headers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-node-rpc-blocks.getblockheaders
+      with:
+        quantity: tools.quantity
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: submit-microblock-epoch-2-x
+      description: Submit a microblock (Epoch 2.x)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: stacks-node-rpc-blocks.postmicroblock
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-stream-confirmed-microblocks-epoch
+      description: Get stream of confirmed microblocks (Epoch 2.x)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-node-rpc-blocks.getconfirmedmicroblocks
+      with:
+        block_id: tools.block_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-stream-unconfirmed-microblocks-epoch
+      description: Get stream of unconfirmed microblocks (Epoch 2.x)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-node-rpc-blocks.getunconfirmedmicroblocks
+      with:
+        block_id: tools.block_id
+        seq: tools.seq
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-stream-microblocks-beginning
+      description: Get a stream of microblocks beginning
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-node-rpc-blocks.getmicroblockbyid
+      with:
+        microblock_id: tools.microblock_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: fetch-nakamoto-block-its-height
+      description: Fetch a Nakamoto block by its height and optional tip
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-node-rpc-blocks.getnakamotoblockbyheight
+      with:
+        block_height: tools.block_height
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: replay-mining-block-and-returns
+      description: Replay mining of a block and returns its content
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-node-rpc-blocks.blockreplay
+      with:
+        block_id: tools.block_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: simulate-mining-block-specified-transactions
+      description: Simulate mining of a block with the specified transactions and returns its content
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-node-rpc-blocks.blocksimulate
+      with:
+        block_id: tools.block_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: upload-nakamoto-block
+      description: Upload a Nakamoto block
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: stacks-node-rpc-blocks.uploadnakamotoblock
+      with:
+        broadcast: tools.broadcast
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-nakamoto-block-id
+      description: Get Nakamoto block by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-node-rpc-blocks.getnakamotoblockbyid
+      with:
+        block_id: tools.block_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-number-blocks-signed-signer
+      description: Get number of blocks signed by signer during a given reward cycle
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-node-rpc-blocks.getsignerblockssigned
+      with:
+        signer_pubkey: tools.signer_pubkey
+        cycle_number: tools.cycle_number
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-latest-sortition-information
+      description: Get latest sortition information
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-node-rpc-blocks.getlatestsortitions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-sortition-burn-header-hash
+      description: Get sortition by burn header hash
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-node-rpc-blocks.getsortitionbyburnheaderhash
+      with:
+        burn_header_hash: tools.burn_header_hash
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-sortition-burn-block-height
+      description: Get sortition by burn block height
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-node-rpc-blocks.getsortitionbyburnblockheight
+      with:
+        height: tools.height
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-sortition-consensus-hash
+      description: Get sortition by consensus hash
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-node-rpc-blocks.getsortitionbyconsensushash
+      with:
+        consensus_hash: tools.consensus_hash
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-latest-and-last-winning
+      description: Get latest and last winning sortitions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-node-rpc-blocks.getlatestandlastwinningsortitions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-list-nakamoto-stacks-blocks
+      description: Get the list of Nakamoto Stacks blocks in a tenure given Bitcoin block hash
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-node-rpc-blocks.gettenureblocksbyhash
+      with:
+        burnchain_block_hash: tools.burnchain_block_hash
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-list-nakamoto-stacks-blocks-2
+      description: Get the list of Nakamoto Stacks blocks in a tenure given Bitcoin block height
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-node-rpc-blocks.gettenureblocksbyheight
+      with:
+        burnchain_block_height: tools.burnchain_block_height
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-list-stacks-blocks-tenure
+      description: Get the list of Stacks blocks in a tenure
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-node-rpc-blocks.gettenureblocks
+      with:
+        consensus_hash: tools.consensus_hash
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-tenure-fork-information
+      description: Get tenure fork information
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-node-rpc-blocks.gettenureforkinfo
+      with:
+        start: tools.start
+        stop: tools.stop
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: fetch-metadata-about-ongoing-nakamoto
+      description: Fetch metadata about the ongoing Nakamoto tenure
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-node-rpc-blocks.gettenureinfo
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-tenure-tip
+      description: Get tenure tip
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-node-rpc-blocks.gettenuretip
+      with:
+        consensus_hash: tools.consensus_hash
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-tenure-tip-metadata
+      description: Get tenure tip with metadata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-node-rpc-blocks.gettenuretipmetadata
+      with:
+        consensus_hash: tools.consensus_hash
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: fetch-sequence-nakamoto-blocks-tenure
+      description: Fetch a sequence of Nakamoto blocks in a tenure
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-node-rpc-blocks.gettenures
+      with:
+        block_id: tools.block_id
+        stop: tools.stop
+      outputParameters:
+      - type: object
+        mapping: $.

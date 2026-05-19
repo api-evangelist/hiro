@@ -1,0 +1,517 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Stacks Blockchain API — Names
+  description: 'Stacks Blockchain API — Names. 10 operations. Lead operation: Get Names Owned by Address. Self-contained Naftiko
+    capability covering one Hiro business surface.'
+  tags:
+  - Hiro
+  - Names
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    HIRO_API_KEY: HIRO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stacks-blockchain-names
+    baseUri: https://api.hiro.so
+    description: Stacks Blockchain API — Names business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-addresses-blockchain-address
+      path: /v1/addresses/{blockchain}/{address}
+      operations:
+      - name: getnamesownedbyaddress
+        method: GET
+        description: Get Names Owned by Address
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: unanchored
+          in: query
+          type: boolean
+          description: Include data from unanchored (i.e. unconfirmed) microblocks
+        - name: blockchain
+          in: path
+          type: string
+          description: the layer-1 blockchain for the address
+          required: true
+        - name: address
+          in: path
+          type: string
+          description: the address to lookup
+          required: true
+    - name: v1-names
+      path: /v1/names/
+      operations:
+      - name: getallnames
+        method: GET
+        description: Get All Names
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: unanchored
+          in: query
+          type: boolean
+          description: Include data from unanchored (i.e. unconfirmed) microblocks
+        - name: page
+          in: query
+          type: integer
+          description: names are defaulted to page 1 with 100 results. You can query specific page results by using the 'page'
+            query parameter.
+    - name: v1-names-name
+      path: /v1/names/{name}
+      operations:
+      - name: getnameinfo
+        method: GET
+        description: Get Name Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: unanchored
+          in: query
+          type: boolean
+          description: Include data from unanchored (i.e. unconfirmed) microblocks
+        - name: name
+          in: path
+          type: string
+          description: fully-qualified name
+          required: true
+    - name: v1-names-name-subdomains
+      path: /v1/names/{name}/subdomains
+      operations:
+      - name: fetchsubdomainslistforname
+        method: GET
+        description: Get Name Subdomains
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: unanchored
+          in: query
+          type: boolean
+          description: Include data from unanchored (i.e. unconfirmed) microblocks
+        - name: name
+          in: path
+          type: string
+          description: fully-qualified name
+          required: true
+    - name: v1-names-name-zonefile
+      path: /v1/names/{name}/zonefile
+      operations:
+      - name: fetchzonefile
+        method: GET
+        description: Get Zone File
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: unanchored
+          in: query
+          type: boolean
+          description: Include data from unanchored (i.e. unconfirmed) microblocks
+        - name: name
+          in: path
+          type: string
+          description: fully-qualified name
+          required: true
+    - name: v1-names-name-zonefile-zoneFileHash
+      path: /v1/names/{name}/zonefile/{zoneFileHash}
+      operations:
+      - name: gethistoricalzonefile
+        method: GET
+        description: Get Historical Zone File
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: unanchored
+          in: query
+          type: boolean
+          description: Include data from unanchored (i.e. unconfirmed) microblocks
+        - name: name
+          in: path
+          type: string
+          description: fully-qualified name
+          required: true
+        - name: zoneFileHash
+          in: path
+          type: string
+          description: zone file hash
+          required: true
+    - name: v1-namespaces
+      path: /v1/namespaces/
+      operations:
+      - name: getallnamespaces
+        method: GET
+        description: Get All Namespaces
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: unanchored
+          in: query
+          type: boolean
+          description: Include data from unanchored (i.e. unconfirmed) microblocks
+    - name: v1-namespaces-tld-names
+      path: /v1/namespaces/{tld}/names
+      operations:
+      - name: getnamespacenames
+        method: GET
+        description: Get Namespace Names
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: number
+          description: namespace values are defaulted to page 1 with 100 results. You can query specific page results by using
+            the 'page' query parameter.
+        - name: unanchored
+          in: query
+          type: boolean
+          description: Include data from unanchored (i.e. unconfirmed) microblocks
+        - name: tld
+          in: path
+          type: string
+          description: the namespace to fetch names from.
+          required: true
+    - name: v2-prices-names-name
+      path: /v2/prices/names/{name}
+      operations:
+      - name: getnameprice
+        method: GET
+        description: Get Name Price
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: the name to query price information for
+          required: true
+    - name: v2-prices-namespaces-tld
+      path: /v2/prices/namespaces/{tld}
+      operations:
+      - name: getnamespaceprice
+        method: GET
+        description: Get Namespace Price
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tld
+          in: path
+          type: string
+          description: the namespace to fetch price for
+          required: true
+  exposes:
+  - type: rest
+    namespace: stacks-blockchain-names-rest
+    port: 8080
+    description: REST adapter for Stacks Blockchain API — Names. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/v1/addresses/{blockchain}/{address}
+      name: v1-addresses-blockchain-address
+      description: REST surface for v1-addresses-blockchain-address.
+      operations:
+      - method: GET
+        name: getnamesownedbyaddress
+        description: Get Names Owned by Address
+        call: stacks-blockchain-names.getnamesownedbyaddress
+        with:
+          unanchored: rest.unanchored
+          blockchain: rest.blockchain
+          address: rest.address
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/names
+      name: v1-names
+      description: REST surface for v1-names.
+      operations:
+      - method: GET
+        name: getallnames
+        description: Get All Names
+        call: stacks-blockchain-names.getallnames
+        with:
+          unanchored: rest.unanchored
+          page: rest.page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/names/{name}
+      name: v1-names-name
+      description: REST surface for v1-names-name.
+      operations:
+      - method: GET
+        name: getnameinfo
+        description: Get Name Details
+        call: stacks-blockchain-names.getnameinfo
+        with:
+          unanchored: rest.unanchored
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/names/{name}/subdomains
+      name: v1-names-name-subdomains
+      description: REST surface for v1-names-name-subdomains.
+      operations:
+      - method: GET
+        name: fetchsubdomainslistforname
+        description: Get Name Subdomains
+        call: stacks-blockchain-names.fetchsubdomainslistforname
+        with:
+          unanchored: rest.unanchored
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/names/{name}/zonefile
+      name: v1-names-name-zonefile
+      description: REST surface for v1-names-name-zonefile.
+      operations:
+      - method: GET
+        name: fetchzonefile
+        description: Get Zone File
+        call: stacks-blockchain-names.fetchzonefile
+        with:
+          unanchored: rest.unanchored
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/names/{name}/zonefile/{zonefilehash}
+      name: v1-names-name-zonefile-zonefilehash
+      description: REST surface for v1-names-name-zonefile-zoneFileHash.
+      operations:
+      - method: GET
+        name: gethistoricalzonefile
+        description: Get Historical Zone File
+        call: stacks-blockchain-names.gethistoricalzonefile
+        with:
+          unanchored: rest.unanchored
+          name: rest.name
+          zoneFileHash: rest.zoneFileHash
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/namespaces
+      name: v1-namespaces
+      description: REST surface for v1-namespaces.
+      operations:
+      - method: GET
+        name: getallnamespaces
+        description: Get All Namespaces
+        call: stacks-blockchain-names.getallnamespaces
+        with:
+          unanchored: rest.unanchored
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/namespaces/{tld}/names
+      name: v1-namespaces-tld-names
+      description: REST surface for v1-namespaces-tld-names.
+      operations:
+      - method: GET
+        name: getnamespacenames
+        description: Get Namespace Names
+        call: stacks-blockchain-names.getnamespacenames
+        with:
+          page: rest.page
+          unanchored: rest.unanchored
+          tld: rest.tld
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v2/prices/names/{name}
+      name: v2-prices-names-name
+      description: REST surface for v2-prices-names-name.
+      operations:
+      - method: GET
+        name: getnameprice
+        description: Get Name Price
+        call: stacks-blockchain-names.getnameprice
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v2/prices/namespaces/{tld}
+      name: v2-prices-namespaces-tld
+      description: REST surface for v2-prices-namespaces-tld.
+      operations:
+      - method: GET
+        name: getnamespaceprice
+        description: Get Namespace Price
+        call: stacks-blockchain-names.getnamespaceprice
+        with:
+          tld: rest.tld
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stacks-blockchain-names-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Stacks Blockchain API — Names. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-names-owned-address
+      description: Get Names Owned by Address
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-names.getnamesownedbyaddress
+      with:
+        unanchored: tools.unanchored
+        blockchain: tools.blockchain
+        address: tools.address
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-all-names
+      description: Get All Names
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-names.getallnames
+      with:
+        unanchored: tools.unanchored
+        page: tools.page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-name-details
+      description: Get Name Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-names.getnameinfo
+      with:
+        unanchored: tools.unanchored
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-name-subdomains
+      description: Get Name Subdomains
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-names.fetchsubdomainslistforname
+      with:
+        unanchored: tools.unanchored
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-zone-file
+      description: Get Zone File
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-names.fetchzonefile
+      with:
+        unanchored: tools.unanchored
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-historical-zone-file
+      description: Get Historical Zone File
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-names.gethistoricalzonefile
+      with:
+        unanchored: tools.unanchored
+        name: tools.name
+        zoneFileHash: tools.zoneFileHash
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-all-namespaces
+      description: Get All Namespaces
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-names.getallnamespaces
+      with:
+        unanchored: tools.unanchored
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-namespace-names
+      description: Get Namespace Names
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-names.getnamespacenames
+      with:
+        page: tools.page
+        unanchored: tools.unanchored
+        tld: tools.tld
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-name-price
+      description: Get Name Price
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-names.getnameprice
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-namespace-price
+      description: Get Namespace Price
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-names.getnamespaceprice
+      with:
+        tld: tools.tld
+      outputParameters:
+      - type: object
+        mapping: $.

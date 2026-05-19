@@ -1,0 +1,176 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Stacks Blockchain API — Burn Blocks
+  description: 'Stacks Blockchain API — Burn Blocks. 3 operations. Lead operation: Get burn blocks. Self-contained Naftiko
+    capability covering one Hiro business surface.'
+  tags:
+  - Hiro
+  - Burn Blocks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    HIRO_API_KEY: HIRO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stacks-blockchain-burn-blocks
+    baseUri: https://api.hiro.so
+    description: Stacks Blockchain API — Burn Blocks business capability. Self-contained, no shared references.
+    resources:
+    - name: extended-v2-burn-blocks
+      path: /extended/v2/burn-blocks/
+      operations:
+      - name: getburnblocks
+        method: GET
+        description: Get burn blocks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          description: Results per page
+        - name: offset
+          in: query
+          type: integer
+          description: Result offset
+    - name: extended-v2-burn-blocks-height_or_hash
+      path: /extended/v2/burn-blocks/{height_or_hash}
+      operations:
+      - name: getburnblock
+        method: GET
+        description: Get burn block
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: height_or_hash
+          in: path
+          type: string
+          required: true
+    - name: extended-v2-burn-blocks-height_or_hash-blocks
+      path: /extended/v2/burn-blocks/{height_or_hash}/blocks
+      operations:
+      - name: getblocksbyburnblock
+        method: GET
+        description: Get blocks by burn block
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          description: Results per page
+        - name: offset
+          in: query
+          type: integer
+          description: Result offset
+        - name: height_or_hash
+          in: path
+          type: string
+          required: true
+  exposes:
+  - type: rest
+    namespace: stacks-blockchain-burn-blocks-rest
+    port: 8080
+    description: REST adapter for Stacks Blockchain API — Burn Blocks. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/extended/v2/burn-blocks
+      name: extended-v2-burn-blocks
+      description: REST surface for extended-v2-burn-blocks.
+      operations:
+      - method: GET
+        name: getburnblocks
+        description: Get burn blocks
+        call: stacks-blockchain-burn-blocks.getburnblocks
+        with:
+          limit: rest.limit
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v2/burn-blocks/{height-or-hash}
+      name: extended-v2-burn-blocks-height-or-hash
+      description: REST surface for extended-v2-burn-blocks-height_or_hash.
+      operations:
+      - method: GET
+        name: getburnblock
+        description: Get burn block
+        call: stacks-blockchain-burn-blocks.getburnblock
+        with:
+          height_or_hash: rest.height_or_hash
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v2/burn-blocks/{height-or-hash}/blocks
+      name: extended-v2-burn-blocks-height-or-hash-blocks
+      description: REST surface for extended-v2-burn-blocks-height_or_hash-blocks.
+      operations:
+      - method: GET
+        name: getblocksbyburnblock
+        description: Get blocks by burn block
+        call: stacks-blockchain-burn-blocks.getblocksbyburnblock
+        with:
+          limit: rest.limit
+          offset: rest.offset
+          height_or_hash: rest.height_or_hash
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stacks-blockchain-burn-blocks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Stacks Blockchain API — Burn Blocks. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-burn-blocks
+      description: Get burn blocks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-burn-blocks.getburnblocks
+      with:
+        limit: tools.limit
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-burn-block
+      description: Get burn block
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-burn-blocks.getburnblock
+      with:
+        height_or_hash: tools.height_or_hash
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-blocks-burn-block
+      description: Get blocks by burn block
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-burn-blocks.getblocksbyburnblock
+      with:
+        limit: tools.limit
+        offset: tools.offset
+        height_or_hash: tools.height_or_hash
+      outputParameters:
+      - type: object
+        mapping: $.

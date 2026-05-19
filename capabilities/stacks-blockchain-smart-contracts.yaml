@@ -1,0 +1,226 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Stacks Blockchain API — Smart Contracts
+  description: 'Stacks Blockchain API — Smart Contracts. 4 operations. Lead operation: Get contracts by trait. Self-contained
+    Naftiko capability covering one Hiro business surface.'
+  tags:
+  - Hiro
+  - Smart Contracts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    HIRO_API_KEY: HIRO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stacks-blockchain-smart-contracts
+    baseUri: https://api.hiro.so
+    description: Stacks Blockchain API — Smart Contracts business capability. Self-contained, no shared references.
+    resources:
+    - name: extended-v1-contract-by_trait
+      path: /extended/v1/contract/by_trait
+      operations:
+      - name: getcontractsbytrait
+        method: GET
+        description: Get contracts by trait
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: trait_abi
+          in: query
+          type: string
+          description: JSON abi of the trait.
+          required: true
+        - name: limit
+          in: query
+          type: integer
+          description: max number of contracts fetch
+        - name: offset
+          in: query
+          type: integer
+          description: index of first contract event to fetch
+    - name: extended-v1-contract-contract_id
+      path: /extended/v1/contract/{contract_id}
+      operations:
+      - name: getcontractbyid
+        method: GET
+        description: Get contract info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: contract_id
+          in: path
+          type: string
+          description: Contract identifier formatted as `<contract_address>.<contract_name>`
+          required: true
+    - name: extended-v1-contract-contract_id-events
+      path: /extended/v1/contract/{contract_id}/events
+      operations:
+      - name: getcontracteventsbyid
+        method: GET
+        description: Get contract events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          description: max number of events to fetch
+        - name: offset
+          in: query
+          type: integer
+          description: Result offset
+        - name: contract_id
+          in: path
+          type: string
+          description: Contract identifier formatted as `<contract_address>.<contract_name>`
+          required: true
+    - name: extended-v2-smart-contracts-status
+      path: /extended/v2/smart-contracts/status
+      operations:
+      - name: getsmartcontractsstatus
+        method: GET
+        description: Get smart contracts status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: contract_id
+          in: query
+          type: string
+          required: true
+  exposes:
+  - type: rest
+    namespace: stacks-blockchain-smart-contracts-rest
+    port: 8080
+    description: REST adapter for Stacks Blockchain API — Smart Contracts. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/extended/v1/contract/by-trait
+      name: extended-v1-contract-by-trait
+      description: REST surface for extended-v1-contract-by_trait.
+      operations:
+      - method: GET
+        name: getcontractsbytrait
+        description: Get contracts by trait
+        call: stacks-blockchain-smart-contracts.getcontractsbytrait
+        with:
+          trait_abi: rest.trait_abi
+          limit: rest.limit
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v1/contract/{contract-id}
+      name: extended-v1-contract-contract-id
+      description: REST surface for extended-v1-contract-contract_id.
+      operations:
+      - method: GET
+        name: getcontractbyid
+        description: Get contract info
+        call: stacks-blockchain-smart-contracts.getcontractbyid
+        with:
+          contract_id: rest.contract_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v1/contract/{contract-id}/events
+      name: extended-v1-contract-contract-id-events
+      description: REST surface for extended-v1-contract-contract_id-events.
+      operations:
+      - method: GET
+        name: getcontracteventsbyid
+        description: Get contract events
+        call: stacks-blockchain-smart-contracts.getcontracteventsbyid
+        with:
+          limit: rest.limit
+          offset: rest.offset
+          contract_id: rest.contract_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v2/smart-contracts/status
+      name: extended-v2-smart-contracts-status
+      description: REST surface for extended-v2-smart-contracts-status.
+      operations:
+      - method: GET
+        name: getsmartcontractsstatus
+        description: Get smart contracts status
+        call: stacks-blockchain-smart-contracts.getsmartcontractsstatus
+        with:
+          contract_id: rest.contract_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stacks-blockchain-smart-contracts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Stacks Blockchain API — Smart Contracts. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-contracts-trait
+      description: Get contracts by trait
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-smart-contracts.getcontractsbytrait
+      with:
+        trait_abi: tools.trait_abi
+        limit: tools.limit
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-contract-info
+      description: Get contract info
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-smart-contracts.getcontractbyid
+      with:
+        contract_id: tools.contract_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-contract-events
+      description: Get contract events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-smart-contracts.getcontracteventsbyid
+      with:
+        limit: tools.limit
+        offset: tools.offset
+        contract_id: tools.contract_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-smart-contracts-status
+      description: Get smart contracts status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-smart-contracts.getsmartcontractsstatus
+      with:
+        contract_id: tools.contract_id
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,489 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Stacks Blockchain API — Blocks
+  description: 'Stacks Blockchain API — Blocks. 10 operations. Lead operation: Get recent blocks. Self-contained Naftiko capability
+    covering one Hiro business surface.'
+  tags:
+  - Hiro
+  - Blocks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    HIRO_API_KEY: HIRO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stacks-blockchain-blocks
+    baseUri: https://api.hiro.so
+    description: Stacks Blockchain API — Blocks business capability. Self-contained, no shared references.
+    resources:
+    - name: extended-v1-block
+      path: /extended/v1/block/
+      operations:
+      - name: getblocklist
+        method: GET
+        description: Get recent blocks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          description: max number of blocks to fetch
+        - name: offset
+          in: query
+          type: integer
+          description: Result offset
+    - name: extended-v1-block-by_burn_block_hash-burn_block_hash
+      path: /extended/v1/block/by_burn_block_hash/{burn_block_hash}
+      operations:
+      - name: getblockbyburnblockhash
+        method: GET
+        description: Get block by burnchain block hash
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: burn_block_hash
+          in: path
+          type: string
+          description: Hash of the burnchain block
+          required: true
+    - name: extended-v1-block-by_burn_block_height-burn_block_height
+      path: /extended/v1/block/by_burn_block_height/{burn_block_height}
+      operations:
+      - name: getblockbyburnblockheight
+        method: GET
+        description: Get block by burnchain height
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: burn_block_height
+          in: path
+          type: integer
+          description: Height of the burn chain block
+          required: true
+    - name: extended-v1-block-by_height-height
+      path: /extended/v1/block/by_height/{height}
+      operations:
+      - name: getblockbyheight
+        method: GET
+        description: Get block by height
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: height
+          in: path
+          type: integer
+          description: Height of the block
+          required: true
+    - name: extended-v1-block-hash
+      path: /extended/v1/block/{hash}
+      operations:
+      - name: getblockbyhash
+        method: GET
+        description: Get block by hash
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: hash
+          in: path
+          type: string
+          description: Hash of the block
+          required: true
+    - name: extended-v2-block-tenures-tenure_height-blocks
+      path: /extended/v2/block-tenures/{tenure_height}/blocks
+      operations:
+      - name: gettenureblocks
+        method: GET
+        description: Get blocks by tenure
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          description: Results per page
+        - name: offset
+          in: query
+          type: integer
+          description: Result offset
+        - name: cursor
+          in: query
+          type: string
+          description: Cursor for block pagination
+        - name: tenure_height
+          in: path
+          type: integer
+          description: Block tenure height
+          required: true
+    - name: extended-v2-blocks
+      path: /extended/v2/blocks/
+      operations:
+      - name: getblocks
+        method: GET
+        description: Get blocks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          description: Results per page
+        - name: offset
+          in: query
+          type: integer
+          description: Result offset
+        - name: cursor
+          in: query
+          type: string
+          description: Cursor for block pagination
+    - name: extended-v2-blocks-average-times
+      path: /extended/v2/blocks/average-times
+      operations:
+      - name: getaverageblocktimes
+        method: GET
+        description: Get average block times
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: extended-v2-blocks-height_or_hash
+      path: /extended/v2/blocks/{height_or_hash}
+      operations:
+      - name: getblock
+        method: GET
+        description: Get block
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: height_or_hash
+          in: path
+          type: string
+          required: true
+    - name: extended-v2-blocks-height_or_hash-signer-signatures
+      path: /extended/v2/blocks/{height_or_hash}/signer-signatures
+      operations:
+      - name: getsignersignaturesforblock
+        method: GET
+        description: Get signer signatures for block
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          description: Results per page
+        - name: offset
+          in: query
+          type: integer
+          description: Result offset
+        - name: height_or_hash
+          in: path
+          type: string
+          required: true
+  exposes:
+  - type: rest
+    namespace: stacks-blockchain-blocks-rest
+    port: 8080
+    description: REST adapter for Stacks Blockchain API — Blocks. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/extended/v1/block
+      name: extended-v1-block
+      description: REST surface for extended-v1-block.
+      operations:
+      - method: GET
+        name: getblocklist
+        description: Get recent blocks
+        call: stacks-blockchain-blocks.getblocklist
+        with:
+          limit: rest.limit
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v1/block/by-burn-block-hash/{burn-block-hash}
+      name: extended-v1-block-by-burn-block-hash-burn-block-hash
+      description: REST surface for extended-v1-block-by_burn_block_hash-burn_block_hash.
+      operations:
+      - method: GET
+        name: getblockbyburnblockhash
+        description: Get block by burnchain block hash
+        call: stacks-blockchain-blocks.getblockbyburnblockhash
+        with:
+          burn_block_hash: rest.burn_block_hash
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v1/block/by-burn-block-height/{burn-block-height}
+      name: extended-v1-block-by-burn-block-height-burn-block-height
+      description: REST surface for extended-v1-block-by_burn_block_height-burn_block_height.
+      operations:
+      - method: GET
+        name: getblockbyburnblockheight
+        description: Get block by burnchain height
+        call: stacks-blockchain-blocks.getblockbyburnblockheight
+        with:
+          burn_block_height: rest.burn_block_height
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v1/block/by-height/{height}
+      name: extended-v1-block-by-height-height
+      description: REST surface for extended-v1-block-by_height-height.
+      operations:
+      - method: GET
+        name: getblockbyheight
+        description: Get block by height
+        call: stacks-blockchain-blocks.getblockbyheight
+        with:
+          height: rest.height
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v1/block/{hash}
+      name: extended-v1-block-hash
+      description: REST surface for extended-v1-block-hash.
+      operations:
+      - method: GET
+        name: getblockbyhash
+        description: Get block by hash
+        call: stacks-blockchain-blocks.getblockbyhash
+        with:
+          hash: rest.hash
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v2/block-tenures/{tenure-height}/blocks
+      name: extended-v2-block-tenures-tenure-height-blocks
+      description: REST surface for extended-v2-block-tenures-tenure_height-blocks.
+      operations:
+      - method: GET
+        name: gettenureblocks
+        description: Get blocks by tenure
+        call: stacks-blockchain-blocks.gettenureblocks
+        with:
+          limit: rest.limit
+          offset: rest.offset
+          cursor: rest.cursor
+          tenure_height: rest.tenure_height
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v2/blocks
+      name: extended-v2-blocks
+      description: REST surface for extended-v2-blocks.
+      operations:
+      - method: GET
+        name: getblocks
+        description: Get blocks
+        call: stacks-blockchain-blocks.getblocks
+        with:
+          limit: rest.limit
+          offset: rest.offset
+          cursor: rest.cursor
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v2/blocks/average-times
+      name: extended-v2-blocks-average-times
+      description: REST surface for extended-v2-blocks-average-times.
+      operations:
+      - method: GET
+        name: getaverageblocktimes
+        description: Get average block times
+        call: stacks-blockchain-blocks.getaverageblocktimes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v2/blocks/{height-or-hash}
+      name: extended-v2-blocks-height-or-hash
+      description: REST surface for extended-v2-blocks-height_or_hash.
+      operations:
+      - method: GET
+        name: getblock
+        description: Get block
+        call: stacks-blockchain-blocks.getblock
+        with:
+          height_or_hash: rest.height_or_hash
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v2/blocks/{height-or-hash}/signer-signatures
+      name: extended-v2-blocks-height-or-hash-signer-signatures
+      description: REST surface for extended-v2-blocks-height_or_hash-signer-signatures.
+      operations:
+      - method: GET
+        name: getsignersignaturesforblock
+        description: Get signer signatures for block
+        call: stacks-blockchain-blocks.getsignersignaturesforblock
+        with:
+          limit: rest.limit
+          offset: rest.offset
+          height_or_hash: rest.height_or_hash
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stacks-blockchain-blocks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Stacks Blockchain API — Blocks. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-recent-blocks
+      description: Get recent blocks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-blocks.getblocklist
+      with:
+        limit: tools.limit
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-block-burnchain-block-hash
+      description: Get block by burnchain block hash
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-blocks.getblockbyburnblockhash
+      with:
+        burn_block_hash: tools.burn_block_hash
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-block-burnchain-height
+      description: Get block by burnchain height
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-blocks.getblockbyburnblockheight
+      with:
+        burn_block_height: tools.burn_block_height
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-block-height
+      description: Get block by height
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-blocks.getblockbyheight
+      with:
+        height: tools.height
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-block-hash
+      description: Get block by hash
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-blocks.getblockbyhash
+      with:
+        hash: tools.hash
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-blocks-tenure
+      description: Get blocks by tenure
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-blocks.gettenureblocks
+      with:
+        limit: tools.limit
+        offset: tools.offset
+        cursor: tools.cursor
+        tenure_height: tools.tenure_height
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-blocks
+      description: Get blocks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-blocks.getblocks
+      with:
+        limit: tools.limit
+        offset: tools.offset
+        cursor: tools.cursor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-average-block-times
+      description: Get average block times
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-blocks.getaverageblocktimes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-block
+      description: Get block
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-blocks.getblock
+      with:
+        height_or_hash: tools.height_or_hash
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-signer-signatures-block
+      description: Get signer signatures for block
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-blocks.getsignersignaturesforblock
+      with:
+        limit: tools.limit
+        offset: tools.offset
+        height_or_hash: tools.height_or_hash
+      outputParameters:
+      - type: object
+        mapping: $.

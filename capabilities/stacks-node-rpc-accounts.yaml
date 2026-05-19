@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Stacks 3.0+ RPC API — Accounts
+  description: 'Stacks 3.0+ RPC API — Accounts. 1 operations. Lead operation: Get account info. Self-contained Naftiko capability
+    covering one Hiro business surface.'
+  tags:
+  - Hiro
+  - Accounts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    HIRO_API_KEY: HIRO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stacks-node-rpc-accounts
+    baseUri: http://localhost:20443
+    description: Stacks 3.0+ RPC API — Accounts business capability. Self-contained, no shared references.
+    resources:
+    - name: v2-accounts-principal
+      path: /v2/accounts/{principal}
+      operations:
+      - name: getaccountinfo
+        method: GET
+        description: Get account info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: authorization
+      value: '{{env.HIRO_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: stacks-node-rpc-accounts-rest
+    port: 8080
+    description: REST adapter for Stacks 3.0+ RPC API — Accounts. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v2/accounts/{principal}
+      name: v2-accounts-principal
+      description: REST surface for v2-accounts-principal.
+      operations:
+      - method: GET
+        name: getaccountinfo
+        description: Get account info
+        call: stacks-node-rpc-accounts.getaccountinfo
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stacks-node-rpc-accounts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Stacks 3.0+ RPC API — Accounts. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-account-info
+      description: Get account info
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-node-rpc-accounts.getaccountinfo
+      outputParameters:
+      - type: object
+        mapping: $.

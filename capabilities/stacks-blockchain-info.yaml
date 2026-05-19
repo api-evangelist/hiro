@@ -1,0 +1,300 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Stacks Blockchain API — Info
+  description: 'Stacks Blockchain API — Info. 7 operations. Lead operation: API status. Self-contained Naftiko capability
+    covering one Hiro business surface.'
+  tags:
+  - Hiro
+  - Info
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    HIRO_API_KEY: HIRO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stacks-blockchain-info
+    baseUri: https://api.hiro.so
+    description: Stacks Blockchain API — Info business capability. Self-contained, no shared references.
+    resources:
+    - name: extended
+      path: /extended
+      operations:
+      - name: getstatus
+        method: GET
+        description: API status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: extended-v1-info-network_block_time-network
+      path: /extended/v1/info/network_block_time/{network}
+      operations:
+      - name: getnetworkblocktimebynetwork
+        method: GET
+        description: Get a given network's target block time
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: network
+          in: path
+          type: string
+          required: true
+    - name: extended-v1-info-network_block_times
+      path: /extended/v1/info/network_block_times
+      operations:
+      - name: getnetworkblocktimes
+        method: GET
+        description: Get the network target block time
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: extended-v1-stx_supply
+      path: /extended/v1/stx_supply/
+      operations:
+      - name: getstxsupply
+        method: GET
+        description: Get total and unlocked STX supply
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: height
+          in: query
+          type: integer
+          description: Supply details are queried from specified block height. If the block height is not specified, the latest
+            block height is taken as default value. Note that the `
+        - name: unanchored
+          in: query
+          type: boolean
+          description: Include data from unanchored (i.e. unconfirmed) microblocks
+    - name: extended-v1-stx_supply-circulating-plain
+      path: /extended/v1/stx_supply/circulating/plain
+      operations:
+      - name: getstxsupplycirculatingplain
+        method: GET
+        description: Get circulating STX supply in plain text format
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: extended-v1-stx_supply-legacy_format
+      path: /extended/v1/stx_supply/legacy_format
+      operations:
+      - name: gettotalstxsupplylegacyformat
+        method: GET
+        description: Get total and unlocked STX supply (results formatted the same as the legacy 1.0 API)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: height
+          in: query
+          type: integer
+          description: Supply details are queried from specified block height. If the block height is not specified, the latest
+            block height is taken as default value. Note that the `
+        - name: unanchored
+          in: query
+          type: boolean
+          description: Include data from unanchored (i.e. unconfirmed) microblocks
+    - name: extended-v1-stx_supply-total-plain
+      path: /extended/v1/stx_supply/total/plain
+      operations:
+      - name: getstxsupplytotalsupplyplain
+        method: GET
+        description: Get total STX supply in plain text format
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: stacks-blockchain-info-rest
+    port: 8080
+    description: REST adapter for Stacks Blockchain API — Info. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/extended
+      name: extended
+      description: REST surface for extended.
+      operations:
+      - method: GET
+        name: getstatus
+        description: API status
+        call: stacks-blockchain-info.getstatus
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v1/info/network-block-time/{network}
+      name: extended-v1-info-network-block-time-network
+      description: REST surface for extended-v1-info-network_block_time-network.
+      operations:
+      - method: GET
+        name: getnetworkblocktimebynetwork
+        description: Get a given network's target block time
+        call: stacks-blockchain-info.getnetworkblocktimebynetwork
+        with:
+          network: rest.network
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v1/info/network-block-times
+      name: extended-v1-info-network-block-times
+      description: REST surface for extended-v1-info-network_block_times.
+      operations:
+      - method: GET
+        name: getnetworkblocktimes
+        description: Get the network target block time
+        call: stacks-blockchain-info.getnetworkblocktimes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v1/stx-supply
+      name: extended-v1-stx-supply
+      description: REST surface for extended-v1-stx_supply.
+      operations:
+      - method: GET
+        name: getstxsupply
+        description: Get total and unlocked STX supply
+        call: stacks-blockchain-info.getstxsupply
+        with:
+          height: rest.height
+          unanchored: rest.unanchored
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v1/stx-supply/circulating/plain
+      name: extended-v1-stx-supply-circulating-plain
+      description: REST surface for extended-v1-stx_supply-circulating-plain.
+      operations:
+      - method: GET
+        name: getstxsupplycirculatingplain
+        description: Get circulating STX supply in plain text format
+        call: stacks-blockchain-info.getstxsupplycirculatingplain
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v1/stx-supply/legacy-format
+      name: extended-v1-stx-supply-legacy-format
+      description: REST surface for extended-v1-stx_supply-legacy_format.
+      operations:
+      - method: GET
+        name: gettotalstxsupplylegacyformat
+        description: Get total and unlocked STX supply (results formatted the same as the legacy 1.0 API)
+        call: stacks-blockchain-info.gettotalstxsupplylegacyformat
+        with:
+          height: rest.height
+          unanchored: rest.unanchored
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v1/stx-supply/total/plain
+      name: extended-v1-stx-supply-total-plain
+      description: REST surface for extended-v1-stx_supply-total-plain.
+      operations:
+      - method: GET
+        name: getstxsupplytotalsupplyplain
+        description: Get total STX supply in plain text format
+        call: stacks-blockchain-info.getstxsupplytotalsupplyplain
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stacks-blockchain-info-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Stacks Blockchain API — Info. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: api-status
+      description: API status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-info.getstatus
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-given-network-s-target-block
+      description: Get a given network's target block time
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-info.getnetworkblocktimebynetwork
+      with:
+        network: tools.network
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-network-target-block-time
+      description: Get the network target block time
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-info.getnetworkblocktimes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-total-and-unlocked-stx
+      description: Get total and unlocked STX supply
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-info.getstxsupply
+      with:
+        height: tools.height
+        unanchored: tools.unanchored
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-circulating-stx-supply-plain
+      description: Get circulating STX supply in plain text format
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-info.getstxsupplycirculatingplain
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-total-and-unlocked-stx-2
+      description: Get total and unlocked STX supply (results formatted the same as the legacy 1.0 API)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-info.gettotalstxsupplylegacyformat
+      with:
+        height: tools.height
+        unanchored: tools.unanchored
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-total-stx-supply-plain
+      description: Get total STX supply in plain text format
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-info.getstxsupplytotalsupplyplain
+      outputParameters:
+      - type: object
+        mapping: $.

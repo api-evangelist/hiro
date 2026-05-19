@@ -1,0 +1,288 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Stacks Blockchain API — Proof of Transfer
+  description: 'Stacks Blockchain API — Proof of Transfer. 5 operations. Lead operation: Get PoX cycles. Self-contained Naftiko
+    capability covering one Hiro business surface.'
+  tags:
+  - Hiro
+  - Proof of Transfer
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    HIRO_API_KEY: HIRO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stacks-blockchain-proof-of-transfer
+    baseUri: https://api.hiro.so
+    description: Stacks Blockchain API — Proof of Transfer business capability. Self-contained, no shared references.
+    resources:
+    - name: extended-v2-pox-cycles
+      path: /extended/v2/pox/cycles
+      operations:
+      - name: getpoxcycles
+        method: GET
+        description: Get PoX cycles
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          description: Results per page
+        - name: offset
+          in: query
+          type: integer
+          description: Result offset
+    - name: extended-v2-pox-cycles-cycle_number
+      path: /extended/v2/pox/cycles/{cycle_number}
+      operations:
+      - name: getpoxcycle
+        method: GET
+        description: Get PoX cycle
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cycle_number
+          in: path
+          type: integer
+          description: PoX cycle number
+          required: true
+    - name: extended-v2-pox-cycles-cycle_number-signers
+      path: /extended/v2/pox/cycles/{cycle_number}/signers
+      operations:
+      - name: getpoxcyclesigners
+        method: GET
+        description: Get signers in PoX cycle
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          description: Results per page
+        - name: offset
+          in: query
+          type: integer
+          description: Result offset
+        - name: cycle_number
+          in: path
+          type: integer
+          description: PoX cycle number
+          required: true
+    - name: extended-v2-pox-cycles-cycle_number-signers-signer_key
+      path: /extended/v2/pox/cycles/{cycle_number}/signers/{signer_key}
+      operations:
+      - name: getpoxcyclesigner
+        method: GET
+        description: Get signer in PoX cycle
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cycle_number
+          in: path
+          type: integer
+          description: PoX cycle number
+          required: true
+        - name: signer_key
+          in: path
+          type: string
+          description: Signer key
+          required: true
+    - name: extended-v2-pox-cycles-cycle_number-signers-signer_key-stackers
+      path: /extended/v2/pox/cycles/{cycle_number}/signers/{signer_key}/stackers
+      operations:
+      - name: getpoxcyclesignerstackers
+        method: GET
+        description: Get stackers for signer in PoX cycle
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          description: Results per page
+        - name: offset
+          in: query
+          type: integer
+          description: Result offset
+        - name: cycle_number
+          in: path
+          type: integer
+          description: PoX cycle number
+          required: true
+        - name: signer_key
+          in: path
+          type: string
+          description: Signer key
+          required: true
+  exposes:
+  - type: rest
+    namespace: stacks-blockchain-proof-of-transfer-rest
+    port: 8080
+    description: REST adapter for Stacks Blockchain API — Proof of Transfer. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/extended/v2/pox/cycles
+      name: extended-v2-pox-cycles
+      description: REST surface for extended-v2-pox-cycles.
+      operations:
+      - method: GET
+        name: getpoxcycles
+        description: Get PoX cycles
+        call: stacks-blockchain-proof-of-transfer.getpoxcycles
+        with:
+          limit: rest.limit
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v2/pox/cycles/{cycle-number}
+      name: extended-v2-pox-cycles-cycle-number
+      description: REST surface for extended-v2-pox-cycles-cycle_number.
+      operations:
+      - method: GET
+        name: getpoxcycle
+        description: Get PoX cycle
+        call: stacks-blockchain-proof-of-transfer.getpoxcycle
+        with:
+          cycle_number: rest.cycle_number
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v2/pox/cycles/{cycle-number}/signers
+      name: extended-v2-pox-cycles-cycle-number-signers
+      description: REST surface for extended-v2-pox-cycles-cycle_number-signers.
+      operations:
+      - method: GET
+        name: getpoxcyclesigners
+        description: Get signers in PoX cycle
+        call: stacks-blockchain-proof-of-transfer.getpoxcyclesigners
+        with:
+          limit: rest.limit
+          offset: rest.offset
+          cycle_number: rest.cycle_number
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v2/pox/cycles/{cycle-number}/signers/{signer-key}
+      name: extended-v2-pox-cycles-cycle-number-signers-signer-key
+      description: REST surface for extended-v2-pox-cycles-cycle_number-signers-signer_key.
+      operations:
+      - method: GET
+        name: getpoxcyclesigner
+        description: Get signer in PoX cycle
+        call: stacks-blockchain-proof-of-transfer.getpoxcyclesigner
+        with:
+          cycle_number: rest.cycle_number
+          signer_key: rest.signer_key
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v2/pox/cycles/{cycle-number}/signers/{signer-key}/stackers
+      name: extended-v2-pox-cycles-cycle-number-signers-signer-key-stackers
+      description: REST surface for extended-v2-pox-cycles-cycle_number-signers-signer_key-stackers.
+      operations:
+      - method: GET
+        name: getpoxcyclesignerstackers
+        description: Get stackers for signer in PoX cycle
+        call: stacks-blockchain-proof-of-transfer.getpoxcyclesignerstackers
+        with:
+          limit: rest.limit
+          offset: rest.offset
+          cycle_number: rest.cycle_number
+          signer_key: rest.signer_key
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stacks-blockchain-proof-of-transfer-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Stacks Blockchain API — Proof of Transfer. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-pox-cycles
+      description: Get PoX cycles
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-proof-of-transfer.getpoxcycles
+      with:
+        limit: tools.limit
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-pox-cycle
+      description: Get PoX cycle
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-proof-of-transfer.getpoxcycle
+      with:
+        cycle_number: tools.cycle_number
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-signers-pox-cycle
+      description: Get signers in PoX cycle
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-proof-of-transfer.getpoxcyclesigners
+      with:
+        limit: tools.limit
+        offset: tools.offset
+        cycle_number: tools.cycle_number
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-signer-pox-cycle
+      description: Get signer in PoX cycle
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-proof-of-transfer.getpoxcyclesigner
+      with:
+        cycle_number: tools.cycle_number
+        signer_key: tools.signer_key
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-stackers-signer-pox-cycle
+      description: Get stackers for signer in PoX cycle
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-proof-of-transfer.getpoxcyclesignerstackers
+      with:
+        limit: tools.limit
+        offset: tools.offset
+        cycle_number: tools.cycle_number
+        signer_key: tools.signer_key
+      outputParameters:
+      - type: object
+        mapping: $.

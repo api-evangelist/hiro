@@ -1,0 +1,323 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Token Metadata API — Tokens
+  description: 'Token Metadata API — Tokens. 5 operations. Lead operation: Fungible Tokens. Self-contained Naftiko capability
+    covering one Hiro business surface.'
+  tags:
+  - Hiro
+  - Tokens
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    HIRO_API_KEY: HIRO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: token-metadata-tokens
+    baseUri: https://api.hiro.so
+    description: Token Metadata API — Tokens business capability. Self-contained, no shared references.
+    resources:
+    - name: metadata-v1-ft
+      path: /metadata/v1/ft
+      operations:
+      - name: getfungibletokens
+        method: GET
+        description: Fungible Tokens
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+        - name: symbol
+          in: query
+          type: string
+        - name: address
+          in: query
+          type: string
+          description: Stacks Address
+        - name: valid_metadata_only
+          in: query
+          type: boolean
+          description: If enabled, only tokens with valid SIP-016 metadata will be returned
+        - name: offset
+          in: query
+          type: integer
+          description: Result offset
+        - name: limit
+          in: query
+          type: integer
+          description: Results per page
+        - name: order_by
+          in: query
+          type: string
+          description: Parameter to order results by
+        - name: order
+          in: query
+          type: string
+          description: Results order
+    - name: metadata-v1-ft-principal
+      path: /metadata/v1/ft/{principal}
+      operations:
+      - name: getftmetadata
+        method: GET
+        description: Fungible Token Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: locale
+          in: query
+          type: string
+          description: Metadata localization to retrieve
+        - name: principal
+          in: path
+          type: string
+          description: Principal for the contract which owns the SIP-010 token
+          required: true
+    - name: metadata-v1-nft-principal-token_id
+      path: /metadata/v1/nft/{principal}/{token_id}
+      operations:
+      - name: getnftmetadata
+        method: GET
+        description: Non-Fungible Token Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: locale
+          in: query
+          type: string
+          description: Metadata localization to retrieve
+        - name: principal
+          in: path
+          type: string
+          description: SIP-009 compliant smart contract principal
+          required: true
+        - name: token_id
+          in: path
+          type: integer
+          description: Token ID to retrieve
+          required: true
+    - name: metadata-v1-search
+      path: /metadata/v1/search
+      operations:
+      - name: searchtokens
+        method: GET
+        description: Search Tokens
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: contract
+          in: query
+          type: array
+          description: 'Contract identifiers to search for. Format: PRINCIPAL or PRINCIPAL:TOKEN_NUMBER. Defaults token_number
+            to 1 when omitted.'
+          required: true
+        - name: locale
+          in: query
+          type: string
+          description: Metadata localization to retrieve
+    - name: metadata-v1-sft-principal-token_id
+      path: /metadata/v1/sft/{principal}/{token_id}
+      operations:
+      - name: getsftmetadata
+        method: GET
+        description: Semi-Fungible Token Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: locale
+          in: query
+          type: string
+          description: Metadata localization to retrieve
+        - name: principal
+          in: path
+          type: string
+          description: SIP-013 compliant smart contract principal
+          required: true
+        - name: token_id
+          in: path
+          type: integer
+          description: Token ID to retrieve
+          required: true
+  exposes:
+  - type: rest
+    namespace: token-metadata-tokens-rest
+    port: 8080
+    description: REST adapter for Token Metadata API — Tokens. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/metadata/v1/ft
+      name: metadata-v1-ft
+      description: REST surface for metadata-v1-ft.
+      operations:
+      - method: GET
+        name: getfungibletokens
+        description: Fungible Tokens
+        call: token-metadata-tokens.getfungibletokens
+        with:
+          name: rest.name
+          symbol: rest.symbol
+          address: rest.address
+          valid_metadata_only: rest.valid_metadata_only
+          offset: rest.offset
+          limit: rest.limit
+          order_by: rest.order_by
+          order: rest.order
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/metadata/v1/ft/{principal}
+      name: metadata-v1-ft-principal
+      description: REST surface for metadata-v1-ft-principal.
+      operations:
+      - method: GET
+        name: getftmetadata
+        description: Fungible Token Metadata
+        call: token-metadata-tokens.getftmetadata
+        with:
+          locale: rest.locale
+          principal: rest.principal
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/metadata/v1/nft/{principal}/{token-id}
+      name: metadata-v1-nft-principal-token-id
+      description: REST surface for metadata-v1-nft-principal-token_id.
+      operations:
+      - method: GET
+        name: getnftmetadata
+        description: Non-Fungible Token Metadata
+        call: token-metadata-tokens.getnftmetadata
+        with:
+          locale: rest.locale
+          principal: rest.principal
+          token_id: rest.token_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/metadata/v1/search
+      name: metadata-v1-search
+      description: REST surface for metadata-v1-search.
+      operations:
+      - method: GET
+        name: searchtokens
+        description: Search Tokens
+        call: token-metadata-tokens.searchtokens
+        with:
+          contract: rest.contract
+          locale: rest.locale
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/metadata/v1/sft/{principal}/{token-id}
+      name: metadata-v1-sft-principal-token-id
+      description: REST surface for metadata-v1-sft-principal-token_id.
+      operations:
+      - method: GET
+        name: getsftmetadata
+        description: Semi-Fungible Token Metadata
+        call: token-metadata-tokens.getsftmetadata
+        with:
+          locale: rest.locale
+          principal: rest.principal
+          token_id: rest.token_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: token-metadata-tokens-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Token Metadata API — Tokens. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: fungible-tokens
+      description: Fungible Tokens
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: token-metadata-tokens.getfungibletokens
+      with:
+        name: tools.name
+        symbol: tools.symbol
+        address: tools.address
+        valid_metadata_only: tools.valid_metadata_only
+        offset: tools.offset
+        limit: tools.limit
+        order_by: tools.order_by
+        order: tools.order
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: fungible-token-metadata
+      description: Fungible Token Metadata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: token-metadata-tokens.getftmetadata
+      with:
+        locale: tools.locale
+        principal: tools.principal
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: non-fungible-token-metadata
+      description: Non-Fungible Token Metadata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: token-metadata-tokens.getnftmetadata
+      with:
+        locale: tools.locale
+        principal: tools.principal
+        token_id: tools.token_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: search-tokens
+      description: Search Tokens
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: token-metadata-tokens.searchtokens
+      with:
+        contract: tools.contract
+        locale: tools.locale
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: semi-fungible-token-metadata
+      description: Semi-Fungible Token Metadata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: token-metadata-tokens.getsftmetadata
+      with:
+        locale: tools.locale
+        principal: tools.principal
+        token_id: tools.token_id
+      outputParameters:
+      - type: object
+        mapping: $.

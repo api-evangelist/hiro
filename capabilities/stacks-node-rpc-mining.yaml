@@ -1,0 +1,131 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Stacks 3.0+ RPC API — Mining
+  description: 'Stacks 3.0+ RPC API — Mining. 2 operations. Lead operation: Upload a Stacks block. Self-contained Naftiko
+    capability covering one Hiro business surface.'
+  tags:
+  - Hiro
+  - Mining
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    HIRO_API_KEY: HIRO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stacks-node-rpc-mining
+    baseUri: http://localhost:20443
+    description: Stacks 3.0+ RPC API — Mining business capability. Self-contained, no shared references.
+    resources:
+    - name: v2-blocks-upload-consensus_hash
+      path: /v2/blocks/upload/{consensus_hash}
+      operations:
+      - name: uploadlegacyblock
+        method: POST
+        description: Upload a Stacks block
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: consensus_hash
+          in: path
+          type: string
+          description: Consensus hash (40 hex characters)
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v3-block_proposal
+      path: /v3/block_proposal
+      operations:
+      - name: postblockproposal
+        method: POST
+        description: Validate a proposed Stacks block
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: authorization
+      value: '{{env.HIRO_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: stacks-node-rpc-mining-rest
+    port: 8080
+    description: REST adapter for Stacks 3.0+ RPC API — Mining. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/v2/blocks/upload/{consensus-hash}
+      name: v2-blocks-upload-consensus-hash
+      description: REST surface for v2-blocks-upload-consensus_hash.
+      operations:
+      - method: POST
+        name: uploadlegacyblock
+        description: Upload a Stacks block
+        call: stacks-node-rpc-mining.uploadlegacyblock
+        with:
+          consensus_hash: rest.consensus_hash
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/block-proposal
+      name: v3-block-proposal
+      description: REST surface for v3-block_proposal.
+      operations:
+      - method: POST
+        name: postblockproposal
+        description: Validate a proposed Stacks block
+        call: stacks-node-rpc-mining.postblockproposal
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stacks-node-rpc-mining-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Stacks 3.0+ RPC API — Mining. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: upload-stacks-block
+      description: Upload a Stacks block
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: stacks-node-rpc-mining.uploadlegacyblock
+      with:
+        consensus_hash: tools.consensus_hash
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: validate-proposed-stacks-block
+      description: Validate a proposed Stacks block
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: stacks-node-rpc-mining.postblockproposal
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

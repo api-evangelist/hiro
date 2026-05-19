@@ -1,0 +1,156 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Stacks Blockchain API — Microblocks
+  description: 'Stacks Blockchain API — Microblocks. 3 operations. Lead operation: Get recent microblocks. Self-contained
+    Naftiko capability covering one Hiro business surface.'
+  tags:
+  - Hiro
+  - Microblocks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    HIRO_API_KEY: HIRO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stacks-blockchain-microblocks
+    baseUri: https://api.hiro.so
+    description: Stacks Blockchain API — Microblocks business capability. Self-contained, no shared references.
+    resources:
+    - name: extended-v1-microblock
+      path: /extended/v1/microblock/
+      operations:
+      - name: getmicroblocklist
+        method: GET
+        description: Get recent microblocks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          description: Max number of microblocks to fetch
+        - name: offset
+          in: query
+          type: integer
+          description: Result offset
+    - name: extended-v1-microblock-unanchored-txs
+      path: /extended/v1/microblock/unanchored/txs
+      operations:
+      - name: getunanchoredtxs
+        method: GET
+        description: Get the list of current transactions that belong to unanchored microblocks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: extended-v1-microblock-hash
+      path: /extended/v1/microblock/{hash}
+      operations:
+      - name: getmicroblockbyhash
+        method: GET
+        description: Get microblock
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: hash
+          in: path
+          type: string
+          description: Hash of the microblock
+          required: true
+  exposes:
+  - type: rest
+    namespace: stacks-blockchain-microblocks-rest
+    port: 8080
+    description: REST adapter for Stacks Blockchain API — Microblocks. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/extended/v1/microblock
+      name: extended-v1-microblock
+      description: REST surface for extended-v1-microblock.
+      operations:
+      - method: GET
+        name: getmicroblocklist
+        description: Get recent microblocks
+        call: stacks-blockchain-microblocks.getmicroblocklist
+        with:
+          limit: rest.limit
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v1/microblock/unanchored/txs
+      name: extended-v1-microblock-unanchored-txs
+      description: REST surface for extended-v1-microblock-unanchored-txs.
+      operations:
+      - method: GET
+        name: getunanchoredtxs
+        description: Get the list of current transactions that belong to unanchored microblocks
+        call: stacks-blockchain-microblocks.getunanchoredtxs
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extended/v1/microblock/{hash}
+      name: extended-v1-microblock-hash
+      description: REST surface for extended-v1-microblock-hash.
+      operations:
+      - method: GET
+        name: getmicroblockbyhash
+        description: Get microblock
+        call: stacks-blockchain-microblocks.getmicroblockbyhash
+        with:
+          hash: rest.hash
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stacks-blockchain-microblocks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Stacks Blockchain API — Microblocks. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-recent-microblocks
+      description: Get recent microblocks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-microblocks.getmicroblocklist
+      with:
+        limit: tools.limit
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-list-current-transactions-that
+      description: Get the list of current transactions that belong to unanchored microblocks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-microblocks.getunanchoredtxs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-microblock
+      description: Get microblock
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-blockchain-microblocks.getmicroblockbyhash
+      with:
+        hash: tools.hash
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,237 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Stacks 3.0+ RPC API — StackerDB
+  description: 'Stacks 3.0+ RPC API — StackerDB. 5 operations. Lead operation: Get StackerDB metadata. Self-contained Naftiko
+    capability covering one Hiro business surface.'
+  tags:
+  - Hiro
+  - StackerDB
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    HIRO_API_KEY: HIRO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: stacks-node-rpc-stackerdb
+    baseUri: http://localhost:20443
+    description: Stacks 3.0+ RPC API — StackerDB business capability. Self-contained, no shared references.
+    resources:
+    - name: v2-stackerdb-principal-contract_name
+      path: /v2/stackerdb/{principal}/{contract_name}
+      operations:
+      - name: getstackerdbmetadata
+        method: GET
+        description: Get StackerDB metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-stackerdb-principal-contract_name-chunks
+      path: /v2/stackerdb/{principal}/{contract_name}/chunks
+      operations:
+      - name: poststackerdbchunk
+        method: POST
+        description: Write StackerDB chunk
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v2-stackerdb-principal-contract_name-replicas
+      path: /v2/stackerdb/{principal}/{contract_name}/replicas
+      operations:
+      - name: liststackerdbreplicas
+        method: GET
+        description: List StackerDB replicas
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-stackerdb-principal-contract_name-slot_id
+      path: /v2/stackerdb/{principal}/{contract_name}/{slot_id}
+      operations:
+      - name: getstackerdbchunk
+        method: GET
+        description: Get StackerDB chunk (latest version)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: slot_id
+          in: path
+          type: integer
+          description: Slot ID (u32 range)
+          required: true
+    - name: v2-stackerdb-principal-contract_name-slot_id-slot_version
+      path: /v2/stackerdb/{principal}/{contract_name}/{slot_id}/{slot_version}
+      operations:
+      - name: getstackerdbchunkversioned
+        method: GET
+        description: Get StackerDB chunk (specific version)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: slot_id
+          in: path
+          type: integer
+          description: Slot ID (u32 range)
+          required: true
+        - name: slot_version
+          in: path
+          type: integer
+          description: Specific slot version (u32 range)
+          required: true
+    authentication:
+      type: apikey
+      key: authorization
+      value: '{{env.HIRO_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: stacks-node-rpc-stackerdb-rest
+    port: 8080
+    description: REST adapter for Stacks 3.0+ RPC API — StackerDB. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v2/stackerdb/{principal}/{contract-name}
+      name: v2-stackerdb-principal-contract-name
+      description: REST surface for v2-stackerdb-principal-contract_name.
+      operations:
+      - method: GET
+        name: getstackerdbmetadata
+        description: Get StackerDB metadata
+        call: stacks-node-rpc-stackerdb.getstackerdbmetadata
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v2/stackerdb/{principal}/{contract-name}/chunks
+      name: v2-stackerdb-principal-contract-name-chunks
+      description: REST surface for v2-stackerdb-principal-contract_name-chunks.
+      operations:
+      - method: POST
+        name: poststackerdbchunk
+        description: Write StackerDB chunk
+        call: stacks-node-rpc-stackerdb.poststackerdbchunk
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v2/stackerdb/{principal}/{contract-name}/replicas
+      name: v2-stackerdb-principal-contract-name-replicas
+      description: REST surface for v2-stackerdb-principal-contract_name-replicas.
+      operations:
+      - method: GET
+        name: liststackerdbreplicas
+        description: List StackerDB replicas
+        call: stacks-node-rpc-stackerdb.liststackerdbreplicas
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v2/stackerdb/{principal}/{contract-name}/{slot-id}
+      name: v2-stackerdb-principal-contract-name-slot-id
+      description: REST surface for v2-stackerdb-principal-contract_name-slot_id.
+      operations:
+      - method: GET
+        name: getstackerdbchunk
+        description: Get StackerDB chunk (latest version)
+        call: stacks-node-rpc-stackerdb.getstackerdbchunk
+        with:
+          slot_id: rest.slot_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v2/stackerdb/{principal}/{contract-name}/{slot-id}/{slot-version}
+      name: v2-stackerdb-principal-contract-name-slot-id-slot-version
+      description: REST surface for v2-stackerdb-principal-contract_name-slot_id-slot_version.
+      operations:
+      - method: GET
+        name: getstackerdbchunkversioned
+        description: Get StackerDB chunk (specific version)
+        call: stacks-node-rpc-stackerdb.getstackerdbchunkversioned
+        with:
+          slot_id: rest.slot_id
+          slot_version: rest.slot_version
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: stacks-node-rpc-stackerdb-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Stacks 3.0+ RPC API — StackerDB. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-stackerdb-metadata
+      description: Get StackerDB metadata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-node-rpc-stackerdb.getstackerdbmetadata
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: write-stackerdb-chunk
+      description: Write StackerDB chunk
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: stacks-node-rpc-stackerdb.poststackerdbchunk
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-stackerdb-replicas
+      description: List StackerDB replicas
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-node-rpc-stackerdb.liststackerdbreplicas
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-stackerdb-chunk-latest-version
+      description: Get StackerDB chunk (latest version)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-node-rpc-stackerdb.getstackerdbchunk
+      with:
+        slot_id: tools.slot_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-stackerdb-chunk-specific-version
+      description: Get StackerDB chunk (specific version)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: stacks-node-rpc-stackerdb.getstackerdbchunkversioned
+      with:
+        slot_id: tools.slot_id
+        slot_version: tools.slot_version
+      outputParameters:
+      - type: object
+        mapping: $.
