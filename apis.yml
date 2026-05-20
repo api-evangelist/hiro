@@ -8,109 +8,111 @@ description: Hiro builds developer tooling for Bitcoin and the Stacks layer. Pro
   and chainhooks.
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-- Web3
-- Blockchain
-- Bitcoin
-- Stacks
-- sBTC
-- Indexing
+  - Web3
+  - Blockchain
+  - Bitcoin
+  - Stacks
+  - sBTC
+  - Indexing
 created: '2026-05-08'
 modified: '2026-05-08'
 specificationVersion: '0.19'
 apis:
-- aid: hiro:stacks-blockchain-api
-  name: Stacks Blockchain API
-  description: 'REST API for Stacks blockchain data: blocks, transactions, mempool,
-    accounts, smart contracts, BNS names, fungible/non-fungible tokens, microblocks,
-    faucets, fee rates.'
-  humanURL: https://docs.hiro.so/stacks/api
-  baseURL: https://api.mainnet.hiro.so
-  tags:
-  - REST
-  - Stacks
-  properties:
-  - type: Documentation
-    url: https://docs.hiro.so/stacks/api
-  - type: OpenAPI
-    url: openapi/hiro-stacks-blockchain-api-openapi.yaml
-- aid: hiro:stacks-node-rpc
-  name: Stacks Node RPC API
-  description: 'JSON-RPC interface to a Stacks node: submit transactions, call read-only
-    contracts, query mempool/state.'
-  humanURL: https://docs.hiro.so/stacks/rpc-api
-  baseURL: https://api.mainnet.hiro.so
-  tags:
-  - JSON-RPC
-  - Stacks
-  properties:
-  - type: Documentation
-    url: https://docs.hiro.so/stacks/rpc-api
-  - type: OpenAPI
-    url: openapi/hiro-stacks-node-rpc-api-openapi.yaml
-- aid: hiro:token-metadata-api
-  name: Hiro Token Metadata API
-  description: REST API for fungible and non-fungible token metadata on Stacks.
-  humanURL: https://docs.hiro.so/stacks/token-metadata-api
-  baseURL: https://api.mainnet.hiro.so
-  tags:
-  - REST
-  - Tokens
-  - Metadata
-  properties:
-  - type: Documentation
-    url: https://docs.hiro.so/stacks/token-metadata-api
-  - type: OpenAPI
-    url: openapi/hiro-token-metadata-api-openapi.yaml
-- aid: hiro:signer-metrics-api
-  name: Hiro Signer Metrics API
-  description: REST API to monitor and analyze signer behavior and performance on
-    the Stacks Nakamoto network.
-  humanURL: https://docs.hiro.so/stacks/signer-metrics-api
-  baseURL: https://api.mainnet.hiro.so/signer-metrics
-  tags:
-  - REST
-  - Signers
-  - Nakamoto
-  properties:
-  - type: Documentation
-    url: https://docs.hiro.so/stacks/signer-metrics-api
-  - type: OpenAPI
-    url: openapi/hiro-signer-metrics-api-openapi.yaml
-- aid: hiro:chainhooks-api
-  name: Hiro Chainhooks API
-  description: REST API for Chainhook predicate registration and event streaming for
-    Bitcoin and Stacks.
-  humanURL: https://docs.hiro.so/stacks/chainhook
-  baseURL: https://api.platform.hiro.so
-  tags:
-  - REST
-  - Chainhook
-  - Webhooks
-  properties:
-  - type: Documentation
-    url: https://docs.hiro.so/stacks/chainhook
-- aid: hiro:platform-api
-  name: Hiro Platform API
-  description: REST API to programmatically manage Hiro Platform devnets and chainhooks.
-  humanURL: https://docs.hiro.so/stacks/platform-api
-  baseURL: https://api.platform.hiro.so
-  tags:
-  - REST
-  - Platform
-  properties:
-  - type: Documentation
-    url: https://docs.hiro.so/stacks/platform-api
+  - aid: hiro:stacks-blockchain-api
+    name: Stacks Blockchain API
+    description: 'REST API for Stacks blockchain data: blocks, transactions, mempool,
+      accounts, smart contracts, BNS names, fungible/non-fungible tokens, microblocks,
+      faucets, fee rates.'
+    humanURL: https://docs.hiro.so/stacks/api
+    baseURL: https://api.mainnet.hiro.so
+    tags:
+    - REST
+    - Stacks
+    properties:
+    - type: Documentation
+      url: https://docs.hiro.so/stacks/api
+    - type: OpenAPI
+      url: openapi/hiro-stacks-blockchain-api-openapi.yaml
+  - aid: hiro:stacks-node-rpc
+    name: Stacks Node RPC API
+    description: 'JSON-RPC interface to a Stacks node: submit transactions, call read-only
+      contracts, query mempool/state.'
+    humanURL: https://docs.hiro.so/stacks/rpc-api
+    baseURL: https://api.mainnet.hiro.so
+    tags:
+    - JSON-RPC
+    - Stacks
+    properties:
+    - type: Documentation
+      url: https://docs.hiro.so/stacks/rpc-api
+    - type: OpenAPI
+      url: openapi/hiro-stacks-node-rpc-api-openapi.yaml
+  - aid: hiro:token-metadata-api
+    name: Hiro Token Metadata API
+    description: REST API for fungible and non-fungible token metadata on Stacks.
+    humanURL: https://docs.hiro.so/stacks/token-metadata-api
+    baseURL: https://api.mainnet.hiro.so
+    tags:
+    - REST
+    - Tokens
+    - Metadata
+    properties:
+    - type: Documentation
+      url: https://docs.hiro.so/stacks/token-metadata-api
+    - type: OpenAPI
+      url: openapi/hiro-token-metadata-api-openapi.yaml
+  - aid: hiro:signer-metrics-api
+    name: Hiro Signer Metrics API
+    description: REST API to monitor and analyze signer behavior and performance on
+      the Stacks Nakamoto network.
+    humanURL: https://docs.hiro.so/stacks/signer-metrics-api
+    baseURL: https://api.mainnet.hiro.so/signer-metrics
+    tags:
+    - REST
+    - Signers
+    - Nakamoto
+    properties:
+    - type: Documentation
+      url: https://docs.hiro.so/stacks/signer-metrics-api
+    - type: OpenAPI
+      url: openapi/hiro-signer-metrics-api-openapi.yaml
+  - aid: hiro:chainhooks-api
+    name: Hiro Chainhooks API
+    description: REST API for Chainhook predicate registration and event streaming for
+      Bitcoin and Stacks.
+    humanURL: https://docs.hiro.so/stacks/chainhook
+    baseURL: https://api.platform.hiro.so
+    tags:
+    - REST
+    - Chainhook
+    - Webhooks
+    properties:
+    - type: Documentation
+      url: https://docs.hiro.so/stacks/chainhook
+  - aid: hiro:platform-api
+    name: Hiro Platform API
+    description: REST API to programmatically manage Hiro Platform devnets and chainhooks.
+    humanURL: https://docs.hiro.so/stacks/platform-api
+    baseURL: https://api.platform.hiro.so
+    tags:
+    - REST
+    - Platform
+    properties:
+    - type: Documentation
+      url: https://docs.hiro.so/stacks/platform-api
 common:
+  - type: GitHubOrganization
+    url: https://github.com/hirosystems
   - type: LinkedIn
     url: https://www.linkedin.com/company/hiro-systems
-- type: Website
-  url: https://www.hiro.so/
-- type: Plans
-  url: plans/hiro-plans-pricing.yml
-- type: RateLimits
-  url: rate-limits/hiro-rate-limits.yml
-- type: FinOps
-  url: finops/hiro-finops.yml
+  - type: Website
+    url: https://www.hiro.so/
+  - type: Plans
+    url: plans/hiro-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/hiro-rate-limits.yml
+  - type: FinOps
+    url: finops/hiro-finops.yml
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com
