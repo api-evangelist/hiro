@@ -1,0 +1,19 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/hiro-stacks-node-rpc-api-openapi.yaml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: rpcAuth
+  type: apiKey
+  in: header
+  parameter: authorization
+  description: |-
+    Plain-text secret value that must exactly equal the node's
+    configured password, which is set as `connection_options.auth_token`
+    in the node's configuration file.
+  sources:
+  - openapi/hiro-stacks-node-rpc-api-openapi.yaml
