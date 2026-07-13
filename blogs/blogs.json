@@ -1,0 +1,21 @@
+{
+  "repo": "hiro",
+  "feeds": [
+    {
+      "source": "https://www.hiro.so/blog/rss.xml",
+      "feed_url": "https://www.hiro.so/blog/rss.xml",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://docs.hiro.so/stacks/platform-api",
+      "feed_url": "https://docs.hiro.so/stacks/platform-api",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "fetched": "2026-07-11T11:50:51Z",
+  "post_count": 51
+}
