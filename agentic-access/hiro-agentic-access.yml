@@ -1,0 +1,1645 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/hiro-signer-metrics-api-openapi.yaml, openapi/hiro-stacks-blockchain-api-openapi.yaml,
+  openapi/hiro-stacks-node-rpc-api-openapi.yaml, openapi/hiro-token-metadata-api-openapi.yaml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 154
+  by_action_class:
+    connected: 140
+    acting: 14
+  by_consequence:
+    read: 140
+    write: 11
+    physical: 3
+  human_in_the_loop_required: 0
+operations:
+- path: /signer-metrics/
+  method: get
+  operationId: getApiStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /signer-metrics/v1/cycles/{cycle_number}/signers
+  method: get
+  operationId: getPoxCycleSigners
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /signer-metrics/v1/cycles/{cycle_number}/signers/{signer_id}
+  method: get
+  operationId: getPoxCycleSigner
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /signer-metrics/v1/blocks
+  method: get
+  operationId: getBlocks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /signer-metrics/v1/blocks/{height_or_hash}
+  method: get
+  operationId: getBlock
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /signer-metrics/v1/block_proposals
+  method: get
+  operationId: getBlockProposals
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /signer-metrics/v1/block_proposals/{block_hash}
+  method: get
+  operationId: getBlockProposals
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended
+  method: get
+  operationId: get_status
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/tx/
+  method: get
+  operationId: get_transaction_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/tx/multiple
+  method: get
+  operationId: get_tx_list_details
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/tx/mempool
+  method: get
+  operationId: get_mempool_transaction_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/tx/mempool/stats
+  method: get
+  operationId: get_mempool_transaction_stats
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/tx/events
+  method: get
+  operationId: get_filtered_events
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/tx/{tx_id}
+  method: get
+  operationId: get_transaction_by_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/tx/{tx_id}/raw
+  method: get
+  operationId: get_raw_transaction_by_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/tx/block/{block_hash}
+  method: get
+  operationId: get_transactions_by_block_hash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/tx/block_height/{height}
+  method: get
+  operationId: get_transactions_by_block_height
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/stx_supply/
+  method: get
+  operationId: get_stx_supply
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/stx_supply/total/plain
+  method: get
+  operationId: get_stx_supply_total_supply_plain
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/stx_supply/circulating/plain
+  method: get
+  operationId: get_stx_supply_circulating_plain
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/stx_supply/legacy_format
+  method: get
+  operationId: get_total_stx_supply_legacy_format
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/info/network_block_times
+  method: get
+  operationId: get_network_block_times
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/info/network_block_time/{network}
+  method: get
+  operationId: get_network_block_time_by_network
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/tokens/nft/holdings
+  method: get
+  operationId: get_nft_holdings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/tokens/nft/history
+  method: get
+  operationId: get_nft_history
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/tokens/nft/mints
+  method: get
+  operationId: get_nft_mints
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/tokens/ft/{token}/holders
+  method: get
+  operationId: get_ft_holders
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/contract/by_trait
+  method: get
+  operationId: get_contracts_by_trait
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/contract/{contract_id}
+  method: get
+  operationId: get_contract_by_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/contract/{contract_id}/events
+  method: get
+  operationId: get_contract_events_by_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/fee_rate/
+  method: post
+  operationId: fetch_fee_rate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /extended/v1/microblock/
+  method: get
+  operationId: get_microblock_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/microblock/{hash}
+  method: get
+  operationId: get_microblock_by_hash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/microblock/unanchored/txs
+  method: get
+  operationId: get_unanchored_txs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/block/
+  method: get
+  operationId: get_block_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/block/by_height/{height}
+  method: get
+  operationId: get_block_by_height
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/block/by_burn_block_height/{burn_block_height}
+  method: get
+  operationId: get_block_by_burn_block_height
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/block/{hash}
+  method: get
+  operationId: get_block_by_hash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/block/by_burn_block_hash/{burn_block_hash}
+  method: get
+  operationId: get_block_by_burn_block_hash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/burnchain/reward_slot_holders
+  method: get
+  operationId: get_burnchain_reward_slot_holders
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/burnchain/reward_slot_holders/{address}
+  method: get
+  operationId: get_burnchain_reward_slot_holders_by_address
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/burnchain/rewards
+  method: get
+  operationId: get_burnchain_reward_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/burnchain/rewards/{address}
+  method: get
+  operationId: get_burnchain_reward_list_by_address
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/burnchain/rewards/{address}/total
+  method: get
+  operationId: get_burnchain_rewards_total_by_address
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/address/{principal}/stx
+  method: get
+  operationId: get_account_stx_balance
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/address/{principal}/balances
+  method: get
+  operationId: get_account_balance
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/address/{principal}/transactions
+  method: get
+  operationId: get_account_transactions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/address/{principal}/{tx_id}/with_transfers
+  method: get
+  operationId: get_single_transaction_with_transfers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/address/{principal}/transactions_with_transfers
+  method: get
+  operationId: get_account_transactions_with_transfers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/address/{principal}/assets
+  method: get
+  operationId: get_account_assets
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/address/{principal}/stx_inbound
+  method: get
+  operationId: get_account_inbound
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/address/{principal}/mempool
+  method: get
+  operationId: get_address_mempool_transactions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/address/{principal}/nonces
+  method: get
+  operationId: get_account_nonces
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/search/{id}
+  method: get
+  operationId: search_by_id
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/{pox}/events
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/{pox}/tx/{tx_id}
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/{pox}/stacker/{principal}
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/{pox}/{pool_principal}/delegations
+  method: get
+  operationId: get_pool_delegations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/faucets/btc
+  method: post
+  operationId: run_faucet_btc
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /extended/v1/faucets/btc/{address}
+  method: get
+  operationId: get_btc_balance
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v1/faucets/stx
+  method: post
+  operationId: run_faucet_stx
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /extended/v2/blocks/
+  method: get
+  operationId: get_blocks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v2/blocks/average-times
+  method: get
+  operationId: get_average_block_times
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v2/blocks/{height_or_hash}
+  method: get
+  operationId: get_block
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v2/blocks/{height_or_hash}/transactions
+  method: get
+  operationId: get_transactions_by_block
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v2/blocks/{height_or_hash}/signer-signatures
+  method: get
+  operationId: get_signer_signatures_for_block
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v2/burn-blocks/
+  method: get
+  operationId: get_burn_blocks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v2/burn-blocks/{height_or_hash}
+  method: get
+  operationId: get_burn_block
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v2/burn-blocks/{height_or_hash}/blocks
+  method: get
+  operationId: get_blocks_by_burn_block
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v2/block-tenures/{tenure_height}/blocks
+  method: get
+  operationId: get_tenure_blocks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v2/smart-contracts/status
+  method: get
+  operationId: get_smart_contracts_status
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v2/mempool/fees
+  method: get
+  operationId: get_mempool_fee_priorities
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v2/pox/cycles
+  method: get
+  operationId: get_pox_cycles
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v2/pox/cycles/{cycle_number}
+  method: get
+  operationId: get_pox_cycle
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v2/pox/cycles/{cycle_number}/signers
+  method: get
+  operationId: get_pox_cycle_signers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v2/pox/cycles/{cycle_number}/signers/{signer_key}
+  method: get
+  operationId: get_pox_cycle_signer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v2/pox/cycles/{cycle_number}/signers/{signer_key}/stackers
+  method: get
+  operationId: get_pox_cycle_signer_stackers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v2/addresses/{address}/transactions
+  method: get
+  operationId: get_address_transactions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v2/addresses/{address}/transactions/{tx_id}/events
+  method: get
+  operationId: get_address_transaction_events
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v2/addresses/{principal}/balances/stx
+  method: get
+  operationId: get_principal_stx_balance
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v2/addresses/{principal}/balances/ft
+  method: get
+  operationId: get_principal_ft_balances
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /extended/v2/addresses/{principal}/balances/ft/{token}
+  method: get
+  operationId: get_principal_ft_balance
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/names/{name}/zonefile/{zoneFileHash}
+  method: get
+  operationId: get_historical_zone_file
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/names/{name}/subdomains
+  method: get
+  operationId: fetch_subdomains_list_for_name
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/names/{name}/zonefile
+  method: get
+  operationId: fetch_zone_file
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/names/
+  method: get
+  operationId: get_all_names
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/names/{name}
+  method: get
+  operationId: get_name_info
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/namespaces/
+  method: get
+  operationId: get_all_namespaces
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/namespaces/{tld}/names
+  method: get
+  operationId: get_namespace_names
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/addresses/{blockchain}/{address}
+  method: get
+  operationId: get_names_owned_by_address
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/prices/namespaces/{tld}
+  method: get
+  operationId: get_namespace_price
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/prices/names/{name}
+  method: get
+  operationId: get_name_price
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/transactions
+  method: post
+  operationId: broadcastTransaction
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/contracts/interface/{deployer_address}/{contract_name}
+  method: get
+  operationId: getContractInterface
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/map_entry/{deployer_address}/{contract_name}/{map_name}
+  method: post
+  operationId: getContractDataMapEntry
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/contracts/source/{deployer_address}/{contract_name}
+  method: get
+  operationId: getContractSource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/contracts/call-read/{deployer_address}/{contract_name}/{function_name}
+  method: post
+  operationId: callReadOnlyFunction
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/contracts/fast-call-read/{deployer_address}/{contract_name}/{function_name}
+  method: post
+  operationId: fastCallReadOnlyFunction
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/accounts/{principal}
+  method: get
+  operationId: getAccountInfo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/fees/transaction
+  method: post
+  operationId: getFeeTransaction
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/fees/transfer
+  method: get
+  operationId: getFeeTransfer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/info
+  method: get
+  operationId: getNodeInfo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/pox
+  method: get
+  operationId: getPoxInfo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/traits/{deployer_address}/{contract_name}/{trait_deployer_address}/{trait_contract_name}/{trait_name}
+  method: get
+  operationId: checkTraitImplementation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/clarity/marf/{marf_key_hash}
+  method: get
+  operationId: getClarityMarfValue
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/clarity/metadata/{deployer_address}/{contract_name}/{clarity_metadata_key}
+  method: get
+  operationId: getClarityMetadata
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/constant_val/{deployer_address}/{contract_name}/{constant_name}
+  method: get
+  operationId: getConstantValue
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/block_proposal
+  method: post
+  operationId: postBlockProposal
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/stacker_set/{cycle_number}
+  method: get
+  operationId: getStackerSet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/blocks/{block_id}
+  method: get
+  operationId: getNakamotoBlockById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/blocks/height/{block_height}
+  method: get
+  operationId: getNakamotoBlockByHeight
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/tenures/info
+  method: get
+  operationId: getTenureInfo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/tenures/{block_id}
+  method: get
+  operationId: getTenures
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/tenures/blocks/{consensus_hash}
+  method: get
+  operationId: getTenureBlocks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/tenures/blocks/hash/{burnchain_block_hash}
+  method: get
+  operationId: getTenureBlocksByHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/tenures/blocks/height/{burnchain_block_height}
+  method: get
+  operationId: getTenureBlocksByHeight
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/sortitions
+  method: get
+  operationId: getLatestSortitions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/sortitions/latest_and_last
+  method: get
+  operationId: getLatestAndLastWinningSortitions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/sortitions/consensus/{consensus_hash}
+  method: get
+  operationId: getSortitionByConsensusHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/sortitions/burn/{burn_header_hash}
+  method: get
+  operationId: getSortitionByBurnHeaderHash
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/sortitions/burn_height/{height}
+  method: get
+  operationId: getSortitionByBurnBlockHeight
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/signer/{signer_pubkey}/{cycle_number}
+  method: get
+  operationId: getSignerBlocksSigned
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/transaction/{txid}
+  method: get
+  operationId: getTransactionById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/health
+  method: get
+  operationId: getNodeHealth
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/attachments/{hash}
+  method: get
+  operationId: getAttachment
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/attachments/inv
+  method: get
+  operationId: getAttachmentsInventory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/microblocks/confirmed/{block_id}
+  method: get
+  operationId: getConfirmedMicroblocks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/microblocks/{microblock_id}
+  method: get
+  operationId: getMicroblockById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/microblocks/unconfirmed/{block_id}/{seq}
+  method: get
+  operationId: getUnconfirmedMicroblocks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/microblocks
+  method: post
+  operationId: postMicroblock
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/stackerdb/{principal}/{contract_name}/{slot_id}
+  method: get
+  operationId: getStackerDbChunk
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/stackerdb/{principal}/{contract_name}/{slot_id}/{slot_version}
+  method: get
+  operationId: getStackerDbChunkVersioned
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/stackerdb/{principal}/{contract_name}
+  method: get
+  operationId: getStackerDbMetadata
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/stackerdb/{principal}/{contract_name}/chunks
+  method: post
+  operationId: postStackerDbChunk
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/stackerdb/{principal}/{contract_name}/replicas
+  method: get
+  operationId: listStackerDbReplicas
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/data_var/{principal}/{contract_name}/{var_name}
+  method: get
+  operationId: getContractDataVariable
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/headers/{quantity}
+  method: get
+  operationId: getBlockHeaders
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/blocks/{block_id}
+  method: get
+  operationId: getLegacyBlockById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/neighbors
+  method: get
+  operationId: getNetworkPeers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/tenures/fork_info/{start}/{stop}
+  method: get
+  operationId: getTenureForkInfo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/tenures/tip/{consensus_hash}
+  method: get
+  operationId: getTenureTip
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/tenures/tip_metadata/{consensus_hash}
+  method: get
+  operationId: getTenureTipMetadata
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/transactions/unconfirmed/{txid}
+  method: get
+  operationId: getUnconfirmedTransactionById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/blocks/upload/{consensus_hash}
+  method: post
+  operationId: uploadLegacyBlock
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/mempool/query
+  method: post
+  operationId: queryMempool
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/blocks/upload
+  method: post
+  operationId: uploadNakamotoBlock
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/blocks/replay/{block_id}
+  method: get
+  operationId: blockReplay
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/blocks/simulate/{block_id}
+  method: get
+  operationId: blockSimulate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /metadata/v1/ft
+  method: get
+  operationId: getFungibleTokens
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /metadata/v1/ft/{principal}
+  method: get
+  operationId: getFtMetadata
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /metadata/v1/nft/{principal}/{token_id}
+  method: get
+  operationId: getNftMetadata
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /metadata/v1/sft/{principal}/{token_id}
+  method: get
+  operationId: getSftMetadata
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /metadata/v1/search
+  method: get
+  operationId: searchTokens
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /metadata/v1/
+  method: get
+  operationId: getApiStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
