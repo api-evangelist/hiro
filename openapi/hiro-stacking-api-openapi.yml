@@ -1,0 +1,260 @@
+openapi: 3.0.3
+info:
+  title: Signer Metrics Accounts Stacking API
+  description: Welcome to the API reference overview for the Signer Metrics API.
+  version: 1.0.3
+servers:
+- url: https://api.hiro.so/
+  description: mainnet
+- url: https://api.testnet.hiro.so/
+  description: testnet
+tags:
+- name: Stacking
+paths:
+  /extended/v1/{pox}/events:
+    get:
+      summary: Get latest PoX events
+      tags:
+      - Stacking
+      parameters:
+      - schema:
+          minimum: 0
+          default: 96
+          maximum: 200
+          title: Limit
+          type: integer
+        in: query
+        name: limit
+        required: false
+        description: Results per page
+      - schema:
+          minimum: 0
+          default: 0
+          title: Offset
+          type: integer
+        in: query
+        name: offset
+        required: false
+        description: Result offset
+      - schema:
+          anyOf:
+          - type: string
+            enum:
+            - pox2
+          - type: string
+            enum:
+            - pox3
+          - type: string
+            enum:
+            - pox4
+        in: path
+        name: pox
+        required: true
+      responses:
+        '200':
+          description: Default Response
+  /extended/v1/{pox}/tx/{tx_id}:
+    get:
+      summary: Get PoX events for a transaction
+      tags:
+      - Stacking
+      parameters:
+      - schema:
+          anyOf:
+          - type: string
+            enum:
+            - pox2
+          - type: string
+            enum:
+            - pox3
+          - type: string
+            enum:
+            - pox4
+        in: path
+        name: pox
+        required: true
+      - schema:
+          type: string
+        in: path
+        name: tx_id
+        required: true
+      responses:
+        '200':
+          description: Default Response
+  /extended/v1/{pox}/stacker/{principal}:
+    get:
+      summary: Get events for a stacking address
+      tags:
+      - Stacking
+      parameters:
+      - schema:
+          anyOf:
+          - type: string
+            enum:
+            - pox2
+          - type: string
+            enum:
+            - pox3
+          - type: string
+            enum:
+            - pox4
+        in: path
+        name: pox
+        required: true
+      - schema:
+          anyOf:
+          - pattern: ^[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{28,41}
+            title: STX Address
+            description: STX Address
+            examples:
+            - SP318Q55DEKHRXJK696033DQN5C54D9K2EE6DHRWP
+            type: string
+          - pattern: ^[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{28,41}.[a-zA-Z]([a-zA-Z0-9]|[-_]){0,39}$
+            title: Smart Contract ID
+            description: Smart Contract ID
+            examples:
+            - SP000000000000000000002Q6VF78.pox-3
+            type: string
+        in: path
+        name: principal
+        required: true
+      responses:
+        '200':
+          description: Default Response
+  /extended/v1/{pox}/{pool_principal}/delegations:
+    get:
+      operationId: get_pool_delegations
+      summary: Stacking pool members
+      tags:
+      - Stacking
+      description: Retrieves the list of stacking pool members for a given delegator principal.
+      parameters:
+      - schema:
+          minimum: 0
+          default: 100
+          maximum: 200
+          title: Limit
+          type: integer
+        in: query
+        name: limit
+        required: false
+        description: Results per page
+      - schema:
+          minimum: 0
+          default: 0
+          title: Offset
+          type: integer
+        in: query
+        name: offset
+        required: false
+        description: Result offset
+      - schema:
+          minimum: 1
+          type: integer
+        in: query
+        name: after_block
+        required: false
+        description: If specified, only delegation events after the given block will be included
+      - schema:
+          minimum: 1
+          type: integer
+        in: query
+        name: height
+        required: false
+      - schema:
+          default: false
+          type: boolean
+        example: true
+        in: query
+        name: unanchored
+        required: false
+        description: Include data from unanchored (i.e. unconfirmed) microblocks
+      - schema:
+          anyOf:
+          - type: string
+            enum:
+            - pox2
+          - type: string
+            enum:
+            - pox3
+          - type: string
+            enum:
+            - pox4
+        in: path
+        name: pox
+        required: true
+      - schema:
+          type: string
+        example: SPSCWDV3RKV5ZRN1FQD84YE1NQFEDJ9R1F4DYQ11
+        in: path
+        name: pool_principal
+        required: true
+        description: Address principal of the stacking pool delegator
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  limit:
+                    type: integer
+                    example: 20
+                  offset:
+                    type: integer
+                    example: 0
+                  total:
+                    type: integer
+                    example: 1
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        stacker:
+                          description: The principal of the pool member that issued the delegation
+                          type: string
+                        pox_addr:
+                          description: The pox-addr value specified by the stacker in the delegation operation
+                          type: string
+                        amount_ustx:
+                          description: The amount of uSTX delegated by the stacker
+                          type: string
+                        burn_block_unlock_height:
+                          description: The optional burnchain block unlock height that the stacker may have specified
+                          type: integer
+                        block_height:
+                          description: The block height at which the stacker delegation transaction was mined at
+                          type: integer
+                        tx_id:
+                          description: The tx_id of the stacker delegation operation
+                          type: string
+                      required:
+                      - stacker
+                      - amount_ustx
+                      - block_height
+                      - tx_id
+                required:
+                - limit
+                - offset
+                - total
+                - results
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+externalDocs:
+  url: https://github.com/hirosystems/signer-metrics-api
+  description: Source Repository

@@ -1,0 +1,113 @@
+openapi: 3.0.3
+info:
+  title: Signer Metrics Accounts Mempool API
+  description: Welcome to the API reference overview for the Signer Metrics API.
+  version: 1.0.3
+servers:
+- url: https://api.hiro.so/
+  description: mainnet
+- url: https://api.testnet.hiro.so/
+  description: testnet
+tags:
+- name: Mempool
+  description: Endpoints to obtain Mempool information
+paths:
+  /extended/v2/mempool/fees:
+    get:
+      operationId: get_mempool_fee_priorities
+      summary: Get mempool transaction fee priorities
+      tags:
+      - Mempool
+      description: Returns estimated fee priorities (in micro-STX) for all transactions that are currently in the mempool. Also returns priorities separated by transaction type.
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  all:
+                    type: object
+                    properties:
+                      no_priority:
+                        type: integer
+                      low_priority:
+                        type: integer
+                      medium_priority:
+                        type: integer
+                      high_priority:
+                        type: integer
+                    required:
+                    - no_priority
+                    - low_priority
+                    - medium_priority
+                    - high_priority
+                  token_transfer:
+                    type: object
+                    properties:
+                      no_priority:
+                        type: integer
+                      low_priority:
+                        type: integer
+                      medium_priority:
+                        type: integer
+                      high_priority:
+                        type: integer
+                    required:
+                    - no_priority
+                    - low_priority
+                    - medium_priority
+                    - high_priority
+                  contract_call:
+                    type: object
+                    properties:
+                      no_priority:
+                        type: integer
+                      low_priority:
+                        type: integer
+                      medium_priority:
+                        type: integer
+                      high_priority:
+                        type: integer
+                    required:
+                    - no_priority
+                    - low_priority
+                    - medium_priority
+                    - high_priority
+                  smart_contract:
+                    type: object
+                    properties:
+                      no_priority:
+                        type: integer
+                      low_priority:
+                        type: integer
+                      medium_priority:
+                        type: integer
+                      high_priority:
+                        type: integer
+                    required:
+                    - no_priority
+                    - low_priority
+                    - medium_priority
+                    - high_priority
+                required:
+                - all
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+externalDocs:
+  url: https://github.com/hirosystems/signer-metrics-api
+  description: Source Repository

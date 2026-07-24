@@ -1,0 +1,225 @@
+openapi: 3.0.3
+info:
+  title: Signer Metrics Accounts Faucets API
+  description: Welcome to the API reference overview for the Signer Metrics API.
+  version: 1.0.3
+servers:
+- url: https://api.hiro.so/
+  description: mainnet
+- url: https://api.testnet.hiro.so/
+  description: testnet
+tags:
+- name: Faucets
+  description: Endpoints to request STX or BTC tokens (not possible on Mainnet)
+paths:
+  /extended/v1/faucets/btc:
+    post:
+      operationId: run_faucet_btc
+      summary: Add regtest BTC tokens to address
+      tags:
+      - Faucets
+      description: "Add 0.01 BTC token to the specified regtest BTC address.\n\n        The endpoint returns the transaction ID, which you can use to view the transaction in a regtest Bitcoin block\n        explorer. The tokens are delivered once the transaction has been included in a block.\n\n        **Note:** This is a Bitcoin regtest-only endpoint. This endpoint will not work on the Bitcoin mainnet."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - type: object
+                properties:
+                  address:
+                    description: A valid regtest BTC address
+                    examples:
+                    - 2N4M94S1ZPt8HfxydXzL2P7qyzgVq7MHWts
+                    type: string
+              - type: 'null'
+      parameters:
+      - schema:
+          type: string
+        example: 2N4M94S1ZPt8HfxydXzL2P7qyzgVq7MHWts
+        in: query
+        name: address
+        required: false
+        description: A valid regtest BTC address
+      - schema:
+          default: false
+          type: boolean
+        in: query
+        name: large
+        required: false
+        description: Request a large amount of regtest BTC than the default
+      - schema:
+          default: false
+          type: boolean
+        in: query
+        name: xlarge
+        required: false
+        description: Request an extra large amount of regtest BTC than the default
+      responses:
+        '200':
+          description: POST request that initiates a transfer of tokens to a specified Bitcoin regtest address
+          content:
+            application/json:
+              schema:
+                title: RunFaucetResponse
+                description: POST request that initiates a transfer of tokens to a specified Bitcoin regtest address
+                type: object
+                properties:
+                  success:
+                    description: Indicates if the faucet call was successful
+                    type: boolean
+                    enum:
+                    - true
+                  txid:
+                    description: The transaction ID for the faucet call
+                    type: string
+                  raw_tx:
+                    description: Raw transaction in hex string representation
+                    type: string
+                required:
+                - success
+                - txid
+                - raw_tx
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    enum:
+                    - false
+                  error:
+                    description: Error message
+                    type: string
+                required:
+                - success
+                - error
+  /extended/v1/faucets/btc/{address}:
+    get:
+      operationId: get_btc_balance
+      summary: Get BTC balance for address
+      tags:
+      - Faucets
+      parameters:
+      - schema:
+          type: string
+        example: 2N4M94S1ZPt8HfxydXzL2P7qyzgVq7MHWts
+        in: path
+        name: address
+        required: true
+        description: A valid regtest BTC address
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  balance:
+                    description: Address balance in BTC
+                    type: number
+                required:
+                - balance
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    enum:
+                    - false
+                  error:
+                    description: Error message
+                    type: string
+                required:
+                - success
+                - error
+  /extended/v1/faucets/stx:
+    post:
+      operationId: run_faucet_stx
+      summary: Get STX testnet tokens
+      tags:
+      - Faucets
+      description: "Add 500 STX tokens to the specified testnet address. Testnet STX addresses begin with `ST`. If the `stacking`\n        parameter is set to `true`, the faucet will add the required number of tokens for individual stacking to the\n        specified testnet address.\n\n        The endpoint returns the transaction ID, which you can use to view the transaction in the\n        [Stacks Explorer](https://explorer.hiro.so/?chain=testnet). The tokens are delivered once the transaction has\n        been included in an anchor block.\n\n        A common reason for failed faucet transactions is that the faucet has run out of tokens. If you are experiencing\n        failed faucet transactions to a testnet address, you can get help in [Discord](https://stacks.chat).\n\n        **Note:** This is a testnet only endpoint. This endpoint will not work on the mainnet."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - type: object
+                properties:
+                  address:
+                    description: '[Deprecated -- use query param rather than POST body] A valid testnet STX address'
+                    examples:
+                    - ST3M7N9Q9HDRM7RVP1Q26P0EE69358PZZAZD7KMXQ
+                    type: string
+              - type: 'null'
+      parameters:
+      - schema:
+          type: string
+        example: ST3M7N9Q9HDRM7RVP1Q26P0EE69358PZZAZD7KMXQ
+        in: query
+        name: address
+        required: false
+        description: A valid testnet STX address
+      - schema:
+          default: false
+          type: boolean
+        in: query
+        name: stacking
+        required: false
+        description: Request the amount of STX tokens needed for individual address stacking
+      responses:
+        '200':
+          description: POST request that initiates a transfer of tokens to a specified testnet address
+          content:
+            application/json:
+              schema:
+                title: RunFaucetResponse
+                description: POST request that initiates a transfer of tokens to a specified testnet address
+                type: object
+                properties:
+                  success:
+                    description: Indicates if the faucet call was successful
+                    type: boolean
+                    enum:
+                    - true
+                  txId:
+                    description: The transaction ID for the faucet call
+                    type: string
+                  txRaw:
+                    description: Raw transaction in hex string representation
+                    type: string
+                required:
+                - success
+                - txId
+                - txRaw
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    description: Indicates if the faucet call was successful
+                    type: boolean
+                    enum:
+                    - false
+                  error:
+                    description: Error message
+                    type: string
+                  help:
+                    type: string
+                required:
+                - success
+                - error
+externalDocs:
+  url: https://github.com/hirosystems/signer-metrics-api
+  description: Source Repository

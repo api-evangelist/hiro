@@ -1,0 +1,437 @@
+openapi: 3.0.3
+info:
+  title: Signer Metrics Accounts Proof of Transfer API
+  description: Welcome to the API reference overview for the Signer Metrics API.
+  version: 1.0.3
+servers:
+- url: https://api.hiro.so/
+  description: mainnet
+- url: https://api.testnet.hiro.so/
+  description: testnet
+tags:
+- name: Proof of Transfer
+  description: Endpoints to get information about the Proof of Transfer consensus mechanism
+paths:
+  /extended/v2/pox/cycles:
+    get:
+      operationId: get_pox_cycles
+      summary: Get PoX cycles
+      tags:
+      - Proof of Transfer
+      description: Retrieves a list of PoX cycles
+      parameters:
+      - schema:
+          minimum: 0
+          default: 20
+          maximum: 60
+          title: Limit
+          type: integer
+        in: query
+        name: limit
+        required: false
+        description: Results per page
+      - schema:
+          minimum: 0
+          default: 0
+          title: Offset
+          type: integer
+        in: query
+        name: offset
+        required: false
+        description: Result offset
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  limit:
+                    type: integer
+                    example: 20
+                  offset:
+                    type: integer
+                    example: 0
+                  total:
+                    type: integer
+                    example: 1
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        block_height:
+                          type: integer
+                        index_block_hash:
+                          type: string
+                        cycle_number:
+                          type: integer
+                        total_weight:
+                          type: integer
+                        total_stacked_amount:
+                          type: string
+                        total_signers:
+                          type: integer
+                      required:
+                      - block_height
+                      - index_block_hash
+                      - cycle_number
+                      - total_weight
+                      - total_stacked_amount
+                      - total_signers
+                required:
+                - limit
+                - offset
+                - total
+                - results
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /extended/v2/pox/cycles/{cycle_number}:
+    get:
+      operationId: get_pox_cycle
+      summary: Get PoX cycle
+      tags:
+      - Proof of Transfer
+      description: Retrieves details for a PoX cycle
+      parameters:
+      - schema:
+          type: integer
+        in: path
+        name: cycle_number
+        required: true
+        description: PoX cycle number
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  block_height:
+                    type: integer
+                  index_block_hash:
+                    type: string
+                  cycle_number:
+                    type: integer
+                  total_weight:
+                    type: integer
+                  total_stacked_amount:
+                    type: string
+                  total_signers:
+                    type: integer
+                required:
+                - block_height
+                - index_block_hash
+                - cycle_number
+                - total_weight
+                - total_stacked_amount
+                - total_signers
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /extended/v2/pox/cycles/{cycle_number}/signers:
+    get:
+      operationId: get_pox_cycle_signers
+      summary: Get signers in PoX cycle
+      tags:
+      - Proof of Transfer
+      description: Retrieves a list of signers in a PoX cycle
+      parameters:
+      - schema:
+          minimum: 0
+          default: 100
+          maximum: 250
+          title: Limit
+          type: integer
+        in: query
+        name: limit
+        required: false
+        description: Results per page
+      - schema:
+          minimum: 0
+          default: 0
+          title: Offset
+          type: integer
+        in: query
+        name: offset
+        required: false
+        description: Result offset
+      - schema:
+          type: integer
+        in: path
+        name: cycle_number
+        required: true
+        description: PoX cycle number
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  limit:
+                    type: integer
+                    example: 20
+                  offset:
+                    type: integer
+                    example: 0
+                  total:
+                    type: integer
+                    example: 1
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        signing_key:
+                          type: string
+                        signer_address:
+                          description: The Stacks address derived from the signing_key.
+                          type: string
+                        weight:
+                          type: integer
+                        stacked_amount:
+                          type: string
+                        weight_percent:
+                          type: number
+                        stacked_amount_percent:
+                          type: number
+                        solo_stacker_count:
+                          description: The number of solo stackers associated with this signer.
+                          type: integer
+                        pooled_stacker_count:
+                          description: The number of pooled stackers associated with this signer.
+                          type: integer
+                      required:
+                      - signing_key
+                      - signer_address
+                      - weight
+                      - stacked_amount
+                      - weight_percent
+                      - stacked_amount_percent
+                      - solo_stacker_count
+                      - pooled_stacker_count
+                required:
+                - limit
+                - offset
+                - total
+                - results
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /extended/v2/pox/cycles/{cycle_number}/signers/{signer_key}:
+    get:
+      operationId: get_pox_cycle_signer
+      summary: Get signer in PoX cycle
+      tags:
+      - Proof of Transfer
+      description: Retrieves details for a signer in a PoX cycle
+      parameters:
+      - schema:
+          type: integer
+        in: path
+        name: cycle_number
+        required: true
+        description: PoX cycle number
+      - schema:
+          type: string
+        example: '0x038e3c4529395611be9abf6fa3b6987e81d402385e3d605a073f42f407565a4a3d'
+        in: path
+        name: signer_key
+        required: true
+        description: Signer key
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  signing_key:
+                    type: string
+                  signer_address:
+                    description: The Stacks address derived from the signing_key.
+                    type: string
+                  weight:
+                    type: integer
+                  stacked_amount:
+                    type: string
+                  weight_percent:
+                    type: number
+                  stacked_amount_percent:
+                    type: number
+                  solo_stacker_count:
+                    description: The number of solo stackers associated with this signer.
+                    type: integer
+                  pooled_stacker_count:
+                    description: The number of pooled stackers associated with this signer.
+                    type: integer
+                required:
+                - signing_key
+                - signer_address
+                - weight
+                - stacked_amount
+                - weight_percent
+                - stacked_amount_percent
+                - solo_stacker_count
+                - pooled_stacker_count
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /extended/v2/pox/cycles/{cycle_number}/signers/{signer_key}/stackers:
+    get:
+      operationId: get_pox_cycle_signer_stackers
+      summary: Get stackers for signer in PoX cycle
+      tags:
+      - Proof of Transfer
+      description: Retrieves a list of stackers for a signer in a PoX cycle
+      parameters:
+      - schema:
+          minimum: 0
+          default: 100
+          maximum: 200
+          title: Limit
+          type: integer
+        in: query
+        name: limit
+        required: false
+        description: Results per page
+      - schema:
+          minimum: 0
+          default: 0
+          title: Offset
+          type: integer
+        in: query
+        name: offset
+        required: false
+        description: Result offset
+      - schema:
+          type: integer
+        in: path
+        name: cycle_number
+        required: true
+        description: PoX cycle number
+      - schema:
+          type: string
+        example: '0x038e3c4529395611be9abf6fa3b6987e81d402385e3d605a073f42f407565a4a3d'
+        in: path
+        name: signer_key
+        required: true
+        description: Signer key
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  limit:
+                    type: integer
+                    example: 20
+                  offset:
+                    type: integer
+                    example: 0
+                  total:
+                    type: integer
+                    example: 1
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        stacker_address:
+                          type: string
+                        stacked_amount:
+                          type: string
+                        pox_address:
+                          type: string
+                        stacker_type:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - solo
+                          - type: string
+                            enum:
+                            - pooled
+                      required:
+                      - stacker_address
+                      - stacked_amount
+                      - pox_address
+                      - stacker_type
+                required:
+                - limit
+                - offset
+                - total
+                - results
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+externalDocs:
+  url: https://github.com/hirosystems/signer-metrics-api
+  description: Source Repository

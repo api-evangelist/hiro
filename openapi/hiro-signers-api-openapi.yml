@@ -1,0 +1,362 @@
+openapi: 3.0.3
+info:
+  title: Signer Metrics Accounts Signers API
+  description: Welcome to the API reference overview for the Signer Metrics API.
+  version: 1.0.3
+servers:
+- url: https://api.hiro.so/
+  description: mainnet
+- url: https://api.testnet.hiro.so/
+  description: testnet
+tags:
+- name: Signers
+paths:
+  /signer-metrics/v1/cycles/{cycle_number}/signers:
+    get:
+      operationId: getPoxCycleSigners
+      summary: PoX Cycle Signers
+      tags:
+      - Signers
+      description: List of signers for a given PoX cycle
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: from
+        required: false
+        description: Start of time range (e.g., now-2h or ISO timestamp)
+      - schema:
+          type: string
+        in: query
+        name: to
+        required: false
+        description: End of time range (e.g., now or ISO timestamp)
+      - schema:
+          type: integer
+          default: 100
+        in: query
+        name: limit
+        required: true
+        description: 'Number of results to return (default: 100)'
+      - schema:
+          type: integer
+          default: 0
+        in: query
+        name: offset
+        required: true
+        description: 'Number of results to skip (default: 0)'
+      - schema:
+          type: integer
+        in: path
+        name: cycle_number
+        required: true
+        description: PoX cycle number
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - total
+                - limit
+                - offset
+                - results
+                properties:
+                  total:
+                    type: integer
+                  limit:
+                    type: integer
+                  offset:
+                    type: integer
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - signer_key
+                      - slot_index
+                      - weight
+                      - weight_percentage
+                      - stacked_amount
+                      - stacked_amount_percent
+                      - stacked_amount_rank
+                      - proposals_accepted_count
+                      - proposals_rejected_count
+                      - proposals_missed_count
+                      - average_response_time_ms
+                      - last_seen
+                      - version
+                      properties:
+                        signer_key:
+                          type: string
+                        slot_index:
+                          description: Index of the signer in the stacker set
+                          type: integer
+                        weight:
+                          description: Voting weight of this signer (based on slots allocated which is proportional to stacked amount)
+                          type: integer
+                        weight_percentage:
+                          description: Voting weight percent (weight / total_weight)
+                          type: number
+                        stacked_amount:
+                          description: Total STX stacked associated with this signer (string quoted integer)
+                          type: string
+                        stacked_amount_percent:
+                          description: Stacked amount percent (stacked_amount / total_stacked_amount)
+                          type: number
+                        stacked_amount_rank:
+                          description: This signer's rank in the list of all signers (for this cycle) ordered by stacked amount
+                          type: integer
+                        proposals_accepted_count:
+                          description: Number of block proposals accepted by this signer
+                          type: integer
+                        proposals_rejected_count:
+                          description: Number of block proposals rejected by this signer
+                          type: integer
+                        proposals_missed_count:
+                          description: Number of block proposals missed by this signer
+                          type: integer
+                        average_response_time_ms:
+                          description: Time duration (in milliseconds) taken to submit responses to block proposals (tracked best effort)
+                          type: number
+                        last_seen:
+                          description: ISO timestamp of the last time a message from this signer was seen
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        version:
+                          description: The last seen signer binary version reported by this signer
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+  /signer-metrics/v1/cycles/{cycle_number}/signers/{signer_id}:
+    get:
+      operationId: getPoxCycleSigner
+      summary: PoX Cycle Signer
+      tags:
+      - Signers
+      description: Get stats for a specific signer in a given PoX cycle
+      parameters:
+      - schema:
+          type: integer
+        in: path
+        name: cycle_number
+        required: true
+        description: PoX cycle number
+      - schema:
+          type: string
+        in: path
+        name: signer_id
+        required: true
+        description: Signer public key (hex encoded)
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - signer_key
+                - slot_index
+                - weight
+                - weight_percentage
+                - stacked_amount
+                - stacked_amount_percent
+                - stacked_amount_rank
+                - proposals_accepted_count
+                - proposals_rejected_count
+                - proposals_missed_count
+                - average_response_time_ms
+                - last_seen
+                - version
+                properties:
+                  signer_key:
+                    type: string
+                  slot_index:
+                    description: Index of the signer in the stacker set
+                    type: integer
+                  weight:
+                    description: Voting weight of this signer (based on slots allocated which is proportional to stacked amount)
+                    type: integer
+                  weight_percentage:
+                    description: Voting weight percent (weight / total_weight)
+                    type: number
+                  stacked_amount:
+                    description: Total STX stacked associated with this signer (string quoted integer)
+                    type: string
+                  stacked_amount_percent:
+                    description: Stacked amount percent (stacked_amount / total_stacked_amount)
+                    type: number
+                  stacked_amount_rank:
+                    description: This signer's rank in the list of all signers (for this cycle) ordered by stacked amount
+                    type: integer
+                  proposals_accepted_count:
+                    description: Number of block proposals accepted by this signer
+                    type: integer
+                  proposals_rejected_count:
+                    description: Number of block proposals rejected by this signer
+                    type: integer
+                  proposals_missed_count:
+                    description: Number of block proposals missed by this signer
+                    type: integer
+                  average_response_time_ms:
+                    description: Time duration (in milliseconds) taken to submit responses to block proposals (tracked best effort)
+                    type: number
+                  last_seen:
+                    description: ISO timestamp of the last time a message from this signer was seen
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                  version:
+                    description: The last seen signer binary version reported by this signer
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - error
+                properties:
+                  error:
+                    type: string
+                    description: Error message when signer is not found
+  /v3/stacker_set/{cycle_number}:
+    get:
+      summary: Fetch the stacker and signer set information for a given cycle.
+      tags:
+      - Signers
+      security: []
+      operationId: getStackerSet
+      description: 'Used to get stacker and signer set information for a given cycle.
+
+
+        This will only return information for cycles started in Epoch-2.5
+
+        where PoX-4 was active and subsequent cycles.
+
+        '
+      parameters:
+      - name: cycle_number
+        in: path
+        required: true
+        description: reward cycle number
+        schema:
+          type: integer
+      - $ref: ./components/parameters/tip.yaml
+      responses:
+        '200':
+          description: Information for the given reward cycle
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetStackerSet'
+              examples:
+                stacker-set:
+                  $ref: ./components/examples/get-stacker-set.example.json
+        '400':
+          description: Could not fetch the given reward set
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - response
+                - err_msg
+                properties:
+                  response:
+                    type: string
+                    enum:
+                    - error
+                    description: Response status
+                  err_type:
+                    type: string
+                    description: Error type classification
+                  err_msg:
+                    type: string
+                    description: Detailed error message
+              examples:
+                stacker-set-error:
+                  $ref: ./components/examples/get-stacker-set-400.example.json
+        '404':
+          description: Reward cycle not found or does not exist
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: No such file or directory
+  /v3/signer/{signer_pubkey}/{cycle_number}:
+    get:
+      summary: Get number of blocks signed by signer during a given reward cycle
+      tags:
+      - Signers
+      security: []
+      operationId: getSignerBlocksSigned
+      description: Get number of blocks signed by signer during a given reward cycle
+      parameters:
+      - name: signer_pubkey
+        in: path
+        required: true
+        description: Hex-encoded compressed Secp256k1 public key of signer
+        schema:
+          type: string
+          pattern: ^0[23][0-9a-f]{64}$
+      - name: cycle_number
+        in: path
+        required: true
+        description: Reward cycle number
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          description: Number of blocks signed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignerBlocksSigned'
+              example:
+                blocks_signed: 7
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    GetStackerSet:
+      $ref: ./components/schemas/get-stacker-set.schema.yaml
+    SignerBlocksSigned:
+      $ref: ./components/schemas/signer-blocks-signed.schema.yaml
+  responses:
+    NotFound:
+      description: Not found
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Not found
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Internal Server Error
+    BadRequest:
+      description: Bad request
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Bad request
+externalDocs:
+  url: https://github.com/hirosystems/signer-metrics-api
+  description: Source Repository

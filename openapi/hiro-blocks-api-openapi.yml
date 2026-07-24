@@ -1,0 +1,2675 @@
+openapi: 3.0.3
+info:
+  title: Signer Metrics Accounts Blocks API
+  description: Welcome to the API reference overview for the Signer Metrics API.
+  version: 1.0.3
+servers:
+- url: https://api.hiro.so/
+  description: mainnet
+- url: https://api.testnet.hiro.so/
+  description: testnet
+tags:
+- name: Blocks
+paths:
+  /signer-metrics/v1/blocks:
+    get:
+      operationId: getBlocks
+      summary: Aggregated signer information for most recent blocks
+      tags:
+      - Blocks
+      description: Aggregated signer information for most recent blocks
+      parameters:
+      - schema:
+          type: integer
+          default: 100
+        in: query
+        name: limit
+        required: true
+        description: Number of results to return
+      - schema:
+          type: integer
+          default: 0
+        in: query
+        name: offset
+        required: true
+        description: Number of results to skip
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - total
+                - limit
+                - offset
+                - results
+                properties:
+                  total:
+                    type: integer
+                  limit:
+                    type: integer
+                  offset:
+                    type: integer
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - block_height
+                      - block_hash
+                      - block_time
+                      - index_block_hash
+                      - burn_block_height
+                      - tenure_height
+                      - signer_data
+                      properties:
+                        block_height:
+                          type: integer
+                        block_hash:
+                          type: string
+                        block_time:
+                          description: Unix timestamp in seconds of when the block was mined
+                          type: integer
+                        index_block_hash:
+                          type: string
+                        burn_block_height:
+                          type: integer
+                        tenure_height:
+                          type: integer
+                        signer_data:
+                          description: Signer data can by null if it was not detected by the metrics service
+                          anyOf:
+                          - type: object
+                            required:
+                            - cycle_number
+                            - total_signer_count
+                            - accepted_count
+                            - rejected_count
+                            - missing_count
+                            - accepted_excluded_count
+                            - average_response_time_ms
+                            - block_proposal_time_ms
+                            - accepted_stacked_amount
+                            - rejected_stacked_amount
+                            - missing_stacked_amount
+                            - accepted_weight
+                            - rejected_weight
+                            - missing_weight
+                            properties:
+                              cycle_number:
+                                type: integer
+                              total_signer_count:
+                                description: Total number of signers expected for this block
+                                type: integer
+                              accepted_count:
+                                description: Number of signers that submitted an approval for this block
+                                type: integer
+                              rejected_count:
+                                description: Number of signers that submitted a rejection for this block
+                                type: integer
+                              missing_count:
+                                description: Number of signers that failed to submit any response/vote for this block
+                                type: integer
+                              accepted_excluded_count:
+                                description: Number of signers that submitted an approval but where not included in time by the miner (this is a subset of the accepted_count)
+                                type: integer
+                              average_response_time_ms:
+                                description: Average time duration (in milliseconds) taken by signers to submit a response for this block (tracked best effort)
+                                type: number
+                              block_proposal_time_ms:
+                                description: Unix timestamp in milliseconds of when the block was first proposed (tracked best effort)
+                                type: number
+                              accepted_stacked_amount:
+                                description: Sum of total STX stacked of signers who approved the block
+                                type: string
+                              rejected_stacked_amount:
+                                description: Sum of total STX stacked of signers who rejected the block
+                                type: string
+                              missing_stacked_amount:
+                                description: Sum of total STX stacked of missing signers
+                                type: string
+                              accepted_weight:
+                                description: Sum of voting weight of signers who approved the block (based on slots allocated to each signer proportional to stacked amount)
+                                type: integer
+                              rejected_weight:
+                                description: Sum of voting weight of signers who rejected the block
+                                type: integer
+                              missing_weight:
+                                description: Sum of voting weight of missing signers
+                                type: integer
+                          - type: 'null'
+  /signer-metrics/v1/blocks/{height_or_hash}:
+    get:
+      operationId: getBlock
+      summary: Aggregated signer information for a block
+      tags:
+      - Blocks
+      description: Aggregated signer information for a block
+      parameters:
+      - schema:
+          anyOf:
+          - type: string
+            enum:
+            - latest
+          - pattern: ^(0x)?[a-fA-F0-9]{64}$
+            title: Block hash
+            description: Block hash
+            examples:
+            - '0xdaf79950c5e8bb0c620751333967cdd62297137cdaf79950c5e8bb0c62075133'
+            type: string
+          - title: Block height
+            description: Block height
+            examples:
+            - 777678
+            type: integer
+        in: path
+        name: height_or_hash
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - block_height
+                - block_hash
+                - block_time
+                - index_block_hash
+                - burn_block_height
+                - tenure_height
+                - signer_data
+                properties:
+                  block_height:
+                    type: integer
+                  block_hash:
+                    type: string
+                  block_time:
+                    description: Unix timestamp in seconds of when the block was mined
+                    type: integer
+                  index_block_hash:
+                    type: string
+                  burn_block_height:
+                    type: integer
+                  tenure_height:
+                    type: integer
+                  signer_data:
+                    description: Signer data can by null if it was not detected by the metrics service
+                    anyOf:
+                    - type: object
+                      required:
+                      - cycle_number
+                      - total_signer_count
+                      - accepted_count
+                      - rejected_count
+                      - missing_count
+                      - accepted_excluded_count
+                      - average_response_time_ms
+                      - block_proposal_time_ms
+                      - accepted_stacked_amount
+                      - rejected_stacked_amount
+                      - missing_stacked_amount
+                      - accepted_weight
+                      - rejected_weight
+                      - missing_weight
+                      properties:
+                        cycle_number:
+                          type: integer
+                        total_signer_count:
+                          description: Total number of signers expected for this block
+                          type: integer
+                        accepted_count:
+                          description: Number of signers that submitted an approval for this block
+                          type: integer
+                        rejected_count:
+                          description: Number of signers that submitted a rejection for this block
+                          type: integer
+                        missing_count:
+                          description: Number of signers that failed to submit any response/vote for this block
+                          type: integer
+                        accepted_excluded_count:
+                          description: Number of signers that submitted an approval but where not included in time by the miner (this is a subset of the accepted_count)
+                          type: integer
+                        average_response_time_ms:
+                          description: Average time duration (in milliseconds) taken by signers to submit a response for this block (tracked best effort)
+                          type: number
+                        block_proposal_time_ms:
+                          description: Unix timestamp in milliseconds of when the block was first proposed (tracked best effort)
+                          type: number
+                        accepted_stacked_amount:
+                          description: Sum of total STX stacked of signers who approved the block
+                          type: string
+                        rejected_stacked_amount:
+                          description: Sum of total STX stacked of signers who rejected the block
+                          type: string
+                        missing_stacked_amount:
+                          description: Sum of total STX stacked of missing signers
+                          type: string
+                        accepted_weight:
+                          description: Sum of voting weight of signers who approved the block (based on slots allocated to each signer proportional to stacked amount)
+                          type: integer
+                        rejected_weight:
+                          description: Sum of voting weight of signers who rejected the block
+                          type: integer
+                        missing_weight:
+                          description: Sum of voting weight of missing signers
+                          type: integer
+                    - type: 'null'
+  /extended/v1/block/:
+    get:
+      operationId: get_block_list
+      summary: Get recent blocks
+      tags:
+      - Blocks
+      description: "**NOTE:** This endpoint is deprecated in favor of [Get blocks](/api/get-blocks).\n\n          Retrieves a list of recently mined blocks\n\n          If you need to actively monitor new blocks, we highly recommend subscribing to [WebSockets or Socket.io](https://github.com/hirosystems/stacks-blockchain-api/tree/master/client) for real-time updates."
+      parameters:
+      - schema:
+          minimum: 0
+          default: 20
+          maximum: 30
+          title: Limit
+          type: integer
+        in: query
+        name: limit
+        required: false
+        description: max number of blocks to fetch
+      - schema:
+          minimum: 0
+          default: 0
+          title: Offset
+          type: integer
+        in: query
+        name: offset
+        required: false
+        description: Result offset
+      deprecated: true
+      responses:
+        '200':
+          description: GET request that returns blocks
+          content:
+            application/json:
+              schema:
+                title: BlockListResponse
+                description: GET request that returns blocks
+                type: object
+                properties:
+                  limit:
+                    type: integer
+                    example: 20
+                  offset:
+                    type: integer
+                    example: 0
+                  total:
+                    type: integer
+                    example: 1
+                  results:
+                    type: array
+                    items:
+                      title: Block
+                      description: A block
+                      type: object
+                      properties:
+                        canonical:
+                          description: Set to `true` if block corresponds to the canonical chain tip
+                          type: boolean
+                        height:
+                          description: Height of the block
+                          type: integer
+                        hash:
+                          description: Hash representing the block
+                          type: string
+                        block_time:
+                          description: Unix timestamp (in seconds) indicating when this block was mined.
+                          type: number
+                        block_time_iso:
+                          description: An ISO 8601 (YYYY-MM-DDTHH:mm:ss.sssZ) indicating when this block was mined.
+                          type: string
+                        tenure_height:
+                          description: The tenure height (AKA coinbase height) of this block
+                          type: integer
+                        index_block_hash:
+                          description: The only hash that can uniquely identify an anchored block or an unconfirmed state trie
+                          type: string
+                        parent_block_hash:
+                          description: Hash of the parent block
+                          type: string
+                        burn_block_time:
+                          description: Unix timestamp (in seconds) indicating when this block was mined.
+                          type: number
+                        burn_block_time_iso:
+                          description: An ISO 8601 (YYYY-MM-DDTHH:mm:ss.sssZ) indicating when this block was mined.
+                          type: string
+                        burn_block_hash:
+                          description: Hash of the anchor chain block
+                          type: string
+                        burn_block_height:
+                          description: Height of the anchor chain block
+                          type: integer
+                        miner_txid:
+                          description: Anchor chain transaction ID
+                          type: string
+                        execution_cost_read_count:
+                          description: Execution cost read count.
+                          type: integer
+                        execution_cost_read_length:
+                          description: Execution cost read length.
+                          type: integer
+                        execution_cost_runtime:
+                          description: Execution cost runtime.
+                          type: integer
+                        execution_cost_write_count:
+                          description: Execution cost write count.
+                          type: integer
+                        execution_cost_write_length:
+                          description: Execution cost write length.
+                          type: integer
+                        txs:
+                          description: List of transactions included in the block
+                          type: array
+                          items:
+                            description: Transaction ID
+                            type: string
+                        parent_microblock_hash:
+                          description: The hash of the last streamed block that precedes this block to which this block is to be appended. Not every anchored block will have a parent microblock stream. An anchored block that does not have a parent microblock stream has the parent microblock hash set to an empty string, and the parent microblock sequence number set to -1.
+                          type: string
+                        parent_microblock_sequence:
+                          description: The hash of the last streamed block that precedes this block to which this block is to be appended. Not every anchored block will have a parent microblock stream. An anchored block that does not have a parent microblock stream has the parent microblock hash set to an empty string, and the parent microblock sequence number set to -1.
+                          type: integer
+                        microblocks_accepted:
+                          description: List of microblocks that were accepted in this anchor block. Not every anchored block will have a accepted all (or any) of the previously streamed microblocks. Microblocks that were orphaned are not included in this list.
+                          type: array
+                          items:
+                            description: Microblock hash
+                            type: string
+                        microblocks_streamed:
+                          description: List of microblocks that were streamed/produced by this anchor block's miner. This list only includes microblocks that were accepted in the following anchor block. Microblocks that were orphaned are not included in this list.
+                          type: array
+                          items:
+                            description: Microblock hash
+                            type: string
+                        microblock_tx_count:
+                          description: List of txs counts in each accepted microblock
+                          type: object
+                          additionalProperties:
+                            type: integer
+                      required:
+                      - canonical
+                      - height
+                      - hash
+                      - block_time
+                      - block_time_iso
+                      - tenure_height
+                      - index_block_hash
+                      - parent_block_hash
+                      - burn_block_time
+                      - burn_block_time_iso
+                      - burn_block_hash
+                      - burn_block_height
+                      - miner_txid
+                      - execution_cost_read_count
+                      - execution_cost_read_length
+                      - execution_cost_runtime
+                      - execution_cost_write_count
+                      - execution_cost_write_length
+                      - txs
+                      - parent_microblock_hash
+                      - parent_microblock_sequence
+                      - microblocks_accepted
+                      - microblocks_streamed
+                      - microblock_tx_count
+                required:
+                - limit
+                - offset
+                - total
+                - results
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /extended/v1/block/by_height/{height}:
+    get:
+      operationId: get_block_by_height
+      summary: Get block by height
+      tags:
+      - Blocks
+      description: "**NOTE:** This endpoint is deprecated in favor of [Get block](/api/get-block).\n\n        Retrieves block details of a specific block at a given block height"
+      parameters:
+      - schema:
+          minimum: 0
+          type: integer
+        example: 10000
+        in: path
+        name: height
+        required: true
+        description: Height of the block
+      deprecated: true
+      responses:
+        '200':
+          description: A block
+          content:
+            application/json:
+              schema:
+                title: Block
+                description: A block
+                type: object
+                properties:
+                  canonical:
+                    description: Set to `true` if block corresponds to the canonical chain tip
+                    type: boolean
+                  height:
+                    description: Height of the block
+                    type: integer
+                  hash:
+                    description: Hash representing the block
+                    type: string
+                  block_time:
+                    description: Unix timestamp (in seconds) indicating when this block was mined.
+                    type: number
+                  block_time_iso:
+                    description: An ISO 8601 (YYYY-MM-DDTHH:mm:ss.sssZ) indicating when this block was mined.
+                    type: string
+                  tenure_height:
+                    description: The tenure height (AKA coinbase height) of this block
+                    type: integer
+                  index_block_hash:
+                    description: The only hash that can uniquely identify an anchored block or an unconfirmed state trie
+                    type: string
+                  parent_block_hash:
+                    description: Hash of the parent block
+                    type: string
+                  burn_block_time:
+                    description: Unix timestamp (in seconds) indicating when this block was mined.
+                    type: number
+                  burn_block_time_iso:
+                    description: An ISO 8601 (YYYY-MM-DDTHH:mm:ss.sssZ) indicating when this block was mined.
+                    type: string
+                  burn_block_hash:
+                    description: Hash of the anchor chain block
+                    type: string
+                  burn_block_height:
+                    description: Height of the anchor chain block
+                    type: integer
+                  miner_txid:
+                    description: Anchor chain transaction ID
+                    type: string
+                  execution_cost_read_count:
+                    description: Execution cost read count.
+                    type: integer
+                  execution_cost_read_length:
+                    description: Execution cost read length.
+                    type: integer
+                  execution_cost_runtime:
+                    description: Execution cost runtime.
+                    type: integer
+                  execution_cost_write_count:
+                    description: Execution cost write count.
+                    type: integer
+                  execution_cost_write_length:
+                    description: Execution cost write length.
+                    type: integer
+                  txs:
+                    description: List of transactions included in the block
+                    type: array
+                    items:
+                      description: Transaction ID
+                      type: string
+                  parent_microblock_hash:
+                    description: The hash of the last streamed block that precedes this block to which this block is to be appended. Not every anchored block will have a parent microblock stream. An anchored block that does not have a parent microblock stream has the parent microblock hash set to an empty string, and the parent microblock sequence number set to -1.
+                    type: string
+                  parent_microblock_sequence:
+                    description: The hash of the last streamed block that precedes this block to which this block is to be appended. Not every anchored block will have a parent microblock stream. An anchored block that does not have a parent microblock stream has the parent microblock hash set to an empty string, and the parent microblock sequence number set to -1.
+                    type: integer
+                  microblocks_accepted:
+                    description: List of microblocks that were accepted in this anchor block. Not every anchored block will have a accepted all (or any) of the previously streamed microblocks. Microblocks that were orphaned are not included in this list.
+                    type: array
+                    items:
+                      description: Microblock hash
+                      type: string
+                  microblocks_streamed:
+                    description: List of microblocks that were streamed/produced by this anchor block's miner. This list only includes microblocks that were accepted in the following anchor block. Microblocks that were orphaned are not included in this list.
+                    type: array
+                    items:
+                      description: Microblock hash
+                      type: string
+                  microblock_tx_count:
+                    description: List of txs counts in each accepted microblock
+                    type: object
+                    additionalProperties:
+                      type: integer
+                required:
+                - canonical
+                - height
+                - hash
+                - block_time
+                - block_time_iso
+                - tenure_height
+                - index_block_hash
+                - parent_block_hash
+                - burn_block_time
+                - burn_block_time_iso
+                - burn_block_hash
+                - burn_block_height
+                - miner_txid
+                - execution_cost_read_count
+                - execution_cost_read_length
+                - execution_cost_runtime
+                - execution_cost_write_count
+                - execution_cost_write_length
+                - txs
+                - parent_microblock_hash
+                - parent_microblock_sequence
+                - microblocks_accepted
+                - microblocks_streamed
+                - microblock_tx_count
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /extended/v1/block/by_burn_block_height/{burn_block_height}:
+    get:
+      operationId: get_block_by_burn_block_height
+      summary: Get block by burnchain height
+      tags:
+      - Blocks
+      description: "**NOTE:** This endpoint is deprecated in favor of [Get blocks](/api/get-blocks).\n\n        Retrieves block details of a specific block for a given burn chain height"
+      parameters:
+      - schema:
+          minimum: 0
+          type: integer
+        example: 744603
+        in: path
+        name: burn_block_height
+        required: true
+        description: Height of the burn chain block
+      deprecated: true
+      responses:
+        '200':
+          description: A block
+          content:
+            application/json:
+              schema:
+                title: Block
+                description: A block
+                type: object
+                properties:
+                  canonical:
+                    description: Set to `true` if block corresponds to the canonical chain tip
+                    type: boolean
+                  height:
+                    description: Height of the block
+                    type: integer
+                  hash:
+                    description: Hash representing the block
+                    type: string
+                  block_time:
+                    description: Unix timestamp (in seconds) indicating when this block was mined.
+                    type: number
+                  block_time_iso:
+                    description: An ISO 8601 (YYYY-MM-DDTHH:mm:ss.sssZ) indicating when this block was mined.
+                    type: string
+                  tenure_height:
+                    description: The tenure height (AKA coinbase height) of this block
+                    type: integer
+                  index_block_hash:
+                    description: The only hash that can uniquely identify an anchored block or an unconfirmed state trie
+                    type: string
+                  parent_block_hash:
+                    description: Hash of the parent block
+                    type: string
+                  burn_block_time:
+                    description: Unix timestamp (in seconds) indicating when this block was mined.
+                    type: number
+                  burn_block_time_iso:
+                    description: An ISO 8601 (YYYY-MM-DDTHH:mm:ss.sssZ) indicating when this block was mined.
+                    type: string
+                  burn_block_hash:
+                    description: Hash of the anchor chain block
+                    type: string
+                  burn_block_height:
+                    description: Height of the anchor chain block
+                    type: integer
+                  miner_txid:
+                    description: Anchor chain transaction ID
+                    type: string
+                  execution_cost_read_count:
+                    description: Execution cost read count.
+                    type: integer
+                  execution_cost_read_length:
+                    description: Execution cost read length.
+                    type: integer
+                  execution_cost_runtime:
+                    description: Execution cost runtime.
+                    type: integer
+                  execution_cost_write_count:
+                    description: Execution cost write count.
+                    type: integer
+                  execution_cost_write_length:
+                    description: Execution cost write length.
+                    type: integer
+                  txs:
+                    description: List of transactions included in the block
+                    type: array
+                    items:
+                      description: Transaction ID
+                      type: string
+                  parent_microblock_hash:
+                    description: The hash of the last streamed block that precedes this block to which this block is to be appended. Not every anchored block will have a parent microblock stream. An anchored block that does not have a parent microblock stream has the parent microblock hash set to an empty string, and the parent microblock sequence number set to -1.
+                    type: string
+                  parent_microblock_sequence:
+                    description: The hash of the last streamed block that precedes this block to which this block is to be appended. Not every anchored block will have a parent microblock stream. An anchored block that does not have a parent microblock stream has the parent microblock hash set to an empty string, and the parent microblock sequence number set to -1.
+                    type: integer
+                  microblocks_accepted:
+                    description: List of microblocks that were accepted in this anchor block. Not every anchored block will have a accepted all (or any) of the previously streamed microblocks. Microblocks that were orphaned are not included in this list.
+                    type: array
+                    items:
+                      description: Microblock hash
+                      type: string
+                  microblocks_streamed:
+                    description: List of microblocks that were streamed/produced by this anchor block's miner. This list only includes microblocks that were accepted in the following anchor block. Microblocks that were orphaned are not included in this list.
+                    type: array
+                    items:
+                      description: Microblock hash
+                      type: string
+                  microblock_tx_count:
+                    description: List of txs counts in each accepted microblock
+                    type: object
+                    additionalProperties:
+                      type: integer
+                required:
+                - canonical
+                - height
+                - hash
+                - block_time
+                - block_time_iso
+                - tenure_height
+                - index_block_hash
+                - parent_block_hash
+                - burn_block_time
+                - burn_block_time_iso
+                - burn_block_hash
+                - burn_block_height
+                - miner_txid
+                - execution_cost_read_count
+                - execution_cost_read_length
+                - execution_cost_runtime
+                - execution_cost_write_count
+                - execution_cost_write_length
+                - txs
+                - parent_microblock_hash
+                - parent_microblock_sequence
+                - microblocks_accepted
+                - microblocks_streamed
+                - microblock_tx_count
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /extended/v1/block/{hash}:
+    get:
+      operationId: get_block_by_hash
+      summary: Get block by hash
+      tags:
+      - Blocks
+      description: "**NOTE:** This endpoint is deprecated in favor of [Get block](/api/get-block).\n        \n        Retrieves block details of a specific block for a given chain height. You can use the hash from your latest block ('get_block_list' API) to get your block details."
+      parameters:
+      - schema:
+          type: string
+        example: '0x4839a8b01cfb39ffcc0d07d3db31e848d5adf5279d529ed5062300b9f353ff79'
+        in: path
+        name: hash
+        required: true
+        description: Hash of the block
+      deprecated: true
+      responses:
+        '200':
+          description: A block
+          content:
+            application/json:
+              schema:
+                title: Block
+                description: A block
+                type: object
+                properties:
+                  canonical:
+                    description: Set to `true` if block corresponds to the canonical chain tip
+                    type: boolean
+                  height:
+                    description: Height of the block
+                    type: integer
+                  hash:
+                    description: Hash representing the block
+                    type: string
+                  block_time:
+                    description: Unix timestamp (in seconds) indicating when this block was mined.
+                    type: number
+                  block_time_iso:
+                    description: An ISO 8601 (YYYY-MM-DDTHH:mm:ss.sssZ) indicating when this block was mined.
+                    type: string
+                  tenure_height:
+                    description: The tenure height (AKA coinbase height) of this block
+                    type: integer
+                  index_block_hash:
+                    description: The only hash that can uniquely identify an anchored block or an unconfirmed state trie
+                    type: string
+                  parent_block_hash:
+                    description: Hash of the parent block
+                    type: string
+                  burn_block_time:
+                    description: Unix timestamp (in seconds) indicating when this block was mined.
+                    type: number
+                  burn_block_time_iso:
+                    description: An ISO 8601 (YYYY-MM-DDTHH:mm:ss.sssZ) indicating when this block was mined.
+                    type: string
+                  burn_block_hash:
+                    description: Hash of the anchor chain block
+                    type: string
+                  burn_block_height:
+                    description: Height of the anchor chain block
+                    type: integer
+                  miner_txid:
+                    description: Anchor chain transaction ID
+                    type: string
+                  execution_cost_read_count:
+                    description: Execution cost read count.
+                    type: integer
+                  execution_cost_read_length:
+                    description: Execution cost read length.
+                    type: integer
+                  execution_cost_runtime:
+                    description: Execution cost runtime.
+                    type: integer
+                  execution_cost_write_count:
+                    description: Execution cost write count.
+                    type: integer
+                  execution_cost_write_length:
+                    description: Execution cost write length.
+                    type: integer
+                  txs:
+                    description: List of transactions included in the block
+                    type: array
+                    items:
+                      description: Transaction ID
+                      type: string
+                  parent_microblock_hash:
+                    description: The hash of the last streamed block that precedes this block to which this block is to be appended. Not every anchored block will have a parent microblock stream. An anchored block that does not have a parent microblock stream has the parent microblock hash set to an empty string, and the parent microblock sequence number set to -1.
+                    type: string
+                  parent_microblock_sequence:
+                    description: The hash of the last streamed block that precedes this block to which this block is to be appended. Not every anchored block will have a parent microblock stream. An anchored block that does not have a parent microblock stream has the parent microblock hash set to an empty string, and the parent microblock sequence number set to -1.
+                    type: integer
+                  microblocks_accepted:
+                    description: List of microblocks that were accepted in this anchor block. Not every anchored block will have a accepted all (or any) of the previously streamed microblocks. Microblocks that were orphaned are not included in this list.
+                    type: array
+                    items:
+                      description: Microblock hash
+                      type: string
+                  microblocks_streamed:
+                    description: List of microblocks that were streamed/produced by this anchor block's miner. This list only includes microblocks that were accepted in the following anchor block. Microblocks that were orphaned are not included in this list.
+                    type: array
+                    items:
+                      description: Microblock hash
+                      type: string
+                  microblock_tx_count:
+                    description: List of txs counts in each accepted microblock
+                    type: object
+                    additionalProperties:
+                      type: integer
+                required:
+                - canonical
+                - height
+                - hash
+                - block_time
+                - block_time_iso
+                - tenure_height
+                - index_block_hash
+                - parent_block_hash
+                - burn_block_time
+                - burn_block_time_iso
+                - burn_block_hash
+                - burn_block_height
+                - miner_txid
+                - execution_cost_read_count
+                - execution_cost_read_length
+                - execution_cost_runtime
+                - execution_cost_write_count
+                - execution_cost_write_length
+                - txs
+                - parent_microblock_hash
+                - parent_microblock_sequence
+                - microblocks_accepted
+                - microblocks_streamed
+                - microblock_tx_count
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /extended/v1/block/by_burn_block_hash/{burn_block_hash}:
+    get:
+      operationId: get_block_by_burn_block_hash
+      summary: Get block by burnchain block hash
+      tags:
+      - Blocks
+      description: "**NOTE:** This endpoint is deprecated in favor of [Get blocks](/api/get-blocks).\n\n        Retrieves block details of a specific block for a given burnchain block hash"
+      parameters:
+      - schema:
+          type: string
+        example: '0x00000000000000000002bba732926cf68b6eda3e2cdbc2a85af79f10efeeeb10'
+        in: path
+        name: burn_block_hash
+        required: true
+        description: Hash of the burnchain block
+      deprecated: true
+      responses:
+        '200':
+          description: A block
+          content:
+            application/json:
+              schema:
+                title: Block
+                description: A block
+                type: object
+                properties:
+                  canonical:
+                    description: Set to `true` if block corresponds to the canonical chain tip
+                    type: boolean
+                  height:
+                    description: Height of the block
+                    type: integer
+                  hash:
+                    description: Hash representing the block
+                    type: string
+                  block_time:
+                    description: Unix timestamp (in seconds) indicating when this block was mined.
+                    type: number
+                  block_time_iso:
+                    description: An ISO 8601 (YYYY-MM-DDTHH:mm:ss.sssZ) indicating when this block was mined.
+                    type: string
+                  tenure_height:
+                    description: The tenure height (AKA coinbase height) of this block
+                    type: integer
+                  index_block_hash:
+                    description: The only hash that can uniquely identify an anchored block or an unconfirmed state trie
+                    type: string
+                  parent_block_hash:
+                    description: Hash of the parent block
+                    type: string
+                  burn_block_time:
+                    description: Unix timestamp (in seconds) indicating when this block was mined.
+                    type: number
+                  burn_block_time_iso:
+                    description: An ISO 8601 (YYYY-MM-DDTHH:mm:ss.sssZ) indicating when this block was mined.
+                    type: string
+                  burn_block_hash:
+                    description: Hash of the anchor chain block
+                    type: string
+                  burn_block_height:
+                    description: Height of the anchor chain block
+                    type: integer
+                  miner_txid:
+                    description: Anchor chain transaction ID
+                    type: string
+                  execution_cost_read_count:
+                    description: Execution cost read count.
+                    type: integer
+                  execution_cost_read_length:
+                    description: Execution cost read length.
+                    type: integer
+                  execution_cost_runtime:
+                    description: Execution cost runtime.
+                    type: integer
+                  execution_cost_write_count:
+                    description: Execution cost write count.
+                    type: integer
+                  execution_cost_write_length:
+                    description: Execution cost write length.
+                    type: integer
+                  txs:
+                    description: List of transactions included in the block
+                    type: array
+                    items:
+                      description: Transaction ID
+                      type: string
+                  parent_microblock_hash:
+                    description: The hash of the last streamed block that precedes this block to which this block is to be appended. Not every anchored block will have a parent microblock stream. An anchored block that does not have a parent microblock stream has the parent microblock hash set to an empty string, and the parent microblock sequence number set to -1.
+                    type: string
+                  parent_microblock_sequence:
+                    description: The hash of the last streamed block that precedes this block to which this block is to be appended. Not every anchored block will have a parent microblock stream. An anchored block that does not have a parent microblock stream has the parent microblock hash set to an empty string, and the parent microblock sequence number set to -1.
+                    type: integer
+                  microblocks_accepted:
+                    description: List of microblocks that were accepted in this anchor block. Not every anchored block will have a accepted all (or any) of the previously streamed microblocks. Microblocks that were orphaned are not included in this list.
+                    type: array
+                    items:
+                      description: Microblock hash
+                      type: string
+                  microblocks_streamed:
+                    description: List of microblocks that were streamed/produced by this anchor block's miner. This list only includes microblocks that were accepted in the following anchor block. Microblocks that were orphaned are not included in this list.
+                    type: array
+                    items:
+                      description: Microblock hash
+                      type: string
+                  microblock_tx_count:
+                    description: List of txs counts in each accepted microblock
+                    type: object
+                    additionalProperties:
+                      type: integer
+                required:
+                - canonical
+                - height
+                - hash
+                - block_time
+                - block_time_iso
+                - tenure_height
+                - index_block_hash
+                - parent_block_hash
+                - burn_block_time
+                - burn_block_time_iso
+                - burn_block_hash
+                - burn_block_height
+                - miner_txid
+                - execution_cost_read_count
+                - execution_cost_read_length
+                - execution_cost_runtime
+                - execution_cost_write_count
+                - execution_cost_write_length
+                - txs
+                - parent_microblock_hash
+                - parent_microblock_sequence
+                - microblocks_accepted
+                - microblocks_streamed
+                - microblock_tx_count
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /extended/v2/blocks/:
+    get:
+      operationId: get_blocks
+      summary: Get blocks
+      tags:
+      - Blocks
+      description: Retrieves a list of recently mined blocks
+      parameters:
+      - schema:
+          minimum: 0
+          default: 20
+          maximum: 30
+          title: Limit
+          type: integer
+        in: query
+        name: limit
+        required: false
+        description: Results per page
+      - schema:
+          default: 0
+          maximum: 300
+          minimum: -300
+          title: Offset
+          type: integer
+        in: query
+        name: offset
+        required: false
+        description: Result offset
+      - schema:
+          pattern: ^0x[a-fA-F0-9]{64}$
+          type: string
+        in: query
+        name: cursor
+        required: false
+        description: Cursor for block pagination
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  limit:
+                    type: integer
+                    example: 20
+                  offset:
+                    type: integer
+                    example: 0
+                  total:
+                    type: integer
+                    example: 1
+                  next_cursor:
+                    anyOf:
+                    - description: Next page cursor
+                      type: string
+                    - type: 'null'
+                  prev_cursor:
+                    anyOf:
+                    - description: Previous page cursor
+                      type: string
+                    - type: 'null'
+                  cursor:
+                    anyOf:
+                    - description: Current page cursor
+                      type: string
+                    - type: 'null'
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        canonical:
+                          description: Set to `true` if block corresponds to the canonical chain tip
+                          type: boolean
+                        height:
+                          description: Height of the block
+                          type: integer
+                        hash:
+                          description: Hash representing the block
+                          type: string
+                        block_time:
+                          description: Unix timestamp (in seconds) indicating when this block was mined.
+                          type: integer
+                        block_time_iso:
+                          description: An ISO 8601 (YYYY-MM-DDTHH:mm:ss.sssZ) indicating when this block was mined.
+                          type: string
+                        tenure_height:
+                          description: The tenure height (AKA coinbase height) of this block
+                          type: integer
+                        index_block_hash:
+                          description: The only hash that can uniquely identify an anchored block or an unconfirmed state trie
+                          type: string
+                        parent_block_hash:
+                          description: Hash of the parent block
+                          type: string
+                        parent_index_block_hash:
+                          description: Index block hash of the parent block
+                          type: string
+                        burn_block_time:
+                          description: Unix timestamp (in seconds) indicating when this block was mined.
+                          type: integer
+                        burn_block_time_iso:
+                          description: An ISO 8601 (YYYY-MM-DDTHH:mm:ss.sssZ) indicating when this block was mined.
+                          type: string
+                        burn_block_hash:
+                          description: Hash of the anchor chain block
+                          type: string
+                        burn_block_height:
+                          description: Height of the anchor chain block
+                          type: integer
+                        miner_txid:
+                          description: Anchor chain transaction ID
+                          type: string
+                        tx_count:
+                          description: Number of transactions included in the block
+                          type: integer
+                        execution_cost_read_count:
+                          description: Execution cost read count.
+                          type: integer
+                        execution_cost_read_length:
+                          description: Execution cost read length.
+                          type: integer
+                        execution_cost_runtime:
+                          description: Execution cost runtime.
+                          type: integer
+                        execution_cost_write_count:
+                          description: Execution cost write count.
+                          type: integer
+                        execution_cost_write_length:
+                          description: Execution cost write length.
+                          type: integer
+                      required:
+                      - canonical
+                      - height
+                      - hash
+                      - block_time
+                      - block_time_iso
+                      - tenure_height
+                      - index_block_hash
+                      - parent_block_hash
+                      - parent_index_block_hash
+                      - burn_block_time
+                      - burn_block_time_iso
+                      - burn_block_hash
+                      - burn_block_height
+                      - miner_txid
+                      - tx_count
+                      - execution_cost_read_count
+                      - execution_cost_read_length
+                      - execution_cost_runtime
+                      - execution_cost_write_count
+                      - execution_cost_write_length
+                required:
+                - limit
+                - offset
+                - total
+                - next_cursor
+                - prev_cursor
+                - cursor
+                - results
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /extended/v2/blocks/average-times:
+    get:
+      operationId: get_average_block_times
+      summary: Get average block times
+      tags:
+      - Blocks
+      description: Retrieves average block times (in seconds)
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  last_1h:
+                    description: Average block times over the last hour (in seconds)
+                    type: number
+                  last_24h:
+                    description: Average block times over the last 24 hours (in seconds)
+                    type: number
+                  last_7d:
+                    description: Average block times over the last 7 days (in seconds)
+                    type: number
+                  last_30d:
+                    description: Average block times over the last 30 days (in seconds)
+                    type: number
+                required:
+                - last_1h
+                - last_24h
+                - last_7d
+                - last_30d
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /extended/v2/blocks/{height_or_hash}:
+    get:
+      operationId: get_block
+      summary: Get block
+      tags:
+      - Blocks
+      description: Retrieves a single block
+      parameters:
+      - schema:
+          anyOf:
+          - type: string
+            enum:
+            - latest
+          - pattern: ^(0x)?[a-fA-F0-9]{64}$
+            title: Block hash
+            description: Block hash
+            examples:
+            - daf79950c5e8bb0c620751333967cdd62297137cdaf79950c5e8bb0c62075133
+            type: string
+          - title: Block height
+            description: Block height
+            examples:
+            - 777678
+            type: integer
+        in: path
+        name: height_or_hash
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  canonical:
+                    description: Set to `true` if block corresponds to the canonical chain tip
+                    type: boolean
+                  height:
+                    description: Height of the block
+                    type: integer
+                  hash:
+                    description: Hash representing the block
+                    type: string
+                  block_time:
+                    description: Unix timestamp (in seconds) indicating when this block was mined.
+                    type: integer
+                  block_time_iso:
+                    description: An ISO 8601 (YYYY-MM-DDTHH:mm:ss.sssZ) indicating when this block was mined.
+                    type: string
+                  tenure_height:
+                    description: The tenure height (AKA coinbase height) of this block
+                    type: integer
+                  index_block_hash:
+                    description: The only hash that can uniquely identify an anchored block or an unconfirmed state trie
+                    type: string
+                  parent_block_hash:
+                    description: Hash of the parent block
+                    type: string
+                  parent_index_block_hash:
+                    description: Index block hash of the parent block
+                    type: string
+                  burn_block_time:
+                    description: Unix timestamp (in seconds) indicating when this block was mined.
+                    type: integer
+                  burn_block_time_iso:
+                    description: An ISO 8601 (YYYY-MM-DDTHH:mm:ss.sssZ) indicating when this block was mined.
+                    type: string
+                  burn_block_hash:
+                    description: Hash of the anchor chain block
+                    type: string
+                  burn_block_height:
+                    description: Height of the anchor chain block
+                    type: integer
+                  miner_txid:
+                    description: Anchor chain transaction ID
+                    type: string
+                  tx_count:
+                    description: Number of transactions included in the block
+                    type: integer
+                  execution_cost_read_count:
+                    description: Execution cost read count.
+                    type: integer
+                  execution_cost_read_length:
+                    description: Execution cost read length.
+                    type: integer
+                  execution_cost_runtime:
+                    description: Execution cost runtime.
+                    type: integer
+                  execution_cost_write_count:
+                    description: Execution cost write count.
+                    type: integer
+                  execution_cost_write_length:
+                    description: Execution cost write length.
+                    type: integer
+                required:
+                - canonical
+                - height
+                - hash
+                - block_time
+                - block_time_iso
+                - tenure_height
+                - index_block_hash
+                - parent_block_hash
+                - parent_index_block_hash
+                - burn_block_time
+                - burn_block_time_iso
+                - burn_block_hash
+                - burn_block_height
+                - miner_txid
+                - tx_count
+                - execution_cost_read_count
+                - execution_cost_read_length
+                - execution_cost_runtime
+                - execution_cost_write_count
+                - execution_cost_write_length
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /extended/v2/blocks/{height_or_hash}/signer-signatures:
+    get:
+      operationId: get_signer_signatures_for_block
+      summary: Get signer signatures for block
+      tags:
+      - Blocks
+      description: Retrieves the signer signatures (an array of signature byte strings) in a single block
+      parameters:
+      - schema:
+          minimum: 0
+          default: 500
+          maximum: 1000
+          title: Limit
+          type: integer
+        in: query
+        name: limit
+        required: false
+        description: Results per page
+      - schema:
+          minimum: 0
+          default: 0
+          title: Offset
+          type: integer
+        in: query
+        name: offset
+        required: false
+        description: Result offset
+      - schema:
+          anyOf:
+          - type: string
+            enum:
+            - latest
+          - pattern: ^(0x)?[a-fA-F0-9]{64}$
+            title: Block hash
+            description: Block hash
+            examples:
+            - daf79950c5e8bb0c620751333967cdd62297137cdaf79950c5e8bb0c62075133
+            type: string
+          - title: Block height
+            description: Block height
+            examples:
+            - 777678
+            type: integer
+        in: path
+        name: height_or_hash
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  limit:
+                    type: integer
+                    example: 20
+                  offset:
+                    type: integer
+                    example: 0
+                  total:
+                    type: integer
+                    example: 1
+                  results:
+                    type: array
+                    items:
+                      description: Array of hex strings representing the block's signer signature
+                      type: string
+                required:
+                - limit
+                - offset
+                - total
+                - results
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /extended/v2/block-tenures/{tenure_height}/blocks:
+    get:
+      operationId: get_tenure_blocks
+      summary: Get blocks by tenure
+      tags:
+      - Blocks
+      description: Retrieves blocks confirmed in a block tenure
+      parameters:
+      - schema:
+          minimum: 0
+          default: 20
+          maximum: 30
+          title: Limit
+          type: integer
+        in: query
+        name: limit
+        required: false
+        description: Results per page
+      - schema:
+          default: 0
+          maximum: 300
+          minimum: -300
+          title: Offset
+          type: integer
+        in: query
+        name: offset
+        required: false
+        description: Result offset
+      - schema:
+          pattern: ^0x[a-fA-F0-9]{64}$
+          type: string
+        in: query
+        name: cursor
+        required: false
+        description: Cursor for block pagination
+      - schema:
+          minimum: 0
+          title: Block tenure height
+          type: integer
+        example: 165453
+        in: path
+        name: tenure_height
+        required: true
+        description: Block tenure height
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  limit:
+                    type: integer
+                    example: 20
+                  offset:
+                    type: integer
+                    example: 0
+                  total:
+                    type: integer
+                    example: 1
+                  next_cursor:
+                    anyOf:
+                    - description: Next page cursor
+                      type: string
+                    - type: 'null'
+                  prev_cursor:
+                    anyOf:
+                    - description: Previous page cursor
+                      type: string
+                    - type: 'null'
+                  cursor:
+                    anyOf:
+                    - description: Current page cursor
+                      type: string
+                    - type: 'null'
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        canonical:
+                          description: Set to `true` if block corresponds to the canonical chain tip
+                          type: boolean
+                        height:
+                          description: Height of the block
+                          type: integer
+                        hash:
+                          description: Hash representing the block
+                          type: string
+                        block_time:
+                          description: Unix timestamp (in seconds) indicating when this block was mined.
+                          type: integer
+                        block_time_iso:
+                          description: An ISO 8601 (YYYY-MM-DDTHH:mm:ss.sssZ) indicating when this block was mined.
+                          type: string
+                        tenure_height:
+                          description: The tenure height (AKA coinbase height) of this block
+                          type: integer
+                        index_block_hash:
+                          description: The only hash that can uniquely identify an anchored block or an unconfirmed state trie
+                          type: string
+                        parent_block_hash:
+                          description: Hash of the parent block
+                          type: string
+                        parent_index_block_hash:
+                          description: Index block hash of the parent block
+                          type: string
+                        burn_block_time:
+                          description: Unix timestamp (in seconds) indicating when this block was mined.
+                          type: integer
+                        burn_block_time_iso:
+                          description: An ISO 8601 (YYYY-MM-DDTHH:mm:ss.sssZ) indicating when this block was mined.
+                          type: string
+                        burn_block_hash:
+                          description: Hash of the anchor chain block
+                          type: string
+                        burn_block_height:
+                          description: Height of the anchor chain block
+                          type: integer
+                        miner_txid:
+                          description: Anchor chain transaction ID
+                          type: string
+                        tx_count:
+                          description: Number of transactions included in the block
+                          type: integer
+                        execution_cost_read_count:
+                          description: Execution cost read count.
+                          type: integer
+                        execution_cost_read_length:
+                          description: Execution cost read length.
+                          type: integer
+                        execution_cost_runtime:
+                          description: Execution cost runtime.
+                          type: integer
+                        execution_cost_write_count:
+                          description: Execution cost write count.
+                          type: integer
+                        execution_cost_write_length:
+                          description: Execution cost write length.
+                          type: integer
+                      required:
+                      - canonical
+                      - height
+                      - hash
+                      - block_time
+                      - block_time_iso
+                      - tenure_height
+                      - index_block_hash
+                      - parent_block_hash
+                      - parent_index_block_hash
+                      - burn_block_time
+                      - burn_block_time_iso
+                      - burn_block_hash
+                      - burn_block_height
+                      - miner_txid
+                      - tx_count
+                      - execution_cost_read_count
+                      - execution_cost_read_length
+                      - execution_cost_runtime
+                      - execution_cost_write_count
+                      - execution_cost_write_length
+                required:
+                - limit
+                - offset
+                - total
+                - next_cursor
+                - prev_cursor
+                - cursor
+                - results
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /v3/blocks/{block_id}:
+    get:
+      summary: Get Nakamoto block by ID
+      tags:
+      - Blocks
+      security: []
+      operationId: getNakamotoBlockById
+      description: 'Get a specific Nakamoto block (Stacks 3.x+) by its index block hash. This endpoint streams
+
+        the block data from the Nakamoto staging blocks database where Nakamoto blocks are stored
+
+        with additional metadata including tenure information.
+
+
+        **Compatibility**: Works with Nakamoto blocks only. For Stacks 2.x blocks, use `/v2/blocks/{block_id}`.
+
+        '
+      parameters:
+      - name: block_id
+        in: path
+        description: The block's ID hash (64-character hex string)
+        required: true
+        schema:
+          type: string
+          pattern: ^[0-9a-f]{64}$
+          minLength: 64
+          maxLength: 64
+          examples:
+          - 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+      responses:
+        '200':
+          description: The raw SIP-003-encoded block will be returned.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v3/blocks/height/{block_height}:
+    get:
+      summary: Fetch a Nakamoto block by its height and optional tip
+      tags:
+      - Blocks
+      security: []
+      operationId: getNakamotoBlockByHeight
+      description: Fetch a Nakamoto block by its height and optional tip.
+      parameters:
+      - name: block_height
+        in: path
+        description: The block's height (max 4294967295)
+        required: true
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 4294967295
+      - $ref: ./components/parameters/tip.yaml
+      responses:
+        '200':
+          description: The raw SIP-003-encoded block will be returned.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v3/tenures/info:
+    get:
+      summary: Fetch metadata about the ongoing Nakamoto tenure
+      tags:
+      - Blocks
+      security: []
+      operationId: getTenureInfo
+      description: 'Fetch metadata about the ongoing Nakamoto tenure. This information is
+
+        sufficient to obtain and authenticate the highest complete tenure, as
+
+        well as obtain new tenure blocks.
+
+        '
+      responses:
+        '200':
+          description: Metadata about the ongoing tenure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenureInfo'
+              examples:
+                tenure-info:
+                  $ref: ./components/examples/get-tenure-info.example.json
+  /v3/tenures/{block_id}:
+    get:
+      summary: Fetch a sequence of Nakamoto blocks in a tenure
+      tags:
+      - Blocks
+      security: []
+      operationId: getTenures
+      description: 'Fetch a sequence of Nakamoto blocks in a tenure. The blocks will be
+
+        served in order from highest to lowest. The blocks will be encoded in
+
+        their SIP-003 wire format, and concatenated together.
+
+        '
+      parameters:
+      - name: block_id
+        in: path
+        description: The tenure-start block ID of the tenure to query (64-character hex string)
+        required: true
+        schema:
+          type: string
+          pattern: ^[0-9a-f]{64}$
+          minLength: 64
+          maxLength: 64
+          examples:
+          - 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+      - name: stop
+        in: query
+        description: 'The block ID hash of the highest block in this tenure that is already
+
+          known to the caller. Neither the corresponding block nor any of its
+
+          ancestors will be served. This is used to fetch tenure blocks that the
+
+          caller does not have.
+
+          '
+        required: false
+        schema:
+          type: string
+          pattern: ^[0-9a-f]{64}$
+          minLength: 64
+          maxLength: 64
+      responses:
+        '200':
+          description: SIP-003-encoded Nakamoto blocks, concatenated together
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v3/tenures/blocks/{consensus_hash}:
+    get:
+      summary: Get the list of Stacks blocks in a tenure
+      tags:
+      - Blocks
+      security: []
+      operationId: getTenureBlocks
+      description: 'Get the list of blocks in a tenure. The blocks will be
+
+        shown in order from highest to lowest.
+
+        '
+      parameters:
+      - name: consensus_hash
+        in: path
+        description: The hex-encoded consensus hash of the tenure to query (40 hexadecimal characters, without 0x prefix)
+        required: true
+        schema:
+          type: string
+          pattern: ^[0-9a-f]{40}$
+      responses:
+        '200':
+          description: List of Stacks blocks in the tenure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenureBlocks'
+              examples:
+                tenure-blocks:
+                  $ref: ./components/examples/tenure-blocks.example.json
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v3/tenures/blocks/hash/{burnchain_block_hash}:
+    get:
+      summary: Get the list of Nakamoto Stacks blocks in a tenure given Bitcoin block hash
+      tags:
+      - Blocks
+      security: []
+      operationId: getTenureBlocksByHash
+      description: 'Get the list of Nakamoto blocks in a tenure given the Bitcoin block hash. The blocks will be
+
+        shown in order from highest to lowest. This is only for Nakamoto blocks, Epoch2 ones will not be shown.
+
+        '
+      parameters:
+      - name: burnchain_block_hash
+        in: path
+        description: The hex-encoded Bitcoin block hash of the tenure to query (64 hexadecimal characters, without 0x prefix)
+        required: true
+        schema:
+          type: string
+          pattern: ^[0-9a-f]{64}$
+      responses:
+        '200':
+          description: List of Stacks blocks in the tenure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenureBlocks'
+              examples:
+                tenure-blocks:
+                  $ref: ./components/examples/tenure-blocks.example.json
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v3/tenures/blocks/height/{burnchain_block_height}:
+    get:
+      summary: Get the list of Nakamoto Stacks blocks in a tenure given Bitcoin block height
+      tags:
+      - Blocks
+      security: []
+      operationId: getTenureBlocksByHeight
+      description: 'Get the list of Nakamoto blocks in a tenure given the Bitcoin block height. The blocks will be
+
+        shown in order from highest to lowest. This is only for Nakamoto blocks, Epoch2 ones will not be shown.
+
+        '
+      parameters:
+      - name: burnchain_block_height
+        in: path
+        description: The Bitcoin block height of the tenure to query
+        required: true
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 4294967295
+      responses:
+        '200':
+          description: List of Stacks blocks in the tenure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenureBlocks'
+              examples:
+                tenure-blocks:
+                  $ref: ./components/examples/tenure-blocks.example.json
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v3/sortitions:
+    get:
+      summary: Get latest sortition information
+      tags:
+      - Blocks
+      security: []
+      operationId: getLatestSortitions
+      description: 'Get sortition information about the latest burnchain block processed by this node.
+
+        Returns a single-element array with the latest sortition.
+
+        '
+      responses:
+        '200':
+          description: Latest sortition information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sortitions'
+              examples:
+                latest-sortition:
+                  $ref: ./components/examples/get-sortitions.example.json
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v3/sortitions/latest_and_last:
+    get:
+      summary: Get latest and last winning sortitions
+      tags:
+      - Blocks
+      security: []
+      operationId: getLatestAndLastWinningSortitions
+      description: 'Get sortition information about the latest burn block with a winning miner
+
+        AND the previous such burn block. Returns an array with two sortition objects.
+
+        '
+      responses:
+        '200':
+          description: Latest and last sortition information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sortitions'
+              examples:
+                latest-and-last-sortitions:
+                  $ref: ./components/examples/get-sortitions-latest-and-prior.example.json
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v3/sortitions/consensus/{consensus_hash}:
+    get:
+      summary: Get sortition by consensus hash
+      tags:
+      - Blocks
+      security: []
+      operationId: getSortitionByConsensusHash
+      description: 'Get sortition information for a specific consensus hash.
+
+        Returns a single-element array with the matching sortition.
+
+        '
+      parameters:
+      - name: consensus_hash
+        in: path
+        required: true
+        description: Hex-encoded consensus hash (40 characters)
+        schema:
+          type: string
+          pattern: ^[0-9a-f]{40}$
+      responses:
+        '200':
+          description: Sortition information for the consensus hash
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sortitions'
+              examples:
+                sortition-by-consensus:
+                  $ref: ./components/examples/get-sortitions.example.json
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v3/sortitions/burn/{burn_header_hash}:
+    get:
+      summary: Get sortition by burn header hash
+      tags:
+      - Blocks
+      security: []
+      operationId: getSortitionByBurnHeaderHash
+      description: 'Get sortition information for a specific burn header hash.
+
+        Returns a single-element array with the matching sortition.
+
+        '
+      parameters:
+      - name: burn_header_hash
+        in: path
+        required: true
+        description: Hex-encoded burn header hash (64 characters)
+        schema:
+          type: string
+          pattern: ^[0-9a-f]{64}$
+      responses:
+        '200':
+          description: Sortition information for the burn header hash
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sortitions'
+              examples:
+                sortition-by-burn-hash:
+                  $ref: ./components/examples/get-sortitions.example.json
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v3/sortitions/burn_height/{height}:
+    get:
+      summary: Get sortition by burn block height
+      tags:
+      - Blocks
+      security: []
+      operationId: getSortitionByBurnBlockHeight
+      description: 'Get sortition information for a specific burn block height.
+
+        Returns a single-element array with the matching sortition.
+
+        '
+      parameters:
+      - name: height
+        in: path
+        required: true
+        description: Burn block height (integer, max 4294967295)
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 4294967295
+      responses:
+        '200':
+          description: Sortition information for the burn block height
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sortitions'
+              examples:
+                sortition-by-height:
+                  $ref: ./components/examples/get-sortitions.example.json
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v3/signer/{signer_pubkey}/{cycle_number}:
+    get:
+      summary: Get number of blocks signed by signer during a given reward cycle
+      tags:
+      - Blocks
+      security: []
+      operationId: getSignerBlocksSigned
+      description: Get number of blocks signed by signer during a given reward cycle
+      parameters:
+      - name: signer_pubkey
+        in: path
+        required: true
+        description: Hex-encoded compressed Secp256k1 public key of signer
+        schema:
+          type: string
+          pattern: ^0[23][0-9a-f]{64}$
+      - name: cycle_number
+        in: path
+        required: true
+        description: Reward cycle number
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          description: Number of blocks signed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignerBlocksSigned'
+              example:
+                blocks_signed: 7
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v2/microblocks/confirmed/{block_id}:
+    get:
+      summary: Get stream of confirmed microblocks (Epoch 2.x)
+      tags:
+      - Blocks
+      security: []
+      operationId: getConfirmedMicroblocks
+      description: 'Get microblocks that were confirmed by the given anchored block.
+
+        The microblocks are returned as a binary stream of concatenated microblock data.
+
+        '
+      parameters:
+      - name: block_id
+        in: path
+        required: true
+        description: Hex-encoded Stacks block ID (64 characters)
+        schema:
+          type: string
+          pattern: ^[0-9a-f]{64}$
+      responses:
+        '200':
+          description: Stream of confirmed microblocks
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v2/microblocks/{microblock_id}:
+    get:
+      summary: 'Get a stream of microblocks beginning
+
+        with the given microblock (Epoch 2.x).
+
+        '
+      tags:
+      - Blocks
+      security: []
+      operationId: getMicroblockById
+      parameters:
+      - name: microblock_id
+        in: path
+        required: true
+        description: Hex-encoded microblock hash (64 characters)
+        schema:
+          type: string
+          pattern: ^[0-9a-f]{64}$
+      responses:
+        '200':
+          description: The microblock data
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v2/microblocks/unconfirmed/{block_id}/{seq}:
+    get:
+      summary: Get stream of unconfirmed microblocks (Epoch 2.x)
+      tags:
+      - Blocks
+      security: []
+      operationId: getUnconfirmedMicroblocks
+      description: 'Get unconfirmed microblocks starting from a specific sequence number.
+
+        The microblocks are returned as a binary stream.
+
+        '
+      parameters:
+      - name: block_id
+        in: path
+        required: true
+        description: Hex-encoded parent block ID (64 characters)
+        schema:
+          type: string
+          pattern: ^[0-9a-f]{64}$
+      - name: seq
+        in: path
+        required: true
+        description: Starting sequence number (0-65535)
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 65535
+      responses:
+        '200':
+          description: Stream of unconfirmed microblocks
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v2/microblocks:
+    post:
+      summary: Submit a microblock (Epoch 2.x)
+      tags:
+      - Blocks
+      security: []
+      operationId: postMicroblock
+      description: 'Submit a microblock to the node for validation and relay.
+
+        The body **must** be the SIP-003 binary serialization of a `Microblock`
+
+        and sent with `Content-Type: application/octet-stream`.
+
+        '
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+              minLength: 1
+      responses:
+        '200':
+          description: Index-block hash of the accepted microblock
+          content:
+            application/json:
+              schema:
+                type: string
+                description: 32-byte block-header hash (hex)
+                pattern: ^[0-9a-f]{64}$
+              example: 3e4f5d6b7c8a9e0ff1122303445566778899aabbccddeeff0011223344556677
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v2/headers/{quantity}:
+    get:
+      summary: Get recent 2.x block headers
+      tags:
+      - Blocks
+      security: []
+      operationId: getBlockHeaders
+      description: '**Deprecated**: This endpoint is deprecated since Nakamoto.**
+
+        Stream (as a JSON array) up to `quantity` most recent anchored Stacks block headers.
+
+        The result is ordered from the current tip backwards.
+
+        '
+      parameters:
+      - name: quantity
+        in: path
+        required: true
+        description: Number of headers to return (max 256)
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 256
+      - $ref: ./components/parameters/tip.yaml
+      responses:
+        '200':
+          description: Array of block headers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlockHeaders'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v2/blocks/{block_id}:
+    get:
+      summary: Get Stacks 2.x block by ID
+      tags:
+      - Blocks
+      security: []
+      operationId: getLegacyBlockById
+      description: 'Get a specific Stacks 2.x era block by its block ID. This endpoint streams the block data
+
+        from the filesystem storage where traditional Stacks blocks are stored as individual files.
+
+
+        **Compatibility**: Works with all Stacks 2.x blocks. For Nakamoto blocks (Stacks 3.x+), use `/v3/blocks/{block_id}`.
+
+        '
+      parameters:
+      - name: block_id
+        in: path
+        required: true
+        description: Hex-encoded block ID (64 characters)
+        schema:
+          type: string
+          pattern: ^[0-9a-f]{64}$
+      responses:
+        '200':
+          description: The block data
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v3/tenures/fork_info/{start}/{stop}:
+    get:
+      summary: Get tenure fork information
+      tags:
+      - Blocks
+      security: []
+      operationId: getTenureForkInfo
+      description: 'Get information about tenure forking between two consensus hashes.
+
+        This is used to identify conflicting tenures in the Nakamoto consensus.
+
+        '
+      parameters:
+      - name: start
+        in: path
+        required: true
+        description: Starting consensus hash (40 hexadecimal characters, without 0x prefix)
+        schema:
+          type: string
+          pattern: ^[0-9a-f]{40}$
+      - name: stop
+        in: path
+        required: true
+        description: Stopping consensus hash (40 hexadecimal characters, without 0x prefix)
+        schema:
+          type: string
+          pattern: ^[0-9a-f]{40}$
+      responses:
+        '200':
+          description: Ordered list of tenure fork events from `stop` back to (and including) `start`
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TenureForkInfo'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v3/tenures/tip/{consensus_hash}:
+    get:
+      summary: Get tenure tip
+      tags:
+      - Blocks
+      security: []
+      operationId: getTenureTip
+      description: 'Get the tip block of a tenure identified by consensus hash.
+
+        '
+      parameters:
+      - name: consensus_hash
+        in: path
+        required: true
+        description: Consensus hash (40 characters)
+        schema:
+          type: string
+          pattern: ^[0-9a-f]{40}$
+      responses:
+        '200':
+          description: Tenure tip block information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenureTip'
+              examples:
+                tenure-tip:
+                  $ref: ./components/examples/get-tenure-tip.example.json
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v3/tenures/tip_metadata/{consensus_hash}:
+    get:
+      summary: Get tenure tip with metadata
+      tags:
+      - Blocks
+      security: []
+      operationId: getTenureTipMetadata
+      description: 'Get the tip block and associated metadata of a tenure identified by consensus hash.
+
+        '
+      parameters:
+      - name: consensus_hash
+        in: path
+        required: true
+        description: Consensus hash (40 characters)
+        schema:
+          type: string
+          pattern: ^[0-9a-f]{40}$
+      responses:
+        '200':
+          description: Tenure tip block information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenureTipMetadata'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v3/blocks/upload:
+    post:
+      summary: Upload a Nakamoto block
+      tags:
+      - Blocks
+      security:
+      - rpcAuth: []
+      - {}
+      operationId: uploadNakamotoBlock
+      description: "Upload a Nakamoto block to the node for processing.\n\n- **Body** - must be the binary (SIP-003) serialization of a `NakamotoBlock`.\n- **Authentication** - only required when the query parameter `broadcast=1` is supplied.\n  In that case the caller **must** include an `Authorization` header.\n"
+      parameters:
+      - name: broadcast
+        in: query
+        description: 'If set to `"1"` the node will broadcast the uploaded block to peers.
+
+          When present the request must include a valid `Authorization` header.
+
+          '
+        schema:
+          type: string
+          enum:
+          - '1'
+        required: false
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+              minLength: 1
+              description: Binary SIP-003 encoding of a `NakamotoBlock`
+      responses:
+        '200':
+          description: Block upload result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlockUploadResponse'
+              examples:
+                nakamoto-block-upload-success:
+                  summary: Nakamoto block upload accepted
+                  value:
+                    stacks_block_id: abc123...
+                    accepted: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v3/blocks/replay/{block_id}:
+    get:
+      summary: Replay mining of a block and returns its content
+      tags:
+      - Blocks
+      security:
+      - rpcAuth: []
+      operationId: blockReplay
+      description: 'Replay the mining of a block (no data is written in the MARF) and returns its content.
+
+        '
+      parameters:
+      - name: block_id
+        in: path
+        description: The block ID hash
+        required: true
+        schema:
+          type: string
+          pattern: ^[0-9a-f]{64}$
+      responses:
+        '200':
+          description: Content of the replayed block
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlockReplay'
+              examples:
+                block-replay:
+                  $ref: ./components/examples/block-replay.example.json
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v3/blocks/simulate/{block_id}:
+    get:
+      summary: Simulate mining of a block with the specified transactions and returns its content
+      tags:
+      - Blocks
+      security:
+      - rpcAuth: []
+      operationId: blockSimulate
+      description: 'Simulate the mining of a block (no data is written in the MARF) with specified transactions and returns its content.
+
+        '
+      parameters:
+      - name: block_id
+        in: path
+        description: The block ID hash
+        required: true
+        schema:
+          type: string
+          pattern: ^[0-9a-f]{64}$
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                transactions_hex:
+                  type: array
+                  items:
+                    type: string
+                    description: SIP-003-encoded Transaction in hex format
+                mint:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      principal:
+                        type: string
+                        description: Principal address receiving STX
+                      amount:
+                        type: integer
+                        description: amount of microSTX to mint for the block simulation
+      responses:
+        '200':
+          description: Content of the simulated block
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlockReplay'
+              example:
+                $ref: ./components/examples/block-replay.example.json
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    TenureInfo:
+      $ref: ./components/schemas/tenure-info.schema.yaml
+    TenureTipMetadata:
+      $ref: ./components/schemas/tenure-tip-metadata.schema.yaml
+    BlockReplay:
+      $ref: ./components/schemas/block-replay.schema.yaml
+    TenureForkInfo:
+      $ref: ./components/schemas/tenure-fork-info.schema.yaml
+    TenureTip:
+      $ref: ./components/schemas/tenure-tip.schema.yaml
+    Sortitions:
+      $ref: ./components/schemas/sortitions.schema.yaml
+    TenureBlocks:
+      $ref: ./components/schemas/tenure-blocks.schema.yaml
+    BlockHeaders:
+      $ref: ./components/schemas/block-headers.schema.yaml
+    BlockUploadResponse:
+      $ref: ./components/schemas/block-upload-response.schema.yaml
+    SignerBlocksSigned:
+      $ref: ./components/schemas/signer-blocks-signed.schema.yaml
+  responses:
+    MethodNotAllowed:
+      description: Method Not Allowed
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: 'Method Not Allowed. Allowed: GET'
+    NotFound:
+      description: Not found
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Not found
+    Unauthorized:
+      description: Unauthorized. Invalid or missing authentication token.
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Unauthorized
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Internal Server Error
+    BadRequest:
+      description: Bad request
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Bad request
+externalDocs:
+  url: https://github.com/hirosystems/signer-metrics-api
+  description: Source Repository

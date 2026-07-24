@@ -1,0 +1,635 @@
+openapi: 3.0.3
+info:
+  title: Signer Metrics Accounts Names API
+  description: Welcome to the API reference overview for the Signer Metrics API.
+  version: 1.0.3
+servers:
+- url: https://api.hiro.so/
+  description: mainnet
+- url: https://api.testnet.hiro.so/
+  description: testnet
+tags:
+- name: Names
+  description: Read-only endpoints realted to the Blockchain Naming System on Stacks
+  externalDocs:
+    description: Stacks Documentation - Blockchain Naming System
+    url: https://docs.stacks.co/network-fundamentals/bitcoin-name-system
+paths:
+  /v1/names/{name}/zonefile/{zoneFileHash}:
+    get:
+      operationId: get_historical_zone_file
+      summary: Get Historical Zone File
+      tags:
+      - Names
+      description: Retrieves the historical zonefile specified by the username and zone hash.
+      parameters:
+      - schema:
+          default: false
+          type: boolean
+        example: true
+        in: query
+        name: unanchored
+        required: false
+        description: Include data from unanchored (i.e. unconfirmed) microblocks
+      - schema:
+          type: string
+        example: muneeb.id
+        in: path
+        name: name
+        required: true
+        description: fully-qualified name
+      - schema:
+          type: string
+        example: b100a68235244b012854a95f9114695679002af9
+        in: path
+        name: zoneFileHash
+        required: true
+        description: zone file hash
+      responses:
+        '200':
+          description: Fetches the historical zonefile specified by the username and zone hash.
+          content:
+            application/json:
+              schema:
+                title: BnsFetchHistoricalZoneFileResponse
+                description: Fetches the historical zonefile specified by the username and zone hash.
+                type: object
+                properties:
+                  zonefile:
+                    type: string
+                required:
+                - zonefile
+        4XX:
+          description: Error
+          content:
+            application/json:
+              schema:
+                title: BnsError
+                description: Error
+                type: object
+                properties:
+                  error:
+                    type: string
+                required:
+                - error
+  /v1/names/{name}/subdomains:
+    get:
+      operationId: fetch_subdomains_list_for_name
+      summary: Get Name Subdomains
+      tags:
+      - Names
+      description: Retrieves the list of subdomains for a specific name
+      parameters:
+      - schema:
+          default: false
+          type: boolean
+        example: true
+        in: query
+        name: unanchored
+        required: false
+        description: Include data from unanchored (i.e. unconfirmed) microblocks
+      - schema:
+          type: string
+        example: id.blockstack
+        in: path
+        name: name
+        required: true
+        description: fully-qualified name
+      responses:
+        '200':
+          description: Fetch a list of subdomains in a name.
+          content:
+            application/json:
+              schema:
+                title: GetAllSubdomainsInName
+                description: Fetch a list of subdomains in a name.
+                type: array
+                items:
+                  type: string
+              example:
+              - address_test.id.blockstack
+              - previous_subdomain.id.blockstack
+              - subdomain.id.blockstack
+              - zonefile_test.id.blockstack
+              - zone_test.id.blockstack
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /v1/names/{name}/zonefile:
+    get:
+      operationId: fetch_zone_file
+      summary: Get Zone File
+      tags:
+      - Names
+      description: Retrieves a user's raw zone file. This only works for RFC-compliant zone files. This method returns an error for names that have non-standard zone files.
+      parameters:
+      - schema:
+          default: false
+          type: boolean
+        example: true
+        in: query
+        name: unanchored
+        required: false
+        description: Include data from unanchored (i.e. unconfirmed) microblocks
+      - schema:
+          type: string
+        example: bar.test
+        in: path
+        name: name
+        required: true
+        description: fully-qualified name
+      responses:
+        '200':
+          description: Fetch a user's raw zone file. This only works for RFC-compliant zone files. This method returns an error for names that have non-standard zone files.
+          content:
+            application/json:
+              schema:
+                title: BnsFetchFileZoneResponse
+                description: Fetch a user's raw zone file. This only works for RFC-compliant zone files. This method returns an error for names that have non-standard zone files.
+                type: object
+                properties:
+                  zonefile:
+                    type: string
+                    example: '$ORIGIN bar.test
+
+                      $TTL 3600
+
+                      _https._tcp URI 10 1 "https://gaia.blockstack.org/hub/17Zijx61Sp7SbVfRTdETo7PhizJHYEUxbY/profile.json"
+
+                      '
+                required:
+                - zonefile
+        4XX:
+          description: Error
+          content:
+            application/json:
+              schema:
+                title: BnsError
+                description: Error
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Invalid name or subdomain
+                required:
+                - error
+  /v1/names/:
+    get:
+      operationId: get_all_names
+      summary: Get All Names
+      tags:
+      - Names
+      description: Retrieves a list of all names known to the node.
+      parameters:
+      - schema:
+          default: false
+          type: boolean
+        example: true
+        in: query
+        name: unanchored
+        required: false
+        description: Include data from unanchored (i.e. unconfirmed) microblocks
+      - schema:
+          minimum: 0
+          default: 0
+          type: integer
+        in: query
+        name: page
+        required: false
+        description: names are defaulted to page 1 with 100 results. You can query specific page results by using the 'page' query parameter.
+      responses:
+        '200':
+          description: Fetch a list of all names known to the node.
+          content:
+            application/json:
+              schema:
+                title: BnsGetAllNamesResponse
+                description: Fetch a list of all names known to the node.
+                type: array
+                items:
+                  type: string
+              examples:
+                aldenquimby.id:
+                  value: aldenquimby.id
+                aldeoryn.id:
+                  value: aldeoryn.id
+                alderete.id:
+                  value: alderete.id
+                aldert.id:
+                  value: aldert.id
+                aldi.id:
+                  value: aldi.id
+                aldighieri.id:
+                  value: aldighieri.id
+        4XX:
+          description: Error
+          content:
+            application/json:
+              schema:
+                title: BnsError
+                description: Error
+                type: object
+                properties:
+                  error:
+                    type: string
+                required:
+                - error
+  /v1/names/{name}:
+    get:
+      operationId: get_name_info
+      summary: Get Name Details
+      tags:
+      - Names
+      description: Retrieves details of a given name including the `address`, `status` and last transaction id - `last_txid`.
+      parameters:
+      - schema:
+          default: false
+          type: boolean
+        example: true
+        in: query
+        name: unanchored
+        required: false
+        description: Include data from unanchored (i.e. unconfirmed) microblocks
+      - schema:
+          type: string
+        example: muneeb.id
+        in: path
+        name: name
+        required: true
+        description: fully-qualified name
+      responses:
+        '200':
+          description: Get name details
+          content:
+            application/json:
+              schema:
+                title: BnsGetNameInfoResponse
+                description: Get name details
+                type: object
+                properties:
+                  address:
+                    type: string
+                  blockchain:
+                    type: string
+                    example: stacks
+                  expire_block:
+                    minimum: 0
+                    type: integer
+                  grace_period:
+                    minimum: 0
+                    type: integer
+                  last_txid:
+                    type: string
+                  resolver:
+                    type: string
+                  status:
+                    type: string
+                  zonefile:
+                    type: string
+                  zonefile_hash:
+                    type: string
+                required:
+                - address
+                - blockchain
+                - last_txid
+                - status
+                - zonefile_hash
+              example:
+                address: 1J3PUxY5uDShUnHRrMyU6yKtoHEUPhKULs
+                blockchain: stacks
+                expire_block: 599266
+                grace_period: false
+                last_txid: 1edfa419f7b83f33e00830bc9409210da6c6d1db60f99eda10c835aa339cad6b
+                renewal_deadline: 604266
+                resolver: null
+                status: registered
+                zonefile: '$ORIGIN muneeb.id
+
+                  $TTL 3600
+
+                  _http._tcp IN URI 10 1 "https://gaia.blockstack.org/hub/1J3PUxY5uDShUnHRrMyU6yKtoHEUPhKULs/0/profile.json"
+
+                  '
+                zonefile_hash: 37aecf837c6ae9bdc9dbd98a268f263dacd00361
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /v1/namespaces/:
+    get:
+      operationId: get_all_namespaces
+      summary: Get All Namespaces
+      tags:
+      - Names
+      description: Retrieves a list of all namespaces known to the node.
+      parameters:
+      - schema:
+          default: false
+          type: boolean
+        example: true
+        in: query
+        name: unanchored
+        required: false
+        description: Include data from unanchored (i.e. unconfirmed) microblocks
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  namespaces:
+                    title: BnsGetAllNamespacesResponse
+                    description: Fetch a list of all namespaces known to the node.
+                    type: array
+                    items:
+                      type: string
+                required:
+                - namespaces
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /v1/namespaces/{tld}/names:
+    get:
+      operationId: get_namespace_names
+      summary: Get Namespace Names
+      tags:
+      - Names
+      description: Retrieves a list of names within a given namespace.
+      parameters:
+      - schema:
+          type: number
+        example: 22
+        in: query
+        name: page
+        required: false
+        description: namespace values are defaulted to page 1 with 100 results. You can query specific page results by using the 'page' query parameter.
+      - schema:
+          default: false
+          type: boolean
+        example: true
+        in: query
+        name: unanchored
+        required: false
+        description: Include data from unanchored (i.e. unconfirmed) microblocks
+      - schema:
+          type: string
+        example: id
+        in: path
+        name: tld
+        required: true
+        description: the namespace to fetch names from.
+      responses:
+        '200':
+          description: Fetch a list of names from the namespace.
+          content:
+            application/json:
+              schema:
+                title: BnsGetAllNamespacesNamesResponse
+                description: Fetch a list of names from the namespace.
+                type: array
+                items:
+                  type: string
+              example:
+              - aldenquimby.id
+              - aldeoryn.id
+              - alderete.id
+              - aldert.id
+              - aldi.id
+              - aldighieri.id
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /v1/addresses/{blockchain}/{address}:
+    get:
+      operationId: get_names_owned_by_address
+      summary: Get Names Owned by Address
+      tags:
+      - Names
+      description: Retrieves a list of names owned by the address provided.
+      parameters:
+      - schema:
+          default: false
+          type: boolean
+        example: true
+        in: query
+        name: unanchored
+        required: false
+        description: Include data from unanchored (i.e. unconfirmed) microblocks
+      - schema:
+          type: string
+        example: stacks
+        in: path
+        name: blockchain
+        required: true
+        description: the layer-1 blockchain for the address
+      - schema:
+          type: string
+        example: SP2J6ZY48GV1EZ5V2V5RB9MP66SW86PYKKNRV9EJ7
+        in: path
+        name: address
+        required: true
+        description: the address to lookup
+      responses:
+        '200':
+          description: Retrieves a list of names owned by the address provided.
+          content:
+            application/json:
+              schema:
+                title: BnsNamesOwnByAddressResponse
+                description: Retrieves a list of names owned by the address provided.
+                type: object
+                properties:
+                  names:
+                    type: array
+                    items:
+                      type: string
+                      example: muneeb.id
+                required:
+                - names
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /v2/prices/namespaces/{tld}:
+    get:
+      operationId: get_namespace_price
+      summary: Get Namespace Price
+      tags:
+      - Names
+      description: Retrieves the price of a namespace. The `amount` given will be in the smallest possible units of the currency.
+      parameters:
+      - schema:
+          type: string
+        example: id
+        in: path
+        name: tld
+        required: true
+        description: the namespace to fetch price for
+      responses:
+        '200':
+          description: Fetch price for namespace.
+          content:
+            application/json:
+              schema:
+                title: BnsGetNamespacePriceResponse
+                description: Fetch price for namespace.
+                type: object
+                properties:
+                  units:
+                    type: string
+                  amount:
+                    type: string
+                required:
+                - units
+                - amount
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                title: BnsError
+                description: Error
+                type: object
+                properties:
+                  error:
+                    type: string
+                required:
+                - error
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /v2/prices/names/{name}:
+    get:
+      operationId: get_name_price
+      summary: Get Name Price
+      tags:
+      - Names
+      description: Retrieves the price of a name. The `amount` given will be in the smallest possible units of the currency.
+      parameters:
+      - schema:
+          type: string
+        example: muneeb.id
+        in: path
+        name: name
+        required: true
+        description: the name to query price information for
+      responses:
+        '200':
+          description: Fetch price for name.
+          content:
+            application/json:
+              schema:
+                title: BnsGetNamePriceResponse
+                description: Fetch price for name.
+                type: object
+                properties:
+                  units:
+                    type: string
+                  amount:
+                    type: string
+                required:
+                - units
+                - amount
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                title: BnsError
+                description: Error
+                type: object
+                properties:
+                  error:
+                    type: string
+                required:
+                - error
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+externalDocs:
+  url: https://github.com/hirosystems/signer-metrics-api
+  description: Source Repository

@@ -1,0 +1,408 @@
+openapi: 3.0.3
+info:
+  title: Signer Metrics Accounts Blocks Proposals API
+  description: Welcome to the API reference overview for the Signer Metrics API.
+  version: 1.0.3
+servers:
+- url: https://api.hiro.so/
+  description: mainnet
+- url: https://api.testnet.hiro.so/
+  description: testnet
+tags:
+- name: Blocks Proposals
+paths:
+  /signer-metrics/v1/block_proposals:
+    get:
+      operationId: getBlockProposals
+      summary: Signer information for most recent block proposals
+      tags:
+      - Blocks Proposals
+      description: Signer information for most recent block proposals
+      parameters:
+      - schema:
+          type: integer
+          default: 25
+          minimum: 1
+          maximum: 50
+        in: query
+        name: limit
+        required: true
+        description: Number of results to return
+      - schema:
+          type: integer
+          default: 0
+        in: query
+        name: offset
+        required: true
+        description: Number of results to skip
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - limit
+                - offset
+                - results
+                properties:
+                  limit:
+                    type: integer
+                  offset:
+                    type: integer
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - received_at
+                      - block_height
+                      - block_hash
+                      - index_block_hash
+                      - burn_block_height
+                      - block_time
+                      - cycle_number
+                      - status
+                      - push_time_ms
+                      - total_signer_count
+                      - total_signer_weight
+                      - total_signer_stacked_amount
+                      - accepted_count
+                      - rejected_count
+                      - missing_count
+                      - accepted_weight
+                      - rejected_weight
+                      - missing_weight
+                      - signer_data
+                      properties:
+                        received_at:
+                          description: ISO timestamp of when this block proposal was received
+                          type: string
+                        block_height:
+                          type: integer
+                        block_hash:
+                          type: string
+                        index_block_hash:
+                          type: string
+                        burn_block_height:
+                          type: integer
+                        block_time:
+                          description: Unix timestamp in seconds of when the block was mined
+                          type: integer
+                        cycle_number:
+                          type: integer
+                        status:
+                          description: Status of the block proposal
+                          anyOf:
+                          - type: string
+                            enum:
+                            - pending
+                          - type: string
+                            enum:
+                            - accepted
+                          - type: string
+                            enum:
+                            - rejected
+                        push_time_ms:
+                          description: Time duration (in milliseconds) taken between when the block was proposed and when it was pushed
+                          anyOf:
+                          - type: 'null'
+                          - type: integer
+                        total_signer_count:
+                          description: Total number of signers expected for this proposal
+                          type: integer
+                        total_signer_weight:
+                          description: Total voting weight of signers expected for this proposal
+                          type: integer
+                        total_signer_stacked_amount:
+                          description: Total STX stacked of signers expected for this proposal
+                          type: string
+                        accepted_count:
+                          description: Number of signers that submitted an approval for this proposal
+                          type: integer
+                        rejected_count:
+                          description: Number of signers that submitted a rejection for this proposal
+                          type: integer
+                        missing_count:
+                          description: Number of signers that failed to submit any response/vote for this proposal
+                          type: integer
+                        accepted_weight:
+                          description: Sum of voting weight of signers who approved the proposal
+                          type: integer
+                        rejected_weight:
+                          description: Sum of voting weight of signers who rejected the proposal
+                          type: integer
+                        missing_weight:
+                          description: Sum of voting weight of missing signers
+                          type: integer
+                        signer_data:
+                          type: array
+                          items:
+                            type: object
+                            required:
+                            - signer_key
+                            - slot_index
+                            - response
+                            - weight
+                            - weight_percentage
+                            - stacked_amount
+                            - version
+                            - received_at
+                            - response_time_ms
+                            - reason_string
+                            - reason_code
+                            - reject_code
+                            properties:
+                              signer_key:
+                                type: string
+                              slot_index:
+                                description: Index of the signer in the stacker set
+                                type: integer
+                              response:
+                                anyOf:
+                                - type: string
+                                  enum:
+                                  - accepted
+                                - type: string
+                                  enum:
+                                  - rejected
+                                - type: string
+                                  enum:
+                                  - missing
+                              weight:
+                                description: Voting weight of this signer (based on slots allocated which is proportional to stacked amount)
+                                type: integer
+                              weight_percentage:
+                                description: Voting weight percent (weight / total_weight)
+                                type: number
+                              stacked_amount:
+                                description: Total STX stacked associated with this signer (string quoted integer)
+                                type: string
+                              version:
+                                description: The signer binary version reported by this signer for this proposal response (null if response missing)
+                                anyOf:
+                                - type: string
+                                - type: 'null'
+                              received_at:
+                                description: ISO timestamp of when this response was received (null if response missing
+                                anyOf:
+                                - type: string
+                                - type: 'null'
+                              response_time_ms:
+                                description: Time duration (in milliseconds) taken to submit this response (tracked best effort, null if response missing)
+                                anyOf:
+                                - type: integer
+                                - type: 'null'
+                              reason_string:
+                                description: (For rejection responses) reason string for rejection
+                                anyOf:
+                                - type: string
+                                - type: 'null'
+                              reason_code:
+                                description: (For rejection responses) reason code for rejection
+                                anyOf:
+                                - type: string
+                                - type: 'null'
+                              reject_code:
+                                description: (For rejection responses) reject code for rejection
+                                anyOf:
+                                - type: string
+                                - type: 'null'
+  /signer-metrics/v1/block_proposals/{block_hash}:
+    get:
+      operationId: getBlockProposals
+      summary: Signer information for most recent block proposals
+      tags:
+      - Blocks Proposals
+      description: Signer information for most recent block proposals
+      parameters:
+      - schema:
+          type: integer
+          default: 25
+          minimum: 1
+          maximum: 50
+        in: query
+        name: limit
+        required: true
+        description: Number of results to return
+      - schema:
+          type: integer
+          default: 0
+        in: query
+        name: offset
+        required: true
+        description: Number of results to skip
+      - schema:
+          pattern: ^(0x)?[a-fA-F0-9]{64}$
+          title: Block hash
+          type: string
+        example: '0xdaf79950c5e8bb0c620751333967cdd62297137cdaf79950c5e8bb0c62075133'
+        in: path
+        name: block_hash
+        required: true
+        description: Block hash
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - received_at
+                - block_height
+                - block_hash
+                - index_block_hash
+                - burn_block_height
+                - block_time
+                - cycle_number
+                - status
+                - push_time_ms
+                - total_signer_count
+                - total_signer_weight
+                - total_signer_stacked_amount
+                - accepted_count
+                - rejected_count
+                - missing_count
+                - accepted_weight
+                - rejected_weight
+                - missing_weight
+                - signer_data
+                properties:
+                  received_at:
+                    description: ISO timestamp of when this block proposal was received
+                    type: string
+                  block_height:
+                    type: integer
+                  block_hash:
+                    type: string
+                  index_block_hash:
+                    type: string
+                  burn_block_height:
+                    type: integer
+                  block_time:
+                    description: Unix timestamp in seconds of when the block was mined
+                    type: integer
+                  cycle_number:
+                    type: integer
+                  status:
+                    description: Status of the block proposal
+                    anyOf:
+                    - type: string
+                      enum:
+                      - pending
+                    - type: string
+                      enum:
+                      - accepted
+                    - type: string
+                      enum:
+                      - rejected
+                  push_time_ms:
+                    description: Time duration (in milliseconds) taken between when the block was proposed and when it was pushed
+                    anyOf:
+                    - type: 'null'
+                    - type: integer
+                  total_signer_count:
+                    description: Total number of signers expected for this proposal
+                    type: integer
+                  total_signer_weight:
+                    description: Total voting weight of signers expected for this proposal
+                    type: integer
+                  total_signer_stacked_amount:
+                    description: Total STX stacked of signers expected for this proposal
+                    type: string
+                  accepted_count:
+                    description: Number of signers that submitted an approval for this proposal
+                    type: integer
+                  rejected_count:
+                    description: Number of signers that submitted a rejection for this proposal
+                    type: integer
+                  missing_count:
+                    description: Number of signers that failed to submit any response/vote for this proposal
+                    type: integer
+                  accepted_weight:
+                    description: Sum of voting weight of signers who approved the proposal
+                    type: integer
+                  rejected_weight:
+                    description: Sum of voting weight of signers who rejected the proposal
+                    type: integer
+                  missing_weight:
+                    description: Sum of voting weight of missing signers
+                    type: integer
+                  signer_data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - signer_key
+                      - slot_index
+                      - response
+                      - weight
+                      - weight_percentage
+                      - stacked_amount
+                      - version
+                      - received_at
+                      - response_time_ms
+                      - reason_string
+                      - reason_code
+                      - reject_code
+                      properties:
+                        signer_key:
+                          type: string
+                        slot_index:
+                          description: Index of the signer in the stacker set
+                          type: integer
+                        response:
+                          anyOf:
+                          - type: string
+                            enum:
+                            - accepted
+                          - type: string
+                            enum:
+                            - rejected
+                          - type: string
+                            enum:
+                            - missing
+                        weight:
+                          description: Voting weight of this signer (based on slots allocated which is proportional to stacked amount)
+                          type: integer
+                        weight_percentage:
+                          description: Voting weight percent (weight / total_weight)
+                          type: number
+                        stacked_amount:
+                          description: Total STX stacked associated with this signer (string quoted integer)
+                          type: string
+                        version:
+                          description: The signer binary version reported by this signer for this proposal response (null if response missing)
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        received_at:
+                          description: ISO timestamp of when this response was received (null if response missing
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        response_time_ms:
+                          description: Time duration (in milliseconds) taken to submit this response (tracked best effort, null if response missing)
+                          anyOf:
+                          - type: integer
+                          - type: 'null'
+                        reason_string:
+                          description: (For rejection responses) reason string for rejection
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        reason_code:
+                          description: (For rejection responses) reason code for rejection
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        reject_code:
+                          description: (For rejection responses) reject code for rejection
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+externalDocs:
+  url: https://github.com/hirosystems/signer-metrics-api
+  description: Source Repository

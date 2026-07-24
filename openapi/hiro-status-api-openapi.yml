@@ -1,0 +1,97 @@
+openapi: 3.0.3
+info:
+  title: Signer Metrics Accounts Status API
+  description: Welcome to the API reference overview for the Signer Metrics API.
+  version: 1.0.3
+servers:
+- url: https://api.hiro.so/
+  description: mainnet
+- url: https://api.testnet.hiro.so/
+  description: testnet
+tags:
+- name: Status
+  description: Service status endpoints
+paths:
+  /signer-metrics/:
+    get:
+      operationId: getApiStatus
+      summary: API Status
+      tags:
+      - Status
+      description: Displays the status of the API and its current workload
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Api Status Response
+                type: object
+                required:
+                - server_version
+                - status
+                - chain_tip
+                properties:
+                  server_version:
+                    type: string
+                    example: signer-metrics-api v0.0.1 (master:a1b2c3)
+                  status:
+                    type: string
+                    example: ready
+                  chain_tip:
+                    type: object
+                    required:
+                    - block_height
+                    - index_block_hash
+                    properties:
+                      block_height:
+                        type: integer
+                        example: 163541
+                      index_block_hash:
+                        type: string
+                        example: '0x1234567890abcdef'
+  /metadata/v1/:
+    get:
+      operationId: getApiStatus
+      summary: API Status
+      tags:
+      - Status
+      description: Displays the status of the API
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Api Status Response
+                type: object
+                required:
+                - server_version
+                - status
+                - chain_tip
+                properties:
+                  server_version:
+                    type: string
+                    example: token-metadata-api v0.0.1 (master:a1b2c3)
+                  status:
+                    type: string
+                    example: ready
+                  chain_tip:
+                    anyOf:
+                    - type: object
+                      required:
+                      - block_height
+                      - index_block_hash
+                      properties:
+                        block_height:
+                          examples:
+                          - 163541
+                          type: integer
+                        index_block_hash:
+                          examples:
+                          - '0x1234567890abcdef1234567890abcdef1234567890abcdef'
+                          type: string
+                    - type: 'null'
+externalDocs:
+  url: https://github.com/hirosystems/signer-metrics-api
+  description: Source Repository

@@ -1,0 +1,150 @@
+openapi: 3.0.3
+info:
+  title: Signer Metrics Accounts Fees API
+  description: Welcome to the API reference overview for the Signer Metrics API.
+  version: 1.0.3
+servers:
+- url: https://api.hiro.so/
+  description: mainnet
+- url: https://api.testnet.hiro.so/
+  description: testnet
+tags:
+- name: Fees
+  description: Read-only endpoints to obtain fee details
+paths:
+  /extended/v1/fee_rate/:
+    post:
+      operationId: fetch_fee_rate
+      summary: Fetch fee rate
+      tags:
+      - Fees
+      description: "**NOTE:** This endpoint is deprecated in favor of [Get approximate fees for a given transaction](/api/get-approximate-fees-for-a-given-transaction).\n\n        Retrieves estimated fee rate."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: FeeRateRequest
+              description: Request to fetch fee for a transaction
+              type: object
+              properties:
+                transaction:
+                  description: A serialized transaction
+                  type: string
+              required:
+              - transaction
+        required: true
+        description: Request to fetch fee for a transaction
+      deprecated: true
+      responses:
+        '200':
+          description: Get fee rate information.
+          content:
+            application/json:
+              schema:
+                title: FeeRate
+                description: Get fee rate information.
+                type: object
+                properties:
+                  fee_rate:
+                    type: integer
+                required:
+                - fee_rate
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /v2/fees/transaction:
+    post:
+      summary: Get approximate fees for the given transaction
+      tags:
+      - Fees
+      security: []
+      description: "Get an estimated fee for the supplied transaction.  This\nestimates the execution cost of the transaction, the current\nfee rate of the network, and returns estimates for fee\namounts.\n\n* `transaction_payload` is a hex-encoded serialization of\n  the TransactionPayload for the transaction.\n* `estimated_len` is an optional argument that provides the\n  endpoint with an estimation of the final length (in bytes)\n  of the transaction, including any post-conditions and\n  signatures\n\nIf the node cannot provide an estimate for the transaction\n(e.g., if the node has never seen a contract-call for the\ngiven contract and function) or if estimation is not\nconfigured on this node, a 400 response is returned.\nThe 400 response will be a JSON error containing a `reason`\nfield which can be one of the following:\n\n* `DatabaseError` - this Stacks node has had an internal\n  database error while trying to estimate the costs of the\n  supplied transaction.\n* `NoEstimateAvailable` - this Stacks node has not seen this\n  kind of contract-call before, and it cannot provide an\n  estimate yet.\n* `CostEstimationDisabled` - this Stacks node does not perform\n  fee or cost estimation, and it cannot respond on this\n  endpoint.\n\nThe 200 response contains the following data:\n\n* `estimated_cost` - the estimated multi-dimensional cost of\n  executing the Clarity VM on the provided transaction.\n* `estimated_cost_scalar` - a unitless integer that the Stacks\n  node uses to compare how much of the block limit is consumed\n  by different transactions. This value incorporates the\n  estimated length of the transaction and the estimated\n  execution cost of the transaction. The range of this integer\n  may vary between different Stacks nodes. In order to compute\n  an estimate of total fee amount for the transaction, this\n  value is multiplied by the same Stacks node\"s estimated fee\n  rate.\n* `cost_scalar_change_by_byte` - a float value that indicates how\n  much the `estimated_cost_scalar` value would increase for every\n  additional byte in the final transaction.\n* `estimations` - an array of estimated fee rates and total fees to\n  pay in microSTX for the transaction. This array provides a range of\n  estimates (default: 3) that may be used. Each element of the array\n  contains the following fields:\n    * `fee_rate` - the estimated value for the current fee\n      rates in the network\n    * `fee` - the estimated value for the total fee in\n      microSTX that the given transaction should pay. These\n      values are the result of computing:\n      `fee_rate` x `estimated_cost_scalar`.\n      If the estimated fees are less than the minimum relay\n      fee `(1 ustx x estimated_len)`, then that minimum relay\n      fee will be returned here instead.\n\n\nNote: If the final transaction\"s byte size is larger than\nsupplied to `estimated_len`, then applications should increase\nthis fee amount by:\n\n  `fee_rate` x `cost_scalar_change_by_byte` x (`final_size` - `estimated_size`)\n"
+      operationId: getFeeTransaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeeTransactionRequest'
+            examples:
+              fee-transaction-request:
+                summary: Fee estimation request
+                value:
+                  estimated_len: 350
+                  transaction_payload: 021af942874ce525e87f21bbe8c121b12fac831d02f4086765742d696e666f0b7570646174652d696e666f00000000
+      responses:
+        '200':
+          description: Estimated fees for the transaction
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeeTransactionResponse'
+              examples:
+                fee-transaction-response:
+                  $ref: ./components/examples/fee-transaction-response.example.json
+        '400':
+          description: Fee estimation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeeTransactionError'
+            text/plain:
+              schema:
+                type: string
+              example: 'Failed to decode: Failed to parse JSON body'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v2/fees/transfer:
+    get:
+      summary: Get estimated fee
+      tags:
+      - Fees
+      security: []
+      operationId: getFeeTransfer
+      description: 'Get an estimated fee rate for STX transfer transactions. This is a fee
+
+        rate per byte, returned as a JSON integer (microSTX per byte).
+
+        '
+      responses:
+        '200':
+          description: Fee rate in microSTX per byte
+          content:
+            application/json:
+              schema:
+                type: integer
+                minimum: 1
+                description: Fee rate in microSTX per byte
+              example: 3
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    FeeTransactionRequest:
+      $ref: ./components/schemas/fee-transaction-request.schema.yaml
+    FeeTransactionResponse:
+      $ref: ./components/schemas/fee-transaction-response.schema.yaml
+    FeeTransactionError:
+      $ref: ./components/schemas/fee-transaction-error.schema.yaml
+  responses:
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Internal Server Error
+externalDocs:
+  url: https://github.com/hirosystems/signer-metrics-api
+  description: Source Repository

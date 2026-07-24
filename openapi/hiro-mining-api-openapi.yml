@@ -1,0 +1,182 @@
+openapi: 3.0.3
+info:
+  title: Signer Metrics Accounts Mining API
+  description: Welcome to the API reference overview for the Signer Metrics API.
+  version: 1.0.3
+servers:
+- url: https://api.hiro.so/
+  description: mainnet
+- url: https://api.testnet.hiro.so/
+  description: testnet
+tags:
+- name: Mining
+  description: Endpoints related to Stacks block production and mining.
+paths:
+  /v3/block_proposal:
+    post:
+      summary: Validate a proposed Stacks block
+      tags:
+      - Mining
+      operationId: postBlockProposal
+      description: 'Used by stackers to validate a proposed Stacks block from a miner.
+
+        **This API endpoint requires a basic Authorization header.**
+
+        '
+      security:
+      - rpcAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - block
+              - chain_id
+              properties:
+                block:
+                  type: string
+                  minLength: 400
+                  pattern: ^([0-9a-fA-F]{2})+$
+                  description: Hex-encoded block data (must be valid SIP-003 serialized block, typically 200+ bytes)
+                chain_id:
+                  type: integer
+                  minimum: 0
+                  description: Chain ID for the block
+            examples:
+              block-proposal-request:
+                summary: Block proposal request
+                value:
+                  block: 00000000000000001f00000000000927c08fb5ae5bf80e39e4168f6a3fddb0407a069d21ee68465e6856393254d2a66194f44bb01070666d5effcfb2436e209a75878fe80a04b4258a8cd34ab97c38a8dde331a2a509dd7e4b90590726866172cc138c18e80567737667f55d3f9817ce4714c91d1adfd36101141829dc0b5ea0c4944668c0005ddb6f9e2718f60014f21932a42a36ffaf58e88e77b217b2af366c15dd59e6b136ca773729832dcfc5875ec0830d04012dd5a4fa77a196646ea2b356289116fd02558c034b62d63f8a65bdd20d7ffc3fec6c266cd974be776a9e92759b90f288dcc2525b6b6bd5622c5f02e0922440e9ad1095c19b4467fd94566caa9755669d8e0000000180800000000400f64081ae6209dce9245753a4f764d6f168aae1af00000000000000000000000000000064000041dbcc7391991c1a18371eb49b879240247a3ec7f281328f53976c1218ffd65421dbb101e59370e2c972b29f48dc674b2de5e1b65acbd41d5d2689124d42c16c01010000000000051a346048df62be3a52bb6236e11394e8600229e27b000000000000271000000000000000000000000000000000000000000000000000000000000000000000
+                  chain_id: 2147483648
+      responses:
+        '202':
+          description: 'Block proposal has been accepted for processing.
+
+            The result will be returned via the event observer.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlockProposalResponse'
+              examples:
+                block-proposal-accepted:
+                  $ref: ./components/examples/post-block-proposal-response.example.json
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlockProposalResponse'
+              example:
+                result: Error
+                message: Bad Request.
+            text/plain:
+              schema:
+                type: string
+              example: Bad request.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          description: 'There is an ongoing proposal validation being processed, the new
+
+            request cannot be accepted until the prior request has been processed.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlockProposalResponse'
+              examples:
+                too-many-requests:
+                  $ref: ./components/examples/post-block-proposal-response.429.example.json
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v2/blocks/upload/{consensus_hash}:
+    post:
+      summary: Upload a Stacks block
+      tags:
+      - Mining
+      security: []
+      operationId: uploadLegacyBlock
+      description: 'Upload a Stacks block to the node for processing.
+
+        The block must be in binary format and associated with the given consensus hash.
+
+        '
+      parameters:
+      - name: consensus_hash
+        in: path
+        required: true
+        description: Consensus hash (40 hex characters)
+        schema:
+          type: string
+          pattern: ^[0-9a-f]{40}$
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+              minLength: 1
+              description: Binary-encoded Stacks block
+      responses:
+        '200':
+          description: Block upload result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlockUploadResponse'
+              examples:
+                block-upload-success:
+                  summary: Block upload accepted
+                  value:
+                    stacks_block_id: abc123...
+                    accepted: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  responses:
+    NotFound:
+      description: Not found
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Not found
+    Unauthorized:
+      description: Unauthorized. Invalid or missing authentication token.
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Unauthorized
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Internal Server Error
+    BadRequest:
+      description: Bad request
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Bad request
+  schemas:
+    BlockProposalResponse:
+      $ref: ./components/schemas/block-proposal.schema.yaml
+    BlockUploadResponse:
+      $ref: ./components/schemas/block-upload-response.schema.yaml
+externalDocs:
+  url: https://github.com/hirosystems/signer-metrics-api
+  description: Source Repository

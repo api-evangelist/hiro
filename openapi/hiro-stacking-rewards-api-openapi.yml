@@ -1,0 +1,460 @@
+openapi: 3.0.3
+info:
+  title: Signer Metrics Accounts Stacking Rewards API
+  description: Welcome to the API reference overview for the Signer Metrics API.
+  version: 1.0.3
+servers:
+- url: https://api.hiro.so/
+  description: mainnet
+- url: https://api.testnet.hiro.so/
+  description: testnet
+tags:
+- name: Stacking Rewards
+  description: Read-only endpoints to obtain Stacking reward details
+  externalDocs:
+    description: Stacks Documentation - Stacking
+    url: https://docs.stacks.co/block-production/stacking
+paths:
+  /extended/v1/burnchain/reward_slot_holders:
+    get:
+      operationId: get_burnchain_reward_slot_holders
+      summary: Get recent reward slot holders
+      tags:
+      - Stacking Rewards
+      description: Retrieves a list of the Bitcoin addresses that would validly receive Proof-of-Transfer commitments.
+      parameters:
+      - schema:
+          minimum: 0
+          default: 96
+          maximum: 250
+          title: Limit
+          type: integer
+        in: query
+        name: limit
+        required: false
+        description: max number of items to fetch
+      - schema:
+          minimum: 0
+          default: 0
+          title: Offset
+          type: integer
+        in: query
+        name: offset
+        required: false
+        description: Result offset
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: List of burnchain reward recipients and amounts
+                type: object
+                properties:
+                  limit:
+                    type: integer
+                    example: 20
+                  offset:
+                    type: integer
+                    example: 0
+                  total:
+                    type: integer
+                    example: 1
+                  results:
+                    type: array
+                    items:
+                      title: BurnchainRewardSlotHolder
+                      description: Reward slot holder on the burnchain
+                      type: object
+                      properties:
+                        canonical:
+                          description: Set to `true` if block corresponds to the canonical burchchain tip
+                          type: boolean
+                        burn_block_hash:
+                          description: The hash representing the burnchain block
+                          type: string
+                        burn_block_height:
+                          description: Height of the burnchain block
+                          type: integer
+                        address:
+                          description: The recipient address that validly received PoX commitments, in the format native to the burnchain (e.g. B58 encoded for Bitcoin)
+                          type: string
+                        slot_index:
+                          description: The index position of the reward entry, useful for ordering when there's more than one slot per burnchain block
+                          type: integer
+                      required:
+                      - canonical
+                      - burn_block_hash
+                      - burn_block_height
+                      - address
+                      - slot_index
+                required:
+                - limit
+                - offset
+                - total
+                - results
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /extended/v1/burnchain/reward_slot_holders/{address}:
+    get:
+      operationId: get_burnchain_reward_slot_holders_by_address
+      summary: Get recent reward slot holder entries for the given address
+      tags:
+      - Stacking Rewards
+      description: Retrieves a list of the Bitcoin addresses that would validly receive Proof-of-Transfer commitments for a given reward slot holder recipient address.
+      parameters:
+      - schema:
+          minimum: 0
+          default: 96
+          maximum: 250
+          title: Limit
+          type: integer
+        in: query
+        name: limit
+        required: false
+        description: Results per page
+      - schema:
+          minimum: 0
+          default: 0
+          title: Offset
+          type: integer
+        in: query
+        name: offset
+        required: false
+        description: Result offset
+      - schema:
+          type: string
+        example: 36hQtSEXBMevo5chpxhfAGiCTSC34QKgda
+        in: path
+        name: address
+        required: true
+        description: Reward slot holder recipient address. Should either be in the native burnchain's format (e.g. B58 for Bitcoin), or if a STX principal address is provided it will be encoded as into the equivalent burnchain format
+      responses:
+        '200':
+          description: List of burnchain reward recipients and amounts
+          content:
+            application/json:
+              schema:
+                title: BurnchainRewardSlotHolderListResponse
+                description: List of burnchain reward recipients and amounts
+                type: object
+                properties:
+                  limit:
+                    type: integer
+                    example: 20
+                  offset:
+                    type: integer
+                    example: 0
+                  total:
+                    type: integer
+                    example: 1
+                  results:
+                    type: array
+                    items:
+                      title: BurnchainRewardSlotHolder
+                      description: Reward slot holder on the burnchain
+                      type: object
+                      properties:
+                        canonical:
+                          description: Set to `true` if block corresponds to the canonical burchchain tip
+                          type: boolean
+                        burn_block_hash:
+                          description: The hash representing the burnchain block
+                          type: string
+                        burn_block_height:
+                          description: Height of the burnchain block
+                          type: integer
+                        address:
+                          description: The recipient address that validly received PoX commitments, in the format native to the burnchain (e.g. B58 encoded for Bitcoin)
+                          type: string
+                        slot_index:
+                          description: The index position of the reward entry, useful for ordering when there's more than one slot per burnchain block
+                          type: integer
+                      required:
+                      - canonical
+                      - burn_block_hash
+                      - burn_block_height
+                      - address
+                      - slot_index
+                required:
+                - limit
+                - offset
+                - total
+                - results
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /extended/v1/burnchain/rewards:
+    get:
+      operationId: get_burnchain_reward_list
+      summary: Get recent burnchain reward recipients
+      tags:
+      - Stacking Rewards
+      description: Retrieves a list of recent burnchain (e.g. Bitcoin) reward recipients with the associated amounts and block info
+      parameters:
+      - schema:
+          minimum: 0
+          default: 96
+          maximum: 250
+          title: Limit
+          type: integer
+        in: query
+        name: limit
+        required: false
+        description: Results per page
+      - schema:
+          minimum: 0
+          default: 0
+          title: Offset
+          type: integer
+        in: query
+        name: offset
+        required: false
+        description: Result offset
+      responses:
+        '200':
+          description: List of burnchain reward recipients and amounts
+          content:
+            application/json:
+              schema:
+                description: List of burnchain reward recipients and amounts
+                type: object
+                properties:
+                  limit:
+                    type: integer
+                  offset:
+                    type: integer
+                  results:
+                    type: array
+                    items:
+                      title: BurnchainReward
+                      description: Reward payment made on the burnchain
+                      type: object
+                      properties:
+                        canonical:
+                          description: Set to `true` if block corresponds to the canonical burchchain tip
+                          type: boolean
+                        burn_block_hash:
+                          description: The hash representing the burnchain block
+                          type: string
+                        burn_block_height:
+                          description: Height of the burnchain block
+                          type: integer
+                        burn_amount:
+                          description: The total amount of burnchain tokens burned for this burnchain block, in the smallest unit (e.g. satoshis for Bitcoin)
+                          type: string
+                        reward_recipient:
+                          description: The recipient address that received the burnchain rewards, in the format native to the burnchain (e.g. B58 encoded for Bitcoin)
+                          type: string
+                        reward_amount:
+                          description: The amount of burnchain tokens rewarded to the recipient, in the smallest unit (e.g. satoshis for Bitcoin)
+                          type: string
+                        reward_index:
+                          description: The index position of the reward entry, useful for ordering when there's more than one recipient per burnchain block
+                          type: integer
+                      required:
+                      - canonical
+                      - burn_block_hash
+                      - burn_block_height
+                      - burn_amount
+                      - reward_recipient
+                      - reward_amount
+                      - reward_index
+                required:
+                - limit
+                - offset
+                - results
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /extended/v1/burnchain/rewards/{address}:
+    get:
+      operationId: get_burnchain_reward_list_by_address
+      summary: Get recent burnchain reward for the given recipient
+      tags:
+      - Stacking Rewards
+      description: Retrieves a list of recent burnchain (e.g. Bitcoin) rewards for the given recipient with the associated amounts and block info
+      parameters:
+      - schema:
+          minimum: 0
+          default: 96
+          maximum: 250
+          title: Limit
+          type: integer
+        in: query
+        name: limit
+        required: false
+        description: Results per page
+      - schema:
+          minimum: 0
+          default: 0
+          title: Offset
+          type: integer
+        in: query
+        name: offset
+        required: false
+        description: Result offset
+      - schema:
+          type: string
+        example: 36hQtSEXBMevo5chpxhfAGiCTSC34QKgda
+        in: path
+        name: address
+        required: true
+        description: Reward recipient address. Should either be in the native burnchain's format (e.g. B58 for Bitcoin), or if a STX principal address is provided it will be encoded as into the equivalent burnchain format
+      responses:
+        '200':
+          description: List of burnchain reward recipients and amounts
+          content:
+            application/json:
+              schema:
+                description: List of burnchain reward recipients and amounts
+                type: object
+                properties:
+                  limit:
+                    type: integer
+                  offset:
+                    type: integer
+                  results:
+                    type: array
+                    items:
+                      title: BurnchainReward
+                      description: Reward payment made on the burnchain
+                      type: object
+                      properties:
+                        canonical:
+                          description: Set to `true` if block corresponds to the canonical burchchain tip
+                          type: boolean
+                        burn_block_hash:
+                          description: The hash representing the burnchain block
+                          type: string
+                        burn_block_height:
+                          description: Height of the burnchain block
+                          type: integer
+                        burn_amount:
+                          description: The total amount of burnchain tokens burned for this burnchain block, in the smallest unit (e.g. satoshis for Bitcoin)
+                          type: string
+                        reward_recipient:
+                          description: The recipient address that received the burnchain rewards, in the format native to the burnchain (e.g. B58 encoded for Bitcoin)
+                          type: string
+                        reward_amount:
+                          description: The amount of burnchain tokens rewarded to the recipient, in the smallest unit (e.g. satoshis for Bitcoin)
+                          type: string
+                        reward_index:
+                          description: The index position of the reward entry, useful for ordering when there's more than one recipient per burnchain block
+                          type: integer
+                      required:
+                      - canonical
+                      - burn_block_hash
+                      - burn_block_height
+                      - burn_amount
+                      - reward_recipient
+                      - reward_amount
+                      - reward_index
+                required:
+                - limit
+                - offset
+                - results
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /extended/v1/burnchain/rewards/{address}/total:
+    get:
+      operationId: get_burnchain_rewards_total_by_address
+      summary: Get total burnchain rewards for the given recipient
+      tags:
+      - Stacking Rewards
+      description: Retrieves the total burnchain (e.g. Bitcoin) rewards for a given recipient `address`
+      parameters:
+      - schema:
+          type: string
+        example: 36hQtSEXBMevo5chpxhfAGiCTSC34QKgda
+        in: path
+        name: address
+        required: true
+        description: Reward recipient address. Should either be in the native burnchain's format (e.g. B58 for Bitcoin), or if a STX principal address is provided it will be encoded as into the equivalent burnchain format
+      responses:
+        '200':
+          description: Total burnchain rewards made to a recipient
+          content:
+            application/json:
+              schema:
+                title: BurnchainRewardsTotal
+                description: Total burnchain rewards made to a recipient
+                type: object
+                properties:
+                  reward_recipient:
+                    description: The recipient address that received the burnchain rewards, in the format native to the burnchain (e.g. B58 encoded for Bitcoin)
+                    type: string
+                  reward_amount:
+                    description: The total amount of burnchain tokens rewarded to the recipient, in the smallest unit (e.g. satoshis for Bitcoin)
+                    type: string
+                required:
+                - reward_recipient
+                - reward_amount
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+externalDocs:
+  url: https://github.com/hirosystems/signer-metrics-api
+  description: Source Repository

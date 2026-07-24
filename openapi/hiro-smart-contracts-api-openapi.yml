@@ -1,0 +1,1090 @@
+openapi: 3.0.3
+info:
+  title: Signer Metrics Accounts Smart Contracts API
+  description: Welcome to the API reference overview for the Signer Metrics API.
+  version: 1.0.3
+servers:
+- url: https://api.hiro.so/
+  description: mainnet
+- url: https://api.testnet.hiro.so/
+  description: testnet
+tags:
+- name: Smart Contracts
+  description: Read-only endpoints to obtain Clarity smart contract details
+  externalDocs:
+    description: Stacks Documentation - Clarity Smart Contracts
+    url: https://docs.stacks.co/clarity/overview
+paths:
+  /extended/v1/contract/by_trait:
+    get:
+      operationId: get_contracts_by_trait
+      summary: Get contracts by trait
+      tags:
+      - Smart Contracts
+      description: Retrieves a list of contracts based on the following traits listed in JSON format -  functions, variables, maps, fungible tokens and non-fungible tokens
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: trait_abi
+        required: true
+        description: JSON abi of the trait.
+      - schema:
+          minimum: 0
+          default: 20
+          maximum: 50
+          title: Limit
+          type: integer
+        in: query
+        name: limit
+        required: false
+        description: max number of contracts fetch
+      - schema:
+          minimum: 0
+          default: 0
+          title: Offset
+          type: integer
+        in: query
+        name: offset
+        required: false
+        description: index of first contract event to fetch
+      responses:
+        '200':
+          description: GET list of contracts
+          content:
+            application/json:
+              schema:
+                title: ContractListResponse
+                description: GET list of contracts
+                type: object
+                properties:
+                  limit:
+                    type: integer
+                    example: 20
+                  offset:
+                    type: integer
+                    example: 0
+                  results:
+                    type: array
+                    items:
+                      title: SmartContract
+                      description: A Smart Contract Detail
+                      type: object
+                      properties:
+                        tx_id:
+                          type: string
+                        canonical:
+                          type: boolean
+                        contract_id:
+                          type: string
+                        block_height:
+                          type: integer
+                        clarity_version:
+                          anyOf:
+                          - type: integer
+                          - type: 'null'
+                        source_code:
+                          type: string
+                        abi:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                      required:
+                      - tx_id
+                      - canonical
+                      - contract_id
+                      - block_height
+                      - clarity_version
+                      - source_code
+                      - abi
+                required:
+                - limit
+                - offset
+                - results
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /extended/v1/contract/{contract_id}:
+    get:
+      operationId: get_contract_by_id
+      summary: Get contract info
+      tags:
+      - Smart Contracts
+      description: Retrieves details of a contract with a given `contract_id`
+      parameters:
+      - schema:
+          type: string
+        example: SP6P4EJF0VG8V0RB3TQQKJBHDQKEF6NVRD1KZE3C.satoshibles
+        in: path
+        name: contract_id
+        required: true
+        description: Contract identifier formatted as `<contract_address>.<contract_name>`
+      responses:
+        '200':
+          description: A Smart Contract Detail
+          content:
+            application/json:
+              schema:
+                title: SmartContract
+                description: A Smart Contract Detail
+                type: object
+                properties:
+                  tx_id:
+                    type: string
+                  canonical:
+                    type: boolean
+                  contract_id:
+                    type: string
+                  block_height:
+                    type: integer
+                  clarity_version:
+                    anyOf:
+                    - type: integer
+                    - type: 'null'
+                  source_code:
+                    type: string
+                  abi:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                required:
+                - tx_id
+                - canonical
+                - contract_id
+                - block_height
+                - clarity_version
+                - source_code
+                - abi
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /extended/v1/contract/{contract_id}/events:
+    get:
+      operationId: get_contract_events_by_id
+      summary: Get contract events
+      tags:
+      - Smart Contracts
+      description: Retrieves a list of events that have been triggered by a given `contract_id`
+      parameters:
+      - schema:
+          minimum: 0
+          default: 20
+          maximum: 50
+          title: Limit
+          type: integer
+        in: query
+        name: limit
+        required: false
+        description: max number of events to fetch
+      - schema:
+          minimum: 0
+          default: 0
+          title: Offset
+          type: integer
+        in: query
+        name: offset
+        required: false
+        description: Result offset
+      - schema:
+          type: string
+        example: SP6P4EJF0VG8V0RB3TQQKJBHDQKEF6NVRD1KZE3C.satoshibles
+        in: path
+        name: contract_id
+        required: true
+        description: Contract identifier formatted as `<contract_address>.<contract_name>`
+      responses:
+        '200':
+          description: List of events
+          content:
+            application/json:
+              schema:
+                description: List of events
+                type: object
+                properties:
+                  limit:
+                    type: integer
+                  offset:
+                    type: integer
+                  results:
+                    type: array
+                    items:
+                      anyOf:
+                      - title: SmartContractLogTransactionEvent
+                        description: Only present in `smart_contract` and `contract_call` tx types.
+                        type: object
+                        allOf:
+                        - title: AbstractTransactionEvent
+                          type: object
+                          properties:
+                            event_index:
+                              type: integer
+                          required:
+                          - event_index
+                        - type: object
+                          properties:
+                            event_type:
+                              type: string
+                              enum:
+                              - smart_contract_log
+                            tx_id:
+                              type: string
+                            contract_log:
+                              type: object
+                              properties:
+                                contract_id:
+                                  type: string
+                                topic:
+                                  type: string
+                                value:
+                                  type: object
+                                  properties:
+                                    hex:
+                                      type: string
+                                    repr:
+                                      type: string
+                                  required:
+                                  - hex
+                                  - repr
+                              required:
+                              - contract_id
+                              - topic
+                              - value
+                          required:
+                          - event_type
+                          - tx_id
+                          - contract_log
+                      - title: StxLockTransactionEvent
+                        description: Only present in `smart_contract` and `contract_call` tx types.
+                        type: object
+                        allOf:
+                        - title: AbstractTransactionEvent
+                          type: object
+                          properties:
+                            event_index:
+                              type: integer
+                          required:
+                          - event_index
+                        - type: object
+                          properties:
+                            event_type:
+                              type: string
+                              enum:
+                              - stx_lock
+                            tx_id:
+                              type: string
+                            stx_lock_event:
+                              type: object
+                              properties:
+                                locked_amount:
+                                  type: string
+                                unlock_height:
+                                  type: integer
+                                locked_address:
+                                  type: string
+                              required:
+                              - locked_amount
+                              - unlock_height
+                              - locked_address
+                          required:
+                          - event_type
+                          - tx_id
+                          - stx_lock_event
+                      - title: StxAssetTransactionEvent
+                        description: Only present in `smart_contract` and `contract_call` tx types.
+                        type: object
+                        allOf:
+                        - title: AbstractTransactionEvent
+                          type: object
+                          properties:
+                            event_index:
+                              type: integer
+                          required:
+                          - event_index
+                        - type: object
+                          properties:
+                            event_type:
+                              type: string
+                              enum:
+                              - stx_asset
+                            tx_id:
+                              type: string
+                            asset:
+                              type: object
+                              properties:
+                                asset_event_type:
+                                  anyOf:
+                                  - type: string
+                                    enum:
+                                    - transfer
+                                  - type: string
+                                    enum:
+                                    - mint
+                                  - type: string
+                                    enum:
+                                    - burn
+                                sender:
+                                  type: string
+                                recipient:
+                                  type: string
+                                amount:
+                                  type: string
+                                memo:
+                                  type: string
+                              required:
+                              - asset_event_type
+                              - sender
+                              - recipient
+                              - amount
+                          required:
+                          - event_type
+                          - tx_id
+                          - asset
+                      - title: FungibleTokenAssetTransactionEvent
+                        type: object
+                        allOf:
+                        - title: AbstractTransactionEvent
+                          type: object
+                          properties:
+                            event_index:
+                              type: integer
+                          required:
+                          - event_index
+                        - type: object
+                          properties:
+                            event_type:
+                              type: string
+                              enum:
+                              - fungible_token_asset
+                            tx_id:
+                              type: string
+                            asset:
+                              type: object
+                              properties:
+                                asset_event_type:
+                                  anyOf:
+                                  - type: string
+                                    enum:
+                                    - transfer
+                                  - type: string
+                                    enum:
+                                    - mint
+                                  - type: string
+                                    enum:
+                                    - burn
+                                asset_id:
+                                  type: string
+                                sender:
+                                  type: string
+                                recipient:
+                                  type: string
+                                amount:
+                                  type: string
+                              required:
+                              - asset_event_type
+                              - asset_id
+                              - sender
+                              - recipient
+                              - amount
+                          required:
+                          - event_type
+                          - tx_id
+                          - asset
+                      - title: NonFungibleTokenAssetTransactionEvent
+                        type: object
+                        allOf:
+                        - title: AbstractTransactionEvent
+                          type: object
+                          properties:
+                            event_index:
+                              type: integer
+                          required:
+                          - event_index
+                        - type: object
+                          properties:
+                            event_type:
+                              type: string
+                              enum:
+                              - non_fungible_token_asset
+                            tx_id:
+                              type: string
+                            asset:
+                              type: object
+                              properties:
+                                asset_event_type:
+                                  anyOf:
+                                  - type: string
+                                    enum:
+                                    - transfer
+                                  - type: string
+                                    enum:
+                                    - mint
+                                  - type: string
+                                    enum:
+                                    - burn
+                                asset_id:
+                                  type: string
+                                sender:
+                                  type: string
+                                recipient:
+                                  type: string
+                                value:
+                                  type: object
+                                  properties:
+                                    hex:
+                                      type: string
+                                    repr:
+                                      type: string
+                                  required:
+                                  - hex
+                                  - repr
+                              required:
+                              - asset_event_type
+                              - asset_id
+                              - sender
+                              - recipient
+                              - value
+                          required:
+                          - event_type
+                          - tx_id
+                          - asset
+                required:
+                - limit
+                - offset
+                - results
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /extended/v2/smart-contracts/status:
+    get:
+      operationId: get_smart_contracts_status
+      summary: Get smart contracts status
+      tags:
+      - Smart Contracts
+      description: Retrieves the deployment status of multiple smart contracts.
+      parameters:
+      - schema:
+          anyOf:
+          - type: array
+            items:
+              pattern: ^[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{28,41}.[a-zA-Z]([a-zA-Z0-9]|[-_]){0,39}$
+              title: Smart Contract ID
+              description: Smart Contract ID
+              examples:
+              - SP000000000000000000002Q6VF78.pox-3
+              type: string
+          - pattern: ^[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{28,41}.[a-zA-Z]([a-zA-Z0-9]|[-_]){0,39}$
+            title: Smart Contract ID
+            description: Smart Contract ID
+            examples:
+            - SP000000000000000000002Q6VF78.pox-3
+            type: string
+        in: query
+        name: contract_id
+        required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  anyOf:
+                  - type: object
+                    properties:
+                      found:
+                        const: true
+                        type: boolean
+                      result:
+                        type: object
+                        properties:
+                          status:
+                            description: Smart contract deployment transaction status
+                            type: string
+                          tx_id:
+                            description: Deployment transaction ID
+                            type: string
+                          contract_id:
+                            description: Smart contract ID
+                            type: string
+                          block_height:
+                            description: Height of the transaction confirmation block
+                            type: integer
+                        required:
+                        - status
+                        - tx_id
+                        - contract_id
+                    required:
+                    - found
+                    - result
+                  - type: object
+                    properties:
+                      found:
+                        const: false
+                        type: boolean
+                    required:
+                    - found
+        4XX:
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                title: Error Response
+                additionalProperties: true
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                required:
+                - error
+  /v2/contracts/interface/{deployer_address}/{contract_name}:
+    get:
+      summary: Get contract interface
+      description: Get contract interface using a `deployer_address` and `contract name`
+      tags:
+      - Smart Contracts
+      security: []
+      operationId: getContractInterface
+      parameters:
+      - $ref: ./components/parameters/deployer-address.yaml
+      - $ref: ./components/parameters/contract-name.yaml
+      - $ref: ./components/parameters/tip.yaml
+      responses:
+        '200':
+          description: Contract interface
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractInterface'
+              examples:
+                contract-interface:
+                  $ref: ./components/examples/contract-interface.example.json
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v2/map_entry/{deployer_address}/{contract_name}/{map_name}:
+    post:
+      summary: Get specific data-map inside a contract
+      tags:
+      - Smart Contracts
+      security: []
+      operationId: getContractDataMapEntry
+      description: "Attempt to fetch data from a contract data map. The contract is\nidentified with [Stacks Address] and [Contract Name] in the URL path.\nThe map is identified with [Map Name].\n\nThe key to lookup in the map is supplied via the POST body. This should\nbe supplied as the hex string serialization of the key (which should be\na Clarity value). Note, this is a JSON string.\n\nThe response is a JSON object with the following properties:\n- `data`: The hex serialization of the map response. Note that map\n  responses are Clarity option types, for non-existent values, this is\n  a serialized none, and for all other responses, it is a serialized\n  (some ...) object.\n- `proof`: The hex serialization of the Merkle proof for the data.\n"
+      parameters:
+      - $ref: ./components/parameters/deployer-address.yaml
+      - $ref: ./components/parameters/contract-name.yaml
+      - name: map_name
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/ClarityName'
+      - $ref: ./components/parameters/proof.yaml
+      - $ref: ./components/parameters/tip.yaml
+      x-codegen-request-body-name: key
+      requestBody:
+        description: Hex string serialization of the lookup key (which should be a Clarity value)
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+              minLength: 2
+              pattern: ^(0x)?([0-9a-fA-F]{2})+$
+              description: Hex-encoded Clarity value (e.g. "0x0100000000000000000000000000000001")
+              example: '0x0100000000000000000000000000000001'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClarityData'
+              examples:
+                clarity-data:
+                  $ref: ./components/examples/clarity-data.example.json
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v2/contracts/source/{deployer_address}/{contract_name}:
+    get:
+      summary: Get contract source
+      tags:
+      - Smart Contracts
+      security: []
+      operationId: getContractSource
+      description: 'Returns the Clarity source code of a given contract, along with the
+
+        block height it was published in, and the MARF proof for the data.
+
+        '
+      parameters:
+      - $ref: ./components/parameters/deployer-address.yaml
+      - $ref: ./components/parameters/contract-name.yaml
+      - $ref: ./components/parameters/proof.yaml
+      - $ref: ./components/parameters/tip.yaml
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractSource'
+              examples:
+                contract-source:
+                  $ref: ./components/examples/contract-source.example.json
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v2/contracts/call-read/{deployer_address}/{contract_name}/{function_name}:
+    post:
+      summary: Call read-only function
+      description: 'Call a read-only public function on a given contract.
+
+
+        The contract is identified with [Stacks Address] and [Contract Name] in the URL path.
+
+        The function is identified with [Function Name].
+
+
+        The arguments to the function are supplied via the POST body.
+
+        This should be a JSON object with two main properties:
+
+        - `sender` which should be a Stacks address or contract principal
+
+        - `arguments` which should be an array of hex-encoded Clarity values.
+
+        '
+      tags:
+      - Smart Contracts
+      security: []
+      operationId: callReadOnlyFunction
+      parameters:
+      - $ref: ./components/parameters/deployer-address.yaml
+      - $ref: ./components/parameters/contract-name.yaml
+      - name: function_name
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/ClarityName'
+      - $ref: ./components/parameters/tip.yaml
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReadOnlyFunctionArgs'
+      responses:
+        '200':
+          description: Function executed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadOnlyFunctionResult'
+              examples:
+                success:
+                  $ref: ./components/examples/read-only-function-success.example.json
+                failure:
+                  $ref: ./components/examples/read-only-function-failure.example.json
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v3/contracts/fast-call-read/{deployer_address}/{contract_name}/{function_name}:
+    post:
+      summary: Call read-only function in fast mode (no cost and memory tracking)
+      description: 'Call a read-only public function on a given smart contract without cost tracking.
+
+
+        The contract is identified with [Stacks Address] and [Contract Name] in the URL path.
+
+        The function is identified with [Function Name].
+
+
+        The arguments to the function are supplied via the POST body.
+
+        This should be a JSON object with two main properties:
+
+        - `sender` which should be a Stacks address or contract principal
+
+        - `arguments` which should be an array of hex-encoded Clarity values.
+
+
+        **This API endpoint requires a basic Authorization header.**
+
+        '
+      tags:
+      - Smart Contracts
+      security:
+      - rpcAuth: []
+      operationId: fastCallReadOnlyFunction
+      parameters:
+      - $ref: ./components/parameters/deployer-address.yaml
+      - $ref: ./components/parameters/contract-name.yaml
+      - name: function_name
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/ClarityName'
+      - $ref: ./components/parameters/tip.yaml
+      requestBody:
+        description: map of arguments and the simulated tx-sender where sender is either a Contract identifier or a normal Stacks address, and arguments is an array of hex serialized Clarity values.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReadOnlyFunctionArgs'
+            examples:
+              fast-call-request:
+                summary: Fast call read-only function request
+                value:
+                  sender: SP31DA6FTSJX2WGTZ69SFY11BH51NZMB0ZW97B5P0.get-info
+                  arguments:
+                  - 0x0011...
+                  - 0x00231...
+      responses:
+        '200':
+          description: Function executed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadOnlyFunctionResult'
+              examples:
+                success:
+                  $ref: ./components/examples/read-only-function-success.example.json
+                failure:
+                  $ref: ./components/examples/read-only-function-failure.example.json
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '408':
+          $ref: '#/components/responses/Timeout'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v2/traits/{deployer_address}/{contract_name}/{trait_deployer_address}/{trait_contract_name}/{trait_name}:
+    get:
+      summary: Get trait implementation details
+      description: 'Determine whether or not a specified trait is implemented (either
+
+        explicitly or implicitly) within a given contract.
+
+        '
+      tags:
+      - Smart Contracts
+      security: []
+      operationId: checkTraitImplementation
+      parameters:
+      - $ref: ./components/parameters/deployer-address.yaml
+      - $ref: ./components/parameters/contract-name.yaml
+      - name: trait_deployer_address
+        in: path
+        required: true
+        description: 'Stacks address of the trait-defining contract.
+
+          '
+        schema:
+          $ref: ./components/schemas/standard-principal.schema.yaml
+      - name: trait_contract_name
+        in: path
+        required: true
+        description: Contract name of the trait-defining contract.
+        schema:
+          type: string
+          pattern: ^[a-zA-Z]([a-zA-Z0-9]|[-_]){0,127}$
+          minLength: 1
+          maxLength: 128
+          example: some-trait
+      - name: trait_name
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/ClarityName'
+        example: some-trait
+      - $ref: ./components/parameters/tip.yaml
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IsTraitImplemented'
+              examples:
+                is-trait-implemented:
+                  $ref: ./components/examples/is-trait-implemented.example.json
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /v2/clarity/marf/{marf_key_hash}:
+    get:
+      summary: Get the MARF value for a given key
+      tags:
+      - Smart Contracts
+      security: []
+      operationId: getClarityMarfValue
+      description: 'Attempt to fetch the value of a MARF key. The key is a 64-character
+
+        hex string representing the MARF node hash.
+
+        '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClarityData'
+              examples:
+                clarity-data:
+                  $ref: ./components/examples/clarity-data.example.json
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      parameters:
+      - name: marf_key_hash
+        in: path
+        required: true
+        description: The 64-character hex-encoded hash of the MARF key.
+        schema:
+          type: string
+          pattern: ^[0-9a-f]{64}$
+          minLength: 64
+          maxLength: 64
+      - $ref: ./components/parameters/proof.yaml
+      - $ref: ./components/parameters/tip.yaml
+  /v2/clarity/metadata/{deployer_address}/{contract_name}/{clarity_metadata_key}:
+    get:
+      summary: Get the contract metadata for the metadata key
+      tags:
+      - Smart Contracts
+      security: []
+      operationId: getClarityMetadata
+      description: 'Attempt to fetch the metadata of a contract. The contract is identified
+
+        with [Contract Address] and [Contract Name] in the URL path. The metadata
+
+        key is identified with [Clarity Metadata Key].
+
+
+        In the response, `data` is formatted as JSON.
+
+        '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClarityMetadata'
+              examples:
+                clarity-metadata:
+                  $ref: ./components/examples/clarity-metadata.example.json
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      parameters:
+      - $ref: ./components/parameters/deployer-address.yaml
+      - $ref: ./components/parameters/contract-name.yaml
+      - name: clarity_metadata_key
+        in: path
+        required: true
+        description: "Metadata key. Must be either:\n- \"analysis\" for contract analysis data\n- \"vm-metadata::N::TYPE\" where N is the epoch (1-2 digits) and TYPE is one of:\n  contract, contract-size, contract-src, contract-data-size, or a valid Clarity name\n"
+        schema:
+          type: string
+          pattern: ^(analysis)|(vm-metadata::\d{1,2}::(contract|contract-size|contract-src|contract-data-size|[a-zA-Z]([a-zA-Z0-9]|[-_!?+<>=/*])*))$
+          example: analysis
+      - $ref: ./components/parameters/tip.yaml
+  /v2/constant_val/{deployer_address}/{contract_name}/{constant_name}:
+    get:
+      summary: Get the value of a constant inside a contract
+      tags:
+      - Smart Contracts
+      security: []
+      operationId: getConstantValue
+      description: 'Attempt to fetch the value of a constant inside a contract. The contract
+
+        is identified with [Stacks Address] and [Contract Name] in the URL path.
+
+        The constant is identified with [Constant Name].
+
+
+        In the response, `data` is the hex serialization of the constant value.
+
+        '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConstantValue'
+              examples:
+                constant-value:
+                  $ref: ./components/examples/constant-value.example.json
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      parameters:
+      - $ref: ./components/parameters/deployer-address.yaml
+      - $ref: ./components/parameters/contract-name.yaml
+      - name: constant_name
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/ClarityName'
+      - $ref: ./components/parameters/tip.yaml
+  /v2/data_var/{principal}/{contract_name}/{var_name}:
+    get:
+      summary: Get contract data variable
+      tags:
+      - Smart Contracts
+      security: []
+      operationId: getContractDataVariable
+      description: 'Fetch a data variable from a smart contract.
+
+        Returns the raw hex-encoded value of the variable.
+
+        '
+      parameters:
+      - $ref: ./components/parameters/standard-principal.yaml
+      - $ref: ./components/parameters/contract-name.yaml
+      - name: var_name
+        in: path
+        required: true
+        description: Variable name (must be a valid Clarity name)
+        schema:
+          $ref: '#/components/schemas/ClarityName'
+      - $ref: ./components/parameters/proof.yaml
+      - $ref: ./components/parameters/tip.yaml
+      responses:
+        '200':
+          description: The data variable value
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClarityData'
+              examples:
+                clarity-data:
+                  $ref: ./components/examples/clarity-data.example.json
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    NotFound:
+      description: Not found
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Not found
+    Timeout:
+      description: Timeout
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Timeout
+    Unauthorized:
+      description: Unauthorized. Invalid or missing authentication token.
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Unauthorized
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Internal Server Error
+    BadRequest:
+      description: Bad request
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Bad request
+  schemas:
+    ReadOnlyFunctionResult:
+      $ref: ./components/schemas/read-only-function-result.schema.yaml
+    ClarityName:
+      $ref: ./components/schemas/clarity-name.schema.yaml
+    IsTraitImplemented:
+      $ref: ./components/schemas/is-trait-implemented.schema.yaml
+    ContractSource:
+      $ref: ./components/schemas/contract-source.schema.yaml
+    ReadOnlyFunctionArgs:
+      $ref: ./components/schemas/read-only-function-args.schema.yaml
+    ConstantValue:
+      $ref: ./components/schemas/constant-value.schema.yaml
+    ClarityMetadata:
+      $ref: ./components/schemas/clarity-metadata.schema.yaml
+    ClarityData:
+      $ref: ./components/schemas/clarity-data.schema.yaml
+    ContractInterface:
+      $ref: ./components/schemas/contract-interface.schema.yaml
+externalDocs:
+  url: https://github.com/hirosystems/signer-metrics-api
+  description: Source Repository

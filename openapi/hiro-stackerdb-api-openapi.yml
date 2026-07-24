@@ -1,0 +1,251 @@
+openapi: 3.0.3
+info:
+  title: Signer Metrics Accounts StackerDB API
+  description: Welcome to the API reference overview for the Signer Metrics API.
+  version: 1.0.3
+servers:
+- url: https://api.hiro.so/
+  description: mainnet
+- url: https://api.testnet.hiro.so/
+  description: testnet
+tags:
+- name: StackerDB
+  description: Endpoints for interacting with StackerDB instances.
+paths:
+  /v2/stackerdb/{principal}/{contract_name}/{slot_id}:
+    get:
+      summary: Get StackerDB chunk (latest version)
+      tags:
+      - StackerDB
+      security: []
+      operationId: getStackerDbChunk
+      description: 'Get the latest version of a chunk of data from a StackerDB instance.
+
+        '
+      parameters:
+      - $ref: ./components/parameters/standard-principal.yaml
+      - $ref: ./components/parameters/contract-name.yaml
+      - name: slot_id
+        in: path
+        required: true
+        description: Slot ID (u32 range)
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 4294967295
+      responses:
+        '200':
+          description: StackerDB chunk data
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v2/stackerdb/{principal}/{contract_name}/{slot_id}/{slot_version}:
+    get:
+      summary: Get StackerDB chunk (specific version)
+      tags:
+      - StackerDB
+      security: []
+      operationId: getStackerDbChunkVersioned
+      description: 'Get a specific version of a chunk of data from a StackerDB instance.
+
+        '
+      parameters:
+      - $ref: ./components/parameters/standard-principal.yaml
+      - $ref: ./components/parameters/contract-name.yaml
+      - name: slot_id
+        in: path
+        required: true
+        description: Slot ID (u32 range)
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 4294967295
+      - name: slot_version
+        in: path
+        required: true
+        description: Specific slot version (u32 range)
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 4294967295
+      responses:
+        '200':
+          description: StackerDB chunk data
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v2/stackerdb/{principal}/{contract_name}:
+    get:
+      summary: Get StackerDB metadata
+      tags:
+      - StackerDB
+      security: []
+      operationId: getStackerDbMetadata
+      description: 'Get metadata about a StackerDB instance, including slot information.
+
+        '
+      parameters:
+      - $ref: ./components/parameters/standard-principal.yaml
+      - $ref: ./components/parameters/contract-name.yaml
+      responses:
+        '200':
+          description: StackerDB metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StackerDbMetadata'
+              examples:
+                stackerdb-metadata:
+                  summary: StackerDB metadata response
+                  value:
+                  - slot_id: 0
+                    slot_version: 1
+                    data_hash: 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+                    signature: 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v2/stackerdb/{principal}/{contract_name}/chunks:
+    post:
+      summary: Write StackerDB chunk
+      tags:
+      - StackerDB
+      security: []
+      operationId: postStackerDbChunk
+      description: 'Write a chunk of data to a StackerDB instance.
+
+
+        The request body should contain a JSON object with the chunk data including
+
+        slot_id, slot_version, signature, and hex-encoded data.
+
+
+        The response indicates whether the chunk was accepted, and if not, provides
+
+        detailed error information. Note that failed writes return HTTP 200 with
+
+        accepted: false, not HTTP error codes.
+
+        '
+      parameters:
+      - $ref: ./components/parameters/standard-principal.yaml
+      - $ref: ./components/parameters/contract-name.yaml
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StackerDbChunkData'
+            examples:
+              stackerdb-chunk-request:
+                summary: StackerDB chunk data request
+                value:
+                  slot_id: 1
+                  slot_version: 2
+                  sig: 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef01
+                  data: deadbeefcafebabe
+      responses:
+        '200':
+          description: Chunk submission result (both success and failure cases)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StackerDbChunkAckData'
+              examples:
+                success:
+                  $ref: ./components/examples/stackerdb-chunk-ack-success.example.json
+                failure:
+                  $ref: ./components/examples/stackerdb-chunk-ack-failure.example.json
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v2/stackerdb/{principal}/{contract_name}/replicas:
+    get:
+      summary: List StackerDB replicas
+      tags:
+      - StackerDB
+      security: []
+      operationId: listStackerDbReplicas
+      description: 'Get a list of replicas for a StackerDB instance.
+
+        '
+      parameters:
+      - $ref: ./components/parameters/standard-principal.yaml
+      - $ref: ./components/parameters/contract-name.yaml
+      responses:
+        '200':
+          description: List of StackerDB replicas
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StackerDbReplicas'
+              examples:
+                stackerdb-replicas:
+                  summary: List of StackerDB replicas
+                  value:
+                  - ip: 127.0.0.1
+                    port: 20444
+                    public_key_hash: 03abc123...
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  responses:
+    NotFound:
+      description: Not found
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Not found
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Internal Server Error
+    BadRequest:
+      description: Bad request
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Bad request
+  schemas:
+    StackerDbMetadata:
+      $ref: ./components/schemas/stackerdb-metadata.schema.yaml
+    StackerDbChunkAckData:
+      $ref: ./components/schemas/stackerdb-chunk-ack-data.schema.yaml
+    StackerDbChunkData:
+      $ref: ./components/schemas/stackerdb-chunk-data.schema.yaml
+    StackerDbReplicas:
+      $ref: ./components/schemas/stackerdb-replicas.schema.yaml
+externalDocs:
+  url: https://github.com/hirosystems/signer-metrics-api
+  description: Source Repository
