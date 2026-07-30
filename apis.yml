@@ -6,7 +6,20 @@ description: Hiro builds developer tooling for Bitcoin and the Stacks layer. Pro
   REST APIs (Stacks Blockchain API, Token Metadata API, Signer Metrics API, Chainhooks
   API, Platform API), Stacks Node JSON-RPC, plus the Hiro Platform for managing devnets
   and chainhooks.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/hiro.png
 tags:
   - Web3
   - Blockchain
@@ -18,88 +31,463 @@ created: '2026-05-08'
 modified: '2026-05-08'
 specificationVersion: '0.19'
 apis:
-  - aid: hiro:stacks-blockchain-api
-    name: Stacks Blockchain API
-    description: 'REST API for Stacks blockchain data: blocks, transactions, mempool,
-      accounts, smart contracts, BNS names, fungible/non-fungible tokens, microblocks,
-      faucets, fee rates.'
-    humanURL: https://docs.hiro.so/stacks/api
-    baseURL: https://api.mainnet.hiro.so
-    tags:
-    - REST
-    - Stacks
-    properties:
-    - type: Documentation
-      url: https://docs.hiro.so/stacks/api
-    - type: OpenAPI
-      url: openapi/hiro-stacks-blockchain-api-openapi.yaml
-  - aid: hiro:stacks-node-rpc
-    name: Stacks Node RPC API
-    description: 'JSON-RPC interface to a Stacks node: submit transactions, call read-only
-      contracts, query mempool/state.'
-    humanURL: https://docs.hiro.so/stacks/rpc-api
-    baseURL: https://api.mainnet.hiro.so
-    tags:
-    - JSON-RPC
-    - Stacks
-    properties:
-    - type: Documentation
-      url: https://docs.hiro.so/stacks/rpc-api
-    - type: OpenAPI
-      url: openapi/hiro-stacks-node-rpc-api-openapi.yaml
-  - aid: hiro:token-metadata-api
-    name: Hiro Token Metadata API
-    description: REST API for fungible and non-fungible token metadata on Stacks.
-    humanURL: https://docs.hiro.so/stacks/token-metadata-api
-    baseURL: https://api.mainnet.hiro.so
-    tags:
-    - REST
-    - Tokens
-    - Metadata
-    properties:
-    - type: Documentation
-      url: https://docs.hiro.so/stacks/token-metadata-api
-    - type: OpenAPI
-      url: openapi/hiro-token-metadata-api-openapi.yaml
-  - aid: hiro:signer-metrics-api
-    name: Hiro Signer Metrics API
-    description: REST API to monitor and analyze signer behavior and performance on
-      the Stacks Nakamoto network.
-    humanURL: https://docs.hiro.so/stacks/signer-metrics-api
-    baseURL: https://api.mainnet.hiro.so/signer-metrics
-    tags:
-    - REST
-    - Signers
-    - Nakamoto
-    properties:
-    - type: Documentation
-      url: https://docs.hiro.so/stacks/signer-metrics-api
-    - type: OpenAPI
-      url: openapi/hiro-signer-metrics-api-openapi.yaml
-  - aid: hiro:chainhooks-api
-    name: Hiro Chainhooks API
-    description: REST API for Chainhook predicate registration and event streaming for
-      Bitcoin and Stacks.
-    humanURL: https://docs.hiro.so/stacks/chainhook
-    baseURL: https://api.platform.hiro.so
-    tags:
-    - REST
-    - Chainhook
-    - Webhooks
-    properties:
-    - type: Documentation
-      url: https://docs.hiro.so/stacks/chainhook
-  - aid: hiro:platform-api
-    name: Hiro Platform API
-    description: REST API to programmatically manage Hiro Platform devnets and chainhooks.
-    humanURL: https://docs.hiro.so/stacks/platform-api
-    baseURL: https://api.platform.hiro.so
-    tags:
-    - REST
-    - Platform
-    properties:
-    - type: Documentation
-      url: https://docs.hiro.so/stacks/platform-api
+- aid: hiro:chainhooks-api
+  name: Hiro Chainhooks API
+  description: >-
+    REST API for Chainhook predicate registration and event streaming for Bitcoin and Stacks.
+  humanURL: https://docs.hiro.so/stacks/chainhook
+  baseURL: https://api.platform.hiro.so
+  tags:
+  - REST
+  - Chainhook
+  - Webhooks
+  properties:
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/chainhook
+- aid: hiro:platform-api
+  name: Hiro Platform API
+  description: REST API to programmatically manage Hiro Platform devnets and chainhooks.
+  humanURL: https://docs.hiro.so/stacks/platform-api
+  baseURL: https://api.platform.hiro.so
+  tags:
+  - REST
+  - Platform
+  properties:
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/platform-api
+- aid: hiro:hiro-accounts-api
+  name: Hiro Accounts API
+  description: Read-only endpoints to obtain Stacks account details
+  humanURL: https://docs.hiro.so/stacks/api
+  baseURL: https://api.mainnet.hiro.so
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/hiro-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/rpc-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/token-metadata-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/signer-metrics-api
+- aid: hiro:hiro-atlas-api
+  name: Hiro Atlas API
+  description: Operations related to the Atlas global namespace.
+  humanURL: https://docs.hiro.so/stacks/api
+  baseURL: https://api.mainnet.hiro.so
+  tags:
+  - Atlas
+  properties:
+  - type: OpenAPI
+    url: openapi/hiro-atlas-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/rpc-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/token-metadata-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/signer-metrics-api
+- aid: hiro:hiro-blocks-api
+  name: Hiro Blocks API
+  description: The Blocks API from Hiro — 37 operation(s) for blocks.
+  humanURL: https://docs.hiro.so/stacks/api
+  baseURL: https://api.mainnet.hiro.so
+  tags:
+  - Blocks
+  properties:
+  - type: OpenAPI
+    url: openapi/hiro-blocks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/rpc-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/token-metadata-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/signer-metrics-api
+- aid: hiro:hiro-blocks-proposals-api
+  name: Hiro Blocks Proposals API
+  description: The Blocks Proposals API from Hiro — 2 operation(s) for blocks proposals.
+  humanURL: https://docs.hiro.so/stacks/api
+  baseURL: https://api.mainnet.hiro.so
+  tags:
+  - Blocks Proposals
+  properties:
+  - type: OpenAPI
+    url: openapi/hiro-blocks-proposals-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/rpc-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/token-metadata-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/signer-metrics-api
+- aid: hiro:hiro-burn-blocks-api
+  name: Hiro Burn Blocks API
+  description: Read-only endpoints to obtain burn block details
+  humanURL: https://docs.hiro.so/stacks/api
+  baseURL: https://api.mainnet.hiro.so
+  tags:
+  - Burn Blocks
+  properties:
+  - type: OpenAPI
+    url: openapi/hiro-burn-blocks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/rpc-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/token-metadata-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/signer-metrics-api
+- aid: hiro:hiro-faucets-api
+  name: Hiro Faucets API
+  description: Endpoints to request STX or BTC tokens (not possible on Mainnet)
+  humanURL: https://docs.hiro.so/stacks/api
+  baseURL: https://api.mainnet.hiro.so
+  tags:
+  - Faucets
+  properties:
+  - type: OpenAPI
+    url: openapi/hiro-faucets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/rpc-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/token-metadata-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/signer-metrics-api
+- aid: hiro:hiro-fees-api
+  name: Hiro Fees API
+  description: Read-only endpoints to obtain fee details
+  humanURL: https://docs.hiro.so/stacks/api
+  baseURL: https://api.mainnet.hiro.so
+  tags:
+  - Fees
+  properties:
+  - type: OpenAPI
+    url: openapi/hiro-fees-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/rpc-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/token-metadata-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/signer-metrics-api
+- aid: hiro:hiro-fungible-tokens-api
+  name: Hiro Fungible Tokens API
+  description: The Fungible Tokens API from Hiro — 1 operation(s) for fungible tokens.
+  humanURL: https://docs.hiro.so/stacks/api
+  baseURL: https://api.mainnet.hiro.so
+  tags:
+  - Fungible Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/hiro-fungible-tokens-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/rpc-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/token-metadata-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/signer-metrics-api
+- aid: hiro:hiro-info-api
+  name: Hiro Info API
+  description: >-
+    Read-only endpoints to obtain network, Proof-of-Transfer, Stacking, STX token, and node information
+  humanURL: https://docs.hiro.so/stacks/api
+  baseURL: https://api.mainnet.hiro.so
+  tags:
+  - Info
+  properties:
+  - type: OpenAPI
+    url: openapi/hiro-info-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/rpc-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/token-metadata-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/signer-metrics-api
+- aid: hiro:hiro-mempool-api
+  name: Hiro Mempool API
+  description: Endpoints to obtain Mempool information
+  humanURL: https://docs.hiro.so/stacks/api
+  baseURL: https://api.mainnet.hiro.so
+  tags:
+  - Mempool
+  properties:
+  - type: OpenAPI
+    url: openapi/hiro-mempool-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/rpc-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/token-metadata-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/signer-metrics-api
+- aid: hiro:hiro-microblocks-api
+  name: Hiro Microblocks API
+  description: Read-only endpoints to obtain microblocks details
+  humanURL: https://docs.hiro.so/stacks/api
+  baseURL: https://api.mainnet.hiro.so
+  tags:
+  - Microblocks
+  properties:
+  - type: OpenAPI
+    url: openapi/hiro-microblocks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/rpc-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/token-metadata-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/signer-metrics-api
+- aid: hiro:hiro-mining-api
+  name: Hiro Mining API
+  description: Endpoints related to Stacks block production and mining.
+  humanURL: https://docs.hiro.so/stacks/api
+  baseURL: https://api.mainnet.hiro.so
+  tags:
+  - Mining
+  properties:
+  - type: OpenAPI
+    url: openapi/hiro-mining-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/rpc-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/token-metadata-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/signer-metrics-api
+- aid: hiro:hiro-names-api
+  name: Hiro Names API
+  description: Read-only endpoints realted to the Blockchain Naming System on Stacks
+  humanURL: https://docs.hiro.so/stacks/api
+  baseURL: https://api.mainnet.hiro.so
+  tags:
+  - Names
+  properties:
+  - type: OpenAPI
+    url: openapi/hiro-names-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/rpc-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/token-metadata-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/signer-metrics-api
+- aid: hiro:hiro-non-fungible-tokens-api
+  name: Hiro Non-Fungible Tokens API
+  description: Read-only endpoints to obtain non-fungible token details
+  humanURL: https://docs.hiro.so/stacks/api
+  baseURL: https://api.mainnet.hiro.so
+  tags:
+  - Non-Fungible Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/hiro-non-fungible-tokens-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/rpc-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/token-metadata-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/signer-metrics-api
+- aid: hiro:hiro-proof-of-transfer-api
+  name: Hiro Proof of Transfer API
+  description: Endpoints to get information about the Proof of Transfer consensus mechanism
+  humanURL: https://docs.hiro.so/stacks/api
+  baseURL: https://api.mainnet.hiro.so
+  tags:
+  - Proof of Transfer
+  properties:
+  - type: OpenAPI
+    url: openapi/hiro-proof-of-transfer-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/rpc-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/token-metadata-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/signer-metrics-api
+- aid: hiro:hiro-search-api
+  name: Hiro Search API
+  description: Read-only endpoints to search for accounts, blocks, smart contracts, and transactions
+  humanURL: https://docs.hiro.so/stacks/api
+  baseURL: https://api.mainnet.hiro.so
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/hiro-search-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/rpc-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/token-metadata-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/signer-metrics-api
+- aid: hiro:hiro-signers-api
+  name: Hiro Signers API
+  description: The Signers API from Hiro — 4 operation(s) for signers.
+  humanURL: https://docs.hiro.so/stacks/api
+  baseURL: https://api.mainnet.hiro.so
+  tags:
+  - Signers
+  properties:
+  - type: OpenAPI
+    url: openapi/hiro-signers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/rpc-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/token-metadata-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/signer-metrics-api
+- aid: hiro:hiro-smart-contracts-api
+  name: Hiro Smart Contracts API
+  description: Read-only endpoints to obtain Clarity smart contract details
+  humanURL: https://docs.hiro.so/stacks/api
+  baseURL: https://api.mainnet.hiro.so
+  tags:
+  - Smart Contracts
+  properties:
+  - type: OpenAPI
+    url: openapi/hiro-smart-contracts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/rpc-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/token-metadata-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/signer-metrics-api
+- aid: hiro:hiro-stackerdb-api
+  name: Hiro StackerDB API
+  description: Endpoints for interacting with StackerDB instances.
+  humanURL: https://docs.hiro.so/stacks/api
+  baseURL: https://api.mainnet.hiro.so
+  tags:
+  - StackerDB
+  properties:
+  - type: OpenAPI
+    url: openapi/hiro-stackerdb-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/rpc-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/token-metadata-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/signer-metrics-api
+- aid: hiro:hiro-stacking-api
+  name: Hiro Stacking API
+  description: The Stacking API from Hiro — 4 operation(s) for stacking.
+  humanURL: https://docs.hiro.so/stacks/api
+  baseURL: https://api.mainnet.hiro.so
+  tags:
+  - Stacking
+  properties:
+  - type: OpenAPI
+    url: openapi/hiro-stacking-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/rpc-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/token-metadata-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/signer-metrics-api
+- aid: hiro:hiro-stacking-rewards-api
+  name: Hiro Stacking Rewards API
+  description: Read-only endpoints to obtain Stacking reward details
+  humanURL: https://docs.hiro.so/stacks/api
+  baseURL: https://api.mainnet.hiro.so
+  tags:
+  - Stacking Rewards
+  properties:
+  - type: OpenAPI
+    url: openapi/hiro-stacking-rewards-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/rpc-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/token-metadata-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/signer-metrics-api
+- aid: hiro:hiro-status-api
+  name: Hiro Status API
+  description: Service status endpoints
+  humanURL: https://docs.hiro.so/stacks/api
+  baseURL: https://api.mainnet.hiro.so
+  tags:
+  - Status
+  properties:
+  - type: OpenAPI
+    url: openapi/hiro-status-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/rpc-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/token-metadata-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/signer-metrics-api
+- aid: hiro:hiro-tokens-api
+  name: Hiro Tokens API
+  description: Token metadata endpoints
+  humanURL: https://docs.hiro.so/stacks/api
+  baseURL: https://api.mainnet.hiro.so
+  tags:
+  - Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/hiro-tokens-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/rpc-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/token-metadata-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/signer-metrics-api
+- aid: hiro:hiro-transactions-api
+  name: Hiro Transactions API
+  description: Endpoints to obtain transaction details and to broadcast transactions to the network
+  humanURL: https://docs.hiro.so/stacks/api
+  baseURL: https://api.mainnet.hiro.so
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/hiro-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/rpc-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/token-metadata-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/signer-metrics-api
 common:
   - type: AgenticAccess
     url: agentic-access/hiro-agentic-access.yml
