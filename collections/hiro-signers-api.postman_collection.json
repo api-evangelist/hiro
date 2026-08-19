@@ -1,0 +1,778 @@
+{
+  "item": [
+    {
+      "id": "af67d4e6-cbc9-4b5a-bb8b-46f62a281469",
+      "name": "Signers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "73dbc1e7-1245-4475-af9b-5b2d5eed1552",
+          "name": "PoX Cycle Signers",
+          "request": {
+            "name": "PoX Cycle Signers",
+            "description": {
+              "content": "List of signers for a given PoX cycle",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "signer-metrics",
+                "v1",
+                "cycles",
+                ":cycle_number",
+                "signers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<string>",
+                  "description": "Start of time range (e.g., now-2h or ISO timestamp)"
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<string>",
+                  "description": "End of time range (e.g., now or ISO timestamp)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "(Required) Number of results to return (default: 100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "(Required) Number of results to skip (default: 0)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "cycle_number",
+                  "description": "(Required) PoX cycle number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1c8eaec3-fa3c-4b30-905f-d4d45a7724ef",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "signer-metrics",
+                    "v1",
+                    "cycles",
+                    ":cycle_number",
+                    "signers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cycle_number",
+                      "description": "(Required) PoX cycle number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 3347,\n  \"limit\": 817,\n  \"offset\": 4613,\n  \"results\": [\n    {\n      \"signer_key\": \"string\",\n      \"slot_index\": 2473,\n      \"weight\": 8756,\n      \"weight_percentage\": 952.4652733263606,\n      \"stacked_amount\": \"string\",\n      \"stacked_amount_percent\": 3066.208531387471,\n      \"stacked_amount_rank\": 9940,\n      \"proposals_accepted_count\": 8804,\n      \"proposals_rejected_count\": 7256,\n      \"proposals_missed_count\": 1601,\n      \"average_response_time_ms\": 347.35061134757996,\n      \"last_seen\": \"string\",\n      \"version\": \"string\"\n    },\n    {\n      \"signer_key\": \"string\",\n      \"slot_index\": 2231,\n      \"weight\": 6551,\n      \"weight_percentage\": 8915.680738273095,\n      \"stacked_amount\": \"string\",\n      \"stacked_amount_percent\": 5701.818761869588,\n      \"stacked_amount_rank\": 1454,\n      \"proposals_accepted_count\": 8912,\n      \"proposals_rejected_count\": 7056,\n      \"proposals_missed_count\": 4929,\n      \"average_response_time_ms\": 7093.772185525919,\n      \"last_seen\": \"string\",\n      \"version\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "161999bd-b5f9-4013-b938-52791649f63c",
+          "name": "PoX Cycle Signer",
+          "request": {
+            "name": "PoX Cycle Signer",
+            "description": {
+              "content": "Get stats for a specific signer in a given PoX cycle",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "signer-metrics",
+                "v1",
+                "cycles",
+                ":cycle_number",
+                "signers",
+                ":signer_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "cycle_number",
+                  "description": "(Required) PoX cycle number"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "signer_id",
+                  "description": "(Required) Signer public key (hex encoded)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "23a6b42d-48b7-4d77-a247-d0f5178312f4",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "signer-metrics",
+                    "v1",
+                    "cycles",
+                    ":cycle_number",
+                    "signers",
+                    ":signer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cycle_number",
+                      "description": "(Required) PoX cycle number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "signer_id",
+                      "description": "(Required) Signer public key (hex encoded)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"signer_key\": \"string\",\n  \"slot_index\": 986,\n  \"weight\": 5135,\n  \"weight_percentage\": 651.4530440363242,\n  \"stacked_amount\": \"string\",\n  \"stacked_amount_percent\": 1944.1200295385363,\n  \"stacked_amount_rank\": 5097,\n  \"proposals_accepted_count\": 771,\n  \"proposals_rejected_count\": 4748,\n  \"proposals_missed_count\": 8549,\n  \"average_response_time_ms\": 7040.697827670993,\n  \"last_seen\": \"string\",\n  \"version\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ea8db69-3d84-451f-bc99-a9e9b3241d52",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "signer-metrics",
+                    "v1",
+                    "cycles",
+                    ":cycle_number",
+                    "signers",
+                    ":signer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cycle_number",
+                      "description": "(Required) PoX cycle number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "signer_id",
+                      "description": "(Required) Signer public key (hex encoded)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "653defcb-7908-44f1-9498-3828da7f4093",
+          "name": "Fetch the stacker and signer set information for a given cycle.",
+          "request": {
+            "name": "Fetch the stacker and signer set information for a given cycle.",
+            "description": {
+              "content": "Used to get stacker and signer set information for a given cycle.\n\nThis will only return information for cycles started in Epoch-2.5\nwhere PoX-4 was active and subsequent cycles.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "stacker_set",
+                ":cycle_number"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "cycle_number",
+                  "description": "(Required) reward cycle number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e84ac34c-4d59-48fd-9077-e8d646575ec5",
+              "name": "Information for the given reward cycle",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "stacker_set",
+                    ":cycle_number"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cycle_number",
+                      "description": "(Required) reward cycle number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"reference ./components/examples/get-stacker-set.example.json not found in the given specification\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2508e6c-b04a-4239-a03d-4c01f252747a",
+              "name": "Could not fetch the given reward set",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "stacker_set",
+                    ":cycle_number"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cycle_number",
+                      "description": "(Required) reward cycle number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"reference ./components/examples/get-stacker-set-400.example.json not found in the given specification\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0cb2165f-a744-44ad-8bb3-fd27bebf3098",
+              "name": "Reward cycle not found or does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "stacker_set",
+                    ":cycle_number"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cycle_number",
+                      "description": "(Required) reward cycle number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "No such file or directory",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a24b87e-f98c-4f5d-b9fc-0a329336188c",
+          "name": "Get number of blocks signed by signer during a given reward cycle",
+          "request": {
+            "name": "Get number of blocks signed by signer during a given reward cycle",
+            "description": {
+              "content": "Get number of blocks signed by signer during a given reward cycle",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "signer",
+                ":signer_pubkey",
+                ":cycle_number"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "signer_pubkey",
+                  "description": "(Required) Hex-encoded compressed Secp256k1 public key of signer"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "cycle_number",
+                  "description": "(Required) Reward cycle number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "093efe02-b289-4584-8a5e-4ddf37f130a5",
+              "name": "Number of blocks signed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "signer",
+                    ":signer_pubkey",
+                    ":cycle_number"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "signer_pubkey",
+                      "description": "(Required) Hex-encoded compressed Secp256k1 public key of signer"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cycle_number",
+                      "description": "(Required) Reward cycle number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"blocks_signed\": 7\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f21c744-c556-497b-a0c3-42a5ba4adc1a",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "signer",
+                    ":signer_pubkey",
+                    ":cycle_number"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "signer_pubkey",
+                      "description": "(Required) Hex-encoded compressed Secp256k1 public key of signer"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cycle_number",
+                      "description": "(Required) Reward cycle number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Bad request",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9c335ef7-4ace-480e-b1db-4b894498b003",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "signer",
+                    ":signer_pubkey",
+                    ":cycle_number"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "signer_pubkey",
+                      "description": "(Required) Hex-encoded compressed Secp256k1 public key of signer"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cycle_number",
+                      "description": "(Required) Reward cycle number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Not found",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "02f2fb8f-389d-426e-b9f9-d0cd335d7da5",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "signer",
+                    ":signer_pubkey",
+                    ":cycle_number"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "signer_pubkey",
+                      "description": "(Required) Hex-encoded compressed Secp256k1 public key of signer"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cycle_number",
+                      "description": "(Required) Reward cycle number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Internal Server Error",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.hiro.so/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "00558c87-2e20-41c3-829b-6dc9570202ba",
+    "name": "Signer Metrics Accounts Signers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Welcome to the API reference overview for the Signer Metrics API.",
+      "type": "text/plain"
+    }
+  }
+}

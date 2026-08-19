@@ -1,0 +1,147 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Signer Metrics Accounts Microblocks API",
+    "version": "1.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Microblocks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get recent microblocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/microblock/",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max number of microblocks to fetch"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of microblocks.\n\n          If you need to actively monitor new microblocks, we highly recommend subscribing to [WebSockets or Socket.io](https://github.com/hirosystems/stacks-blockchain-api/tree/master/client) for real-time updates."
+        },
+        {
+          "info": {
+            "name": "Get microblock",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/microblock/:hash",
+            "params": [
+              {
+                "name": "hash",
+                "value": "0x3bfcdf84b3012adb544cf0f6df4835f93418c2269a3881885e27b3d58eb82d47",
+                "type": "path",
+                "description": "Hash of the microblock"
+              }
+            ]
+          },
+          "docs": "Retrieves a specific microblock by `hash`"
+        },
+        {
+          "info": {
+            "name": "Get the list of current transactions that belong to unanchored microblocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/microblock/unanchored/txs"
+          },
+          "docs": "Retrieves transactions that have been streamed in microblocks but not yet accepted or rejected in an anchor block"
+        },
+        {
+          "info": {
+            "name": "Get stream of confirmed microblocks (Epoch 2.x)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v2/microblocks/confirmed/:block_id",
+            "params": [
+              {
+                "name": "block_id",
+                "value": "",
+                "type": "path",
+                "description": "Hex-encoded Stacks block ID (64 characters)"
+              }
+            ]
+          },
+          "docs": "Get microblocks that were confirmed by the given anchored block.\nThe microblocks are returned as a binary stream of concatenated microblock data.\n"
+        },
+        {
+          "info": {
+            "name": "Get a stream of microblocks beginning\nwith the given microblock (Epoch 2.x).\n",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v2/microblocks/:microblock_id",
+            "params": [
+              {
+                "name": "microblock_id",
+                "value": "",
+                "type": "path",
+                "description": "Hex-encoded microblock hash (64 characters)"
+              }
+            ]
+          },
+          "docs": "Get a stream of microblocks beginning\nwith the given microblock (Epoch 2.x).\n"
+        },
+        {
+          "info": {
+            "name": "Get stream of unconfirmed microblocks (Epoch 2.x)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v2/microblocks/unconfirmed/:block_id/:seq",
+            "params": [
+              {
+                "name": "block_id",
+                "value": "",
+                "type": "path",
+                "description": "Hex-encoded parent block ID (64 characters)"
+              },
+              {
+                "name": "seq",
+                "value": "",
+                "type": "path",
+                "description": "Starting sequence number (0-65535)"
+              }
+            ]
+          },
+          "docs": "Get unconfirmed microblocks starting from a specific sequence number.\nThe microblocks are returned as a binary stream.\n"
+        },
+        {
+          "info": {
+            "name": "Submit a microblock (Epoch 2.x)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.hiro.so/v2/microblocks"
+          },
+          "docs": "Submit a microblock to the node for validation and relay.\nThe body **must** be the SIP-003 binary serialization of a `Microblock`\nand sent with `Content-Type: application/octet-stream`.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

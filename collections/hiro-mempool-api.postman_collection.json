@@ -1,0 +1,146 @@
+{
+  "item": [
+    {
+      "id": "96a04c75-6089-41f8-91a8-7dd4b41e5556",
+      "name": "Mempool",
+      "description": {
+        "content": "Endpoints to obtain Mempool information",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a8d8d3b4-6ab9-454a-b832-99e40f69cc89",
+          "name": "Get mempool transaction fee priorities",
+          "request": {
+            "name": "Get mempool transaction fee priorities",
+            "description": {
+              "content": "Returns estimated fee priorities (in micro-STX) for all transactions that are currently in the mempool. Also returns priorities separated by transaction type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v2",
+                "mempool",
+                "fees"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0390fc22-04a6-4f18-86d3-f03cb964f308",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v2",
+                    "mempool",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"all\": {\n    \"no_priority\": 7218,\n    \"low_priority\": 5601,\n    \"medium_priority\": 4386,\n    \"high_priority\": 8089\n  },\n  \"token_transfer\": {\n    \"no_priority\": 8949,\n    \"low_priority\": 8010,\n    \"medium_priority\": 2292,\n    \"high_priority\": 637\n  },\n  \"contract_call\": {\n    \"no_priority\": 4115,\n    \"low_priority\": 4694,\n    \"medium_priority\": 8158,\n    \"high_priority\": 6806\n  },\n  \"smart_contract\": {\n    \"no_priority\": 7771,\n    \"low_priority\": 6090,\n    \"medium_priority\": 8841,\n    \"high_priority\": 316\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65c182d5-09ed-41fb-bbb3-870072804127",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v2",
+                    "mempool",
+                    "fees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.hiro.so/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b723c927-53a4-42c7-ae04-1d627741a304",
+    "name": "Signer Metrics Accounts Mempool API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Welcome to the API reference overview for the Signer Metrics API.",
+      "type": "text/plain"
+    }
+  }
+}

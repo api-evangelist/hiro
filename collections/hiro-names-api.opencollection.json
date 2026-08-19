@@ -1,0 +1,268 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Signer Metrics Accounts Names API",
+    "version": "1.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Names",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Historical Zone File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v1/names/:name/zonefile/:zoneFileHash",
+            "params": [
+              {
+                "name": "unanchored",
+                "value": "true",
+                "type": "query",
+                "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+              },
+              {
+                "name": "name",
+                "value": "muneeb.id",
+                "type": "path",
+                "description": "fully-qualified name"
+              },
+              {
+                "name": "zoneFileHash",
+                "value": "b100a68235244b012854a95f9114695679002af9",
+                "type": "path",
+                "description": "zone file hash"
+              }
+            ]
+          },
+          "docs": "Retrieves the historical zonefile specified by the username and zone hash."
+        },
+        {
+          "info": {
+            "name": "Get Name Subdomains",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v1/names/:name/subdomains",
+            "params": [
+              {
+                "name": "unanchored",
+                "value": "true",
+                "type": "query",
+                "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+              },
+              {
+                "name": "name",
+                "value": "id.blockstack",
+                "type": "path",
+                "description": "fully-qualified name"
+              }
+            ]
+          },
+          "docs": "Retrieves the list of subdomains for a specific name"
+        },
+        {
+          "info": {
+            "name": "Get Zone File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v1/names/:name/zonefile",
+            "params": [
+              {
+                "name": "unanchored",
+                "value": "true",
+                "type": "query",
+                "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+              },
+              {
+                "name": "name",
+                "value": "bar.test",
+                "type": "path",
+                "description": "fully-qualified name"
+              }
+            ]
+          },
+          "docs": "Retrieves a user's raw zone file. This only works for RFC-compliant zone files. This method returns an error for names that have non-standard zone files."
+        },
+        {
+          "info": {
+            "name": "Get All Names",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v1/names/",
+            "params": [
+              {
+                "name": "unanchored",
+                "value": "true",
+                "type": "query",
+                "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "names are defaulted to page 1 with 100 results. You can query specific page results by using the 'page' query parameter."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all names known to the node."
+        },
+        {
+          "info": {
+            "name": "Get Name Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v1/names/:name",
+            "params": [
+              {
+                "name": "unanchored",
+                "value": "true",
+                "type": "query",
+                "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+              },
+              {
+                "name": "name",
+                "value": "muneeb.id",
+                "type": "path",
+                "description": "fully-qualified name"
+              }
+            ]
+          },
+          "docs": "Retrieves details of a given name including the `address`, `status` and last transaction id - `last_txid`."
+        },
+        {
+          "info": {
+            "name": "Get All Namespaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v1/namespaces/",
+            "params": [
+              {
+                "name": "unanchored",
+                "value": "true",
+                "type": "query",
+                "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all namespaces known to the node."
+        },
+        {
+          "info": {
+            "name": "Get Namespace Names",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v1/namespaces/:tld/names",
+            "params": [
+              {
+                "name": "page",
+                "value": "22",
+                "type": "query",
+                "description": "namespace values are defaulted to page 1 with 100 results. You can query specific page results by using the 'page' query parameter."
+              },
+              {
+                "name": "unanchored",
+                "value": "true",
+                "type": "query",
+                "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+              },
+              {
+                "name": "tld",
+                "value": "id",
+                "type": "path",
+                "description": "the namespace to fetch names from."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of names within a given namespace."
+        },
+        {
+          "info": {
+            "name": "Get Names Owned by Address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v1/addresses/:blockchain/:address",
+            "params": [
+              {
+                "name": "unanchored",
+                "value": "true",
+                "type": "query",
+                "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+              },
+              {
+                "name": "blockchain",
+                "value": "stacks",
+                "type": "path",
+                "description": "the layer-1 blockchain for the address"
+              },
+              {
+                "name": "address",
+                "value": "SP2J6ZY48GV1EZ5V2V5RB9MP66SW86PYKKNRV9EJ7",
+                "type": "path",
+                "description": "the address to lookup"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of names owned by the address provided."
+        },
+        {
+          "info": {
+            "name": "Get Namespace Price",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v2/prices/namespaces/:tld",
+            "params": [
+              {
+                "name": "tld",
+                "value": "id",
+                "type": "path",
+                "description": "the namespace to fetch price for"
+              }
+            ]
+          },
+          "docs": "Retrieves the price of a namespace. The `amount` given will be in the smallest possible units of the currency."
+        },
+        {
+          "info": {
+            "name": "Get Name Price",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v2/prices/names/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "muneeb.id",
+                "type": "path",
+                "description": "the name to query price information for"
+              }
+            ]
+          },
+          "docs": "Retrieves the price of a name. The `amount` given will be in the smallest possible units of the currency."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

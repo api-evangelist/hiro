@@ -1,0 +1,487 @@
+{
+  "item": [
+    {
+      "id": "4d3d47a2-13c4-4b82-8e48-0baad09d3db8",
+      "name": "Burn Blocks",
+      "description": {
+        "content": "Read-only endpoints to obtain burn block details",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4078c547-26bc-4d2d-bd9d-d41943a624a5",
+          "name": "Get burn blocks",
+          "request": {
+            "name": "Get burn blocks",
+            "description": {
+              "content": "Retrieves a list of recent burn blocks",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v2",
+                "burn-blocks",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Results per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Result offset"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ed4a9880-ba16-420e-9dd1-6a9a87a7bc67",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v2",
+                    "burn-blocks",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"limit\": 20,\n  \"offset\": 0,\n  \"total\": 1,\n  \"results\": [\n    {\n      \"burn_block_time\": 5492,\n      \"burn_block_time_iso\": \"string\",\n      \"burn_block_hash\": \"string\",\n      \"burn_block_height\": 5214,\n      \"stacks_blocks\": [\n        \"string\",\n        \"string\"\n      ],\n      \"avg_block_time\": 2882,\n      \"total_tx_count\": 7192\n    },\n    {\n      \"burn_block_time\": 5325,\n      \"burn_block_time_iso\": \"string\",\n      \"burn_block_hash\": \"string\",\n      \"burn_block_height\": 5584,\n      \"stacks_blocks\": [\n        \"string\",\n        \"string\"\n      ],\n      \"avg_block_time\": 3868,\n      \"total_tx_count\": 4221\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7cc91b8e-a3eb-48ac-8c1e-d1663f261e23",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v2",
+                    "burn-blocks",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ed8e8dbb-cc8c-475d-b89f-1baf3be18b92",
+          "name": "Get burn block",
+          "request": {
+            "name": "Get burn block",
+            "description": {
+              "content": "Retrieves a single burn block",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v2",
+                "burn-blocks",
+                ":height_or_hash"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "height_or_hash",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bdb8bfab-82f1-4a18-b525-eb14c883bd65",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v2",
+                    "burn-blocks",
+                    ":height_or_hash"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "height_or_hash",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"burn_block_time\": 6780,\n  \"burn_block_time_iso\": \"string\",\n  \"burn_block_hash\": \"string\",\n  \"burn_block_height\": 7583,\n  \"stacks_blocks\": [\n    \"string\",\n    \"string\"\n  ],\n  \"avg_block_time\": 1265,\n  \"total_tx_count\": 8809\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6351253f-fd8c-4ad0-b465-2d7413ffe716",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v2",
+                    "burn-blocks",
+                    ":height_or_hash"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "height_or_hash",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "16c6c69a-4de6-4708-992a-647f4b080e7d",
+          "name": "Get blocks by burn block",
+          "request": {
+            "name": "Get blocks by burn block",
+            "description": {
+              "content": "Retrieves a list of blocks confirmed by a specific burn block",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v2",
+                "burn-blocks",
+                ":height_or_hash",
+                "blocks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Results per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Result offset"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "height_or_hash",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0ffb3d11-0957-4450-a50f-376178052c0c",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v2",
+                    "burn-blocks",
+                    ":height_or_hash",
+                    "blocks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "height_or_hash",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"limit\": 20,\n  \"offset\": 0,\n  \"total\": 1,\n  \"results\": [\n    {\n      \"canonical\": false,\n      \"height\": 3677,\n      \"hash\": \"string\",\n      \"block_time\": 1588,\n      \"block_time_iso\": \"string\",\n      \"tenure_height\": 5971,\n      \"index_block_hash\": \"string\",\n      \"parent_block_hash\": \"string\",\n      \"parent_index_block_hash\": \"string\",\n      \"burn_block_time\": 1983,\n      \"burn_block_time_iso\": \"string\",\n      \"burn_block_hash\": \"string\",\n      \"burn_block_height\": 8449,\n      \"miner_txid\": \"string\",\n      \"tx_count\": 3619,\n      \"execution_cost_read_count\": 687,\n      \"execution_cost_read_length\": 7878,\n      \"execution_cost_runtime\": 9329,\n      \"execution_cost_write_count\": 5012,\n      \"execution_cost_write_length\": 2725\n    },\n    {\n      \"canonical\": false,\n      \"height\": 7155,\n      \"hash\": \"string\",\n      \"block_time\": 4422,\n      \"block_time_iso\": \"string\",\n      \"tenure_height\": 7860,\n      \"index_block_hash\": \"string\",\n      \"parent_block_hash\": \"string\",\n      \"parent_index_block_hash\": \"string\",\n      \"burn_block_time\": 5797,\n      \"burn_block_time_iso\": \"string\",\n      \"burn_block_hash\": \"string\",\n      \"burn_block_height\": 9873,\n      \"miner_txid\": \"string\",\n      \"tx_count\": 3565,\n      \"execution_cost_read_count\": 6102,\n      \"execution_cost_read_length\": 8515,\n      \"execution_cost_runtime\": 8009,\n      \"execution_cost_write_count\": 8733,\n      \"execution_cost_write_length\": 9963\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e40c70bb-bf6a-469f-b659-b30040e9e26e",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v2",
+                    "burn-blocks",
+                    ":height_or_hash",
+                    "blocks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "height_or_hash",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.hiro.so/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "34187943-5fda-45c1-8059-0fffae3e867a",
+    "name": "Signer Metrics Accounts Burn Blocks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Welcome to the API reference overview for the Signer Metrics API.",
+      "type": "text/plain"
+    }
+  }
+}

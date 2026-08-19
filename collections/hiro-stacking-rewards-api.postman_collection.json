@@ -1,0 +1,810 @@
+{
+  "item": [
+    {
+      "id": "3e642e0f-2535-46f2-bcbf-454163535c77",
+      "name": "Stacking Rewards",
+      "description": {
+        "content": "Read-only endpoints to obtain Stacking reward details",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "70e4033a-d64c-42a4-8199-afb6e9deb810",
+          "name": "Get recent reward slot holders",
+          "request": {
+            "name": "Get recent reward slot holders",
+            "description": {
+              "content": "Retrieves a list of the Bitcoin addresses that would validly receive Proof-of-Transfer commitments.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v1",
+                "burnchain",
+                "reward_slot_holders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "96",
+                  "description": "max number of items to fetch"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Result offset"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e47fea16-37f3-4ed5-ba49-12342229fd1b",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "burnchain",
+                    "reward_slot_holders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "96"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"limit\": 20,\n  \"offset\": 0,\n  \"total\": 1,\n  \"results\": [\n    {\n      \"canonical\": true,\n      \"burn_block_hash\": \"string\",\n      \"burn_block_height\": 6348,\n      \"address\": \"string\",\n      \"slot_index\": 8513\n    },\n    {\n      \"canonical\": true,\n      \"burn_block_hash\": \"string\",\n      \"burn_block_height\": 7950,\n      \"address\": \"string\",\n      \"slot_index\": 6672\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d9c01af-4328-41bb-99b8-4c3529105757",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "burnchain",
+                    "reward_slot_holders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "96"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "90415a78-976c-4c92-8fcc-8cfeb7dd8712",
+          "name": "Get recent reward slot holder entries for the given address",
+          "request": {
+            "name": "Get recent reward slot holder entries for the given address",
+            "description": {
+              "content": "Retrieves a list of the Bitcoin addresses that would validly receive Proof-of-Transfer commitments for a given reward slot holder recipient address.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v1",
+                "burnchain",
+                "reward_slot_holders",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "96",
+                  "description": "Results per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Result offset"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Reward slot holder recipient address. Should either be in the native burnchain's format (e.g. B58 for Bitcoin), or if a STX principal address is provided it will be encoded as into the equivalent burnchain format"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "60ebbc44-1421-4881-9c37-04d60b8ba86e",
+              "name": "List of burnchain reward recipients and amounts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "burnchain",
+                    "reward_slot_holders",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "96"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Reward slot holder recipient address. Should either be in the native burnchain's format (e.g. B58 for Bitcoin), or if a STX principal address is provided it will be encoded as into the equivalent burnchain format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"limit\": 20,\n  \"offset\": 0,\n  \"total\": 1,\n  \"results\": [\n    {\n      \"canonical\": true,\n      \"burn_block_hash\": \"string\",\n      \"burn_block_height\": 6288,\n      \"address\": \"string\",\n      \"slot_index\": 1190\n    },\n    {\n      \"canonical\": false,\n      \"burn_block_hash\": \"string\",\n      \"burn_block_height\": 909,\n      \"address\": \"string\",\n      \"slot_index\": 3555\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d54d29e-7ad0-4d9b-b7c6-227e564deb6b",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "burnchain",
+                    "reward_slot_holders",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "96"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Reward slot holder recipient address. Should either be in the native burnchain's format (e.g. B58 for Bitcoin), or if a STX principal address is provided it will be encoded as into the equivalent burnchain format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "62d7d4a5-77e2-4318-bfb3-0ed055a97770",
+          "name": "Get recent burnchain reward recipients",
+          "request": {
+            "name": "Get recent burnchain reward recipients",
+            "description": {
+              "content": "Retrieves a list of recent burnchain (e.g. Bitcoin) reward recipients with the associated amounts and block info",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v1",
+                "burnchain",
+                "rewards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "96",
+                  "description": "Results per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Result offset"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ce975346-ba47-43ad-a394-769ea33246ae",
+              "name": "List of burnchain reward recipients and amounts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "burnchain",
+                    "rewards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "96"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"limit\": 7749,\n  \"offset\": 7825,\n  \"results\": [\n    {\n      \"canonical\": true,\n      \"burn_block_hash\": \"string\",\n      \"burn_block_height\": 1441,\n      \"burn_amount\": \"string\",\n      \"reward_recipient\": \"string\",\n      \"reward_amount\": \"string\",\n      \"reward_index\": 9194\n    },\n    {\n      \"canonical\": false,\n      \"burn_block_hash\": \"string\",\n      \"burn_block_height\": 9280,\n      \"burn_amount\": \"string\",\n      \"reward_recipient\": \"string\",\n      \"reward_amount\": \"string\",\n      \"reward_index\": 5817\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6274046f-3aea-4a6f-86b5-f8efef998e2b",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "burnchain",
+                    "rewards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "96"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "779d9d7d-12a5-42c7-be3d-5fa6a29704f6",
+          "name": "Get recent burnchain reward for the given recipient",
+          "request": {
+            "name": "Get recent burnchain reward for the given recipient",
+            "description": {
+              "content": "Retrieves a list of recent burnchain (e.g. Bitcoin) rewards for the given recipient with the associated amounts and block info",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v1",
+                "burnchain",
+                "rewards",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "96",
+                  "description": "Results per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Result offset"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Reward recipient address. Should either be in the native burnchain's format (e.g. B58 for Bitcoin), or if a STX principal address is provided it will be encoded as into the equivalent burnchain format"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fd1ff6cf-2918-49e0-a6bf-f8161b6ad8a6",
+              "name": "List of burnchain reward recipients and amounts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "burnchain",
+                    "rewards",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "96"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Reward recipient address. Should either be in the native burnchain's format (e.g. B58 for Bitcoin), or if a STX principal address is provided it will be encoded as into the equivalent burnchain format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"limit\": 7749,\n  \"offset\": 7825,\n  \"results\": [\n    {\n      \"canonical\": true,\n      \"burn_block_hash\": \"string\",\n      \"burn_block_height\": 1441,\n      \"burn_amount\": \"string\",\n      \"reward_recipient\": \"string\",\n      \"reward_amount\": \"string\",\n      \"reward_index\": 9194\n    },\n    {\n      \"canonical\": false,\n      \"burn_block_hash\": \"string\",\n      \"burn_block_height\": 9280,\n      \"burn_amount\": \"string\",\n      \"reward_recipient\": \"string\",\n      \"reward_amount\": \"string\",\n      \"reward_index\": 5817\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c3cf0b5-dd3d-46fb-bcbf-4dacc259c378",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "burnchain",
+                    "rewards",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "96"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Reward recipient address. Should either be in the native burnchain's format (e.g. B58 for Bitcoin), or if a STX principal address is provided it will be encoded as into the equivalent burnchain format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d977d50-1140-4a63-a85a-40b17db2ee66",
+          "name": "Get total burnchain rewards for the given recipient",
+          "request": {
+            "name": "Get total burnchain rewards for the given recipient",
+            "description": {
+              "content": "Retrieves the total burnchain (e.g. Bitcoin) rewards for a given recipient `address`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v1",
+                "burnchain",
+                "rewards",
+                ":address",
+                "total"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Reward recipient address. Should either be in the native burnchain's format (e.g. B58 for Bitcoin), or if a STX principal address is provided it will be encoded as into the equivalent burnchain format"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f2bc1ea3-a5de-4af7-8534-021e3baaaf37",
+              "name": "Total burnchain rewards made to a recipient",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "burnchain",
+                    "rewards",
+                    ":address",
+                    "total"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Reward recipient address. Should either be in the native burnchain's format (e.g. B58 for Bitcoin), or if a STX principal address is provided it will be encoded as into the equivalent burnchain format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reward_recipient\": \"string\",\n  \"reward_amount\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "872c775c-ed4c-452f-841d-abcfc61cfdd6",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "burnchain",
+                    "rewards",
+                    ":address",
+                    "total"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Reward recipient address. Should either be in the native burnchain's format (e.g. B58 for Bitcoin), or if a STX principal address is provided it will be encoded as into the equivalent burnchain format"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.hiro.so/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f4e1475e-a9f2-4084-b139-b0dfb9c7f910",
+    "name": "Signer Metrics Accounts Stacking Rewards API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Welcome to the API reference overview for the Signer Metrics API.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,400 @@
+{
+  "item": [
+    {
+      "id": "2fd96d40-7ef7-428b-93ca-53746edbf599",
+      "name": "Atlas",
+      "description": {
+        "content": "Operations related to the Atlas global namespace.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1487c8f2-9af5-460f-a53b-4bee81343baa",
+          "name": "Get attachment by hash",
+          "request": {
+            "name": "Get attachment by hash",
+            "description": {
+              "content": "Get an attachment by its hash. Attachments are content stored in the Atlas network.\n\nThe attachment hash is a 40-character hex string (SHA-1 hash).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "attachments",
+                ":hash"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "hash",
+                  "description": "(Required) Hex-encoded SHA-1 hash of the attachment (40 characters)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "32910ff0-52aa-435c-82ef-3ea3ca48f694",
+              "name": "The attachment content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "attachments",
+                    ":hash"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hash",
+                      "description": "(Required) Hex-encoded SHA-1 hash of the attachment (40 characters)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e420d41-3992-4836-8085-d2182f56c5d1",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "attachments",
+                    ":hash"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hash",
+                      "description": "(Required) Hex-encoded SHA-1 hash of the attachment (40 characters)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Bad request",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ea6df3b6-3e54-45ba-8a97-58f36e060f70",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "attachments",
+                    ":hash"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "hash",
+                      "description": "(Required) Hex-encoded SHA-1 hash of the attachment (40 characters)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Not found",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "978d2596-d293-49b8-9d8f-cd30ebde4eb2",
+          "name": "Get attachment inventory",
+          "request": {
+            "name": "Get attachment inventory",
+            "description": {
+              "content": "Get inventory of attachments for a given index block hash and page range.\nThis returns a bitfield indicating which attachments are available.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "attachments",
+                "inv"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "index_block_hash",
+                  "value": "<string>",
+                  "description": "(Required) Hex-encoded index block hash (64 characters)"
+                },
+                {
+                  "disabled": false,
+                  "key": "pages_indexes",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of page indexes to query.\n- Maximum 8 pages per request\n- Each index must be 0-4294967295 (u32 range)\n- Values outside u32 range return 400 Bad Request\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e2bd524a-067d-41d7-b878-f298e2560420",
+              "name": "Attachment inventory bitfield",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "attachments",
+                    "inv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "index_block_hash",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pages_indexes",
+                      "value": "1,2,3"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"block_id\": \"0123456789abcdef0123456789abcdef0123456789abcdef\",\n  \"pages\": [\n    {\n      \"index\": 1,\n      \"inventory\": [\n        255,\n        0,\n        255,\n        0\n      ]\n    },\n    {\n      \"index\": 2,\n      \"inventory\": [\n        0,\n        255,\n        0,\n        255\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50e2ff32-05bb-4529-8668-f7b7d49e868b",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "attachments",
+                    "inv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "index_block_hash",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pages_indexes",
+                      "value": "1,2,3"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Bad request",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e0a04f2a-c5b7-4401-8d33-682ecac6cc5e",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "attachments",
+                    "inv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "index_block_hash",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pages_indexes",
+                      "value": "1,2,3"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Not found",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.hiro.so/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f408c30f-861d-4351-817e-8a1de9c4d279",
+    "name": "Signer Metrics Accounts Atlas API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Welcome to the API reference overview for the Signer Metrics API.",
+      "type": "text/plain"
+    }
+  }
+}

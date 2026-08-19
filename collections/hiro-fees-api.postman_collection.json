@@ -1,0 +1,471 @@
+{
+  "item": [
+    {
+      "id": "d887bb24-7911-4a9b-959a-0693350ae0e2",
+      "name": "Fees",
+      "description": {
+        "content": "Read-only endpoints to obtain fee details",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1818ad01-20b9-4bd3-aaf2-c6e0a2f1989b",
+          "name": "Fetch fee rate",
+          "request": {
+            "name": "Fetch fee rate",
+            "description": {
+              "content": "**NOTE:** This endpoint is deprecated in favor of [Get approximate fees for a given transaction](/api/get-approximate-fees-for-a-given-transaction).\n\n        Retrieves estimated fee rate.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v1",
+                "fee_rate",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transaction\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4afcbeeb-925d-4601-94f4-a80290fcd13e",
+              "name": "Get fee rate information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "fee_rate",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transaction\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fee_rate\": 1632\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c27d735a-39a7-4cae-b73c-074980c50cbd",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "fee_rate",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transaction\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a087e15f-e322-4136-94d2-24ae5899736b",
+          "name": "Get approximate fees for the given transaction",
+          "request": {
+            "name": "Get approximate fees for the given transaction",
+            "description": {
+              "content": "Get an estimated fee for the supplied transaction.  This\nestimates the execution cost of the transaction, the current\nfee rate of the network, and returns estimates for fee\namounts.\n\n* `transaction_payload` is a hex-encoded serialization of\n  the TransactionPayload for the transaction.\n* `estimated_len` is an optional argument that provides the\n  endpoint with an estimation of the final length (in bytes)\n  of the transaction, including any post-conditions and\n  signatures\n\nIf the node cannot provide an estimate for the transaction\n(e.g., if the node has never seen a contract-call for the\ngiven contract and function) or if estimation is not\nconfigured on this node, a 400 response is returned.\nThe 400 response will be a JSON error containing a `reason`\nfield which can be one of the following:\n\n* `DatabaseError` - this Stacks node has had an internal\n  database error while trying to estimate the costs of the\n  supplied transaction.\n* `NoEstimateAvailable` - this Stacks node has not seen this\n  kind of contract-call before, and it cannot provide an\n  estimate yet.\n* `CostEstimationDisabled` - this Stacks node does not perform\n  fee or cost estimation, and it cannot respond on this\n  endpoint.\n\nThe 200 response contains the following data:\n\n* `estimated_cost` - the estimated multi-dimensional cost of\n  executing the Clarity VM on the provided transaction.\n* `estimated_cost_scalar` - a unitless integer that the Stacks\n  node uses to compare how much of the block limit is consumed\n  by different transactions. This value incorporates the\n  estimated length of the transaction and the estimated\n  execution cost of the transaction. The range of this integer\n  may vary between different Stacks nodes. In order to compute\n  an estimate of total fee amount for the transaction, this\n  value is multiplied by the same Stacks node\"s estimated fee\n  rate.\n* `cost_scalar_change_by_byte` - a float value that indicates how\n  much the `estimated_cost_scalar` value would increase for every\n  additional byte in the final transaction.\n* `estimations` - an array of estimated fee rates and total fees to\n  pay in microSTX for the transaction. This array provides a range of\n  estimates (default: 3) that may be used. Each element of the array\n  contains the following fields:\n    * `fee_rate` - the estimated value for the current fee\n      rates in the network\n    * `fee` - the estimated value for the total fee in\n      microSTX that the given transaction should pay. These\n      values are the result of computing:\n      `fee_rate` x `estimated_cost_scalar`.\n      If the estimated fees are less than the minimum relay\n      fee `(1 ustx x estimated_len)`, then that minimum relay\n      fee will be returned here instead.\n\n\nNote: If the final transaction\"s byte size is larger than\nsupplied to `estimated_len`, then applications should increase\nthis fee amount by:\n\n  `fee_rate` x `cost_scalar_change_by_byte` x (`final_size` - `estimated_size`)\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "fees",
+                "transaction"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0e760c4e-1585-414c-970c-7a961ce84c09",
+              "name": "Estimated fees for the transaction",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "fees",
+                    "transaction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"estimated_len\": 350,\n  \"transaction_payload\": \"021af942874ce525e87f21bbe8c121b12fac831d02f4086765742d696e666f0b7570646174652d696e666f00000000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"reference ./components/examples/fee-transaction-response.example.json not found in the given specification\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46162ddc-6c92-438b-97ac-1c9bd2c028d8",
+              "name": "Fee estimation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "fees",
+                    "transaction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"estimated_len\": 350,\n  \"transaction_payload\": \"021af942874ce525e87f21bbe8c121b12fac831d02f4086765742d696e666f0b7570646174652d696e666f00000000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d950113b-190f-411f-ab7c-9eb64d9aefe8",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "fees",
+                    "transaction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"estimated_len\": 350,\n  \"transaction_payload\": \"021af942874ce525e87f21bbe8c121b12fac831d02f4086765742d696e666f0b7570646174652d696e666f00000000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Internal Server Error",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f732497-fd78-4cf2-b4fd-1af71ca2b530",
+          "name": "Get estimated fee",
+          "request": {
+            "name": "Get estimated fee",
+            "description": {
+              "content": "Get an estimated fee rate for STX transfer transactions. This is a fee\nrate per byte, returned as a JSON integer (microSTX per byte).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "fees",
+                "transfer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "10213b97-ec7c-40f4-8127-62828e6101ad",
+              "name": "Fee rate in microSTX per byte",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "fees",
+                    "transfer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "3",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f0ffc8d-fd23-4fd1-b373-8c69de2f677c",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "fees",
+                    "transfer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Internal Server Error",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.hiro.so/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "27c14def-0637-49e8-8ebd-c8bf11d9c409",
+    "name": "Signer Metrics Accounts Fees API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Welcome to the API reference overview for the Signer Metrics API.",
+      "type": "text/plain"
+    }
+  }
+}

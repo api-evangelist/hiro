@@ -1,0 +1,964 @@
+{
+  "item": [
+    {
+      "id": "e577dd19-ffc2-4a9f-a99a-9eae2b5a34bf",
+      "name": "Tokens",
+      "description": {
+        "content": "Token metadata endpoints",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "21abe167-63ca-444a-9740-b47ccca7d594",
+          "name": "Fungible Tokens",
+          "request": {
+            "name": "Fungible Tokens",
+            "description": {
+              "content": "Retrieves a list of Fungible Tokens",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "v1",
+                "ft"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "symbol",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>",
+                  "description": "Stacks Address"
+                },
+                {
+                  "disabled": false,
+                  "key": "valid_metadata_only",
+                  "value": "<boolean>",
+                  "description": "If enabled, only tokens with valid SIP-016 metadata will be returned"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Result offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Results per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "Parameter to order results by"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Results order"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7fa4736f-675d-4bae-9f0e-e1c2dbea3a08",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "v1",
+                    "ft"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9"
+                    },
+                    {
+                      "key": "valid_metadata_only",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"limit\": 20,\n  \"offset\": 0,\n  \"total\": 1,\n  \"results\": [\n    {\n      \"tx_id\": \"0xef2ac1126e16f46843228b1dk4830e19eb7599129e4jf392cab9e65ae83a45c0\",\n      \"sender_address\": \"ST399W7Z9WS0GMSNQGJGME5JAENKN56D65VGMGKGA\",\n      \"asset_identifier\": \"SPZA22A4D15RKH5G8XDGQ7BPC20Q5JNMH0VQKSR6.token-ststx-earn-v1::stSTXearn\",\n      \"contract_principal\": \"SP1H1733V5MZ3SZ9XRW9FKYGEZT0JDGEB8Y634C7R.miamicoin-token-v2\",\n      \"name\": \"Wrapped USD\",\n      \"symbol\": \"xUSD\",\n      \"decimals\": 8,\n      \"total_supply\": \"9999980000000\",\n      \"token_uri\": \"ipfs://ipfs/Qmf9yDYuPTrp8NRUFf8xxDd5Ud24Dx9uYMwMn8o8G2cWPW/12200.json\",\n      \"description\": \"Heavy hitters, all-stars and legends of the game join forces to create a collection of unique varsity jackets\",\n      \"image_uri\": \"https://ipfs.io/ipfs/QmZMqhh2ztwuZ3Y8PyEp2z5auyH3TCm3nnr5ZfjjgDjd5q/12199.png\",\n      \"image_thumbnail_uri\": \"https://ipfs.io/ipfs/QmZMqhh2ztwuZ3Y8PyEp2z5auyH3TCm3nnr5ZfjjgDjd5q/12199.png\",\n      \"image_canonical_uri\": \"ipfs://ipfs/QmZMqhh2ztwuZ3Y8PyEp2z5auyH3TCm3nnr5ZfjjgDjd5q/12199.png\"\n    },\n    {\n      \"tx_id\": \"0xef2ac1126e16f46843228b1dk4830e19eb7599129e4jf392cab9e65ae83a45c0\",\n      \"sender_address\": \"ST399W7Z9WS0GMSNQGJGME5JAENKN56D65VGMGKGA\",\n      \"asset_identifier\": \"SPZA22A4D15RKH5G8XDGQ7BPC20Q5JNMH0VQKSR6.token-ststx-earn-v1::stSTXearn\",\n      \"contract_principal\": \"SP1H1733V5MZ3SZ9XRW9FKYGEZT0JDGEB8Y634C7R.miamicoin-token-v2\",\n      \"name\": \"Wrapped USD\",\n      \"symbol\": \"xUSD\",\n      \"decimals\": 8,\n      \"total_supply\": \"9999980000000\",\n      \"token_uri\": \"ipfs://ipfs/Qmf9yDYuPTrp8NRUFf8xxDd5Ud24Dx9uYMwMn8o8G2cWPW/12200.json\",\n      \"description\": \"Heavy hitters, all-stars and legends of the game join forces to create a collection of unique varsity jackets\",\n      \"image_uri\": \"https://ipfs.io/ipfs/QmZMqhh2ztwuZ3Y8PyEp2z5auyH3TCm3nnr5ZfjjgDjd5q/12199.png\",\n      \"image_thumbnail_uri\": \"https://ipfs.io/ipfs/QmZMqhh2ztwuZ3Y8PyEp2z5auyH3TCm3nnr5ZfjjgDjd5q/12199.png\",\n      \"image_canonical_uri\": \"ipfs://ipfs/QmZMqhh2ztwuZ3Y8PyEp2z5auyH3TCm3nnr5ZfjjgDjd5q/12199.png\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "67a096ef-160c-4b2f-b608-dec8b87aee04",
+          "name": "Fungible Token Metadata",
+          "request": {
+            "name": "Fungible Token Metadata",
+            "description": {
+              "content": "Retrieves metadata for a SIP-010 Fungible Token",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "v1",
+                "ft",
+                ":principal"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "locale",
+                  "value": "<string>",
+                  "description": "Metadata localization to retrieve"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "principal",
+                  "description": "(Required) Principal for the contract which owns the SIP-010 token"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9821829e-2aa8-4b2b-8f01-a47575f456ab",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "v1",
+                    "ft",
+                    ":principal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "locale",
+                      "value": "es-MX"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) Principal for the contract which owns the SIP-010 token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tx_id\": \"0x5642ca7d68976b6b2a2055689d9a57de26d67f0dd8b016d1b0d94cb634454cdd\",\n  \"sender_address\": \"SPZA22A4D15RKH5G8XDGQ7BPC20Q5JNMH0VQKSR6\",\n  \"asset_identifier\": \"SPZA22A4D15RKH5G8XDGQ7BPC20Q5JNMH0VQKSR6.token-ststx-earn-v1::stSTXearn\",\n  \"name\": \"Wrapped USD\",\n  \"symbol\": \"xUSD\",\n  \"decimals\": 8,\n  \"total_supply\": \"9999980000000\",\n  \"token_uri\": \"ipfs://ipfs/Qmf9yDYuPTrp8NRUFf8xxDd5Ud24Dx9uYMwMn8o8G2cWPW/12200.json\",\n  \"description\": \"Heavy hitters, all-stars and legends of the game join forces to create a collection of unique varsity jackets\",\n  \"image_uri\": \"https://ipfs.io/ipfs/QmZMqhh2ztwuZ3Y8PyEp2z5auyH3TCm3nnr5ZfjjgDjd5q/12199.png\",\n  \"image_thumbnail_uri\": \"https://ipfs.io/ipfs/QmZMqhh2ztwuZ3Y8PyEp2z5auyH3TCm3nnr5ZfjjgDjd5q/12199.png\",\n  \"image_canonical_uri\": \"ipfs://ipfs/QmZMqhh2ztwuZ3Y8PyEp2z5auyH3TCm3nnr5ZfjjgDjd5q/12199.png\",\n  \"metadata\": {\n    \"sip\": 16,\n    \"name\": \"Satoshi's Team #12200\",\n    \"description\": \"Heavy hitters, all-stars and legends of the game join forces to create a collection of unique varsity jackets\",\n    \"image\": \"ipfs://ipfs/QmZMqhh2ztwuZ3Y8PyEp2z5auyH3TCm3nnr5ZfjjgDjd5q/12199.png\",\n    \"cached_image\": \"https://ipfs.io/ipfs/QmZMqhh2ztwuZ3Y8PyEp2z5auyH3TCm3nnr5ZfjjgDjd5q/12199.png\",\n    \"cached_thumbnail_image\": \"https://ipfs.io/ipfs/QmZMqhh2ztwuZ3Y8PyEp2z5auyH3TCm3nnr5ZfjjgDjd5q/12199.png\",\n    \"attributes\": [\n      {\n        \"trait_type\": \"Background\",\n        \"value\": {},\n        \"display_type\": \"string\"\n      },\n      {\n        \"trait_type\": \"Background\",\n        \"value\": {},\n        \"display_type\": \"string\"\n      }\n    ],\n    \"properties\": {\n      \"key_0\": {}\n    },\n    \"localization\": {\n      \"uri\": \"http://vuVQoRQHPIdh.hwuumD1+VkN6sL-Y8n-wDiNoH9wtMh.HLkKK8TZHlY1\",\n      \"default\": \"en\",\n      \"locales\": [\n        \"en\",\n        \"jp\"\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09418066-8ce6-4fee-a7a0-83a6ec8980c0",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "v1",
+                    "ft",
+                    ":principal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "locale",
+                      "value": "es-MX"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) Principal for the contract which owns the SIP-010 token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Token not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ebd76fdf-cf6d-44a1-a8b5-3efb0bbda38b",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "v1",
+                    "ft",
+                    ":principal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "locale",
+                      "value": "es-MX"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) Principal for the contract which owns the SIP-010 token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Token metadata fetch in progress\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dbc67da6-15e4-4290-8bbd-b20e39038f78",
+          "name": "Non-Fungible Token Metadata",
+          "request": {
+            "name": "Non-Fungible Token Metadata",
+            "description": {
+              "content": "Retrieves metadata for a SIP-009 Non-Fungible Token",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "v1",
+                "nft",
+                ":principal",
+                ":token_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "locale",
+                  "value": "<string>",
+                  "description": "Metadata localization to retrieve"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "principal",
+                  "description": "(Required) SIP-009 compliant smart contract principal"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "token_id",
+                  "description": "(Required) Token ID to retrieve"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "be5a5f82-7bbe-4ba7-b48e-c7a17028ef6e",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "v1",
+                    "nft",
+                    ":principal",
+                    ":token_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "locale",
+                      "value": "es-MX"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) SIP-009 compliant smart contract principal"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "token_id",
+                      "description": "(Required) Token ID to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token_uri\": \"ipfs://ipfs/Qmf9yDYuPTrp8NRUFf8xxDd5Ud24Dx9uYMwMn8o8G2cWPW/12200.json\",\n  \"metadata\": {\n    \"sip\": 16,\n    \"name\": \"Satoshi's Team #12200\",\n    \"description\": \"Heavy hitters, all-stars and legends of the game join forces to create a collection of unique varsity jackets\",\n    \"image\": \"ipfs://ipfs/QmZMqhh2ztwuZ3Y8PyEp2z5auyH3TCm3nnr5ZfjjgDjd5q/12199.png\",\n    \"cached_image\": \"https://ipfs.io/ipfs/QmZMqhh2ztwuZ3Y8PyEp2z5auyH3TCm3nnr5ZfjjgDjd5q/12199.png\",\n    \"cached_thumbnail_image\": \"https://ipfs.io/ipfs/QmZMqhh2ztwuZ3Y8PyEp2z5auyH3TCm3nnr5ZfjjgDjd5q/12199.png\",\n    \"attributes\": [\n      {\n        \"trait_type\": \"Background\",\n        \"value\": {},\n        \"display_type\": \"string\"\n      },\n      {\n        \"trait_type\": \"Background\",\n        \"value\": {},\n        \"display_type\": \"string\"\n      }\n    ],\n    \"properties\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    },\n    \"localization\": {\n      \"uri\": \"http://MRUiA.vzF5UbofwwAxHV,QFbndl6660+tIYR0B3WNrOYwjd21hQGkJpuHixE\",\n      \"default\": \"en\",\n      \"locales\": [\n        \"en\",\n        \"jp\"\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6abbd44b-a68f-4d7a-b85f-2be1aa89dece",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "v1",
+                    "nft",
+                    ":principal",
+                    ":token_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "locale",
+                      "value": "es-MX"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) SIP-009 compliant smart contract principal"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "token_id",
+                      "description": "(Required) Token ID to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Token not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "330730a2-46d8-4e40-9a45-01a4e64dbfe5",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "v1",
+                    "nft",
+                    ":principal",
+                    ":token_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "locale",
+                      "value": "es-MX"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) SIP-009 compliant smart contract principal"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "token_id",
+                      "description": "(Required) Token ID to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Token metadata fetch in progress\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fe655013-3f93-4e99-bdeb-07b306499312",
+          "name": "Semi-Fungible Token Metadata",
+          "request": {
+            "name": "Semi-Fungible Token Metadata",
+            "description": {
+              "content": "Retrieves metadata for a SIP-013 Semi-Fungible Token",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "v1",
+                "sft",
+                ":principal",
+                ":token_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "locale",
+                  "value": "<string>",
+                  "description": "Metadata localization to retrieve"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "principal",
+                  "description": "(Required) SIP-013 compliant smart contract principal"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "token_id",
+                  "description": "(Required) Token ID to retrieve"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "842d7f69-47f8-4e68-b8ec-ae9c7e533d5e",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "v1",
+                    "sft",
+                    ":principal",
+                    ":token_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "locale",
+                      "value": "es-MX"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) SIP-013 compliant smart contract principal"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "token_id",
+                      "description": "(Required) Token ID to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token_uri\": \"ipfs://ipfs/Qmf9yDYuPTrp8NRUFf8xxDd5Ud24Dx9uYMwMn8o8G2cWPW/12200.json\",\n  \"decimals\": 6,\n  \"total_supply\": \"250\",\n  \"metadata\": {\n    \"sip\": 16,\n    \"name\": \"Satoshi's Team #12200\",\n    \"description\": \"Heavy hitters, all-stars and legends of the game join forces to create a collection of unique varsity jackets\",\n    \"image\": \"ipfs://ipfs/QmZMqhh2ztwuZ3Y8PyEp2z5auyH3TCm3nnr5ZfjjgDjd5q/12199.png\",\n    \"cached_image\": \"https://ipfs.io/ipfs/QmZMqhh2ztwuZ3Y8PyEp2z5auyH3TCm3nnr5ZfjjgDjd5q/12199.png\",\n    \"cached_thumbnail_image\": \"https://ipfs.io/ipfs/QmZMqhh2ztwuZ3Y8PyEp2z5auyH3TCm3nnr5ZfjjgDjd5q/12199.png\",\n    \"attributes\": [\n      {\n        \"trait_type\": \"Background\",\n        \"value\": {},\n        \"display_type\": \"string\"\n      },\n      {\n        \"trait_type\": \"Background\",\n        \"value\": {},\n        \"display_type\": \"string\"\n      }\n    ],\n    \"properties\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"localization\": {\n      \"uri\": \"https://fpGstwFeeaixabPVYAcffwyVhr.pfjxo55UJkzZ28d\",\n      \"default\": \"en\",\n      \"locales\": [\n        \"en\",\n        \"jp\"\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e5eaa2b-1d48-493a-810f-714364be26f0",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "v1",
+                    "sft",
+                    ":principal",
+                    ":token_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "locale",
+                      "value": "es-MX"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) SIP-013 compliant smart contract principal"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "token_id",
+                      "description": "(Required) Token ID to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Token not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e88db72-d42d-4eac-8bdd-68e3b73b84ed",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "v1",
+                    "sft",
+                    ":principal",
+                    ":token_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "locale",
+                      "value": "es-MX"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) SIP-013 compliant smart contract principal"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "token_id",
+                      "description": "(Required) Token ID to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Token metadata fetch in progress\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f7bff934-a313-43b4-aded-38168e9ac3f2",
+          "name": "Search Tokens",
+          "request": {
+            "name": "Search Tokens",
+            "description": {
+              "content": "Retrieves metadata for multiple tokens in a single request. Accepts up to 50 contract identifiers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metadata",
+                "v1",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "contract",
+                  "value": "<string>",
+                  "description": "(Required) Contract identifiers to search for. Format: PRINCIPAL or PRINCIPAL:TOKEN_NUMBER. Defaults token_number to 1 when omitted."
+                },
+                {
+                  "disabled": false,
+                  "key": "locale",
+                  "value": "<string>",
+                  "description": "Metadata localization to retrieve"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c7090e8d-1880-4b21-81ec-eda33c90f79d",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metadata",
+                    "v1",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contract",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "locale",
+                      "value": "es-MX"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"contract_id\": \"SP32XCD69XPS3GKDEXAQ29PJRDSD5AR643GNEEBXZ.fari-token\",\n    \"token_number\": 1,\n    \"token_type\": \"ft\",\n    \"tx_id\": \"0x5642ca7d68976b6b2a2055689d9a57de26d67f0dd8b016d1b0d94cb634454cdd\",\n    \"sender_address\": \"SPZA22A4D15RKH5G8XDGQ7BPC20Q5JNMH0VQKSR6\",\n    \"name\": \"Wrapped USD\",\n    \"symbol\": \"xUSD\",\n    \"decimals\": 8,\n    \"total_supply\": \"9999980000000\",\n    \"token_uri\": \"ipfs://ipfs/Qmf9yDYuPTrp8NRUFf8xxDd5Ud24Dx9uYMwMn8o8G2cWPW/12200.json\",\n    \"description\": \"Heavy hitters, all-stars and legends of the game join forces to create a collection of unique varsity jackets\",\n    \"image_uri\": \"https://ipfs.io/ipfs/QmZMqhh2ztwuZ3Y8PyEp2z5auyH3TCm3nnr5ZfjjgDjd5q/12199.png\",\n    \"image_thumbnail_uri\": \"https://ipfs.io/ipfs/QmZMqhh2ztwuZ3Y8PyEp2z5auyH3TCm3nnr5ZfjjgDjd5q/12199.png\",\n    \"image_canonical_uri\": \"ipfs://ipfs/QmZMqhh2ztwuZ3Y8PyEp2z5auyH3TCm3nnr5ZfjjgDjd5q/12199.png\"\n  },\n  {\n    \"contract_id\": \"SP32XCD69XPS3GKDEXAQ29PJRDSD5AR643GNEEBXZ.fari-token\",\n    \"token_number\": 1,\n    \"token_type\": \"ft\",\n    \"tx_id\": \"0x5642ca7d68976b6b2a2055689d9a57de26d67f0dd8b016d1b0d94cb634454cdd\",\n    \"sender_address\": \"SPZA22A4D15RKH5G8XDGQ7BPC20Q5JNMH0VQKSR6\",\n    \"name\": \"Wrapped USD\",\n    \"symbol\": \"xUSD\",\n    \"decimals\": 8,\n    \"total_supply\": \"9999980000000\",\n    \"token_uri\": \"ipfs://ipfs/Qmf9yDYuPTrp8NRUFf8xxDd5Ud24Dx9uYMwMn8o8G2cWPW/12200.json\",\n    \"description\": \"Heavy hitters, all-stars and legends of the game join forces to create a collection of unique varsity jackets\",\n    \"image_uri\": \"https://ipfs.io/ipfs/QmZMqhh2ztwuZ3Y8PyEp2z5auyH3TCm3nnr5ZfjjgDjd5q/12199.png\",\n    \"image_thumbnail_uri\": \"https://ipfs.io/ipfs/QmZMqhh2ztwuZ3Y8PyEp2z5auyH3TCm3nnr5ZfjjgDjd5q/12199.png\",\n    \"image_canonical_uri\": \"ipfs://ipfs/QmZMqhh2ztwuZ3Y8PyEp2z5auyH3TCm3nnr5ZfjjgDjd5q/12199.png\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.hiro.so/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9362ae47-c2e8-41a9-84b6-7047a4ce6c39",
+    "name": "Signer Metrics Accounts Tokens API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Welcome to the API reference overview for the Signer Metrics API.",
+      "type": "text/plain"
+    }
+  }
+}

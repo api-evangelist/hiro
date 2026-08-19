@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Signer Metrics Accounts Signers API",
+    "version": "1.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Signers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PoX Cycle Signers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/signer-metrics/v1/cycles/:cycle_number/signers",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start of time range (e.g., now-2h or ISO timestamp)"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End of time range (e.g., now or ISO timestamp)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return (default: 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip (default: 0)"
+              },
+              {
+                "name": "cycle_number",
+                "value": "",
+                "type": "path",
+                "description": "PoX cycle number"
+              }
+            ]
+          },
+          "docs": "List of signers for a given PoX cycle"
+        },
+        {
+          "info": {
+            "name": "PoX Cycle Signer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/signer-metrics/v1/cycles/:cycle_number/signers/:signer_id",
+            "params": [
+              {
+                "name": "cycle_number",
+                "value": "",
+                "type": "path",
+                "description": "PoX cycle number"
+              },
+              {
+                "name": "signer_id",
+                "value": "",
+                "type": "path",
+                "description": "Signer public key (hex encoded)"
+              }
+            ]
+          },
+          "docs": "Get stats for a specific signer in a given PoX cycle"
+        },
+        {
+          "info": {
+            "name": "Fetch the stacker and signer set information for a given cycle.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v3/stacker_set/:cycle_number",
+            "params": [
+              {
+                "name": "cycle_number",
+                "value": "",
+                "type": "path",
+                "description": "reward cycle number"
+              }
+            ]
+          },
+          "docs": "Used to get stacker and signer set information for a given cycle.\n\nThis will only return information for cycles started in Epoch-2.5\nwhere PoX-4 was active and subsequent cycles.\n"
+        },
+        {
+          "info": {
+            "name": "Get number of blocks signed by signer during a given reward cycle",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v3/signer/:signer_pubkey/:cycle_number",
+            "params": [
+              {
+                "name": "signer_pubkey",
+                "value": "",
+                "type": "path",
+                "description": "Hex-encoded compressed Secp256k1 public key of signer"
+              },
+              {
+                "name": "cycle_number",
+                "value": "",
+                "type": "path",
+                "description": "Reward cycle number"
+              }
+            ]
+          },
+          "docs": "Get number of blocks signed by signer during a given reward cycle"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

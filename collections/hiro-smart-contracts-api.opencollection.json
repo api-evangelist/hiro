@@ -1,0 +1,310 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Signer Metrics Accounts Smart Contracts API",
+    "version": "1.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Smart Contracts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get contracts by trait",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/contract/by_trait",
+            "params": [
+              {
+                "name": "trait_abi",
+                "value": "",
+                "type": "query",
+                "description": "JSON abi of the trait."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "max number of contracts fetch"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "index of first contract event to fetch"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of contracts based on the following traits listed in JSON format -  functions, variables, maps, fungible tokens and non-fungible tokens"
+        },
+        {
+          "info": {
+            "name": "Get contract info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/contract/:contract_id",
+            "params": [
+              {
+                "name": "contract_id",
+                "value": "SP6P4EJF0VG8V0RB3TQQKJBHDQKEF6NVRD1KZE3C.satoshibles",
+                "type": "path",
+                "description": "Contract identifier formatted as `<contract_address>.<contract_name>`"
+              }
+            ]
+          },
+          "docs": "Retrieves details of a contract with a given `contract_id`"
+        },
+        {
+          "info": {
+            "name": "Get contract events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/contract/:contract_id/events",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "max number of events to fetch"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              },
+              {
+                "name": "contract_id",
+                "value": "SP6P4EJF0VG8V0RB3TQQKJBHDQKEF6NVRD1KZE3C.satoshibles",
+                "type": "path",
+                "description": "Contract identifier formatted as `<contract_address>.<contract_name>`"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of events that have been triggered by a given `contract_id`"
+        },
+        {
+          "info": {
+            "name": "Get smart contracts status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v2/smart-contracts/status",
+            "params": [
+              {
+                "name": "contract_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves the deployment status of multiple smart contracts."
+        },
+        {
+          "info": {
+            "name": "Get contract interface",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v2/contracts/interface/:deployer_address/:contract_name"
+          },
+          "docs": "Get contract interface using a `deployer_address` and `contract name`"
+        },
+        {
+          "info": {
+            "name": "Get specific data-map inside a contract",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.hiro.so/v2/map_entry/:deployer_address/:contract_name/:map_name",
+            "params": [
+              {
+                "name": "map_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Attempt to fetch data from a contract data map. The contract is\nidentified with [Stacks Address] and [Contract Name] in the URL path.\nThe map is identified with [Map Name].\n\nThe key to lookup in the map is supplied via the POST body. This should\nbe supplied as the hex string serialization of the key (which should be\na Clarity value). Note, this is a JSON string.\n\nThe response is a JSON object with the following properties:\n- `data`: The hex serialization of the map response. Note that map\n  resp"
+        },
+        {
+          "info": {
+            "name": "Get contract source",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v2/contracts/source/:deployer_address/:contract_name"
+          },
+          "docs": "Returns the Clarity source code of a given contract, along with the\nblock height it was published in, and the MARF proof for the data.\n"
+        },
+        {
+          "info": {
+            "name": "Call read-only function",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.hiro.so/v2/contracts/call-read/:deployer_address/:contract_name/:function_name",
+            "params": [
+              {
+                "name": "function_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Call a read-only public function on a given contract.\n\nThe contract is identified with [Stacks Address] and [Contract Name] in the URL path.\nThe function is identified with [Function Name].\n\nThe arguments to the function are supplied via the POST body.\nThis should be a JSON object with two main properties:\n- `sender` which should be a Stacks address or contract principal\n- `arguments` which should be an array of hex-encoded Clarity values.\n"
+        },
+        {
+          "info": {
+            "name": "Call read-only function in fast mode (no cost and memory tracking)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.hiro.so/v3/contracts/fast-call-read/:deployer_address/:contract_name/:function_name",
+            "params": [
+              {
+                "name": "function_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Call a read-only public function on a given smart contract without cost tracking.\n\nThe contract is identified with [Stacks Address] and [Contract Name] in the URL path.\nThe function is identified with [Function Name].\n\nThe arguments to the function are supplied via the POST body.\nThis should be a JSON object with two main properties:\n- `sender` which should be a Stacks address or contract principal\n- `arguments` which should be an array of hex-encoded Clarity values.\n\n**This API endpoint require"
+        },
+        {
+          "info": {
+            "name": "Get trait implementation details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v2/traits/:deployer_address/:contract_name/:trait_deployer_address/:trait_contract_name/:trait_name",
+            "params": [
+              {
+                "name": "trait_deployer_address",
+                "value": "",
+                "type": "path",
+                "description": "Stacks address of the trait-defining contract.\n"
+              },
+              {
+                "name": "trait_contract_name",
+                "value": "",
+                "type": "path",
+                "description": "Contract name of the trait-defining contract."
+              },
+              {
+                "name": "trait_name",
+                "value": "some-trait",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Determine whether or not a specified trait is implemented (either\nexplicitly or implicitly) within a given contract.\n"
+        },
+        {
+          "info": {
+            "name": "Get the MARF value for a given key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v2/clarity/marf/:marf_key_hash",
+            "params": [
+              {
+                "name": "marf_key_hash",
+                "value": "",
+                "type": "path",
+                "description": "The 64-character hex-encoded hash of the MARF key."
+              }
+            ]
+          },
+          "docs": "Attempt to fetch the value of a MARF key. The key is a 64-character\nhex string representing the MARF node hash.\n"
+        },
+        {
+          "info": {
+            "name": "Get the contract metadata for the metadata key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v2/clarity/metadata/:deployer_address/:contract_name/:clarity_metadata_key",
+            "params": [
+              {
+                "name": "clarity_metadata_key",
+                "value": "",
+                "type": "path",
+                "description": "Metadata key. Must be either:\n- \"analysis\" for contract analysis data\n- \"vm-metadata::N::TYPE\" where N is the epoch (1-2 digits) and TYPE is one of:\n  contract, contract-size, contract-src, contract-data-size, or a valid Clarity name\n"
+              }
+            ]
+          },
+          "docs": "Attempt to fetch the metadata of a contract. The contract is identified\nwith [Contract Address] and [Contract Name] in the URL path. The metadata\nkey is identified with [Clarity Metadata Key].\n\nIn the response, `data` is formatted as JSON.\n"
+        },
+        {
+          "info": {
+            "name": "Get the value of a constant inside a contract",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v2/constant_val/:deployer_address/:contract_name/:constant_name",
+            "params": [
+              {
+                "name": "constant_name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Attempt to fetch the value of a constant inside a contract. The contract\nis identified with [Stacks Address] and [Contract Name] in the URL path.\nThe constant is identified with [Constant Name].\n\nIn the response, `data` is the hex serialization of the constant value.\n"
+        },
+        {
+          "info": {
+            "name": "Get contract data variable",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v2/data_var/:principal/:contract_name/:var_name",
+            "params": [
+              {
+                "name": "var_name",
+                "value": "",
+                "type": "path",
+                "description": "Variable name (must be a valid Clarity name)"
+              }
+            ]
+          },
+          "docs": "Fetch a data variable from a smart contract.\nReturns the raw hex-encoded value of the variable.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

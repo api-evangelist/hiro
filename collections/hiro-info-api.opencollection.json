@@ -1,0 +1,174 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Signer Metrics Accounts Info API",
+    "version": "1.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Info",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "API status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended"
+          },
+          "docs": "Retrieves the running status of the Stacks Blockchain API, including the server version and current chain tip information."
+        },
+        {
+          "info": {
+            "name": "Get total and unlocked STX supply",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/stx_supply/",
+            "params": [
+              {
+                "name": "height",
+                "value": "777678",
+                "type": "query",
+                "description": "Supply details are queried from specified block height. If the block height is not specified, the latest block height is taken as default value. Note that the `block height` is referred to the stacks blockchain."
+              },
+              {
+                "name": "unanchored",
+                "value": "true",
+                "type": "query",
+                "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+              }
+            ]
+          },
+          "docs": "Retrieves the total and unlocked STX supply. More information on Stacking can be found [here] (https://docs.stacks.co/block-production/stacking)."
+        },
+        {
+          "info": {
+            "name": "Get total STX supply in plain text format",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/stx_supply/total/plain"
+          },
+          "docs": "Retrieves the total circulating STX token supply as plain text."
+        },
+        {
+          "info": {
+            "name": "Get circulating STX supply in plain text format",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/stx_supply/circulating/plain"
+          },
+          "docs": "Retrieves the STX tokens currently in circulation that have been unlocked as plain text."
+        },
+        {
+          "info": {
+            "name": "Get total and unlocked STX supply (results formatted the same as the legacy 1.0 API)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/stx_supply/legacy_format",
+            "params": [
+              {
+                "name": "height",
+                "value": "777678",
+                "type": "query",
+                "description": "Supply details are queried from specified block height. If the block height is not specified, the latest block height is taken as default value. Note that the `block height` is referred to the stacks blockchain."
+              },
+              {
+                "name": "unanchored",
+                "value": "true",
+                "type": "query",
+                "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+              }
+            ]
+          },
+          "docs": "Retrieves total supply of STX tokens including those currently in circulation that have been unlocked."
+        },
+        {
+          "info": {
+            "name": "Get the network target block time",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/info/network_block_times"
+          },
+          "docs": "Retrieves the target block times for mainnet and testnet. The block time is hardcoded and will change throughout the implementation phases of the testnet."
+        },
+        {
+          "info": {
+            "name": "Get a given network's target block time",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/info/network_block_time/:network",
+            "params": [
+              {
+                "name": "network",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the target block time for a given network. The network can be mainnet or testnet. The block time is hardcoded and will change throughout the implementation phases of the testnet."
+        },
+        {
+          "info": {
+            "name": "Get Core API info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v2/info"
+          },
+          "docs": "Get Core API information"
+        },
+        {
+          "info": {
+            "name": "Get PoX details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v2/pox"
+          },
+          "docs": "Get Proof of Transfer (PoX) information. Can be used for Stacking."
+        },
+        {
+          "info": {
+            "name": "Query the health of the node.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v3/health"
+          },
+          "docs": "Get node health information.\nA node is considered healthy if its Stacks tip height matches the maximum Stacks tip height observed among its connected peers.\nThis endpoint returns:\n- `difference_from_max_peer`: The difference in Stacks height between this node and its most advanced peer.\n- `max_stacks_height_of_neighbors`: The maximum Stacks height observed among the node\"s connected peers.\n- `node_stacks_tip_height`: The current Stacks tip height of this node.\n- `max_stacks_neighbor_address`: Th"
+        },
+        {
+          "info": {
+            "name": "Get neighbor peers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v2/neighbors"
+          },
+          "docs": "Get information about the node\"s neighbor peers in the network.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

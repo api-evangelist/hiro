@@ -1,0 +1,760 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Signer Metrics Accounts Blocks API",
+    "version": "1.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Blocks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Aggregated signer information for most recent blocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/signer-metrics/v1/blocks",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              }
+            ]
+          },
+          "docs": "Aggregated signer information for most recent blocks"
+        },
+        {
+          "info": {
+            "name": "Aggregated signer information for a block",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/signer-metrics/v1/blocks/:height_or_hash",
+            "params": [
+              {
+                "name": "height_or_hash",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Aggregated signer information for a block"
+        },
+        {
+          "info": {
+            "name": "Get recent blocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/block/",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "max number of blocks to fetch"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              }
+            ]
+          },
+          "docs": "**NOTE:** This endpoint is deprecated in favor of [Get blocks](/api/get-blocks).\n\n          Retrieves a list of recently mined blocks\n\n          If you need to actively monitor new blocks, we highly recommend subscribing to [WebSockets or Socket.io](https://github.com/hirosystems/stacks-blockchain-api/tree/master/client) for real-time updates."
+        },
+        {
+          "info": {
+            "name": "Get block by height",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/block/by_height/:height",
+            "params": [
+              {
+                "name": "height",
+                "value": "10000",
+                "type": "path",
+                "description": "Height of the block"
+              }
+            ]
+          },
+          "docs": "**NOTE:** This endpoint is deprecated in favor of [Get block](/api/get-block).\n\n        Retrieves block details of a specific block at a given block height"
+        },
+        {
+          "info": {
+            "name": "Get block by burnchain height",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/block/by_burn_block_height/:burn_block_height",
+            "params": [
+              {
+                "name": "burn_block_height",
+                "value": "744603",
+                "type": "path",
+                "description": "Height of the burn chain block"
+              }
+            ]
+          },
+          "docs": "**NOTE:** This endpoint is deprecated in favor of [Get blocks](/api/get-blocks).\n\n        Retrieves block details of a specific block for a given burn chain height"
+        },
+        {
+          "info": {
+            "name": "Get block by hash",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/block/:hash",
+            "params": [
+              {
+                "name": "hash",
+                "value": "0x4839a8b01cfb39ffcc0d07d3db31e848d5adf5279d529ed5062300b9f353ff79",
+                "type": "path",
+                "description": "Hash of the block"
+              }
+            ]
+          },
+          "docs": "**NOTE:** This endpoint is deprecated in favor of [Get block](/api/get-block).\n        \n        Retrieves block details of a specific block for a given chain height. You can use the hash from your latest block ('get_block_list' API) to get your block details."
+        },
+        {
+          "info": {
+            "name": "Get block by burnchain block hash",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/block/by_burn_block_hash/:burn_block_hash",
+            "params": [
+              {
+                "name": "burn_block_hash",
+                "value": "0x00000000000000000002bba732926cf68b6eda3e2cdbc2a85af79f10efeeeb10",
+                "type": "path",
+                "description": "Hash of the burnchain block"
+              }
+            ]
+          },
+          "docs": "**NOTE:** This endpoint is deprecated in favor of [Get blocks](/api/get-blocks).\n\n        Retrieves block details of a specific block for a given burnchain block hash"
+        },
+        {
+          "info": {
+            "name": "Get blocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v2/blocks/",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for block pagination"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of recently mined blocks"
+        },
+        {
+          "info": {
+            "name": "Get average block times",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v2/blocks/average-times"
+          },
+          "docs": "Retrieves average block times (in seconds)"
+        },
+        {
+          "info": {
+            "name": "Get block",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v2/blocks/:height_or_hash",
+            "params": [
+              {
+                "name": "height_or_hash",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a single block"
+        },
+        {
+          "info": {
+            "name": "Get signer signatures for block",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v2/blocks/:height_or_hash/signer-signatures",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              },
+              {
+                "name": "height_or_hash",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the signer signatures (an array of signature byte strings) in a single block"
+        },
+        {
+          "info": {
+            "name": "Get blocks by tenure",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v2/block-tenures/:tenure_height/blocks",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for block pagination"
+              },
+              {
+                "name": "tenure_height",
+                "value": "165453",
+                "type": "path",
+                "description": "Block tenure height"
+              }
+            ]
+          },
+          "docs": "Retrieves blocks confirmed in a block tenure"
+        },
+        {
+          "info": {
+            "name": "Get Nakamoto block by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v3/blocks/:block_id",
+            "params": [
+              {
+                "name": "block_id",
+                "value": "",
+                "type": "path",
+                "description": "The block's ID hash (64-character hex string)"
+              }
+            ]
+          },
+          "docs": "Get a specific Nakamoto block (Stacks 3.x+) by its index block hash. This endpoint streams\nthe block data from the Nakamoto staging blocks database where Nakamoto blocks are stored\nwith additional metadata including tenure information.\n\n**Compatibility**: Works with Nakamoto blocks only. For Stacks 2.x blocks, use `/v2/blocks/{block_id}`.\n"
+        },
+        {
+          "info": {
+            "name": "Fetch a Nakamoto block by its height and optional tip",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v3/blocks/height/:block_height",
+            "params": [
+              {
+                "name": "block_height",
+                "value": "",
+                "type": "path",
+                "description": "The block's height (max 4294967295)"
+              }
+            ]
+          },
+          "docs": "Fetch a Nakamoto block by its height and optional tip."
+        },
+        {
+          "info": {
+            "name": "Fetch metadata about the ongoing Nakamoto tenure",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v3/tenures/info"
+          },
+          "docs": "Fetch metadata about the ongoing Nakamoto tenure. This information is\nsufficient to obtain and authenticate the highest complete tenure, as\nwell as obtain new tenure blocks.\n"
+        },
+        {
+          "info": {
+            "name": "Fetch a sequence of Nakamoto blocks in a tenure",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v3/tenures/:block_id",
+            "params": [
+              {
+                "name": "block_id",
+                "value": "",
+                "type": "path",
+                "description": "The tenure-start block ID of the tenure to query (64-character hex string)"
+              },
+              {
+                "name": "stop",
+                "value": "",
+                "type": "query",
+                "description": "The block ID hash of the highest block in this tenure that is already\nknown to the caller. Neither the corresponding block nor any of its\nancestors will be served. This is used to fetch tenure blocks that the\ncaller does not have.\n"
+              }
+            ]
+          },
+          "docs": "Fetch a sequence of Nakamoto blocks in a tenure. The blocks will be\nserved in order from highest to lowest. The blocks will be encoded in\ntheir SIP-003 wire format, and concatenated together.\n"
+        },
+        {
+          "info": {
+            "name": "Get the list of Stacks blocks in a tenure",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v3/tenures/blocks/:consensus_hash",
+            "params": [
+              {
+                "name": "consensus_hash",
+                "value": "",
+                "type": "path",
+                "description": "The hex-encoded consensus hash of the tenure to query (40 hexadecimal characters, without 0x prefix)"
+              }
+            ]
+          },
+          "docs": "Get the list of blocks in a tenure. The blocks will be\nshown in order from highest to lowest.\n"
+        },
+        {
+          "info": {
+            "name": "Get the list of Nakamoto Stacks blocks in a tenure given Bitcoin block hash",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v3/tenures/blocks/hash/:burnchain_block_hash",
+            "params": [
+              {
+                "name": "burnchain_block_hash",
+                "value": "",
+                "type": "path",
+                "description": "The hex-encoded Bitcoin block hash of the tenure to query (64 hexadecimal characters, without 0x prefix)"
+              }
+            ]
+          },
+          "docs": "Get the list of Nakamoto blocks in a tenure given the Bitcoin block hash. The blocks will be\nshown in order from highest to lowest. This is only for Nakamoto blocks, Epoch2 ones will not be shown.\n"
+        },
+        {
+          "info": {
+            "name": "Get the list of Nakamoto Stacks blocks in a tenure given Bitcoin block height",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v3/tenures/blocks/height/:burnchain_block_height",
+            "params": [
+              {
+                "name": "burnchain_block_height",
+                "value": "",
+                "type": "path",
+                "description": "The Bitcoin block height of the tenure to query"
+              }
+            ]
+          },
+          "docs": "Get the list of Nakamoto blocks in a tenure given the Bitcoin block height. The blocks will be\nshown in order from highest to lowest. This is only for Nakamoto blocks, Epoch2 ones will not be shown.\n"
+        },
+        {
+          "info": {
+            "name": "Get latest sortition information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v3/sortitions"
+          },
+          "docs": "Get sortition information about the latest burnchain block processed by this node.\nReturns a single-element array with the latest sortition.\n"
+        },
+        {
+          "info": {
+            "name": "Get latest and last winning sortitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v3/sortitions/latest_and_last"
+          },
+          "docs": "Get sortition information about the latest burn block with a winning miner\nAND the previous such burn block. Returns an array with two sortition objects.\n"
+        },
+        {
+          "info": {
+            "name": "Get sortition by consensus hash",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v3/sortitions/consensus/:consensus_hash",
+            "params": [
+              {
+                "name": "consensus_hash",
+                "value": "",
+                "type": "path",
+                "description": "Hex-encoded consensus hash (40 characters)"
+              }
+            ]
+          },
+          "docs": "Get sortition information for a specific consensus hash.\nReturns a single-element array with the matching sortition.\n"
+        },
+        {
+          "info": {
+            "name": "Get sortition by burn header hash",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v3/sortitions/burn/:burn_header_hash",
+            "params": [
+              {
+                "name": "burn_header_hash",
+                "value": "",
+                "type": "path",
+                "description": "Hex-encoded burn header hash (64 characters)"
+              }
+            ]
+          },
+          "docs": "Get sortition information for a specific burn header hash.\nReturns a single-element array with the matching sortition.\n"
+        },
+        {
+          "info": {
+            "name": "Get sortition by burn block height",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v3/sortitions/burn_height/:height",
+            "params": [
+              {
+                "name": "height",
+                "value": "",
+                "type": "path",
+                "description": "Burn block height (integer, max 4294967295)"
+              }
+            ]
+          },
+          "docs": "Get sortition information for a specific burn block height.\nReturns a single-element array with the matching sortition.\n"
+        },
+        {
+          "info": {
+            "name": "Get number of blocks signed by signer during a given reward cycle",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v3/signer/:signer_pubkey/:cycle_number",
+            "params": [
+              {
+                "name": "signer_pubkey",
+                "value": "",
+                "type": "path",
+                "description": "Hex-encoded compressed Secp256k1 public key of signer"
+              },
+              {
+                "name": "cycle_number",
+                "value": "",
+                "type": "path",
+                "description": "Reward cycle number"
+              }
+            ]
+          },
+          "docs": "Get number of blocks signed by signer during a given reward cycle"
+        },
+        {
+          "info": {
+            "name": "Get stream of confirmed microblocks (Epoch 2.x)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v2/microblocks/confirmed/:block_id",
+            "params": [
+              {
+                "name": "block_id",
+                "value": "",
+                "type": "path",
+                "description": "Hex-encoded Stacks block ID (64 characters)"
+              }
+            ]
+          },
+          "docs": "Get microblocks that were confirmed by the given anchored block.\nThe microblocks are returned as a binary stream of concatenated microblock data.\n"
+        },
+        {
+          "info": {
+            "name": "Get a stream of microblocks beginning\nwith the given microblock (Epoch 2.x).\n",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v2/microblocks/:microblock_id",
+            "params": [
+              {
+                "name": "microblock_id",
+                "value": "",
+                "type": "path",
+                "description": "Hex-encoded microblock hash (64 characters)"
+              }
+            ]
+          },
+          "docs": "Get a stream of microblocks beginning\nwith the given microblock (Epoch 2.x).\n"
+        },
+        {
+          "info": {
+            "name": "Get stream of unconfirmed microblocks (Epoch 2.x)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v2/microblocks/unconfirmed/:block_id/:seq",
+            "params": [
+              {
+                "name": "block_id",
+                "value": "",
+                "type": "path",
+                "description": "Hex-encoded parent block ID (64 characters)"
+              },
+              {
+                "name": "seq",
+                "value": "",
+                "type": "path",
+                "description": "Starting sequence number (0-65535)"
+              }
+            ]
+          },
+          "docs": "Get unconfirmed microblocks starting from a specific sequence number.\nThe microblocks are returned as a binary stream.\n"
+        },
+        {
+          "info": {
+            "name": "Submit a microblock (Epoch 2.x)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.hiro.so/v2/microblocks"
+          },
+          "docs": "Submit a microblock to the node for validation and relay.\nThe body **must** be the SIP-003 binary serialization of a `Microblock`\nand sent with `Content-Type: application/octet-stream`.\n"
+        },
+        {
+          "info": {
+            "name": "Get recent 2.x block headers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v2/headers/:quantity",
+            "params": [
+              {
+                "name": "quantity",
+                "value": "",
+                "type": "path",
+                "description": "Number of headers to return (max 256)"
+              }
+            ]
+          },
+          "docs": "**Deprecated**: This endpoint is deprecated since Nakamoto.**\nStream (as a JSON array) up to `quantity` most recent anchored Stacks block headers.\nThe result is ordered from the current tip backwards.\n"
+        },
+        {
+          "info": {
+            "name": "Get Stacks 2.x block by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v2/blocks/:block_id",
+            "params": [
+              {
+                "name": "block_id",
+                "value": "",
+                "type": "path",
+                "description": "Hex-encoded block ID (64 characters)"
+              }
+            ]
+          },
+          "docs": "Get a specific Stacks 2.x era block by its block ID. This endpoint streams the block data\nfrom the filesystem storage where traditional Stacks blocks are stored as individual files.\n\n**Compatibility**: Works with all Stacks 2.x blocks. For Nakamoto blocks (Stacks 3.x+), use `/v3/blocks/{block_id}`.\n"
+        },
+        {
+          "info": {
+            "name": "Get tenure fork information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v3/tenures/fork_info/:start/:stop",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "path",
+                "description": "Starting consensus hash (40 hexadecimal characters, without 0x prefix)"
+              },
+              {
+                "name": "stop",
+                "value": "",
+                "type": "path",
+                "description": "Stopping consensus hash (40 hexadecimal characters, without 0x prefix)"
+              }
+            ]
+          },
+          "docs": "Get information about tenure forking between two consensus hashes.\nThis is used to identify conflicting tenures in the Nakamoto consensus.\n"
+        },
+        {
+          "info": {
+            "name": "Get tenure tip",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v3/tenures/tip/:consensus_hash",
+            "params": [
+              {
+                "name": "consensus_hash",
+                "value": "",
+                "type": "path",
+                "description": "Consensus hash (40 characters)"
+              }
+            ]
+          },
+          "docs": "Get the tip block of a tenure identified by consensus hash.\n"
+        },
+        {
+          "info": {
+            "name": "Get tenure tip with metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v3/tenures/tip_metadata/:consensus_hash",
+            "params": [
+              {
+                "name": "consensus_hash",
+                "value": "",
+                "type": "path",
+                "description": "Consensus hash (40 characters)"
+              }
+            ]
+          },
+          "docs": "Get the tip block and associated metadata of a tenure identified by consensus hash.\n"
+        },
+        {
+          "info": {
+            "name": "Upload a Nakamoto block",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.hiro.so/v3/blocks/upload",
+            "params": [
+              {
+                "name": "broadcast",
+                "value": "",
+                "type": "query",
+                "description": "If set to `\"1\"` the node will broadcast the uploaded block to peers.\nWhen present the request must include a valid `Authorization` header.\n"
+              }
+            ]
+          },
+          "docs": "Upload a Nakamoto block to the node for processing.\n\n- **Body** - must be the binary (SIP-003) serialization of a `NakamotoBlock`.\n- **Authentication** - only required when the query parameter `broadcast=1` is supplied.\n  In that case the caller **must** include an `Authorization` header.\n"
+        },
+        {
+          "info": {
+            "name": "Replay mining of a block and returns its content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v3/blocks/replay/:block_id",
+            "params": [
+              {
+                "name": "block_id",
+                "value": "",
+                "type": "path",
+                "description": "The block ID hash"
+              }
+            ]
+          },
+          "docs": "Replay the mining of a block (no data is written in the MARF) and returns its content.\n"
+        },
+        {
+          "info": {
+            "name": "Simulate mining of a block with the specified transactions and returns its content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v3/blocks/simulate/:block_id",
+            "params": [
+              {
+                "name": "block_id",
+                "value": "",
+                "type": "path",
+                "description": "The block ID hash"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulate the mining of a block (no data is written in the MARF) with specified transactions and returns its content.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

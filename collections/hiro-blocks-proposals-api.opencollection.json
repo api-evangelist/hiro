@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Signer Metrics Accounts Blocks Proposals API",
+    "version": "1.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Blocks Proposals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Signer information for most recent block proposals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/signer-metrics/v1/block_proposals",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              }
+            ]
+          },
+          "docs": "Signer information for most recent block proposals"
+        },
+        {
+          "info": {
+            "name": "Signer information for most recent block proposals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/signer-metrics/v1/block_proposals/:block_hash",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              },
+              {
+                "name": "block_hash",
+                "value": "0xdaf79950c5e8bb0c620751333967cdd62297137cdaf79950c5e8bb0c62075133",
+                "type": "path",
+                "description": "Block hash"
+              }
+            ]
+          },
+          "docs": "Signer information for most recent block proposals"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

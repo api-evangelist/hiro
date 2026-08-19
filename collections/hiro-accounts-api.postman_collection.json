@@ -1,0 +1,2258 @@
+{
+  "item": [
+    {
+      "id": "0cfa388e-349f-414d-a5f8-29d4152c96a4",
+      "name": "Accounts",
+      "description": {
+        "content": "Read-only endpoints to obtain Stacks account details",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "85d1259c-9489-4aec-aaf3-40bc6dd05e5c",
+          "name": "Get account STX balance",
+          "request": {
+            "name": "Get account STX balance",
+            "description": {
+              "content": "**NOTE:** This endpoint is deprecated in favor of [Get address STX balance](/api/get-principal-stx-balance).\n\n        Retrieves STX token balance for a given Address or Contract Identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v1",
+                "address",
+                ":principal",
+                "stx"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "unanchored",
+                  "value": "false",
+                  "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+                },
+                {
+                  "disabled": false,
+                  "key": "until_block",
+                  "value": "<string>",
+                  "description": "Block hash or block height. Return data representing the state up until that point in time, rather than the current block. Note - Use either of the query parameters but not both at a time."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "principal",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7074734e-71bd-49d0-95c8-70c2b309040f",
+              "name": "GET request that returns address balances",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "address",
+                    ":principal",
+                    "stx"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "unanchored",
+                      "value": "true"
+                    },
+                    {
+                      "key": "until_block",
+                      "value": "60000"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"balance\": \"string\",\n  \"total_miner_rewards_received\": \"string\",\n  \"lock_tx_id\": \"string\",\n  \"locked\": \"string\",\n  \"lock_height\": 2035,\n  \"burnchain_lock_height\": 689,\n  \"burnchain_unlock_height\": 2954,\n  \"estimated_balance\": \"string\",\n  \"pending_balance_inbound\": \"string\",\n  \"pending_balance_outbound\": \"string\",\n  \"total_sent\": \"string\",\n  \"total_received\": \"string\",\n  \"total_fees_sent\": \"string\",\n  \"token_offering_locked\": {\n    \"total_locked\": \"string\",\n    \"total_unlocked\": \"string\",\n    \"unlock_schedule\": [\n      {\n        \"amount\": \"string\",\n        \"block_height\": 3940\n      },\n      {\n        \"amount\": \"string\",\n        \"block_height\": 7438\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cbc3641d-8e2f-404f-a4ea-aa220b117531",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "address",
+                    ":principal",
+                    "stx"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "unanchored",
+                      "value": "true"
+                    },
+                    {
+                      "key": "until_block",
+                      "value": "60000"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ad03a70-123a-4799-a5c0-38ee58406184",
+          "name": "Get account balances",
+          "request": {
+            "name": "Get account balances",
+            "description": {
+              "content": "**NOTE:** This endpoint is deprecated in favor of [Get address FT balances](/api/get-principal-ft-balances).\n\n        Retrieves total account balance information for a given Address or Contract Identifier. This includes the balances of STX Tokens, Fungible Tokens and Non-Fungible Tokens for the account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v1",
+                "address",
+                ":principal",
+                "balances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "unanchored",
+                  "value": "false",
+                  "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+                },
+                {
+                  "disabled": false,
+                  "key": "until_block",
+                  "value": "<string>",
+                  "description": "Block hash or block height. Return data representing the state up until that point in time, rather than the current block. Note - Use either of the query parameters but not both at a time."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "principal",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1fcb9943-d8d3-4c6e-80e3-1ee35dc6f8c9",
+              "name": "GET request that returns address balances",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "address",
+                    ":principal",
+                    "balances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "unanchored",
+                      "value": "true"
+                    },
+                    {
+                      "key": "until_block",
+                      "value": "60000"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"stx\": {\n    \"balance\": \"string\",\n    \"total_miner_rewards_received\": \"string\",\n    \"lock_tx_id\": \"string\",\n    \"locked\": \"string\",\n    \"lock_height\": 3077,\n    \"burnchain_lock_height\": 8720,\n    \"burnchain_unlock_height\": 6016,\n    \"estimated_balance\": \"string\",\n    \"pending_balance_inbound\": \"string\",\n    \"pending_balance_outbound\": \"string\",\n    \"total_sent\": \"string\",\n    \"total_received\": \"string\",\n    \"total_fees_sent\": \"string\"\n  },\n  \"fungible_tokens\": {\n    \"key_0\": {\n      \"balance\": \"string\",\n      \"total_sent\": \"string\",\n      \"total_received\": \"string\"\n    },\n    \"key_1\": {\n      \"balance\": \"string\",\n      \"total_sent\": \"string\",\n      \"total_received\": \"string\"\n    }\n  },\n  \"non_fungible_tokens\": {\n    \"key_0\": {\n      \"count\": \"string\",\n      \"total_sent\": \"string\",\n      \"total_received\": \"string\"\n    },\n    \"key_1\": {\n      \"count\": \"string\",\n      \"total_sent\": \"string\",\n      \"total_received\": \"string\"\n    }\n  },\n  \"token_offering_locked\": {\n    \"total_locked\": \"string\",\n    \"total_unlocked\": \"string\",\n    \"unlock_schedule\": [\n      {\n        \"amount\": \"string\",\n        \"block_height\": 9395\n      },\n      {\n        \"amount\": \"string\",\n        \"block_height\": 5708\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bbf9a493-7dc6-42fb-9314-6e8522d3a6a8",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "address",
+                    ":principal",
+                    "balances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "unanchored",
+                      "value": "true"
+                    },
+                    {
+                      "key": "until_block",
+                      "value": "60000"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "38b7c449-7505-4ca9-97e7-8226eeea8458",
+          "name": "Get account transactions",
+          "request": {
+            "name": "Get account transactions",
+            "description": {
+              "content": "**NOTE:** This endpoint is deprecated in favor of [Get address transactions](/api/get-address-transactions).\n\n        Retrieves a list of all Transactions for a given Address or Contract Identifier. More information on Transaction types can be found [here](https://docs.stacks.co/transactions/how-transactions-work#types).\n\n        If you need to actively monitor new transactions for an address or contract id, we highly recommend subscribing to [WebSockets or Socket.io](https://github.com/hirosystems/stacks-blockchain-api/tree/master/client) for real-time updates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v1",
+                "address",
+                ":principal",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Results per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Result offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<integer>",
+                  "description": "Filter for transactions only at this given block height"
+                },
+                {
+                  "disabled": false,
+                  "key": "unanchored",
+                  "value": "false",
+                  "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+                },
+                {
+                  "disabled": false,
+                  "key": "until_block",
+                  "value": "<string>",
+                  "description": "Block hash or block height. Return data representing the state up until that point in time, rather than the current block. Note - Use either of the query parameters but not both at a time."
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude_function_args",
+                  "value": "false",
+                  "description": "Exclude function_args from contract call responses for smaller transaction sizes."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "principal",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bc288314-6df7-48e3-8457-e42b4da879e6",
+              "name": "GET request that returns account transactions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "address",
+                    ":principal",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "unanchored",
+                      "value": "true"
+                    },
+                    {
+                      "key": "until_block",
+                      "value": "60000"
+                    },
+                    {
+                      "key": "exclude_function_args",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"limit\": 20,\n  \"offset\": 0,\n  \"total\": 1,\n  \"results\": [\n    {\n      \"tx_id\": \"string\",\n      \"nonce\": 5542,\n      \"fee_rate\": \"string\",\n      \"sender_address\": \"string\",\n      \"sponsored\": true,\n      \"post_condition_mode\": \"allow\",\n      \"post_conditions\": [\n        {\n          \"principal\": {\n            \"type_id\": \"principal_origin\"\n          },\n          \"condition_code\": \"sent_equal_to\",\n          \"amount\": \"string\",\n          \"type\": \"stx\"\n        },\n        {\n          \"principal\": {\n            \"type_id\": \"principal_origin\"\n          },\n          \"condition_code\": \"sent_equal_to\",\n          \"amount\": \"string\",\n          \"type\": \"stx\"\n        }\n      ],\n      \"anchor_mode\": \"on_chain_only\",\n      \"block_hash\": \"string\",\n      \"block_height\": 9851,\n      \"block_time\": 1819.4996505201755,\n      \"block_time_iso\": \"string\",\n      \"burn_block_time\": 1244,\n      \"burn_block_height\": 1867,\n      \"burn_block_time_iso\": \"string\",\n      \"parent_burn_block_time\": 8597,\n      \"parent_burn_block_time_iso\": \"string\",\n      \"canonical\": false,\n      \"tx_index\": 5497,\n      \"tx_status\": \"success\",\n      \"tx_result\": {\n        \"hex\": \"string\",\n        \"repr\": \"string\"\n      },\n      \"event_count\": 5875,\n      \"parent_block_hash\": \"string\",\n      \"is_unanchored\": false,\n      \"microblock_hash\": \"string\",\n      \"microblock_sequence\": 1966,\n      \"microblock_canonical\": false,\n      \"execution_cost_read_count\": 797,\n      \"execution_cost_read_length\": 9103,\n      \"execution_cost_runtime\": 3666,\n      \"execution_cost_write_count\": 8141,\n      \"execution_cost_write_length\": 3333,\n      \"vm_error\": \"string\",\n      \"events\": [\n        {\n          \"contract_log\": {\n            \"contract_id\": \"string\",\n            \"topic\": \"string\",\n            \"value\": {\n              \"hex\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"repr\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          \"event_index\": 7421,\n          \"event_type\": \"smart_contract_log\",\n          \"tx_id\": \"string\"\n        },\n        {\n          \"contract_log\": {\n            \"contract_id\": \"string\",\n            \"topic\": \"string\",\n            \"value\": {\n              \"hex\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"repr\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          \"event_index\": 3946,\n          \"event_type\": \"smart_contract_log\",\n          \"tx_id\": \"string\"\n        }\n      ],\n      \"tx_type\": \"token_transfer\",\n      \"token_transfer\": {\n        \"recipient_address\": \"string\",\n        \"amount\": \"string\",\n        \"memo\": \"string\"\n      },\n      \"sponsor_nonce\": 5621,\n      \"sponsor_address\": \"string\"\n    },\n    {\n      \"tx_id\": \"string\",\n      \"nonce\": 8752,\n      \"fee_rate\": \"string\",\n      \"sender_address\": \"string\",\n      \"sponsored\": true,\n      \"post_condition_mode\": \"allow\",\n      \"post_conditions\": [\n        {\n          \"principal\": {\n            \"type_id\": \"principal_origin\"\n          },\n          \"condition_code\": \"sent_equal_to\",\n          \"amount\": \"string\",\n          \"type\": \"stx\"\n        },\n        {\n          \"principal\": {\n            \"type_id\": \"principal_origin\"\n          },\n          \"condition_code\": \"sent_equal_to\",\n          \"amount\": \"string\",\n          \"type\": \"stx\"\n        }\n      ],\n      \"anchor_mode\": \"on_chain_only\",\n      \"block_hash\": \"string\",\n      \"block_height\": 4654,\n      \"block_time\": 8066.880057823955,\n      \"block_time_iso\": \"string\",\n      \"burn_block_time\": 9191,\n      \"burn_block_height\": 8622,\n      \"burn_block_time_iso\": \"string\",\n      \"parent_burn_block_time\": 3724,\n      \"parent_burn_block_time_iso\": \"string\",\n      \"canonical\": false,\n      \"tx_index\": 6763,\n      \"tx_status\": \"success\",\n      \"tx_result\": {\n        \"hex\": \"string\",\n        \"repr\": \"string\"\n      },\n      \"event_count\": 3667,\n      \"parent_block_hash\": \"string\",\n      \"is_unanchored\": false,\n      \"microblock_hash\": \"string\",\n      \"microblock_sequence\": 3641,\n      \"microblock_canonical\": true,\n      \"execution_cost_read_count\": 4308,\n      \"execution_cost_read_length\": 5069,\n      \"execution_cost_runtime\": 6773,\n      \"execution_cost_write_count\": 3037,\n      \"execution_cost_write_length\": 3541,\n      \"vm_error\": \"string\",\n      \"events\": [\n        {\n          \"contract_log\": {\n            \"contract_id\": \"string\",\n            \"topic\": \"string\",\n            \"value\": {\n              \"hex\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"repr\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          \"event_index\": 9113,\n          \"event_type\": \"smart_contract_log\",\n          \"tx_id\": \"string\"\n        },\n        {\n          \"contract_log\": {\n            \"contract_id\": \"string\",\n            \"topic\": \"string\",\n            \"value\": {\n              \"hex\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"repr\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          \"event_index\": 8442,\n          \"event_type\": \"smart_contract_log\",\n          \"tx_id\": \"string\"\n        }\n      ],\n      \"tx_type\": \"token_transfer\",\n      \"token_transfer\": {\n        \"recipient_address\": \"string\",\n        \"amount\": \"string\",\n        \"memo\": \"string\"\n      },\n      \"sponsor_nonce\": 5882,\n      \"sponsor_address\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9db4427-13e6-4b17-b618-84b07b558e08",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "address",
+                    ":principal",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "unanchored",
+                      "value": "true"
+                    },
+                    {
+                      "key": "until_block",
+                      "value": "60000"
+                    },
+                    {
+                      "key": "exclude_function_args",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "04f85bc7-1464-4281-94e7-5fdefffd1013",
+          "name": "Get account transaction information for specific transaction",
+          "request": {
+            "name": "Get account transaction information for specific transaction",
+            "description": {
+              "content": "**NOTE:** This endpoint is deprecated in favor of [Get events for an address transaction](/api/get-address-transaction-events).\n\n        Retrieves transaction details for a given Transaction Id `tx_id`, for a given account or contract Identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v1",
+                "address",
+                ":principal",
+                ":tx_id",
+                "with_transfers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "principal",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tx_id",
+                  "description": "(Required) Transaction ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "385ab893-558d-4996-a881-8dd1fff17fbf",
+              "name": "Transaction with STX transfers for a given address",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "address",
+                    ":principal",
+                    ":tx_id",
+                    "with_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tx_id",
+                      "description": "(Required) Transaction ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tx\": {\n    \"tx_id\": \"string\",\n    \"nonce\": 4584,\n    \"fee_rate\": \"string\",\n    \"sender_address\": \"string\",\n    \"sponsored\": false,\n    \"post_condition_mode\": \"allow\",\n    \"post_conditions\": [\n      {\n        \"principal\": {\n          \"type_id\": \"principal_origin\"\n        },\n        \"condition_code\": \"sent_equal_to\",\n        \"amount\": \"string\",\n        \"type\": \"stx\"\n      },\n      {\n        \"principal\": {\n          \"type_id\": \"principal_origin\"\n        },\n        \"condition_code\": \"sent_equal_to\",\n        \"amount\": \"string\",\n        \"type\": \"stx\"\n      }\n    ],\n    \"anchor_mode\": \"on_chain_only\",\n    \"block_hash\": \"string\",\n    \"block_height\": 2929,\n    \"block_time\": 4372.32682882705,\n    \"block_time_iso\": \"string\",\n    \"burn_block_time\": 581,\n    \"burn_block_height\": 161,\n    \"burn_block_time_iso\": \"string\",\n    \"parent_burn_block_time\": 9899,\n    \"parent_burn_block_time_iso\": \"string\",\n    \"canonical\": true,\n    \"tx_index\": 9162,\n    \"tx_status\": \"success\",\n    \"tx_result\": {\n      \"hex\": \"string\",\n      \"repr\": \"string\"\n    },\n    \"event_count\": 4871,\n    \"parent_block_hash\": \"string\",\n    \"is_unanchored\": true,\n    \"microblock_hash\": \"string\",\n    \"microblock_sequence\": 7145,\n    \"microblock_canonical\": true,\n    \"execution_cost_read_count\": 7337,\n    \"execution_cost_read_length\": 3560,\n    \"execution_cost_runtime\": 7613,\n    \"execution_cost_write_count\": 6168,\n    \"execution_cost_write_length\": 410,\n    \"vm_error\": \"string\",\n    \"events\": [\n      {\n        \"contract_log\": {\n          \"contract_id\": \"string\",\n          \"topic\": \"string\",\n          \"value\": {\n            \"hex\": \"string\",\n            \"repr\": \"string\"\n          }\n        },\n        \"event_index\": 7056,\n        \"event_type\": \"smart_contract_log\",\n        \"tx_id\": \"string\"\n      },\n      {\n        \"contract_log\": {\n          \"contract_id\": \"string\",\n          \"topic\": \"string\",\n          \"value\": {\n            \"hex\": \"string\",\n            \"repr\": \"string\"\n          }\n        },\n        \"event_index\": 8906,\n        \"event_type\": \"smart_contract_log\",\n        \"tx_id\": \"string\"\n      }\n    ],\n    \"tx_type\": \"token_transfer\",\n    \"token_transfer\": {\n      \"recipient_address\": \"string\",\n      \"amount\": \"string\",\n      \"memo\": \"string\"\n    },\n    \"sponsor_nonce\": 4423,\n    \"sponsor_address\": \"string\"\n  },\n  \"stx_sent\": \"string\",\n  \"stx_received\": \"string\",\n  \"stx_transfers\": [\n    {\n      \"amount\": \"string\",\n      \"sender\": \"string\",\n      \"recipient\": \"string\"\n    },\n    {\n      \"amount\": \"string\",\n      \"sender\": \"string\",\n      \"recipient\": \"string\"\n    }\n  ],\n  \"ft_transfers\": [\n    {\n      \"amount\": \"string\",\n      \"asset_identifier\": \"string\",\n      \"sender\": \"string\",\n      \"recipient\": \"string\"\n    },\n    {\n      \"amount\": \"string\",\n      \"asset_identifier\": \"string\",\n      \"sender\": \"string\",\n      \"recipient\": \"string\"\n    }\n  ],\n  \"nft_transfers\": [\n    {\n      \"value\": {\n        \"hex\": \"string\",\n        \"repr\": \"string\"\n      },\n      \"asset_identifier\": \"string\",\n      \"sender\": \"string\",\n      \"recipient\": \"string\"\n    },\n    {\n      \"value\": {\n        \"hex\": \"string\",\n        \"repr\": \"string\"\n      },\n      \"asset_identifier\": \"string\",\n      \"sender\": \"string\",\n      \"recipient\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d205aad9-39cb-4c29-9167-ac8cd3fb6e2f",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "address",
+                    ":principal",
+                    ":tx_id",
+                    "with_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tx_id",
+                      "description": "(Required) Transaction ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "64e41a9e-a8cc-41b3-8fb5-ca2e5f37db66",
+          "name": "Get account transactions including STX transfers for each transaction.",
+          "request": {
+            "name": "Get account transactions including STX transfers for each transaction.",
+            "description": {
+              "content": "Retrieve all transactions for an account or contract identifier including STX transfers for each transaction.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v1",
+                "address",
+                ":principal",
+                "transactions_with_transfers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Results per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Result offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<integer>",
+                  "description": "Filter for transactions only at this given block height"
+                },
+                {
+                  "disabled": false,
+                  "key": "unanchored",
+                  "value": "false",
+                  "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+                },
+                {
+                  "disabled": false,
+                  "key": "until_block",
+                  "value": "<string>",
+                  "description": "Block hash or block height. Return data representing the state up until that point in time, rather than the current block. Note - Use either of the query parameters but not both at a time."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "principal",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "32ba9693-af18-4c19-a35d-f4ecd8037777",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "address",
+                    ":principal",
+                    "transactions_with_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "unanchored",
+                      "value": "true"
+                    },
+                    {
+                      "key": "until_block",
+                      "value": "60000"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"limit\": 20,\n  \"offset\": 0,\n  \"total\": 1,\n  \"results\": [\n    {\n      \"tx\": {\n        \"tx_id\": \"string\",\n        \"nonce\": 1144,\n        \"fee_rate\": \"string\",\n        \"sender_address\": \"string\",\n        \"sponsored\": false,\n        \"post_condition_mode\": \"allow\",\n        \"post_conditions\": [\n          {\n            \"principal\": {\n              \"type_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"condition_code\": \"sent_equal_to\",\n            \"amount\": \"string\",\n            \"type\": \"stx\"\n          },\n          {\n            \"principal\": {\n              \"type_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"condition_code\": \"sent_equal_to\",\n            \"amount\": \"string\",\n            \"type\": \"stx\"\n          }\n        ],\n        \"anchor_mode\": \"on_chain_only\",\n        \"block_hash\": \"string\",\n        \"block_height\": 1931,\n        \"block_time\": 3816.2644158114936,\n        \"block_time_iso\": \"string\",\n        \"burn_block_time\": 3809,\n        \"burn_block_height\": 3806,\n        \"burn_block_time_iso\": \"string\",\n        \"parent_burn_block_time\": 3605,\n        \"parent_burn_block_time_iso\": \"string\",\n        \"canonical\": false,\n        \"tx_index\": 320,\n        \"tx_status\": \"success\",\n        \"tx_result\": {\n          \"hex\": \"string\",\n          \"repr\": \"string\"\n        },\n        \"event_count\": 7575,\n        \"parent_block_hash\": \"string\",\n        \"is_unanchored\": false,\n        \"microblock_hash\": \"string\",\n        \"microblock_sequence\": 3529,\n        \"microblock_canonical\": true,\n        \"execution_cost_read_count\": 9412,\n        \"execution_cost_read_length\": 6944,\n        \"execution_cost_runtime\": 8865,\n        \"execution_cost_write_count\": 6167,\n        \"execution_cost_write_length\": 2438,\n        \"vm_error\": \"string\",\n        \"events\": [\n          {\n            \"contract_log\": {\n              \"contract_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"topic\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"event_index\": 9414,\n            \"event_type\": \"smart_contract_log\",\n            \"tx_id\": \"string\"\n          },\n          {\n            \"contract_log\": {\n              \"contract_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"topic\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"event_index\": 2262,\n            \"event_type\": \"smart_contract_log\",\n            \"tx_id\": \"string\"\n          }\n        ],\n        \"tx_type\": \"token_transfer\",\n        \"token_transfer\": {\n          \"recipient_address\": \"string\",\n          \"amount\": \"string\",\n          \"memo\": \"string\"\n        },\n        \"sponsor_nonce\": 5903,\n        \"sponsor_address\": \"string\"\n      },\n      \"stx_sent\": \"string\",\n      \"stx_received\": \"string\",\n      \"stx_transfers\": [\n        {\n          \"amount\": \"string\",\n          \"sender\": \"string\",\n          \"recipient\": \"string\"\n        },\n        {\n          \"amount\": \"string\",\n          \"sender\": \"string\",\n          \"recipient\": \"string\"\n        }\n      ],\n      \"ft_transfers\": [\n        {\n          \"amount\": \"string\",\n          \"asset_identifier\": \"string\",\n          \"sender\": \"string\",\n          \"recipient\": \"string\"\n        },\n        {\n          \"amount\": \"string\",\n          \"asset_identifier\": \"string\",\n          \"sender\": \"string\",\n          \"recipient\": \"string\"\n        }\n      ],\n      \"nft_transfers\": [\n        {\n          \"value\": {\n            \"hex\": \"string\",\n            \"repr\": \"string\"\n          },\n          \"asset_identifier\": \"string\",\n          \"sender\": \"string\",\n          \"recipient\": \"string\"\n        },\n        {\n          \"value\": {\n            \"hex\": \"string\",\n            \"repr\": \"string\"\n          },\n          \"asset_identifier\": \"string\",\n          \"sender\": \"string\",\n          \"recipient\": \"string\"\n        }\n      ]\n    },\n    {\n      \"tx\": {\n        \"tx_id\": \"string\",\n        \"nonce\": 7082,\n        \"fee_rate\": \"string\",\n        \"sender_address\": \"string\",\n        \"sponsored\": false,\n        \"post_condition_mode\": \"allow\",\n        \"post_conditions\": [\n          {\n            \"principal\": {\n              \"type_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"condition_code\": \"sent_equal_to\",\n            \"amount\": \"string\",\n            \"type\": \"stx\"\n          },\n          {\n            \"principal\": {\n              \"type_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"condition_code\": \"sent_equal_to\",\n            \"amount\": \"string\",\n            \"type\": \"stx\"\n          }\n        ],\n        \"anchor_mode\": \"on_chain_only\",\n        \"block_hash\": \"string\",\n        \"block_height\": 7735,\n        \"block_time\": 8371.21891375939,\n        \"block_time_iso\": \"string\",\n        \"burn_block_time\": 1991,\n        \"burn_block_height\": 8558,\n        \"burn_block_time_iso\": \"string\",\n        \"parent_burn_block_time\": 7728,\n        \"parent_burn_block_time_iso\": \"string\",\n        \"canonical\": true,\n        \"tx_index\": 594,\n        \"tx_status\": \"success\",\n        \"tx_result\": {\n          \"hex\": \"string\",\n          \"repr\": \"string\"\n        },\n        \"event_count\": 516,\n        \"parent_block_hash\": \"string\",\n        \"is_unanchored\": true,\n        \"microblock_hash\": \"string\",\n        \"microblock_sequence\": 9568,\n        \"microblock_canonical\": true,\n        \"execution_cost_read_count\": 565,\n        \"execution_cost_read_length\": 6704,\n        \"execution_cost_runtime\": 2426,\n        \"execution_cost_write_count\": 8157,\n        \"execution_cost_write_length\": 8847,\n        \"vm_error\": \"string\",\n        \"events\": [\n          {\n            \"contract_log\": {\n              \"contract_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"topic\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"event_index\": 7331,\n            \"event_type\": \"smart_contract_log\",\n            \"tx_id\": \"string\"\n          },\n          {\n            \"contract_log\": {\n              \"contract_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"topic\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"event_index\": 8963,\n            \"event_type\": \"smart_contract_log\",\n            \"tx_id\": \"string\"\n          }\n        ],\n        \"tx_type\": \"token_transfer\",\n        \"token_transfer\": {\n          \"recipient_address\": \"string\",\n          \"amount\": \"string\",\n          \"memo\": \"string\"\n        },\n        \"sponsor_nonce\": 7616,\n        \"sponsor_address\": \"string\"\n      },\n      \"stx_sent\": \"string\",\n      \"stx_received\": \"string\",\n      \"stx_transfers\": [\n        {\n          \"amount\": \"string\",\n          \"sender\": \"string\",\n          \"recipient\": \"string\"\n        },\n        {\n          \"amount\": \"string\",\n          \"sender\": \"string\",\n          \"recipient\": \"string\"\n        }\n      ],\n      \"ft_transfers\": [\n        {\n          \"amount\": \"string\",\n          \"asset_identifier\": \"string\",\n          \"sender\": \"string\",\n          \"recipient\": \"string\"\n        },\n        {\n          \"amount\": \"string\",\n          \"asset_identifier\": \"string\",\n          \"sender\": \"string\",\n          \"recipient\": \"string\"\n        }\n      ],\n      \"nft_transfers\": [\n        {\n          \"value\": {\n            \"hex\": \"string\",\n            \"repr\": \"string\"\n          },\n          \"asset_identifier\": \"string\",\n          \"sender\": \"string\",\n          \"recipient\": \"string\"\n        },\n        {\n          \"value\": {\n            \"hex\": \"string\",\n            \"repr\": \"string\"\n          },\n          \"asset_identifier\": \"string\",\n          \"sender\": \"string\",\n          \"recipient\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b08325da-4d2e-46b7-8a21-3c3e55738acb",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "address",
+                    ":principal",
+                    "transactions_with_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "unanchored",
+                      "value": "true"
+                    },
+                    {
+                      "key": "until_block",
+                      "value": "60000"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "706be7fb-7779-4d5e-9bff-f80b316b5952",
+          "name": "Get account assets",
+          "request": {
+            "name": "Get account assets",
+            "description": {
+              "content": "Retrieves a list of all assets events associated with an account or a Contract Identifier. This includes Transfers, Mints.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v1",
+                "address",
+                ":principal",
+                "assets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Results per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Result offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "unanchored",
+                  "value": "false",
+                  "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+                },
+                {
+                  "disabled": false,
+                  "key": "until_block",
+                  "value": "<string>",
+                  "description": "Block hash or block height. Return data representing the state up until that point in time, rather than the current block. Note - Use either of the query parameters but not both at a time."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "principal",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ef0a95f5-b3fd-435e-9419-aa2370aa4190",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "address",
+                    ":principal",
+                    "assets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "unanchored",
+                      "value": "true"
+                    },
+                    {
+                      "key": "until_block",
+                      "value": "60000"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"limit\": 20,\n  \"offset\": 0,\n  \"total\": 1,\n  \"results\": [\n    {\n      \"contract_log\": {\n        \"contract_id\": \"string\",\n        \"topic\": \"string\",\n        \"value\": {\n          \"hex\": \"string\",\n          \"repr\": \"string\"\n        }\n      },\n      \"event_index\": 4770,\n      \"event_type\": \"smart_contract_log\",\n      \"tx_id\": \"string\"\n    },\n    {\n      \"contract_log\": {\n        \"contract_id\": \"string\",\n        \"topic\": \"string\",\n        \"value\": {\n          \"hex\": \"string\",\n          \"repr\": \"string\"\n        }\n      },\n      \"event_index\": 1365,\n      \"event_type\": \"smart_contract_log\",\n      \"tx_id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e4013b7-61a9-4c8f-892a-4132e5e02d83",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "address",
+                    ":principal",
+                    "assets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "unanchored",
+                      "value": "true"
+                    },
+                    {
+                      "key": "until_block",
+                      "value": "60000"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b17f8f83-9b21-4dab-9e1b-38d947225c41",
+          "name": "Get inbound STX transfers",
+          "request": {
+            "name": "Get inbound STX transfers",
+            "description": {
+              "content": "Retrieves a list of STX transfers with memos to the given principal. This includes regular transfers from a stx-transfer transaction type,\n        and transfers from contract-call transactions a the `send-many-memo` bulk sending contract.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v1",
+                "address",
+                ":principal",
+                "stx_inbound"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Results per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Result offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<integer>",
+                  "description": "Filter for transactions only at this given block height"
+                },
+                {
+                  "disabled": false,
+                  "key": "unanchored",
+                  "value": "false",
+                  "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+                },
+                {
+                  "disabled": false,
+                  "key": "until_block",
+                  "value": "<string>",
+                  "description": "Block hash or block height. Return data representing the state up until that point in time, rather than the current block. Note - Use either of the query parameters but not both at a time."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "principal",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "77e513b0-59ff-443f-bf79-163cfc2a2352",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "address",
+                    ":principal",
+                    "stx_inbound"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "unanchored",
+                      "value": "true"
+                    },
+                    {
+                      "key": "until_block",
+                      "value": "60000"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"limit\": 20,\n  \"offset\": 0,\n  \"total\": 1,\n  \"results\": [\n    {\n      \"sender\": \"string\",\n      \"amount\": \"string\",\n      \"memo\": \"string\",\n      \"block_height\": 3217,\n      \"tx_id\": \"string\",\n      \"transfer_type\": \"bulk-send\",\n      \"tx_index\": 3432\n    },\n    {\n      \"sender\": \"string\",\n      \"amount\": \"string\",\n      \"memo\": \"string\",\n      \"block_height\": 3433,\n      \"tx_id\": \"string\",\n      \"transfer_type\": \"bulk-send\",\n      \"tx_index\": 4293\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28ce3dbf-4c75-4999-a648-15edb8edf81b",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "address",
+                    ":principal",
+                    "stx_inbound"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "unanchored",
+                      "value": "true"
+                    },
+                    {
+                      "key": "until_block",
+                      "value": "60000"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f21b4833-3ef2-46b9-8348-0ef072a9c90b",
+          "name": "Get the latest nonce used by an account",
+          "request": {
+            "name": "Get the latest nonce used by an account",
+            "description": {
+              "content": "Retrieves the latest nonce values used by an account by inspecting the mempool, microblock transactions, and anchored transactions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v1",
+                "address",
+                ":principal",
+                "nonces"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "block_height",
+                  "value": "<integer>",
+                  "description": "Optionally get the nonce at a given block height."
+                },
+                {
+                  "disabled": false,
+                  "key": "block_hash",
+                  "value": "<string>",
+                  "description": "Optionally get the nonce at a given block hash. Note - Use either of the query parameters but not both at a time."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "principal",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9eeb61f6-f646-46d4-8b97-b0f0da6d7ea4",
+              "name": "The latest nonce values used by an account by inspecting the mempool, microblock transactions, and anchored transactions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "address",
+                    ":principal",
+                    "nonces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "block_height",
+                      "value": "66119"
+                    },
+                    {
+                      "key": "block_hash",
+                      "value": "0x72d53f3cba39e149dcd42708e535bdae03d73e60d2fe853aaf61c0b392f521e9"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"last_mempool_tx_nonce\": 2271,\n  \"last_executed_tx_nonce\": 2231,\n  \"possible_next_nonce\": 5406,\n  \"detected_missing_nonces\": [\n    1638,\n    416\n  ],\n  \"detected_mempool_nonces\": [\n    8334,\n    3438\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ae0bb77-de31-47b5-871f-6d296cea4590",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "address",
+                    ":principal",
+                    "nonces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "block_height",
+                      "value": "66119"
+                    },
+                    {
+                      "key": "block_hash",
+                      "value": "0x72d53f3cba39e149dcd42708e535bdae03d73e60d2fe853aaf61c0b392f521e9"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "71eb1b1e-446d-4fbc-acfb-184be1fb3997",
+          "name": "Get principal STX balance",
+          "request": {
+            "name": "Get principal STX balance",
+            "description": {
+              "content": "Retrieves STX account balance information for a given Address or Contract Identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v2",
+                "addresses",
+                ":principal",
+                "balances",
+                "stx"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include_mempool",
+                  "value": "false",
+                  "description": "Include pending mempool transactions in the balance calculation"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "principal",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2171c1d7-c8a8-4eb3-b6e3-15ffd305b41d",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v2",
+                    "addresses",
+                    ":principal",
+                    "balances",
+                    "stx"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_mempool",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"balance\": \"string\",\n  \"total_miner_rewards_received\": \"string\",\n  \"lock_tx_id\": \"string\",\n  \"locked\": \"string\",\n  \"lock_height\": 5790,\n  \"burnchain_lock_height\": 6527,\n  \"burnchain_unlock_height\": 1929,\n  \"estimated_balance\": \"string\",\n  \"pending_balance_inbound\": \"string\",\n  \"pending_balance_outbound\": \"string\",\n  \"total_sent\": \"string\",\n  \"total_received\": \"string\",\n  \"total_fees_sent\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9cfd0304-8514-49de-bae8-b3c2d6644b24",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v2",
+                    "addresses",
+                    ":principal",
+                    "balances",
+                    "stx"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_mempool",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9ffbb456-bfcd-4d8e-8f3f-e55190525c75",
+          "name": "Get principal FT balances",
+          "request": {
+            "name": "Get principal FT balances",
+            "description": {
+              "content": "Retrieves Fungible-token account balance information for a given Address or Contract Identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v2",
+                "addresses",
+                ":principal",
+                "balances",
+                "ft"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Results per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Result offset"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "principal",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "adffbfcc-2732-417a-9228-00ead7a10086",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v2",
+                    "addresses",
+                    ":principal",
+                    "balances",
+                    "ft"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"limit\": 20,\n  \"offset\": 0,\n  \"total\": 1,\n  \"results\": [\n    {\n      \"token\": \"string\",\n      \"balance\": \"string\"\n    },\n    {\n      \"token\": \"string\",\n      \"balance\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4550554-7a3b-41b4-ae34-d10228037952",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v2",
+                    "addresses",
+                    ":principal",
+                    "balances",
+                    "ft"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "033f2103-8da5-4cfa-a128-29cd0dc24cd5",
+          "name": "Get principal FT balance",
+          "request": {
+            "name": "Get principal FT balance",
+            "description": {
+              "content": "Retrieves a specific fungible-token balance for a given principal.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v2",
+                "addresses",
+                ":principal",
+                "balances",
+                "ft",
+                ":token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "principal",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "token",
+                  "description": "(Required) fungible token identifier, e.g. `SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token::sbtc-token`"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8a0941ad-dde6-4e78-929a-acf3776990f6",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v2",
+                    "addresses",
+                    ":principal",
+                    "balances",
+                    "ft",
+                    ":token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) fungible token identifier, e.g. `SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token::sbtc-token`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"balance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d411fa2-59ac-4fd9-acd3-9b0847726888",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v2",
+                    "addresses",
+                    ":principal",
+                    "balances",
+                    "ft",
+                    ":token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "principal",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) fungible token identifier, e.g. `SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token::sbtc-token`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "87a5afa7-f258-4c90-9086-80f3a9cd4a2d",
+          "name": "Get account info",
+          "request": {
+            "name": "Get account info",
+            "description": {
+              "content": "Get the account data for the provided principal\n\nWhere balance is the hex encoding of a unsigned 128-bit integer (big-endian), nonce is a unsigned 64-bit integer, and the proofs are provided as hex strings.\n\nFor non-existent accounts, this does not 404, rather it returns an object with balance and nonce of 0.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "accounts",
+                ":principal"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "88764e7a-9b68-4c6a-9a54-1438f67682e6",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    ":principal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"reference ./components/examples/account-data.example.json not found in the given specification\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9002fba9-3656-46b1-ac57-4128b50d1a89",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    ":principal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Bad request",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ed7e94a8-4351-42fc-b3c5-96a19d26ae48",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    ":principal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Not found",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5e45adff-c4cc-4953-ba2a-56d25b2b7a54",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    ":principal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Internal Server Error",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.hiro.so/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "898ad789-7cda-43c7-ac9a-a0df0f04b983",
+    "name": "Signer Metrics Accounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Welcome to the API reference overview for the Signer Metrics API.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,637 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Signer Metrics Accounts Transactions API",
+    "version": "1.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get recent transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/tx/",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "unanchored",
+                "value": "true",
+                "type": "query",
+                "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Option to sort results by block height, timestamp, or fee"
+              },
+              {
+                "name": "from_address",
+                "value": "",
+                "type": "query",
+                "description": "Option to filter results by sender address"
+              },
+              {
+                "name": "to_address",
+                "value": "",
+                "type": "query",
+                "description": "Option to filter results by recipient address"
+              },
+              {
+                "name": "start_time",
+                "value": "1704067200",
+                "type": "query",
+                "description": "Filter by transactions after this timestamp (unix timestamp in seconds)"
+              },
+              {
+                "name": "end_time",
+                "value": "1706745599",
+                "type": "query",
+                "description": "Filter by transactions before this timestamp (unix timestamp in seconds)"
+              },
+              {
+                "name": "contract_id",
+                "value": "SP000000000000000000002Q6VF78.pox-4",
+                "type": "query",
+                "description": "Option to filter results by contract ID"
+              },
+              {
+                "name": "function_name",
+                "value": "delegate-stx",
+                "type": "query",
+                "description": "Filter by contract call transactions involving this function name"
+              },
+              {
+                "name": "nonce",
+                "value": "123",
+                "type": "query",
+                "description": "Filter by transactions with this nonce"
+              },
+              {
+                "name": "exclude_function_args",
+                "value": "",
+                "type": "query",
+                "description": "Exclude function_args from contract call responses for smaller transaction sizes."
+              }
+            ]
+          },
+          "docs": "Retrieves all recently mined transactions"
+        },
+        {
+          "info": {
+            "name": "Get list of details for transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/tx/multiple",
+            "params": [
+              {
+                "name": "tx_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "event_limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "event_offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              },
+              {
+                "name": "unanchored",
+                "value": "true",
+                "type": "query",
+                "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+              },
+              {
+                "name": "exclude_function_args",
+                "value": "",
+                "type": "query",
+                "description": "Exclude function_args from contract call responses for smaller transaction sizes."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of transactions for a given list of transaction IDs"
+        },
+        {
+          "info": {
+            "name": "Get mempool transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/tx/mempool",
+            "params": [
+              {
+                "name": "sender_address",
+                "value": "SP318Q55DEKHRXJK696033DQN5C54D9K2EE6DHRWP",
+                "type": "query",
+                "description": "STX Address"
+              },
+              {
+                "name": "recipient_address",
+                "value": "SP318Q55DEKHRXJK696033DQN5C54D9K2EE6DHRWP",
+                "type": "query",
+                "description": "STX Address"
+              },
+              {
+                "name": "address",
+                "value": "SP318Q55DEKHRXJK696033DQN5C54D9K2EE6DHRWP",
+                "type": "query",
+                "description": "STX Address"
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Option to sort results by transaction age, size, or fee rate."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Results order"
+              },
+              {
+                "name": "unanchored",
+                "value": "true",
+                "type": "query",
+                "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "exclude_function_args",
+                "value": "",
+                "type": "query",
+                "description": "Exclude function_args from contract call responses for smaller transaction sizes."
+              }
+            ]
+          },
+          "docs": "Retrieves all transactions that have been recently broadcast to the mempool. These are pending transactions awaiting confirmation.\n\n        If you need to monitor new transactions, we highly recommend subscribing to [WebSockets or Socket.io](https://github.com/hirosystems/stacks-blockchain-api/tree/master/client) for real-time updates."
+        },
+        {
+          "info": {
+            "name": "Get statistics for mempool transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/tx/mempool/stats"
+          },
+          "docs": "Queries for transactions counts, age (by block height), fees (simple average), and size.\n        All results broken down by transaction type and percentiles (p25, p50, p75, p95)."
+        },
+        {
+          "info": {
+            "name": "Transaction Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/tx/events",
+            "params": [
+              {
+                "name": "tx_id",
+                "value": "0xf6bd5f4a7b26184a3466340b2e99fd003b4962c0e382a7e4b6a13df3dd7a91c6",
+                "type": "query",
+                "description": "Transaction ID"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              }
+            ]
+          },
+          "docs": "Retrieves the list of events filtered by principal (STX address or Smart Contract ID), transaction id or event types.\n        The list of event types is ('smart_contract_log', 'stx_lock', 'stx_asset', 'fungible_token_asset', 'non_fungible_token_asset')."
+        },
+        {
+          "info": {
+            "name": "Get transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/tx/:tx_id",
+            "params": [
+              {
+                "name": "event_limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "event_offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              },
+              {
+                "name": "unanchored",
+                "value": "true",
+                "type": "query",
+                "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+              },
+              {
+                "name": "exclude_function_args",
+                "value": "",
+                "type": "query",
+                "description": "Exclude function_args from contract call responses for smaller transaction sizes."
+              },
+              {
+                "name": "tx_id",
+                "value": "0xf6bd5f4a7b26184a3466340b2e99fd003b4962c0e382a7e4b6a13df3dd7a91c6",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "Retrieves transaction details for a given transaction ID"
+        },
+        {
+          "info": {
+            "name": "Get raw transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/tx/:tx_id/raw",
+            "params": [
+              {
+                "name": "event_limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "event_offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              },
+              {
+                "name": "tx_id",
+                "value": "0xf6bd5f4a7b26184a3466340b2e99fd003b4962c0e382a7e4b6a13df3dd7a91c6",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "Retrieves a hex encoded serialized transaction for a given ID"
+        },
+        {
+          "info": {
+            "name": "Transactions by block hash",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/tx/block/:block_hash",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "exclude_function_args",
+                "value": "",
+                "type": "query",
+                "description": "Exclude function_args from contract call responses for smaller transaction sizes."
+              },
+              {
+                "name": "block_hash",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "**NOTE:** This endpoint is deprecated in favor of [Get transactions by block](/api/get-transactions-by-block).\n\n        Retrieves a list of all transactions within a block for a given block hash."
+        },
+        {
+          "info": {
+            "name": "Transactions by block height",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/tx/block_height/:height",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "exclude_function_args",
+                "value": "",
+                "type": "query",
+                "description": "Exclude function_args from contract call responses for smaller transaction sizes."
+              },
+              {
+                "name": "height",
+                "value": "777678",
+                "type": "path",
+                "description": "Block height"
+              }
+            ]
+          },
+          "docs": "**NOTE:** This endpoint is deprecated in favor of [Get transactions by block](/api/get-transactions-by-block).\n\n        Retrieves all transactions within a block at a given height"
+        },
+        {
+          "info": {
+            "name": "Transactions for address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/address/:principal/mempool",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              },
+              {
+                "name": "unanchored",
+                "value": "true",
+                "type": "query",
+                "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+              },
+              {
+                "name": "exclude_function_args",
+                "value": "",
+                "type": "query",
+                "description": "Exclude function_args from contract call responses for smaller transaction sizes."
+              },
+              {
+                "name": "principal",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves all transactions for a given address that are currently in mempool"
+        },
+        {
+          "info": {
+            "name": "Get transactions by block",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v2/blocks/:height_or_hash/transactions",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              },
+              {
+                "name": "height_or_hash",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves transactions confirmed in a single block"
+        },
+        {
+          "info": {
+            "name": "Get address transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v2/addresses/:address/transactions",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              },
+              {
+                "name": "exclude_function_args",
+                "value": "",
+                "type": "query",
+                "description": "Exclude function_args from contract call responses for smaller transaction sizes."
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a paginated list of confirmed transactions sent or received by a STX address or Smart Contract ID, alongside the total amount of STX sent or received and the number of STX, FT and NFT transfers contained within each transaction.\n\n        More information on Transaction types can be found [here](https://docs.stacks.co/transactions/how-transactions-work#types)."
+        },
+        {
+          "info": {
+            "name": "Get events for an address transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v2/addresses/:address/transactions/:tx_id/events",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tx_id",
+                "value": "0xf6bd5f4a7b26184a3466340b2e99fd003b4962c0e382a7e4b6a13df3dd7a91c6",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "Retrieves a paginated list of all STX, FT and NFT events concerning a STX address or Smart Contract ID within a specific transaction."
+        },
+        {
+          "info": {
+            "name": "Broadcast raw transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.hiro.so/v2/transactions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Broadcast raw transactions on the network. You can use the [@stacks/transactions](https://github.com/blockstack/stacks.js)\nproject to generate a raw transaction payload.\n\nThe node performs static validation checks on transactions before accepting them into the mempool, including:\n- Transaction format validation\n- Signature verification\n- Nonce checking\n- Fee validation\n- Size limits\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve transaction details by TXID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v3/transaction/:txid",
+            "params": [
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID (64 hexadecimal characters)"
+              }
+            ]
+          },
+          "docs": "Get a JSON with the transaction details including the `index_block_hash`,\nthe hex-encoded transaction body, and the `result`.\n"
+        },
+        {
+          "info": {
+            "name": "Get unconfirmed transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v2/transactions/unconfirmed/:txid",
+            "params": [
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID (64 hexadecimal characters)"
+              }
+            ]
+          },
+          "docs": "Get an unconfirmed transaction by its transaction ID.\nThis looks in both the mempool and unconfirmed microblock stream.\n"
+        },
+        {
+          "info": {
+            "name": "Query mempool for missing transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.hiro.so/v2/mempool/query",
+            "params": [
+              {
+                "name": "page_id",
+                "value": "",
+                "type": "query",
+                "description": "Transaction ID to start pagination from"
+              }
+            ]
+          },
+          "docs": "Query the mempool for transactions that might be missing from the requesting node.\nThis endpoint supports pagination and streaming of transaction data.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

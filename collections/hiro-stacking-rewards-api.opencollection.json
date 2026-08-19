@@ -1,0 +1,149 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Signer Metrics Accounts Stacking Rewards API",
+    "version": "1.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stacking Rewards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get recent reward slot holders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/burnchain/reward_slot_holders",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "max number of items to fetch"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of the Bitcoin addresses that would validly receive Proof-of-Transfer commitments."
+        },
+        {
+          "info": {
+            "name": "Get recent reward slot holder entries for the given address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/burnchain/reward_slot_holders/:address",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              },
+              {
+                "name": "address",
+                "value": "36hQtSEXBMevo5chpxhfAGiCTSC34QKgda",
+                "type": "path",
+                "description": "Reward slot holder recipient address. Should either be in the native burnchain's format (e.g. B58 for Bitcoin), or if a STX principal address is provided it will be encoded as into the equivalent burnchain format"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of the Bitcoin addresses that would validly receive Proof-of-Transfer commitments for a given reward slot holder recipient address."
+        },
+        {
+          "info": {
+            "name": "Get recent burnchain reward recipients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/burnchain/rewards",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of recent burnchain (e.g. Bitcoin) reward recipients with the associated amounts and block info"
+        },
+        {
+          "info": {
+            "name": "Get recent burnchain reward for the given recipient",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/burnchain/rewards/:address",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              },
+              {
+                "name": "address",
+                "value": "36hQtSEXBMevo5chpxhfAGiCTSC34QKgda",
+                "type": "path",
+                "description": "Reward recipient address. Should either be in the native burnchain's format (e.g. B58 for Bitcoin), or if a STX principal address is provided it will be encoded as into the equivalent burnchain format"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of recent burnchain (e.g. Bitcoin) rewards for the given recipient with the associated amounts and block info"
+        },
+        {
+          "info": {
+            "name": "Get total burnchain rewards for the given recipient",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/burnchain/rewards/:address/total",
+            "params": [
+              {
+                "name": "address",
+                "value": "36hQtSEXBMevo5chpxhfAGiCTSC34QKgda",
+                "type": "path",
+                "description": "Reward recipient address. Should either be in the native burnchain's format (e.g. B58 for Bitcoin), or if a STX principal address is provided it will be encoded as into the equivalent burnchain format"
+              }
+            ]
+          },
+          "docs": "Retrieves the total burnchain (e.g. Bitcoin) rewards for a given recipient `address`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

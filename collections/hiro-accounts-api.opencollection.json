@@ -1,0 +1,413 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Signer Metrics Accounts API",
+    "version": "1.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get account STX balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/address/:principal/stx",
+            "params": [
+              {
+                "name": "unanchored",
+                "value": "true",
+                "type": "query",
+                "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+              },
+              {
+                "name": "until_block",
+                "value": "",
+                "type": "query",
+                "description": "Block hash or block height. Return data representing the state up until that point in time, rather than the current block. Note - Use either of the query parameters but not both at a time."
+              },
+              {
+                "name": "principal",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "**NOTE:** This endpoint is deprecated in favor of [Get address STX balance](/api/get-principal-stx-balance).\n\n        Retrieves STX token balance for a given Address or Contract Identifier."
+        },
+        {
+          "info": {
+            "name": "Get account balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/address/:principal/balances",
+            "params": [
+              {
+                "name": "unanchored",
+                "value": "true",
+                "type": "query",
+                "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+              },
+              {
+                "name": "until_block",
+                "value": "",
+                "type": "query",
+                "description": "Block hash or block height. Return data representing the state up until that point in time, rather than the current block. Note - Use either of the query parameters but not both at a time."
+              },
+              {
+                "name": "principal",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "**NOTE:** This endpoint is deprecated in favor of [Get address FT balances](/api/get-principal-ft-balances).\n\n        Retrieves total account balance information for a given Address or Contract Identifier. This includes the balances of STX Tokens, Fungible Tokens and Non-Fungible Tokens for the account."
+        },
+        {
+          "info": {
+            "name": "Get account transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/address/:principal/transactions",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              },
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "Filter for transactions only at this given block height"
+              },
+              {
+                "name": "unanchored",
+                "value": "true",
+                "type": "query",
+                "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+              },
+              {
+                "name": "until_block",
+                "value": "",
+                "type": "query",
+                "description": "Block hash or block height. Return data representing the state up until that point in time, rather than the current block. Note - Use either of the query parameters but not both at a time."
+              },
+              {
+                "name": "exclude_function_args",
+                "value": "",
+                "type": "query",
+                "description": "Exclude function_args from contract call responses for smaller transaction sizes."
+              },
+              {
+                "name": "principal",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "**NOTE:** This endpoint is deprecated in favor of [Get address transactions](/api/get-address-transactions).\n\n        Retrieves a list of all Transactions for a given Address or Contract Identifier. More information on Transaction types can be found [here](https://docs.stacks.co/transactions/how-transactions-work#types).\n\n        If you need to actively monitor new transactions for an address or contract id, we highly recommend subscribing to [WebSockets or Socket.io](https://github.com/hirosyst"
+        },
+        {
+          "info": {
+            "name": "Get account transaction information for specific transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/address/:principal/:tx_id/with_transfers",
+            "params": [
+              {
+                "name": "principal",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tx_id",
+                "value": "0x34d79c7cfc2fe525438736733e501a4bf0308a5556e3e080d1e2c0858aad7448",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "**NOTE:** This endpoint is deprecated in favor of [Get events for an address transaction](/api/get-address-transaction-events).\n\n        Retrieves transaction details for a given Transaction Id `tx_id`, for a given account or contract Identifier."
+        },
+        {
+          "info": {
+            "name": "Get account transactions including STX transfers for each transaction.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/address/:principal/transactions_with_transfers",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              },
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "Filter for transactions only at this given block height"
+              },
+              {
+                "name": "unanchored",
+                "value": "true",
+                "type": "query",
+                "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+              },
+              {
+                "name": "until_block",
+                "value": "",
+                "type": "query",
+                "description": "Block hash or block height. Return data representing the state up until that point in time, rather than the current block. Note - Use either of the query parameters but not both at a time."
+              },
+              {
+                "name": "principal",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve all transactions for an account or contract identifier including STX transfers for each transaction."
+        },
+        {
+          "info": {
+            "name": "Get account assets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/address/:principal/assets",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              },
+              {
+                "name": "unanchored",
+                "value": "true",
+                "type": "query",
+                "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+              },
+              {
+                "name": "until_block",
+                "value": "",
+                "type": "query",
+                "description": "Block hash or block height. Return data representing the state up until that point in time, rather than the current block. Note - Use either of the query parameters but not both at a time."
+              },
+              {
+                "name": "principal",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all assets events associated with an account or a Contract Identifier. This includes Transfers, Mints."
+        },
+        {
+          "info": {
+            "name": "Get inbound STX transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/address/:principal/stx_inbound",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              },
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "Filter for transactions only at this given block height"
+              },
+              {
+                "name": "unanchored",
+                "value": "true",
+                "type": "query",
+                "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+              },
+              {
+                "name": "until_block",
+                "value": "",
+                "type": "query",
+                "description": "Block hash or block height. Return data representing the state up until that point in time, rather than the current block. Note - Use either of the query parameters but not both at a time."
+              },
+              {
+                "name": "principal",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of STX transfers with memos to the given principal. This includes regular transfers from a stx-transfer transaction type,\n        and transfers from contract-call transactions a the `send-many-memo` bulk sending contract."
+        },
+        {
+          "info": {
+            "name": "Get the latest nonce used by an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/address/:principal/nonces",
+            "params": [
+              {
+                "name": "block_height",
+                "value": "66119",
+                "type": "query",
+                "description": "Optionally get the nonce at a given block height."
+              },
+              {
+                "name": "block_hash",
+                "value": "0x72d53f3cba39e149dcd42708e535bdae03d73e60d2fe853aaf61c0b392f521e9",
+                "type": "query",
+                "description": "Optionally get the nonce at a given block hash. Note - Use either of the query parameters but not both at a time."
+              },
+              {
+                "name": "principal",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the latest nonce values used by an account by inspecting the mempool, microblock transactions, and anchored transactions."
+        },
+        {
+          "info": {
+            "name": "Get principal STX balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v2/addresses/:principal/balances/stx",
+            "params": [
+              {
+                "name": "include_mempool",
+                "value": "",
+                "type": "query",
+                "description": "Include pending mempool transactions in the balance calculation"
+              },
+              {
+                "name": "principal",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves STX account balance information for a given Address or Contract Identifier."
+        },
+        {
+          "info": {
+            "name": "Get principal FT balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v2/addresses/:principal/balances/ft",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              },
+              {
+                "name": "principal",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves Fungible-token account balance information for a given Address or Contract Identifier."
+        },
+        {
+          "info": {
+            "name": "Get principal FT balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v2/addresses/:principal/balances/ft/:token",
+            "params": [
+              {
+                "name": "principal",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "fungible token identifier, e.g. `SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token::sbtc-token`"
+              }
+            ]
+          },
+          "docs": "Retrieves a specific fungible-token balance for a given principal."
+        },
+        {
+          "info": {
+            "name": "Get account info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v2/accounts/:principal"
+          },
+          "docs": "Get the account data for the provided principal\n\nWhere balance is the hex encoding of a unsigned 128-bit integer (big-endian), nonce is a unsigned 64-bit integer, and the proofs are provided as hex strings.\n\nFor non-existent accounts, this does not 404, rather it returns an object with balance and nonce of 0.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

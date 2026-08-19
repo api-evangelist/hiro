@@ -1,0 +1,155 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Signer Metrics Accounts Proof of Transfer API",
+    "version": "1.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Proof of Transfer",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get PoX cycles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v2/pox/cycles",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of PoX cycles"
+        },
+        {
+          "info": {
+            "name": "Get PoX cycle",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v2/pox/cycles/:cycle_number",
+            "params": [
+              {
+                "name": "cycle_number",
+                "value": "",
+                "type": "path",
+                "description": "PoX cycle number"
+              }
+            ]
+          },
+          "docs": "Retrieves details for a PoX cycle"
+        },
+        {
+          "info": {
+            "name": "Get signers in PoX cycle",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v2/pox/cycles/:cycle_number/signers",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              },
+              {
+                "name": "cycle_number",
+                "value": "",
+                "type": "path",
+                "description": "PoX cycle number"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of signers in a PoX cycle"
+        },
+        {
+          "info": {
+            "name": "Get signer in PoX cycle",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v2/pox/cycles/:cycle_number/signers/:signer_key",
+            "params": [
+              {
+                "name": "cycle_number",
+                "value": "",
+                "type": "path",
+                "description": "PoX cycle number"
+              },
+              {
+                "name": "signer_key",
+                "value": "0x038e3c4529395611be9abf6fa3b6987e81d402385e3d605a073f42f407565a4a3d",
+                "type": "path",
+                "description": "Signer key"
+              }
+            ]
+          },
+          "docs": "Retrieves details for a signer in a PoX cycle"
+        },
+        {
+          "info": {
+            "name": "Get stackers for signer in PoX cycle",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v2/pox/cycles/:cycle_number/signers/:signer_key/stackers",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              },
+              {
+                "name": "cycle_number",
+                "value": "",
+                "type": "path",
+                "description": "PoX cycle number"
+              },
+              {
+                "name": "signer_key",
+                "value": "0x038e3c4529395611be9abf6fa3b6987e81d402385e3d605a073f42f407565a4a3d",
+                "type": "path",
+                "description": "Signer key"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of stackers for a signer in a PoX cycle"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

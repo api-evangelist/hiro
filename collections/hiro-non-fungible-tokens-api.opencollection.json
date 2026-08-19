@@ -1,0 +1,151 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Signer Metrics Accounts Non-Fungible Tokens API",
+    "version": "1.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Non-Fungible Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Non-Fungible Token holdings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/tokens/nft/holdings",
+            "params": [
+              {
+                "name": "principal",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "asset_identifiers",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "max number of tokens to fetch"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "index of first tokens to fetch"
+              },
+              {
+                "name": "tx_metadata",
+                "value": "",
+                "type": "query",
+                "description": "whether or not to include the complete transaction metadata instead of just `tx_id`. Enabling this option can affect performance and response times."
+              }
+            ]
+          },
+          "docs": "Retrieves the list of Non-Fungible Tokens owned by the given principal (STX address or Smart Contract ID).\n        Results can be filtered by one or more asset identifiers and can include metadata about the transaction that made the principal own each token.\n\n        More information on Non-Fungible Tokens on the Stacks blockchain can be found [here](https://docs.stacks.co/build/create-tokens/creating-a-nft)."
+        },
+        {
+          "info": {
+            "name": "Non-Fungible Token history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/tokens/nft/history",
+            "params": [
+              {
+                "name": "asset_identifier",
+                "value": "SP2X0TZ59D5SZ8ACQ6YMCHHNR2ZN51Z32E2CJ173.the-explorer-guild::The-Explorer-Guild",
+                "type": "query",
+                "description": "asset class identifier"
+              },
+              {
+                "name": "value",
+                "value": "0x0100000000000000000000000000000803",
+                "type": "query",
+                "description": "hex representation of the token's unique value"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "max number of events to fetch"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "index of first event to fetch"
+              },
+              {
+                "name": "unanchored",
+                "value": "true",
+                "type": "query",
+                "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+              },
+              {
+                "name": "tx_metadata",
+                "value": "",
+                "type": "query",
+                "description": "whether or not to include the complete transaction metadata instead of just `tx_id`. Enabling this option can affect performance and response times."
+              }
+            ]
+          },
+          "docs": "Retrieves all events relevant to a Non-Fungible Token. Useful to determine the ownership history of a particular asset.\n\n        More information on Non-Fungible Tokens on the Stacks blockchain can be found [here](https://docs.stacks.co/build/create-tokens/creating-a-nft)."
+        },
+        {
+          "info": {
+            "name": "Non-Fungible Token mints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/tokens/nft/mints",
+            "params": [
+              {
+                "name": "asset_identifier",
+                "value": "SP2X0TZ59D5SZ8ACQ6YMCHHNR2ZN51Z32E2CJ173.the-explorer-guild::The-Explorer-Guild",
+                "type": "query",
+                "description": "asset class identifier"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "max number of events to fetch"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "index of first event to fetch"
+              },
+              {
+                "name": "unanchored",
+                "value": "true",
+                "type": "query",
+                "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+              },
+              {
+                "name": "tx_metadata",
+                "value": "",
+                "type": "query",
+                "description": "whether or not to include the complete transaction metadata instead of just `tx_id`. Enabling this option can affect performance and response times."
+              }
+            ]
+          },
+          "docs": "Retrieves all mint events for a Non-Fungible Token asset class. Useful to determine which NFTs of a particular collection have been claimed.\n\n        More information on Non-Fungible Tokens on the Stacks blockchain can be found [here](https://docs.stacks.co/build/create-tokens/creating-a-nft)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

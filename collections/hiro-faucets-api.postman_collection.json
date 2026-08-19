@@ -1,0 +1,532 @@
+{
+  "item": [
+    {
+      "id": "1b043de3-d656-4872-a7a2-4790267961b3",
+      "name": "Faucets",
+      "description": {
+        "content": "Endpoints to request STX or BTC tokens (not possible on Mainnet)",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9630fde2-3c28-4ac5-8117-f0dda2c6b3cf",
+          "name": "Add regtest BTC tokens to address",
+          "request": {
+            "name": "Add regtest BTC tokens to address",
+            "description": {
+              "content": "Add 0.01 BTC token to the specified regtest BTC address.\n\n        The endpoint returns the transaction ID, which you can use to view the transaction in a regtest Bitcoin block\n        explorer. The tokens are delivered once the transaction has been included in a block.\n\n        **Note:** This is a Bitcoin regtest-only endpoint. This endpoint will not work on the Bitcoin mainnet.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v1",
+                "faucets",
+                "btc"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>",
+                  "description": "A valid regtest BTC address"
+                },
+                {
+                  "disabled": false,
+                  "key": "large",
+                  "value": "false",
+                  "description": "Request a large amount of regtest BTC than the default"
+                },
+                {
+                  "disabled": false,
+                  "key": "xlarge",
+                  "value": "false",
+                  "description": "Request an extra large amount of regtest BTC than the default"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d8dbf365-11c9-433a-a3a4-7cf504a801d6",
+              "name": "POST request that initiates a transfer of tokens to a specified Bitcoin regtest address",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "faucets",
+                    "btc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "2N4M94S1ZPt8HfxydXzL2P7qyzgVq7MHWts"
+                    },
+                    {
+                      "key": "large",
+                      "value": "false"
+                    },
+                    {
+                      "key": "xlarge",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"txid\": \"string\",\n  \"raw_tx\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c338c9a5-7627-4b3e-be51-7478c2fb0bdd",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "faucets",
+                    "btc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "2N4M94S1ZPt8HfxydXzL2P7qyzgVq7MHWts"
+                    },
+                    {
+                      "key": "large",
+                      "value": "false"
+                    },
+                    {
+                      "key": "xlarge",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1a8818e0-ae8f-456f-aa62-6f59f28fc79c",
+          "name": "Get BTC balance for address",
+          "request": {
+            "name": "Get BTC balance for address",
+            "description": {},
+            "url": {
+              "path": [
+                "extended",
+                "v1",
+                "faucets",
+                "btc",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) A valid regtest BTC address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3005ac2f-26d1-4b48-849c-2a878bf83cf5",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "faucets",
+                    "btc",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) A valid regtest BTC address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"balance\": 6285.953719491771\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "922d5f82-2384-4a62-ab38-795fc19a7c8c",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "faucets",
+                    "btc",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) A valid regtest BTC address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5fb0fd46-3793-46c3-a7b7-4aa9e51ba104",
+          "name": "Get STX testnet tokens",
+          "request": {
+            "name": "Get STX testnet tokens",
+            "description": {
+              "content": "Add 500 STX tokens to the specified testnet address. Testnet STX addresses begin with `ST`. If the `stacking`\n        parameter is set to `true`, the faucet will add the required number of tokens for individual stacking to the\n        specified testnet address.\n\n        The endpoint returns the transaction ID, which you can use to view the transaction in the\n        [Stacks Explorer](https://explorer.hiro.so/?chain=testnet). The tokens are delivered once the transaction has\n        been included in an anchor block.\n\n        A common reason for failed faucet transactions is that the faucet has run out of tokens. If you are experiencing\n        failed faucet transactions to a testnet address, you can get help in [Discord](https://stacks.chat).\n\n        **Note:** This is a testnet only endpoint. This endpoint will not work on the mainnet.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v1",
+                "faucets",
+                "stx"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>",
+                  "description": "A valid testnet STX address"
+                },
+                {
+                  "disabled": false,
+                  "key": "stacking",
+                  "value": "false",
+                  "description": "Request the amount of STX tokens needed for individual address stacking"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8b9ba056-07de-4ff1-82c3-a9fd35e523bd",
+              "name": "POST request that initiates a transfer of tokens to a specified testnet address",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "faucets",
+                    "stx"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "ST3M7N9Q9HDRM7RVP1Q26P0EE69358PZZAZD7KMXQ"
+                    },
+                    {
+                      "key": "stacking",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"txId\": \"string\",\n  \"txRaw\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4b3dd03-c30e-4ce9-b64a-da999682c81a",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "faucets",
+                    "stx"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "ST3M7N9Q9HDRM7RVP1Q26P0EE69358PZZAZD7KMXQ"
+                    },
+                    {
+                      "key": "stacking",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"string\",\n  \"help\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.hiro.so/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "68fe1cea-20ec-4048-9abb-67bb0df5bc34",
+    "name": "Signer Metrics Accounts Faucets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Welcome to the API reference overview for the Signer Metrics API.",
+      "type": "text/plain"
+    }
+  }
+}

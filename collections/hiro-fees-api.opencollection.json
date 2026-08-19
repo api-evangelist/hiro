@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Signer Metrics Accounts Fees API",
+    "version": "1.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fees",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch fee rate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.hiro.so/extended/v1/fee_rate/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "**NOTE:** This endpoint is deprecated in favor of [Get approximate fees for a given transaction](/api/get-approximate-fees-for-a-given-transaction).\n\n        Retrieves estimated fee rate."
+        },
+        {
+          "info": {
+            "name": "Get approximate fees for the given transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.hiro.so/v2/fees/transaction",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get an estimated fee for the supplied transaction.  This\nestimates the execution cost of the transaction, the current\nfee rate of the network, and returns estimates for fee\namounts.\n\n* `transaction_payload` is a hex-encoded serialization of\n  the TransactionPayload for the transaction.\n* `estimated_len` is an optional argument that provides the\n  endpoint with an estimation of the final length (in bytes)\n  of the transaction, including any post-conditions and\n  signatures\n\nIf the node cannot pro"
+        },
+        {
+          "info": {
+            "name": "Get estimated fee",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v2/fees/transfer"
+          },
+          "docs": "Get an estimated fee rate for STX transfer transactions. This is a fee\nrate per byte, returned as a JSON integer (microSTX per byte).\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

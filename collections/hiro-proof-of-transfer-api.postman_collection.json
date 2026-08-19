@@ -1,0 +1,863 @@
+{
+  "item": [
+    {
+      "id": "9eac7989-0325-4638-bcc5-16842fd7e674",
+      "name": "Proof of Transfer",
+      "description": {
+        "content": "Endpoints to get information about the Proof of Transfer consensus mechanism",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "67e116c8-2661-4d24-901e-c3700a9add92",
+          "name": "Get PoX cycles",
+          "request": {
+            "name": "Get PoX cycles",
+            "description": {
+              "content": "Retrieves a list of PoX cycles",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v2",
+                "pox",
+                "cycles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Results per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Result offset"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8d802e77-9fd4-4d20-8fd8-f977ea7a2d31",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v2",
+                    "pox",
+                    "cycles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"limit\": 20,\n  \"offset\": 0,\n  \"total\": 1,\n  \"results\": [\n    {\n      \"block_height\": 2729,\n      \"index_block_hash\": \"string\",\n      \"cycle_number\": 7547,\n      \"total_weight\": 6937,\n      \"total_stacked_amount\": \"string\",\n      \"total_signers\": 7550\n    },\n    {\n      \"block_height\": 34,\n      \"index_block_hash\": \"string\",\n      \"cycle_number\": 1914,\n      \"total_weight\": 1732,\n      \"total_stacked_amount\": \"string\",\n      \"total_signers\": 4186\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73ef7fda-0cd3-45a8-8115-20f339d9eea1",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v2",
+                    "pox",
+                    "cycles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1114f552-5452-40bc-a85f-0c8abe4bfb00",
+          "name": "Get PoX cycle",
+          "request": {
+            "name": "Get PoX cycle",
+            "description": {
+              "content": "Retrieves details for a PoX cycle",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v2",
+                "pox",
+                "cycles",
+                ":cycle_number"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "cycle_number",
+                  "description": "(Required) PoX cycle number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3bf6e734-feb1-4d4e-abfa-6ecd7eb80149",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v2",
+                    "pox",
+                    "cycles",
+                    ":cycle_number"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cycle_number",
+                      "description": "(Required) PoX cycle number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"block_height\": 9621,\n  \"index_block_hash\": \"string\",\n  \"cycle_number\": 5715,\n  \"total_weight\": 572,\n  \"total_stacked_amount\": \"string\",\n  \"total_signers\": 1404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c37eb4eb-c04e-426c-a106-fb968f9695ee",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v2",
+                    "pox",
+                    "cycles",
+                    ":cycle_number"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cycle_number",
+                      "description": "(Required) PoX cycle number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c5a67a47-a6c2-4b9f-8dea-ef401519bbaf",
+          "name": "Get signers in PoX cycle",
+          "request": {
+            "name": "Get signers in PoX cycle",
+            "description": {
+              "content": "Retrieves a list of signers in a PoX cycle",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v2",
+                "pox",
+                "cycles",
+                ":cycle_number",
+                "signers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Results per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Result offset"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "cycle_number",
+                  "description": "(Required) PoX cycle number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1c8dbcbc-5c69-4429-a53c-cb8279b1101d",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v2",
+                    "pox",
+                    "cycles",
+                    ":cycle_number",
+                    "signers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cycle_number",
+                      "description": "(Required) PoX cycle number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"limit\": 20,\n  \"offset\": 0,\n  \"total\": 1,\n  \"results\": [\n    {\n      \"signing_key\": \"string\",\n      \"signer_address\": \"string\",\n      \"weight\": 5495,\n      \"stacked_amount\": \"string\",\n      \"weight_percent\": 5294.340755966391,\n      \"stacked_amount_percent\": 1001.1946102072467,\n      \"solo_stacker_count\": 6913,\n      \"pooled_stacker_count\": 4570\n    },\n    {\n      \"signing_key\": \"string\",\n      \"signer_address\": \"string\",\n      \"weight\": 2879,\n      \"stacked_amount\": \"string\",\n      \"weight_percent\": 7926.47851543539,\n      \"stacked_amount_percent\": 8413.764013076321,\n      \"solo_stacker_count\": 4889,\n      \"pooled_stacker_count\": 4641\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a3b070f-c093-4307-8ecc-f35995513a84",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v2",
+                    "pox",
+                    "cycles",
+                    ":cycle_number",
+                    "signers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cycle_number",
+                      "description": "(Required) PoX cycle number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "27f8208a-61bd-4b69-8d03-08739dc76ca7",
+          "name": "Get signer in PoX cycle",
+          "request": {
+            "name": "Get signer in PoX cycle",
+            "description": {
+              "content": "Retrieves details for a signer in a PoX cycle",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v2",
+                "pox",
+                "cycles",
+                ":cycle_number",
+                "signers",
+                ":signer_key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "cycle_number",
+                  "description": "(Required) PoX cycle number"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "signer_key",
+                  "description": "(Required) Signer key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7cb66d4d-e8ad-409b-8855-465b3b9bd327",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v2",
+                    "pox",
+                    "cycles",
+                    ":cycle_number",
+                    "signers",
+                    ":signer_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cycle_number",
+                      "description": "(Required) PoX cycle number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "signer_key",
+                      "description": "(Required) Signer key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"signing_key\": \"string\",\n  \"signer_address\": \"string\",\n  \"weight\": 6925,\n  \"stacked_amount\": \"string\",\n  \"weight_percent\": 4926.211238576606,\n  \"stacked_amount_percent\": 6380.816974132516,\n  \"solo_stacker_count\": 9070,\n  \"pooled_stacker_count\": 8898\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19e377ae-888c-4296-bf2c-f74e3e80e8b9",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v2",
+                    "pox",
+                    "cycles",
+                    ":cycle_number",
+                    "signers",
+                    ":signer_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cycle_number",
+                      "description": "(Required) PoX cycle number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "signer_key",
+                      "description": "(Required) Signer key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "34bd0882-7275-45b0-aa58-ee97982140c1",
+          "name": "Get stackers for signer in PoX cycle",
+          "request": {
+            "name": "Get stackers for signer in PoX cycle",
+            "description": {
+              "content": "Retrieves a list of stackers for a signer in a PoX cycle",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v2",
+                "pox",
+                "cycles",
+                ":cycle_number",
+                "signers",
+                ":signer_key",
+                "stackers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Results per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Result offset"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "cycle_number",
+                  "description": "(Required) PoX cycle number"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "signer_key",
+                  "description": "(Required) Signer key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c5842be4-a475-4cf7-adb0-3dc199897885",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v2",
+                    "pox",
+                    "cycles",
+                    ":cycle_number",
+                    "signers",
+                    ":signer_key",
+                    "stackers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cycle_number",
+                      "description": "(Required) PoX cycle number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "signer_key",
+                      "description": "(Required) Signer key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"limit\": 20,\n  \"offset\": 0,\n  \"total\": 1,\n  \"results\": [\n    {\n      \"stacker_address\": \"string\",\n      \"stacked_amount\": \"string\",\n      \"pox_address\": \"string\",\n      \"stacker_type\": \"solo\"\n    },\n    {\n      \"stacker_address\": \"string\",\n      \"stacked_amount\": \"string\",\n      \"pox_address\": \"string\",\n      \"stacker_type\": \"solo\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71b0692a-a6fc-40bd-9e1d-b3d5294a3d54",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v2",
+                    "pox",
+                    "cycles",
+                    ":cycle_number",
+                    "signers",
+                    ":signer_key",
+                    "stackers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "cycle_number",
+                      "description": "(Required) PoX cycle number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "signer_key",
+                      "description": "(Required) Signer key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.hiro.so/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6f45eb60-0933-44dc-8caa-a8ae852be906",
+    "name": "Signer Metrics Accounts Proof of Transfer API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Welcome to the API reference overview for the Signer Metrics API.",
+      "type": "text/plain"
+    }
+  }
+}

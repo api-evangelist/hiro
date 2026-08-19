@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Signer Metrics Accounts Mining API",
+    "version": "1.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Mining",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Validate a proposed Stacks block",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.hiro.so/v3/block_proposal",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Used by stackers to validate a proposed Stacks block from a miner.\n**This API endpoint requires a basic Authorization header.**\n"
+        },
+        {
+          "info": {
+            "name": "Upload a Stacks block",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.hiro.so/v2/blocks/upload/:consensus_hash",
+            "params": [
+              {
+                "name": "consensus_hash",
+                "value": "",
+                "type": "path",
+                "description": "Consensus hash (40 hex characters)"
+              }
+            ]
+          },
+          "docs": "Upload a Stacks block to the node for processing.\nThe block must be in binary format and associated with the given consensus hash.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

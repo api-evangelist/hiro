@@ -1,0 +1,147 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Signer Metrics Accounts Stacking API",
+    "version": "1.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stacking",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get latest PoX events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/:pox/events",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              },
+              {
+                "name": "pox",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get latest PoX events"
+        },
+        {
+          "info": {
+            "name": "Get PoX events for a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/:pox/tx/:tx_id",
+            "params": [
+              {
+                "name": "pox",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "tx_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get PoX events for a transaction"
+        },
+        {
+          "info": {
+            "name": "Get events for a stacking address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/:pox/stacker/:principal",
+            "params": [
+              {
+                "name": "pox",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "principal",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get events for a stacking address"
+        },
+        {
+          "info": {
+            "name": "Stacking pool members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v1/:pox/:pool_principal/delegations",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              },
+              {
+                "name": "after_block",
+                "value": "",
+                "type": "query",
+                "description": "If specified, only delegation events after the given block will be included"
+              },
+              {
+                "name": "height",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "unanchored",
+                "value": "true",
+                "type": "query",
+                "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+              },
+              {
+                "name": "pox",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "pool_principal",
+                "value": "SPSCWDV3RKV5ZRN1FQD84YE1NQFEDJ9R1F4DYQ11",
+                "type": "path",
+                "description": "Address principal of the stacking pool delegator"
+              }
+            ]
+          },
+          "docs": "Retrieves the list of stacking pool members for a given delegator principal."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

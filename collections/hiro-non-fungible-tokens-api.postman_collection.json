@@ -1,0 +1,628 @@
+{
+  "item": [
+    {
+      "id": "74f5710a-71d5-4e6a-9c26-c2769363231f",
+      "name": "Non-Fungible Tokens",
+      "description": {
+        "content": "Read-only endpoints to obtain non-fungible token details",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "152ea4b7-35cb-4f35-b8dc-735096c58650",
+          "name": "Non-Fungible Token holdings",
+          "request": {
+            "name": "Non-Fungible Token holdings",
+            "description": {
+              "content": "Retrieves the list of Non-Fungible Tokens owned by the given principal (STX address or Smart Contract ID).\n        Results can be filtered by one or more asset identifiers and can include metadata about the transaction that made the principal own each token.\n\n        More information on Non-Fungible Tokens on the Stacks blockchain can be found [here](https://docs.stacks.co/build/create-tokens/creating-a-nft).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v1",
+                "tokens",
+                "nft",
+                "holdings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "principal",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "asset_identifiers",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "asset_identifiers",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "max number of tokens to fetch"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "index of first tokens to fetch"
+                },
+                {
+                  "disabled": false,
+                  "key": "tx_metadata",
+                  "value": "false",
+                  "description": "(Required) whether or not to include the complete transaction metadata instead of just `tx_id`. Enabling this option can affect performance and response times."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9c2227b8-5360-46c1-a0b9-fdc85dc8cc99",
+              "name": "List of Non-Fungible Token holdings",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "tokens",
+                    "nft",
+                    "holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "principal",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asset_identifiers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asset_identifiers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "tx_metadata",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"limit\": 20,\n  \"offset\": 0,\n  \"total\": 1,\n  \"results\": [\n    {\n      \"asset_identifier\": \"string\",\n      \"value\": {\n        \"hex\": \"string\",\n        \"repr\": \"string\"\n      },\n      \"block_height\": 4024,\n      \"tx_id\": \"string\"\n    },\n    {\n      \"asset_identifier\": \"string\",\n      \"value\": {\n        \"hex\": \"string\",\n        \"repr\": \"string\"\n      },\n      \"block_height\": 2393,\n      \"tx_id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bcf96ced-3e5a-468a-a72b-451df6f6df26",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "tokens",
+                    "nft",
+                    "holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "principal",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asset_identifiers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asset_identifiers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "tx_metadata",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "19aa383a-573f-43fa-9e7a-3e4a48a80d9e",
+          "name": "Non-Fungible Token history",
+          "request": {
+            "name": "Non-Fungible Token history",
+            "description": {
+              "content": "Retrieves all events relevant to a Non-Fungible Token. Useful to determine the ownership history of a particular asset.\n\n        More information on Non-Fungible Tokens on the Stacks blockchain can be found [here](https://docs.stacks.co/build/create-tokens/creating-a-nft).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v1",
+                "tokens",
+                "nft",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "asset_identifier",
+                  "value": "<string>",
+                  "description": "(Required) asset class identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>",
+                  "description": "(Required) hex representation of the token's unique value"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "max number of events to fetch"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "index of first event to fetch"
+                },
+                {
+                  "disabled": false,
+                  "key": "unanchored",
+                  "value": "false",
+                  "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+                },
+                {
+                  "disabled": false,
+                  "key": "tx_metadata",
+                  "value": "false",
+                  "description": "(Required) whether or not to include the complete transaction metadata instead of just `tx_id`. Enabling this option can affect performance and response times."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4dc801e2-2e59-475e-9ae5-0aaa18cbdefe",
+              "name": "List of Non-Fungible Token history events",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "tokens",
+                    "nft",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "asset_identifier",
+                      "value": "SP2X0TZ59D5SZ8ACQ6YMCHHNR2ZN51Z32E2CJ173.the-explorer-guild::The-Explorer-Guild"
+                    },
+                    {
+                      "key": "value",
+                      "value": "0x0100000000000000000000000000000803"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "unanchored",
+                      "value": "true"
+                    },
+                    {
+                      "key": "tx_metadata",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"limit\": 20,\n  \"offset\": 0,\n  \"total\": 1,\n  \"results\": [\n    {\n      \"event_index\": 6778,\n      \"asset_event_type\": \"string\",\n      \"tx_id\": \"string\",\n      \"sender\": \"string\",\n      \"recipient\": \"string\"\n    },\n    {\n      \"event_index\": 908,\n      \"asset_event_type\": \"string\",\n      \"tx_id\": \"string\",\n      \"sender\": \"string\",\n      \"recipient\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a0878f6-578e-439f-b5ce-0a5db7426c39",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "tokens",
+                    "nft",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "asset_identifier",
+                      "value": "SP2X0TZ59D5SZ8ACQ6YMCHHNR2ZN51Z32E2CJ173.the-explorer-guild::The-Explorer-Guild"
+                    },
+                    {
+                      "key": "value",
+                      "value": "0x0100000000000000000000000000000803"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "unanchored",
+                      "value": "true"
+                    },
+                    {
+                      "key": "tx_metadata",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a24d17d8-0742-4c15-ab07-058e2b4d0bf7",
+          "name": "Non-Fungible Token mints",
+          "request": {
+            "name": "Non-Fungible Token mints",
+            "description": {
+              "content": "Retrieves all mint events for a Non-Fungible Token asset class. Useful to determine which NFTs of a particular collection have been claimed.\n\n        More information on Non-Fungible Tokens on the Stacks blockchain can be found [here](https://docs.stacks.co/build/create-tokens/creating-a-nft).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v1",
+                "tokens",
+                "nft",
+                "mints"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "asset_identifier",
+                  "value": "<string>",
+                  "description": "(Required) asset class identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "max number of events to fetch"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "index of first event to fetch"
+                },
+                {
+                  "disabled": false,
+                  "key": "unanchored",
+                  "value": "false",
+                  "description": "Include data from unanchored (i.e. unconfirmed) microblocks"
+                },
+                {
+                  "disabled": false,
+                  "key": "tx_metadata",
+                  "value": "false",
+                  "description": "(Required) whether or not to include the complete transaction metadata instead of just `tx_id`. Enabling this option can affect performance and response times."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "933d6f14-c0d7-4eab-8ad7-eeaeeac8e563",
+              "name": "List of Non-Fungible Token mint events for an asset identifier",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "tokens",
+                    "nft",
+                    "mints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "asset_identifier",
+                      "value": "SP2X0TZ59D5SZ8ACQ6YMCHHNR2ZN51Z32E2CJ173.the-explorer-guild::The-Explorer-Guild"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "unanchored",
+                      "value": "true"
+                    },
+                    {
+                      "key": "tx_metadata",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"limit\": 20,\n  \"offset\": 0,\n  \"total\": 1,\n  \"results\": [\n    {\n      \"event_index\": 13,\n      \"value\": {\n        \"hex\": \"string\",\n        \"repr\": \"string\"\n      },\n      \"tx_id\": \"string\",\n      \"recipient\": \"string\"\n    },\n    {\n      \"event_index\": 8609,\n      \"value\": {\n        \"hex\": \"string\",\n        \"repr\": \"string\"\n      },\n      \"tx_id\": \"string\",\n      \"recipient\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09fde68e-a165-471b-8145-4149deab12c9",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "tokens",
+                    "nft",
+                    "mints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "asset_identifier",
+                      "value": "SP2X0TZ59D5SZ8ACQ6YMCHHNR2ZN51Z32E2CJ173.the-explorer-guild::The-Explorer-Guild"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "unanchored",
+                      "value": "true"
+                    },
+                    {
+                      "key": "tx_metadata",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.hiro.so/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8374397e-1812-4c4f-820f-9e320a290583",
+    "name": "Signer Metrics Accounts Non-Fungible Tokens API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Welcome to the API reference overview for the Signer Metrics API.",
+      "type": "text/plain"
+    }
+  }
+}

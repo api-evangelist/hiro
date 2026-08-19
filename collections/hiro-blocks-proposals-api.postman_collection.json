@@ -1,0 +1,242 @@
+{
+  "item": [
+    {
+      "id": "1ea39b3f-eb5b-4db8-843f-a99105a502e1",
+      "name": "Blocks Proposals",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3b474f70-fc07-4dd2-8302-42b65cdd93fd",
+          "name": "Signer information for most recent block proposals",
+          "request": {
+            "name": "Signer information for most recent block proposals",
+            "description": {
+              "content": "Signer information for most recent block proposals",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "signer-metrics",
+                "v1",
+                "block_proposals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "(Required) Number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "(Required) Number of results to skip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e652243f-9f81-4b65-9e51-76ec0c703ba8",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "signer-metrics",
+                    "v1",
+                    "block_proposals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"limit\": 2243,\n  \"offset\": 2476,\n  \"results\": [\n    {\n      \"received_at\": \"string\",\n      \"block_height\": 4561,\n      \"block_hash\": \"string\",\n      \"index_block_hash\": \"string\",\n      \"burn_block_height\": 5659,\n      \"block_time\": 7704,\n      \"cycle_number\": 7339,\n      \"status\": \"pending\",\n      \"push_time_ms\": null,\n      \"total_signer_count\": 6775,\n      \"total_signer_weight\": 5789,\n      \"total_signer_stacked_amount\": \"string\",\n      \"accepted_count\": 6186,\n      \"rejected_count\": 6983,\n      \"missing_count\": 6850,\n      \"accepted_weight\": 6998,\n      \"rejected_weight\": 7348,\n      \"missing_weight\": 208,\n      \"signer_data\": [\n        {\n          \"signer_key\": \"string\",\n          \"slot_index\": 3599,\n          \"response\": \"accepted\",\n          \"weight\": 495,\n          \"weight_percentage\": 3495.977582523766,\n          \"stacked_amount\": \"string\",\n          \"version\": \"string\",\n          \"received_at\": \"string\",\n          \"response_time_ms\": 6215,\n          \"reason_string\": \"string\",\n          \"reason_code\": \"string\",\n          \"reject_code\": \"string\"\n        },\n        {\n          \"signer_key\": \"string\",\n          \"slot_index\": 9134,\n          \"response\": \"accepted\",\n          \"weight\": 4326,\n          \"weight_percentage\": 8213.887664089374,\n          \"stacked_amount\": \"string\",\n          \"version\": \"string\",\n          \"received_at\": \"string\",\n          \"response_time_ms\": 1865,\n          \"reason_string\": \"string\",\n          \"reason_code\": \"string\",\n          \"reject_code\": \"string\"\n        }\n      ]\n    },\n    {\n      \"received_at\": \"string\",\n      \"block_height\": 7101,\n      \"block_hash\": \"string\",\n      \"index_block_hash\": \"string\",\n      \"burn_block_height\": 529,\n      \"block_time\": 5013,\n      \"cycle_number\": 2617,\n      \"status\": \"pending\",\n      \"push_time_ms\": null,\n      \"total_signer_count\": 3716,\n      \"total_signer_weight\": 7600,\n      \"total_signer_stacked_amount\": \"string\",\n      \"accepted_count\": 2517,\n      \"rejected_count\": 4836,\n      \"missing_count\": 9444,\n      \"accepted_weight\": 5142,\n      \"rejected_weight\": 8098,\n      \"missing_weight\": 2533,\n      \"signer_data\": [\n        {\n          \"signer_key\": \"string\",\n          \"slot_index\": 8303,\n          \"response\": \"accepted\",\n          \"weight\": 778,\n          \"weight_percentage\": 5506.121980413234,\n          \"stacked_amount\": \"string\",\n          \"version\": \"string\",\n          \"received_at\": \"string\",\n          \"response_time_ms\": 8022,\n          \"reason_string\": \"string\",\n          \"reason_code\": \"string\",\n          \"reject_code\": \"string\"\n        },\n        {\n          \"signer_key\": \"string\",\n          \"slot_index\": 7146,\n          \"response\": \"accepted\",\n          \"weight\": 3495,\n          \"weight_percentage\": 1060.618727558038,\n          \"stacked_amount\": \"string\",\n          \"version\": \"string\",\n          \"received_at\": \"string\",\n          \"response_time_ms\": 3262,\n          \"reason_string\": \"string\",\n          \"reason_code\": \"string\",\n          \"reject_code\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f78da877-1c12-47b2-a530-3385238e76e5",
+          "name": "Signer information for most recent block proposals",
+          "request": {
+            "name": "Signer information for most recent block proposals",
+            "description": {
+              "content": "Signer information for most recent block proposals",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "signer-metrics",
+                "v1",
+                "block_proposals",
+                ":block_hash"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "(Required) Number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "(Required) Number of results to skip"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "block_hash",
+                  "description": "(Required) Block hash"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "98a4c1e9-39cc-4158-a521-2502045a9783",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "signer-metrics",
+                    "v1",
+                    "block_proposals",
+                    ":block_hash"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "block_hash",
+                      "description": "(Required) Block hash"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"received_at\": \"string\",\n  \"block_height\": 226,\n  \"block_hash\": \"string\",\n  \"index_block_hash\": \"string\",\n  \"burn_block_height\": 7182,\n  \"block_time\": 5963,\n  \"cycle_number\": 7531,\n  \"status\": \"pending\",\n  \"push_time_ms\": null,\n  \"total_signer_count\": 7402,\n  \"total_signer_weight\": 788,\n  \"total_signer_stacked_amount\": \"string\",\n  \"accepted_count\": 1537,\n  \"rejected_count\": 5416,\n  \"missing_count\": 6823,\n  \"accepted_weight\": 5670,\n  \"rejected_weight\": 4826,\n  \"missing_weight\": 9942,\n  \"signer_data\": [\n    {\n      \"signer_key\": \"string\",\n      \"slot_index\": 145,\n      \"response\": \"accepted\",\n      \"weight\": 2416,\n      \"weight_percentage\": 4774.735048517849,\n      \"stacked_amount\": \"string\",\n      \"version\": \"string\",\n      \"received_at\": \"string\",\n      \"response_time_ms\": 3978,\n      \"reason_string\": \"string\",\n      \"reason_code\": \"string\",\n      \"reject_code\": \"string\"\n    },\n    {\n      \"signer_key\": \"string\",\n      \"slot_index\": 7252,\n      \"response\": \"accepted\",\n      \"weight\": 9962,\n      \"weight_percentage\": 4521.238409447667,\n      \"stacked_amount\": \"string\",\n      \"version\": \"string\",\n      \"received_at\": \"string\",\n      \"response_time_ms\": 4233,\n      \"reason_string\": \"string\",\n      \"reason_code\": \"string\",\n      \"reject_code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.hiro.so/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7bcbdc17-eb64-48fa-8d22-5eed9aa19541",
+    "name": "Signer Metrics Accounts Blocks Proposals API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Welcome to the API reference overview for the Signer Metrics API.",
+      "type": "text/plain"
+    }
+  }
+}

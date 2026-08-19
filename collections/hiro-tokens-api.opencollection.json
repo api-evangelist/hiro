@@ -1,0 +1,189 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Signer Metrics Accounts Tokens API",
+    "version": "1.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fungible Tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/metadata/v1/ft",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "address",
+                "value": "SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9",
+                "type": "query",
+                "description": "Stacks Address"
+              },
+              {
+                "name": "valid_metadata_only",
+                "value": "",
+                "type": "query",
+                "description": "If enabled, only tokens with valid SIP-016 metadata will be returned"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Parameter to order results by"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Results order"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of Fungible Tokens"
+        },
+        {
+          "info": {
+            "name": "Fungible Token Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/metadata/v1/ft/:principal",
+            "params": [
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "Metadata localization to retrieve"
+              },
+              {
+                "name": "principal",
+                "value": "SP32XCD69XPS3GKDEXAQ29PJRDSD5AR643GNEEBXZ.fari-token",
+                "type": "path",
+                "description": "Principal for the contract which owns the SIP-010 token"
+              }
+            ]
+          },
+          "docs": "Retrieves metadata for a SIP-010 Fungible Token"
+        },
+        {
+          "info": {
+            "name": "Non-Fungible Token Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/metadata/v1/nft/:principal/:token_id",
+            "params": [
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "Metadata localization to retrieve"
+              },
+              {
+                "name": "principal",
+                "value": "SP497E7RX3233ATBS2AB9G4WTHB63X5PBSP5VGAQ.boomboxes-cycle-12",
+                "type": "path",
+                "description": "SIP-009 compliant smart contract principal"
+              },
+              {
+                "name": "token_id",
+                "value": "35",
+                "type": "path",
+                "description": "Token ID to retrieve"
+              }
+            ]
+          },
+          "docs": "Retrieves metadata for a SIP-009 Non-Fungible Token"
+        },
+        {
+          "info": {
+            "name": "Semi-Fungible Token Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/metadata/v1/sft/:principal/:token_id",
+            "params": [
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "Metadata localization to retrieve"
+              },
+              {
+                "name": "principal",
+                "value": "SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.key-alex-autoalex-v1",
+                "type": "path",
+                "description": "SIP-013 compliant smart contract principal"
+              },
+              {
+                "name": "token_id",
+                "value": "35",
+                "type": "path",
+                "description": "Token ID to retrieve"
+              }
+            ]
+          },
+          "docs": "Retrieves metadata for a SIP-013 Semi-Fungible Token"
+        },
+        {
+          "info": {
+            "name": "Search Tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/metadata/v1/search",
+            "params": [
+              {
+                "name": "contract",
+                "value": "",
+                "type": "query",
+                "description": "Contract identifiers to search for. Format: PRINCIPAL or PRINCIPAL:TOKEN_NUMBER. Defaults token_number to 1 when omitted."
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "Metadata localization to retrieve"
+              }
+            ]
+          },
+          "docs": "Retrieves metadata for multiple tokens in a single request. Accepts up to 50 contract identifiers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

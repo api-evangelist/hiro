@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Signer Metrics Accounts Mempool API",
+    "version": "1.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Mempool",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get mempool transaction fee priorities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/extended/v2/mempool/fees"
+          },
+          "docs": "Returns estimated fee priorities (in micro-STX) for all transactions that are currently in the mempool. Also returns priorities separated by transaction type."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

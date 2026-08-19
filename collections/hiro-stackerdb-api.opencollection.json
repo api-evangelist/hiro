@@ -1,0 +1,99 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Signer Metrics Accounts StackerDB API",
+    "version": "1.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "StackerDB",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get StackerDB chunk (latest version)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v2/stackerdb/:principal/:contract_name/:slot_id",
+            "params": [
+              {
+                "name": "slot_id",
+                "value": "",
+                "type": "path",
+                "description": "Slot ID (u32 range)"
+              }
+            ]
+          },
+          "docs": "Get the latest version of a chunk of data from a StackerDB instance.\n"
+        },
+        {
+          "info": {
+            "name": "Get StackerDB chunk (specific version)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v2/stackerdb/:principal/:contract_name/:slot_id/:slot_version",
+            "params": [
+              {
+                "name": "slot_id",
+                "value": "",
+                "type": "path",
+                "description": "Slot ID (u32 range)"
+              },
+              {
+                "name": "slot_version",
+                "value": "",
+                "type": "path",
+                "description": "Specific slot version (u32 range)"
+              }
+            ]
+          },
+          "docs": "Get a specific version of a chunk of data from a StackerDB instance.\n"
+        },
+        {
+          "info": {
+            "name": "Get StackerDB metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v2/stackerdb/:principal/:contract_name"
+          },
+          "docs": "Get metadata about a StackerDB instance, including slot information.\n"
+        },
+        {
+          "info": {
+            "name": "Write StackerDB chunk",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.hiro.so/v2/stackerdb/:principal/:contract_name/chunks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Write a chunk of data to a StackerDB instance.\n\nThe request body should contain a JSON object with the chunk data including\nslot_id, slot_version, signature, and hex-encoded data.\n\nThe response indicates whether the chunk was accepted, and if not, provides\ndetailed error information. Note that failed writes return HTTP 200 with\naccepted: false, not HTTP error codes.\n"
+        },
+        {
+          "info": {
+            "name": "List StackerDB replicas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hiro.so/v2/stackerdb/:principal/:contract_name/replicas"
+          },
+          "docs": "Get a list of replicas for a StackerDB instance.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

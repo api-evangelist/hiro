@@ -1,0 +1,3096 @@
+{
+  "item": [
+    {
+      "id": "17db4ffb-f532-4578-93fa-d074d5bef026",
+      "name": "Smart Contracts",
+      "description": {
+        "content": "Read-only endpoints to obtain Clarity smart contract details",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2c8fd29b-1f9e-48fc-946f-aa0e82eacdc9",
+          "name": "Get contracts by trait",
+          "request": {
+            "name": "Get contracts by trait",
+            "description": {
+              "content": "Retrieves a list of contracts based on the following traits listed in JSON format -  functions, variables, maps, fungible tokens and non-fungible tokens",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v1",
+                "contract",
+                "by_trait"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "trait_abi",
+                  "value": "<string>",
+                  "description": "(Required) JSON abi of the trait."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "max number of contracts fetch"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "index of first contract event to fetch"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "59b6bafb-bdaa-4995-b287-316942c7cdde",
+              "name": "GET list of contracts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "contract",
+                    "by_trait"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "trait_abi",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"limit\": 20,\n  \"offset\": 0,\n  \"results\": [\n    {\n      \"tx_id\": \"string\",\n      \"canonical\": true,\n      \"contract_id\": \"string\",\n      \"block_height\": 2681,\n      \"clarity_version\": 8511,\n      \"source_code\": \"string\",\n      \"abi\": \"string\"\n    },\n    {\n      \"tx_id\": \"string\",\n      \"canonical\": false,\n      \"contract_id\": \"string\",\n      \"block_height\": 2414,\n      \"clarity_version\": 9190,\n      \"source_code\": \"string\",\n      \"abi\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bde7e352-ab54-4bf0-96a9-b8f10c5b42d1",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "contract",
+                    "by_trait"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "trait_abi",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a9992f9f-a2e1-4155-a86d-621cbe386923",
+          "name": "Get contract info",
+          "request": {
+            "name": "Get contract info",
+            "description": {
+              "content": "Retrieves details of a contract with a given `contract_id`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v1",
+                "contract",
+                ":contract_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contract_id",
+                  "description": "(Required) Contract identifier formatted as `<contract_address>.<contract_name>`"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "61228cda-7245-43b0-828a-de59c93e8baf",
+              "name": "A Smart Contract Detail",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "contract",
+                    ":contract_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contract_id",
+                      "description": "(Required) Contract identifier formatted as `<contract_address>.<contract_name>`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tx_id\": \"string\",\n  \"canonical\": true,\n  \"contract_id\": \"string\",\n  \"block_height\": 8592,\n  \"clarity_version\": 826,\n  \"source_code\": \"string\",\n  \"abi\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7363a1b9-fc31-4a93-826f-e110f4a5c0a0",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "contract",
+                    ":contract_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contract_id",
+                      "description": "(Required) Contract identifier formatted as `<contract_address>.<contract_name>`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1407749e-f211-41ec-b95b-06124b263a37",
+          "name": "Get contract events",
+          "request": {
+            "name": "Get contract events",
+            "description": {
+              "content": "Retrieves a list of events that have been triggered by a given `contract_id`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v1",
+                "contract",
+                ":contract_id",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "max number of events to fetch"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Result offset"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contract_id",
+                  "description": "(Required) Contract identifier formatted as `<contract_address>.<contract_name>`"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4fdf92a7-9ab5-4b16-83bc-e53e36fcd574",
+              "name": "List of events",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "contract",
+                    ":contract_id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contract_id",
+                      "description": "(Required) Contract identifier formatted as `<contract_address>.<contract_name>`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"limit\": 4717,\n  \"offset\": 3378,\n  \"results\": [\n    {\n      \"contract_log\": {\n        \"contract_id\": \"string\",\n        \"topic\": \"string\",\n        \"value\": {\n          \"hex\": \"string\",\n          \"repr\": \"string\"\n        }\n      },\n      \"event_index\": 9638,\n      \"event_type\": \"smart_contract_log\",\n      \"tx_id\": \"string\"\n    },\n    {\n      \"contract_log\": {\n        \"contract_id\": \"string\",\n        \"topic\": \"string\",\n        \"value\": {\n          \"hex\": \"string\",\n          \"repr\": \"string\"\n        }\n      },\n      \"event_index\": 6032,\n      \"event_type\": \"smart_contract_log\",\n      \"tx_id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "356d05ab-5b29-4ca3-a11d-7eaeeb69b1a8",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v1",
+                    "contract",
+                    ":contract_id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contract_id",
+                      "description": "(Required) Contract identifier formatted as `<contract_address>.<contract_name>`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4db86699-3906-447d-ba64-6cdeeb944e55",
+          "name": "Get smart contracts status",
+          "request": {
+            "name": "Get smart contracts status",
+            "description": {
+              "content": "Retrieves the deployment status of multiple smart contracts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extended",
+                "v2",
+                "smart-contracts",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "contract_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "contract_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dd85938c-f04f-47b1-b3ae-bc95bc8f3761",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v2",
+                    "smart-contracts",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contract_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "contract_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": {\n    \"found\": true,\n    \"result\": {\n      \"status\": \"string\",\n      \"tx_id\": \"string\",\n      \"contract_id\": \"string\",\n      \"block_height\": 8085\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1af4883d-7052-4480-9b43-c169b6619f53",
+              "name": "Default Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extended",
+                    "v2",
+                    "smart-contracts",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contract_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "contract_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bea65b9b-a5dc-4bcb-b458-ce17d9e0c66b",
+          "name": "Get contract interface",
+          "request": {
+            "name": "Get contract interface",
+            "description": {
+              "content": "Get contract interface using a `deployer_address` and `contract name`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "contracts",
+                "interface",
+                ":deployer_address",
+                ":contract_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "136c3453-9786-405a-96a3-df74f68a96a1",
+              "name": "Contract interface",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contracts",
+                    "interface",
+                    ":deployer_address",
+                    ":contract_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"reference ./components/examples/contract-interface.example.json not found in the given specification\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7dd86d1-2319-4f67-8ff5-ba01ca9ea8ba",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contracts",
+                    "interface",
+                    ":deployer_address",
+                    ":contract_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Bad request",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3cb3efe2-5be5-497d-8895-a0f0d161ff3d",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contracts",
+                    "interface",
+                    ":deployer_address",
+                    ":contract_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Not found",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f2f0349a-7bf0-4ed4-8d4b-ff6add545f73",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contracts",
+                    "interface",
+                    ":deployer_address",
+                    ":contract_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Internal Server Error",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f975a19-0035-45f9-b936-e7242af7a69a",
+          "name": "Get specific data-map inside a contract",
+          "request": {
+            "name": "Get specific data-map inside a contract",
+            "description": {
+              "content": "Attempt to fetch data from a contract data map. The contract is\nidentified with [Stacks Address] and [Contract Name] in the URL path.\nThe map is identified with [Map Name].\n\nThe key to lookup in the map is supplied via the POST body. This should\nbe supplied as the hex string serialization of the key (which should be\na Clarity value). Note, this is a JSON string.\n\nThe response is a JSON object with the following properties:\n- `data`: The hex serialization of the map response. Note that map\n  responses are Clarity option types, for non-existent values, this is\n  a serialized none, and for all other responses, it is a serialized\n  (some ...) object.\n- `proof`: The hex serialization of the Merkle proof for the data.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "map_entry",
+                ":deployer_address",
+                ":contract_name",
+                ":map_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                  "key": "map_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<string>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "19d1ad5e-6b27-4c16-aa98-1d8f3483542b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "map_entry",
+                    ":deployer_address",
+                    ":contract_name",
+                    ":map_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                      "key": "map_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "0x0100000000000000000000000000000001",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"reference ./components/examples/clarity-data.example.json not found in the given specification\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ae8ea0e-d355-4637-92dc-54341e9108da",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "map_entry",
+                    ":deployer_address",
+                    ":contract_name",
+                    ":map_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                      "key": "map_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "0x0100000000000000000000000000000001",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Bad request",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4917e280-b7b8-40b4-beb7-aa384073466d",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "map_entry",
+                    ":deployer_address",
+                    ":contract_name",
+                    ":map_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                      "key": "map_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "0x0100000000000000000000000000000001",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Not found",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "be376d05-0049-4b12-b441-384ea5c6fd80",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "map_entry",
+                    ":deployer_address",
+                    ":contract_name",
+                    ":map_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                      "key": "map_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "0x0100000000000000000000000000000001",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Internal Server Error",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ceb8f32-5671-4998-a29d-e1c8c9aa39b2",
+          "name": "Get contract source",
+          "request": {
+            "name": "Get contract source",
+            "description": {
+              "content": "Returns the Clarity source code of a given contract, along with the\nblock height it was published in, and the MARF proof for the data.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "contracts",
+                "source",
+                ":deployer_address",
+                ":contract_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b6a2d5a5-e858-4bfb-86fb-dff5580ab64d",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contracts",
+                    "source",
+                    ":deployer_address",
+                    ":contract_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"reference ./components/examples/contract-source.example.json not found in the given specification\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21c8819c-ae9c-48a5-8dbb-e602079538b5",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contracts",
+                    "source",
+                    ":deployer_address",
+                    ":contract_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Bad request",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bc38951c-e954-4964-a8c3-01b833e7111e",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contracts",
+                    "source",
+                    ":deployer_address",
+                    ":contract_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Not found",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "54ff5f94-fdc0-4e83-ab77-4bb2b456fa8e",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contracts",
+                    "source",
+                    ":deployer_address",
+                    ":contract_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Internal Server Error",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5ca3d51-f2ac-45e8-8e31-2b76c04a26d3",
+          "name": "Call read-only function",
+          "request": {
+            "name": "Call read-only function",
+            "description": {
+              "content": "Call a read-only public function on a given contract.\n\nThe contract is identified with [Stacks Address] and [Contract Name] in the URL path.\nThe function is identified with [Function Name].\n\nThe arguments to the function are supplied via the POST body.\nThis should be a JSON object with two main properties:\n- `sender` which should be a Stacks address or contract principal\n- `arguments` which should be an array of hex-encoded Clarity values.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "contracts",
+                "call-read",
+                ":deployer_address",
+                ":contract_name",
+                ":function_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                  "key": "function_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "06068fcf-b021-4501-8af0-d9925d916369",
+              "name": "Function executed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contracts",
+                    "call-read",
+                    ":deployer_address",
+                    ":contract_name",
+                    ":function_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                      "key": "function_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"reference ./components/examples/read-only-function-success.example.json not found in the given specification\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b4753aa-080b-465c-90c7-bd90b017c4ba",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contracts",
+                    "call-read",
+                    ":deployer_address",
+                    ":contract_name",
+                    ":function_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                      "key": "function_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Bad request",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "23b07629-264b-4617-9284-35520b0d1695",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contracts",
+                    "call-read",
+                    ":deployer_address",
+                    ":contract_name",
+                    ":function_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                      "key": "function_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Not found",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3a9f6801-e5d2-4a04-9e07-36ef45e0720e",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contracts",
+                    "call-read",
+                    ":deployer_address",
+                    ":contract_name",
+                    ":function_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                      "key": "function_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Internal Server Error",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b6b85ef-e19a-4146-b107-ddd0347185ae",
+          "name": "Call read-only function in fast mode (no cost and memory tracking)",
+          "request": {
+            "name": "Call read-only function in fast mode (no cost and memory tracking)",
+            "description": {
+              "content": "Call a read-only public function on a given smart contract without cost tracking.\n\nThe contract is identified with [Stacks Address] and [Contract Name] in the URL path.\nThe function is identified with [Function Name].\n\nThe arguments to the function are supplied via the POST body.\nThis should be a JSON object with two main properties:\n- `sender` which should be a Stacks address or contract principal\n- `arguments` which should be an array of hex-encoded Clarity values.\n\n**This API endpoint requires a basic Authorization header.**\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "contracts",
+                "fast-call-read",
+                ":deployer_address",
+                ":contract_name",
+                ":function_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                  "key": "function_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a84eca9e-82c5-43d3-8653-07a115c1f339",
+              "name": "Function executed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "contracts",
+                    "fast-call-read",
+                    ":deployer_address",
+                    ":contract_name",
+                    ":function_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                      "key": "function_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sender\": \"SP31DA6FTSJX2WGTZ69SFY11BH51NZMB0ZW97B5P0.get-info\",\n  \"arguments\": [\n    \"0x0011...\",\n    \"0x00231...\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"reference ./components/examples/read-only-function-success.example.json not found in the given specification\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f869697-c58f-4f76-b6af-012c54f66ac7",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "contracts",
+                    "fast-call-read",
+                    ":deployer_address",
+                    ":contract_name",
+                    ":function_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                      "key": "function_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sender\": \"SP31DA6FTSJX2WGTZ69SFY11BH51NZMB0ZW97B5P0.get-info\",\n  \"arguments\": [\n    \"0x0011...\",\n    \"0x00231...\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Bad request",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "06f98f29-296d-40ee-86f9-b40daec1a288",
+              "name": "Unauthorized. Invalid or missing authentication token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "contracts",
+                    "fast-call-read",
+                    ":deployer_address",
+                    ":contract_name",
+                    ":function_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                      "key": "function_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sender\": \"SP31DA6FTSJX2WGTZ69SFY11BH51NZMB0ZW97B5P0.get-info\",\n  \"arguments\": [\n    \"0x0011...\",\n    \"0x00231...\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Unauthorized",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "64e66e5f-41a5-4098-b472-537ccfd058a3",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "contracts",
+                    "fast-call-read",
+                    ":deployer_address",
+                    ":contract_name",
+                    ":function_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                      "key": "function_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sender\": \"SP31DA6FTSJX2WGTZ69SFY11BH51NZMB0ZW97B5P0.get-info\",\n  \"arguments\": [\n    \"0x0011...\",\n    \"0x00231...\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Not found",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "55b292b8-81ca-4627-ad3b-9f4e0700ac6b",
+              "name": "Timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "contracts",
+                    "fast-call-read",
+                    ":deployer_address",
+                    ":contract_name",
+                    ":function_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                      "key": "function_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sender\": \"SP31DA6FTSJX2WGTZ69SFY11BH51NZMB0ZW97B5P0.get-info\",\n  \"arguments\": [\n    \"0x0011...\",\n    \"0x00231...\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Timeout",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d2eb937b-efb4-489b-9fd6-2af6f5504289",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "contracts",
+                    "fast-call-read",
+                    ":deployer_address",
+                    ":contract_name",
+                    ":function_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                      "key": "function_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sender\": \"SP31DA6FTSJX2WGTZ69SFY11BH51NZMB0ZW97B5P0.get-info\",\n  \"arguments\": [\n    \"0x0011...\",\n    \"0x00231...\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Internal Server Error",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc6824d7-eca6-4aa8-a729-c38206678215",
+          "name": "Get trait implementation details",
+          "request": {
+            "name": "Get trait implementation details",
+            "description": {
+              "content": "Determine whether or not a specified trait is implemented (either\nexplicitly or implicitly) within a given contract.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "traits",
+                ":deployer_address",
+                ":contract_name",
+                ":trait_deployer_address",
+                ":trait_contract_name",
+                ":trait_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "reference ./components/schemas/standard-principal.schema.yaml not found in the OpenAPI spec",
+                  "key": "trait_deployer_address",
+                  "description": "(Required) Stacks address of the trait-defining contract.\n"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "trait_contract_name",
+                  "description": "(Required) Contract name of the trait-defining contract."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                  "key": "trait_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d39b11dc-ecb2-401d-9ca1-acb87c5f3220",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "traits",
+                    ":deployer_address",
+                    ":contract_name",
+                    ":trait_deployer_address",
+                    ":trait_contract_name",
+                    ":trait_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference ./components/schemas/standard-principal.schema.yaml not found in the OpenAPI spec",
+                      "key": "trait_deployer_address",
+                      "description": "(Required) Stacks address of the trait-defining contract.\n"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trait_contract_name",
+                      "description": "(Required) Contract name of the trait-defining contract."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                      "key": "trait_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"reference ./components/examples/is-trait-implemented.example.json not found in the given specification\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24c33441-66d1-469d-959e-8bd363f1395b",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "traits",
+                    ":deployer_address",
+                    ":contract_name",
+                    ":trait_deployer_address",
+                    ":trait_contract_name",
+                    ":trait_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference ./components/schemas/standard-principal.schema.yaml not found in the OpenAPI spec",
+                      "key": "trait_deployer_address",
+                      "description": "(Required) Stacks address of the trait-defining contract.\n"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trait_contract_name",
+                      "description": "(Required) Contract name of the trait-defining contract."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                      "key": "trait_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Bad request",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b6b654f3-dd61-4d77-8f44-b23bb52efab1",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "traits",
+                    ":deployer_address",
+                    ":contract_name",
+                    ":trait_deployer_address",
+                    ":trait_contract_name",
+                    ":trait_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference ./components/schemas/standard-principal.schema.yaml not found in the OpenAPI spec",
+                      "key": "trait_deployer_address",
+                      "description": "(Required) Stacks address of the trait-defining contract.\n"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trait_contract_name",
+                      "description": "(Required) Contract name of the trait-defining contract."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                      "key": "trait_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Not found",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d7e3d442-3ea9-47c3-b8bb-86733484e19c",
+          "name": "Get the MARF value for a given key",
+          "request": {
+            "name": "Get the MARF value for a given key",
+            "description": {
+              "content": "Attempt to fetch the value of a MARF key. The key is a 64-character\nhex string representing the MARF node hash.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "clarity",
+                "marf",
+                ":marf_key_hash"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "marf_key_hash",
+                  "description": "(Required) The 64-character hex-encoded hash of the MARF key."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "12cd0184-7a7b-4401-a89c-5fd7287319f1",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "clarity",
+                    "marf",
+                    ":marf_key_hash"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "marf_key_hash",
+                      "description": "(Required) The 64-character hex-encoded hash of the MARF key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"reference ./components/examples/clarity-data.example.json not found in the given specification\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4379c1a-4eaa-4395-a089-e7ae1c443069",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "clarity",
+                    "marf",
+                    ":marf_key_hash"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "marf_key_hash",
+                      "description": "(Required) The 64-character hex-encoded hash of the MARF key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Bad request",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "755462a2-3fc5-422c-9bbe-e71c488ffb23",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "clarity",
+                    "marf",
+                    ":marf_key_hash"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "marf_key_hash",
+                      "description": "(Required) The 64-character hex-encoded hash of the MARF key."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Not found",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ddd0099e-6ea1-46f3-80b2-25e763e1625e",
+          "name": "Get the contract metadata for the metadata key",
+          "request": {
+            "name": "Get the contract metadata for the metadata key",
+            "description": {
+              "content": "Attempt to fetch the metadata of a contract. The contract is identified\nwith [Contract Address] and [Contract Name] in the URL path. The metadata\nkey is identified with [Clarity Metadata Key].\n\nIn the response, `data` is formatted as JSON.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "clarity",
+                "metadata",
+                ":deployer_address",
+                ":contract_name",
+                ":clarity_metadata_key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clarity_metadata_key",
+                  "description": "(Required) Metadata key. Must be either:\n- \"analysis\" for contract analysis data\n- \"vm-metadata::N::TYPE\" where N is the epoch (1-2 digits) and TYPE is one of:\n  contract, contract-size, contract-src, contract-data-size, or a valid Clarity name\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4a0d6e39-2b1d-4e0a-8a60-7c9355ce4131",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "clarity",
+                    "metadata",
+                    ":deployer_address",
+                    ":contract_name",
+                    ":clarity_metadata_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clarity_metadata_key",
+                      "description": "(Required) Metadata key. Must be either:\n- \"analysis\" for contract analysis data\n- \"vm-metadata::N::TYPE\" where N is the epoch (1-2 digits) and TYPE is one of:\n  contract, contract-size, contract-src, contract-data-size, or a valid Clarity name\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"reference ./components/examples/clarity-metadata.example.json not found in the given specification\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7cc844e2-c260-4f42-ace6-0039444657e0",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "clarity",
+                    "metadata",
+                    ":deployer_address",
+                    ":contract_name",
+                    ":clarity_metadata_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clarity_metadata_key",
+                      "description": "(Required) Metadata key. Must be either:\n- \"analysis\" for contract analysis data\n- \"vm-metadata::N::TYPE\" where N is the epoch (1-2 digits) and TYPE is one of:\n  contract, contract-size, contract-src, contract-data-size, or a valid Clarity name\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Bad request",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7d3b310f-bc0c-4e69-9f52-831c2659ea1a",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "clarity",
+                    "metadata",
+                    ":deployer_address",
+                    ":contract_name",
+                    ":clarity_metadata_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clarity_metadata_key",
+                      "description": "(Required) Metadata key. Must be either:\n- \"analysis\" for contract analysis data\n- \"vm-metadata::N::TYPE\" where N is the epoch (1-2 digits) and TYPE is one of:\n  contract, contract-size, contract-src, contract-data-size, or a valid Clarity name\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Not found",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "35855650-841e-4c9e-ba50-3b845a0687cf",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "clarity",
+                    "metadata",
+                    ":deployer_address",
+                    ":contract_name",
+                    ":clarity_metadata_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clarity_metadata_key",
+                      "description": "(Required) Metadata key. Must be either:\n- \"analysis\" for contract analysis data\n- \"vm-metadata::N::TYPE\" where N is the epoch (1-2 digits) and TYPE is one of:\n  contract, contract-size, contract-src, contract-data-size, or a valid Clarity name\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Internal Server Error",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c4660b4c-8efc-4aa8-8c36-56d1bbf537f8",
+          "name": "Get the value of a constant inside a contract",
+          "request": {
+            "name": "Get the value of a constant inside a contract",
+            "description": {
+              "content": "Attempt to fetch the value of a constant inside a contract. The contract\nis identified with [Stacks Address] and [Contract Name] in the URL path.\nThe constant is identified with [Constant Name].\n\nIn the response, `data` is the hex serialization of the constant value.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "constant_val",
+                ":deployer_address",
+                ":contract_name",
+                ":constant_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                  "key": "constant_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "456738af-ad4c-44fe-9188-63ab150cbcd4",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "constant_val",
+                    ":deployer_address",
+                    ":contract_name",
+                    ":constant_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                      "key": "constant_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"reference ./components/examples/constant-value.example.json not found in the given specification\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fbd597b0-3c88-4f2a-95d2-71c2462b6ec6",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "constant_val",
+                    ":deployer_address",
+                    ":contract_name",
+                    ":constant_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                      "key": "constant_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Bad request",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ef1e5e80-f56f-4ae7-8e98-123c50cdaec7",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "constant_val",
+                    ":deployer_address",
+                    ":contract_name",
+                    ":constant_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                      "key": "constant_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Not found",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c1d7b54e-abeb-4501-9d07-343e64fad6b1",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "constant_val",
+                    ":deployer_address",
+                    ":contract_name",
+                    ":constant_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                      "key": "constant_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Internal Server Error",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2df07da8-96cd-4f44-8ed4-65485e5ff66a",
+          "name": "Get contract data variable",
+          "request": {
+            "name": "Get contract data variable",
+            "description": {
+              "content": "Fetch a data variable from a smart contract.\nReturns the raw hex-encoded value of the variable.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "data_var",
+                ":principal",
+                ":contract_name",
+                ":var_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                  "key": "var_name",
+                  "description": "(Required) Variable name (must be a valid Clarity name)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c870e831-1962-46f4-9098-c911aec02d40",
+              "name": "The data variable value",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "data_var",
+                    ":principal",
+                    ":contract_name",
+                    ":var_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                      "key": "var_name",
+                      "description": "(Required) Variable name (must be a valid Clarity name)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"reference ./components/examples/clarity-data.example.json not found in the given specification\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8dbbb94-6171-45ed-9a26-a37b33066d11",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "data_var",
+                    ":principal",
+                    ":contract_name",
+                    ":var_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                      "key": "var_name",
+                      "description": "(Required) Variable name (must be a valid Clarity name)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Bad request",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b52507bb-f131-455a-8315-8f6db6c489a5",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "data_var",
+                    ":principal",
+                    ":contract_name",
+                    ":var_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference ./components/schemas/clarity-name.schema.yaml not found in the OpenAPI spec",
+                      "key": "var_name",
+                      "description": "(Required) Variable name (must be a valid Clarity name)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Not found",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.hiro.so/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "575966b9-8a2e-4a60-afc4-33654fe8ad74",
+    "name": "Signer Metrics Accounts Smart Contracts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Welcome to the API reference overview for the Signer Metrics API.",
+      "type": "text/plain"
+    }
+  }
+}
