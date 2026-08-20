@@ -40,6 +40,10 @@ apis:
   tags:
   - REST
   - Chainhook
+  - Webhook
+  tags_raw:
+  - REST
+  - Chainhook
   - Webhooks
   properties:
   - type: Documentation
@@ -61,6 +65,8 @@ apis:
   humanURL: https://docs.hiro.so/stacks/api
   baseURL: https://api.mainnet.hiro.so
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -278,6 +284,8 @@ apis:
   humanURL: https://docs.hiro.so/stacks/api
   baseURL: https://api.mainnet.hiro.so
   tags:
+  - Name
+  tags_raw:
   - Names
   properties:
   - type: OpenAPI
@@ -476,6 +484,8 @@ apis:
   humanURL: https://docs.hiro.so/stacks/api
   baseURL: https://api.mainnet.hiro.so
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
