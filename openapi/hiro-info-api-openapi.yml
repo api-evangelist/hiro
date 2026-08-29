@@ -1,13 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Signer Metrics Accounts Info API
-  description: Welcome to the API reference overview for the Signer Metrics API.
-  version: 1.0.3
+  title: Hiro Info API
+  version: '1.0'
+  description: 'Operations tagged Info across 2 of this provider''s published API definitions: hiro-stacks-blockchain-api-openapi.yaml, hiro-stacks-node-rpc-api-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.hiro.so/
   description: mainnet
-- url: https://api.testnet.hiro.so/
-  description: testnet
+- url: http://localhost:20443
+  description: Local Stacks Node
 tags:
 - name: Info
   description: Read-only endpoints to obtain network, Proof-of-Transfer, Stacking, STX token, and node information
@@ -92,6 +92,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/stx_supply/:
     get:
       operationId: get_stx_supply
@@ -163,6 +166,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/stx_supply/total/plain:
     get:
       operationId: get_stx_supply_total_supply_plain
@@ -197,6 +203,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/stx_supply/circulating/plain:
     get:
       operationId: get_stx_supply_circulating_plain
@@ -231,6 +240,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/stx_supply/legacy_format:
     get:
       operationId: get_total_stx_supply_legacy_format
@@ -315,6 +327,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/info/network_block_times:
     get:
       operationId: get_network_block_times
@@ -364,6 +379,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/info/network_block_time/{network}:
     get:
       operationId: get_network_block_time_by_network
@@ -412,6 +430,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /v2/info:
     get:
       summary: Get Core API info
@@ -432,6 +453,9 @@ paths:
                   $ref: ./components/examples/node-info.example.json
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v2/pox:
     get:
       summary: Get PoX details
@@ -458,6 +482,9 @@ paths:
           $ref: '#/components/responses/InternalServerError'
       parameters:
       - $ref: ./components/parameters/tip.yaml
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v3/health:
     get:
       summary: Query the health of the node.
@@ -494,6 +521,9 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v2/neighbors:
     get:
       summary: Get neighbor peers
@@ -514,6 +544,9 @@ paths:
               examples:
                 network-peers:
                   $ref: ./components/examples/network-peers.example.json
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
 components:
   schemas:
     PoxInfo:
@@ -546,6 +579,21 @@ components:
           schema:
             type: string
           example: Bad request
+  securitySchemes:
+    rpcAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: 'Plain-text secret value that must exactly equal the node''s
+
+        configured password, which is set as `connection_options.auth_token`
+
+        in the node''s configuration file.
+
+        '
 externalDocs:
-  url: https://github.com/hirosystems/signer-metrics-api
+  url: https://github.com/hirosystems/stacks-blockchain-api
   description: Source Repository
+x-refined-from:
+- hiro-stacks-blockchain-api-openapi.yaml
+- hiro-stacks-node-rpc-api-openapi.yaml

@@ -1,13 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Signer Metrics Accounts Transactions API
-  description: Welcome to the API reference overview for the Signer Metrics API.
-  version: 1.0.3
+  title: Hiro Transactions API
+  version: '1.0'
+  description: 'Operations tagged Transactions across 2 of this provider''s published API definitions: hiro-stacks-blockchain-api-openapi.yaml, hiro-stacks-node-rpc-api-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.hiro.so/
   description: mainnet
-- url: https://api.testnet.hiro.so/
-  description: testnet
+- url: http://localhost:20443
+  description: Local Stacks Node
 tags:
 - name: Transactions
   description: Endpoints to obtain transaction details and to broadcast transactions to the network
@@ -4245,6 +4245,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/tx/multiple:
     get:
       operationId: get_tx_list_details
@@ -9953,6 +9956,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/tx/mempool:
     get:
       operationId: get_mempool_transaction_list
@@ -12164,6 +12170,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/tx/mempool/stats:
     get:
       operationId: get_mempool_transaction_stats
@@ -12290,6 +12299,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/tx/events:
     get:
       operationId: get_filtered_events
@@ -12641,6 +12653,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/tx/{tx_id}:
     get:
       operationId: get_transaction_by_id
@@ -18827,6 +18842,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/tx/{tx_id}/raw:
     get:
       operationId: get_raw_transaction_by_id
@@ -18892,6 +18910,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/tx/block/{block_hash}:
     get:
       operationId: get_transactions_by_block_hash
@@ -23019,6 +23040,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/tx/block_height/{height}:
     get:
       operationId: get_transactions_by_block_height
@@ -27150,6 +27174,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/address/{principal}/mempool:
     get:
       operationId: get_address_mempool_transactions
@@ -29322,6 +29349,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v2/blocks/{height_or_hash}/transactions:
     get:
       operationId: get_transactions_by_block
@@ -33449,6 +33479,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v2/addresses/{address}/transactions:
     get:
       operationId: get_address_transactions
@@ -37648,6 +37681,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v2/addresses/{address}/transactions/{tx_id}/events:
     get:
       operationId: get_address_transaction_events
@@ -37873,6 +37909,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /v2/transactions:
     post:
       summary: Broadcast raw transaction
@@ -37948,6 +37987,9 @@ paths:
               example: Failed to decode transaction
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v3/transaction/{txid}:
     get:
       summary: Retrieve transaction details by TXID
@@ -37991,6 +38033,9 @@ paths:
               schema:
                 type: string
               example: Transaction indexing is not enabled
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v2/transactions/unconfirmed/{txid}:
     get:
       summary: Get unconfirmed transaction
@@ -38030,6 +38075,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v2/mempool/query:
     post:
       summary: Query mempool for missing transactions
@@ -38079,14 +38127,17 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
 components:
   schemas:
+    TransactionSubmissionError:
+      $ref: ./components/schemas/transaction-submission-error.schema.yaml
     UnconfirmedTransaction:
       $ref: ./components/schemas/unconfirmed-transaction.schema.yaml
     TransactionInfo:
       $ref: ./components/schemas/get-transaction.schema.yaml
-    TransactionSubmissionError:
-      $ref: ./components/schemas/transaction-submission-error.schema.yaml
   responses:
     NotFound:
       description: Not found
@@ -38109,6 +38160,21 @@ components:
           schema:
             type: string
           example: Bad request
+  securitySchemes:
+    rpcAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: 'Plain-text secret value that must exactly equal the node''s
+
+        configured password, which is set as `connection_options.auth_token`
+
+        in the node''s configuration file.
+
+        '
 externalDocs:
-  url: https://github.com/hirosystems/signer-metrics-api
+  url: https://github.com/hirosystems/stacks-blockchain-api
   description: Source Repository
+x-refined-from:
+- hiro-stacks-blockchain-api-openapi.yaml
+- hiro-stacks-node-rpc-api-openapi.yaml

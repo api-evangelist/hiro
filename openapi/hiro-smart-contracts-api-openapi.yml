@@ -1,13 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Signer Metrics Accounts Smart Contracts API
-  description: Welcome to the API reference overview for the Signer Metrics API.
-  version: 1.0.3
+  title: Hiro Smart Contracts API
+  version: '1.0'
+  description: 'Operations tagged Smart Contracts across 2 of this provider''s published API definitions: hiro-stacks-blockchain-api-openapi.yaml, hiro-stacks-node-rpc-api-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.hiro.so/
   description: mainnet
-- url: https://api.testnet.hiro.so/
-  description: testnet
+- url: http://localhost:20443
+  description: Local Stacks Node
 tags:
 - name: Smart Contracts
   description: Read-only endpoints to obtain Clarity smart contract details
@@ -116,6 +116,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/contract/{contract_id}:
     get:
       operationId: get_contract_by_id
@@ -182,6 +185,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/contract/{contract_id}/events:
     get:
       operationId: get_contract_events_by_id
@@ -490,6 +496,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v2/smart-contracts/status:
     get:
       operationId: get_smart_contracts_status
@@ -575,6 +584,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /v2/contracts/interface/{deployer_address}/{contract_name}:
     get:
       summary: Get contract interface
@@ -603,6 +615,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v2/map_entry/{deployer_address}/{contract_name}/{map_name}:
     post:
       summary: Get specific data-map inside a contract
@@ -649,6 +664,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v2/contracts/source/{deployer_address}/{contract_name}:
     get:
       summary: Get contract source
@@ -682,6 +700,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v2/contracts/call-read/{deployer_address}/{contract_name}/{function_name}:
     post:
       summary: Call read-only function
@@ -739,6 +760,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v3/contracts/fast-call-read/{deployer_address}/{contract_name}/{function_name}:
     post:
       summary: Call read-only function in fast mode (no cost and memory tracking)
@@ -813,6 +837,9 @@ paths:
           $ref: '#/components/responses/Timeout'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v2/traits/{deployer_address}/{contract_name}/{trait_deployer_address}/{trait_contract_name}/{trait_name}:
     get:
       summary: Get trait implementation details
@@ -867,6 +894,9 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v2/clarity/marf/{marf_key_hash}:
     get:
       summary: Get the MARF value for a given key
@@ -905,6 +935,9 @@ paths:
           maxLength: 64
       - $ref: ./components/parameters/proof.yaml
       - $ref: ./components/parameters/tip.yaml
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v2/clarity/metadata/{deployer_address}/{contract_name}/{clarity_metadata_key}:
     get:
       summary: Get the contract metadata for the metadata key
@@ -950,6 +983,9 @@ paths:
           pattern: ^(analysis)|(vm-metadata::\d{1,2}::(contract|contract-size|contract-src|contract-data-size|[a-zA-Z]([a-zA-Z0-9]|[-_!?+<>=/*])*))$
           example: analysis
       - $ref: ./components/parameters/tip.yaml
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v2/constant_val/{deployer_address}/{contract_name}/{constant_name}:
     get:
       summary: Get the value of a constant inside a contract
@@ -992,6 +1028,9 @@ paths:
         schema:
           $ref: '#/components/schemas/ClarityName'
       - $ref: ./components/parameters/tip.yaml
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v2/data_var/{principal}/{contract_name}/{var_name}:
     get:
       summary: Get contract data variable
@@ -1029,22 +1068,30 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
 components:
+  schemas:
+    ClarityMetadata:
+      $ref: ./components/schemas/clarity-metadata.schema.yaml
+    ClarityName:
+      $ref: ./components/schemas/clarity-name.schema.yaml
+    ContractInterface:
+      $ref: ./components/schemas/contract-interface.schema.yaml
+    ContractSource:
+      $ref: ./components/schemas/contract-source.schema.yaml
+    ReadOnlyFunctionResult:
+      $ref: ./components/schemas/read-only-function-result.schema.yaml
+    ReadOnlyFunctionArgs:
+      $ref: ./components/schemas/read-only-function-args.schema.yaml
+    ClarityData:
+      $ref: ./components/schemas/clarity-data.schema.yaml
+    ConstantValue:
+      $ref: ./components/schemas/constant-value.schema.yaml
+    IsTraitImplemented:
+      $ref: ./components/schemas/is-trait-implemented.schema.yaml
   responses:
-    NotFound:
-      description: Not found
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Not found
-    Timeout:
-      description: Timeout
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Timeout
     Unauthorized:
       description: Unauthorized. Invalid or missing authentication token.
       content:
@@ -1052,6 +1099,20 @@ components:
           schema:
             type: string
           example: Unauthorized
+    Timeout:
+      description: Timeout
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Timeout
+    NotFound:
+      description: Not found
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Not found
     InternalServerError:
       description: Internal Server Error
       content:
@@ -1066,25 +1127,21 @@ components:
           schema:
             type: string
           example: Bad request
-  schemas:
-    ReadOnlyFunctionResult:
-      $ref: ./components/schemas/read-only-function-result.schema.yaml
-    ClarityName:
-      $ref: ./components/schemas/clarity-name.schema.yaml
-    IsTraitImplemented:
-      $ref: ./components/schemas/is-trait-implemented.schema.yaml
-    ContractSource:
-      $ref: ./components/schemas/contract-source.schema.yaml
-    ReadOnlyFunctionArgs:
-      $ref: ./components/schemas/read-only-function-args.schema.yaml
-    ConstantValue:
-      $ref: ./components/schemas/constant-value.schema.yaml
-    ClarityMetadata:
-      $ref: ./components/schemas/clarity-metadata.schema.yaml
-    ClarityData:
-      $ref: ./components/schemas/clarity-data.schema.yaml
-    ContractInterface:
-      $ref: ./components/schemas/contract-interface.schema.yaml
+  securitySchemes:
+    rpcAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: 'Plain-text secret value that must exactly equal the node''s
+
+        configured password, which is set as `connection_options.auth_token`
+
+        in the node''s configuration file.
+
+        '
 externalDocs:
-  url: https://github.com/hirosystems/signer-metrics-api
+  url: https://github.com/hirosystems/stacks-blockchain-api
   description: Source Repository
+x-refined-from:
+- hiro-stacks-blockchain-api-openapi.yaml
+- hiro-stacks-node-rpc-api-openapi.yaml

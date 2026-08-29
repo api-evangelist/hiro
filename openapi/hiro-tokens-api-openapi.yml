@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Signer Metrics Accounts Tokens API
-  description: Welcome to the API reference overview for the Signer Metrics API.
-  version: 1.0.3
+  title: Token Metadata Tokens API
+  description: Welcome to the API reference overview for the [Token Metadata API](https://docs.hiro.so/token-metadata-api). Service that indexes metadata for every SIP-009, SIP-010, and SIP-013 Token in the Stacks blockchain and exposes it via REST API endpoints.
+  version: v2.2.1
 servers:
 - url: https://api.hiro.so/
   description: mainnet
@@ -911,5 +911,5 @@ paths:
                       type: string
                       example: SPZA22A4D15RKH5G8XDGQ7BPC20Q5JNMH0VQKSR6
 externalDocs:
-  url: https://github.com/hirosystems/signer-metrics-api
+  url: https://github.com/hirosystems/token-metadata-api
   description: Source Repository

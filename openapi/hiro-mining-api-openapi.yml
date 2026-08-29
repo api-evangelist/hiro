@@ -1,13 +1,16 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Signer Metrics Accounts Mining API
-  description: Welcome to the API reference overview for the Signer Metrics API.
-  version: 1.0.3
+  title: Stacks 3.0+ RPC Mining API
+  version: 1.0.0
+  description: 'This is the documentation for the `stacks-node` RPC interface.
+
+    '
+  license:
+    name: CC-0
+    url: https://creativecommons.org/publicdomain/zero/1.0/
 servers:
-- url: https://api.hiro.so/
-  description: mainnet
-- url: https://api.testnet.hiro.so/
-  description: testnet
+- url: http://localhost:20443
+  description: Local Stacks Node
 tags:
 - name: Mining
   description: Endpoints related to Stacks block production and mining.
@@ -143,14 +146,12 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
+  schemas:
+    BlockProposalResponse:
+      $ref: ./components/schemas/block-proposal.schema.yaml
+    BlockUploadResponse:
+      $ref: ./components/schemas/block-upload-response.schema.yaml
   responses:
-    NotFound:
-      description: Not found
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Not found
     Unauthorized:
       description: Unauthorized. Invalid or missing authentication token.
       content:
@@ -158,6 +159,13 @@ components:
           schema:
             type: string
           example: Unauthorized
+    NotFound:
+      description: Not found
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Not found
     InternalServerError:
       description: Internal Server Error
       content:
@@ -172,11 +180,15 @@ components:
           schema:
             type: string
           example: Bad request
-  schemas:
-    BlockProposalResponse:
-      $ref: ./components/schemas/block-proposal.schema.yaml
-    BlockUploadResponse:
-      $ref: ./components/schemas/block-upload-response.schema.yaml
-externalDocs:
-  url: https://github.com/hirosystems/signer-metrics-api
-  description: Source Repository
+  securitySchemes:
+    rpcAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: 'Plain-text secret value that must exactly equal the node''s
+
+        configured password, which is set as `connection_options.auth_token`
+
+        in the node''s configuration file.
+
+        '

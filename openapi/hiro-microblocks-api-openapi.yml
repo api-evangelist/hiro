@@ -1,13 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Signer Metrics Accounts Microblocks API
-  description: Welcome to the API reference overview for the Signer Metrics API.
-  version: 1.0.3
+  title: Hiro Microblocks API
+  version: '1.0'
+  description: 'Operations tagged Microblocks across 2 of this provider''s published API definitions: hiro-stacks-blockchain-api-openapi.yaml, hiro-stacks-node-rpc-api-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.hiro.so/
   description: mainnet
-- url: https://api.testnet.hiro.so/
-  description: testnet
+- url: http://localhost:20443
+  description: Local Stacks Node
 tags:
 - name: Microblocks
   description: Read-only endpoints to obtain microblocks details
@@ -149,6 +149,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/microblock/{hash}:
     get:
       operationId: get_microblock_by_hash
@@ -250,6 +253,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/microblock/unanchored/txs:
     get:
       operationId: get_unanchored_txs
@@ -4329,6 +4335,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /v2/microblocks/confirmed/{block_id}:
     get:
       summary: Get stream of confirmed microblocks (Epoch 2.x)
@@ -4363,6 +4372,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v2/microblocks/{microblock_id}:
     get:
       summary: 'Get a stream of microblocks beginning
@@ -4396,6 +4408,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v2/microblocks/unconfirmed/{block_id}/{seq}:
     get:
       summary: Get stream of unconfirmed microblocks (Epoch 2.x)
@@ -4438,6 +4453,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v2/microblocks:
     post:
       summary: Submit a microblock (Epoch 2.x)
@@ -4476,6 +4494,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
 components:
   responses:
     NotFound:
@@ -4499,6 +4520,21 @@ components:
           schema:
             type: string
           example: Bad request
+  securitySchemes:
+    rpcAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: 'Plain-text secret value that must exactly equal the node''s
+
+        configured password, which is set as `connection_options.auth_token`
+
+        in the node''s configuration file.
+
+        '
 externalDocs:
-  url: https://github.com/hirosystems/signer-metrics-api
+  url: https://github.com/hirosystems/stacks-blockchain-api
   description: Source Repository
+x-refined-from:
+- hiro-stacks-blockchain-api-openapi.yaml
+- hiro-stacks-node-rpc-api-openapi.yaml

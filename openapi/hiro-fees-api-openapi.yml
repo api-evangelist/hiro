@@ -1,13 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Signer Metrics Accounts Fees API
-  description: Welcome to the API reference overview for the Signer Metrics API.
-  version: 1.0.3
+  title: Hiro Fees API
+  version: '1.0'
+  description: 'Operations tagged Fees across 2 of this provider''s published API definitions: hiro-stacks-blockchain-api-openapi.yaml, hiro-stacks-node-rpc-api-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.hiro.so/
   description: mainnet
-- url: https://api.testnet.hiro.so/
-  description: testnet
+- url: http://localhost:20443
+  description: Local Stacks Node
 tags:
 - name: Fees
   description: Read-only endpoints to obtain fee details
@@ -64,6 +64,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /v2/fees/transaction:
     post:
       summary: Get approximate fees for the given transaction
@@ -105,6 +108,9 @@ paths:
               example: 'Failed to decode: Failed to parse JSON body'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v2/fees/transfer:
     get:
       summary: Get estimated fee
@@ -129,14 +135,17 @@ paths:
               example: 3
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
 components:
   schemas:
+    FeeTransactionError:
+      $ref: ./components/schemas/fee-transaction-error.schema.yaml
     FeeTransactionRequest:
       $ref: ./components/schemas/fee-transaction-request.schema.yaml
     FeeTransactionResponse:
       $ref: ./components/schemas/fee-transaction-response.schema.yaml
-    FeeTransactionError:
-      $ref: ./components/schemas/fee-transaction-error.schema.yaml
   responses:
     InternalServerError:
       description: Internal Server Error
@@ -145,6 +154,21 @@ components:
           schema:
             type: string
           example: Internal Server Error
+  securitySchemes:
+    rpcAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: 'Plain-text secret value that must exactly equal the node''s
+
+        configured password, which is set as `connection_options.auth_token`
+
+        in the node''s configuration file.
+
+        '
 externalDocs:
-  url: https://github.com/hirosystems/signer-metrics-api
+  url: https://github.com/hirosystems/stacks-blockchain-api
   description: Source Repository
+x-refined-from:
+- hiro-stacks-blockchain-api-openapi.yaml
+- hiro-stacks-node-rpc-api-openapi.yaml

@@ -1,13 +1,16 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Signer Metrics Accounts Atlas API
-  description: Welcome to the API reference overview for the Signer Metrics API.
-  version: 1.0.3
+  title: Stacks 3.0+ RPC Atlas API
+  version: 1.0.0
+  description: 'This is the documentation for the `stacks-node` RPC interface.
+
+    '
+  license:
+    name: CC-0
+    url: https://creativecommons.org/publicdomain/zero/1.0/
 servers:
-- url: https://api.hiro.so/
-  description: mainnet
-- url: https://api.testnet.hiro.so/
-  description: testnet
+- url: http://localhost:20443
+  description: Local Stacks Node
 tags:
 - name: Atlas
   description: Operations related to the Atlas global namespace.
@@ -130,6 +133,15 @@ components:
           schema:
             type: string
           example: Bad request
-externalDocs:
-  url: https://github.com/hirosystems/signer-metrics-api
-  description: Source Repository
+  securitySchemes:
+    rpcAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: 'Plain-text secret value that must exactly equal the node''s
+
+        configured password, which is set as `connection_options.auth_token`
+
+        in the node''s configuration file.
+
+        '

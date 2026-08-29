@@ -1,13 +1,15 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Signer Metrics Accounts Blocks API
-  description: Welcome to the API reference overview for the Signer Metrics API.
-  version: 1.0.3
+  title: Hiro Blocks API
+  version: '1.0'
+  description: 'Operations tagged Blocks across 3 of this provider''s published API definitions: hiro-signer-metrics-api-openapi.yaml, hiro-stacks-blockchain-api-openapi.yaml, hiro-stacks-node-rpc-api-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.hiro.so/
   description: mainnet
 - url: https://api.testnet.hiro.so/
   description: testnet
+- url: http://localhost:20443
+  description: Local Stacks Node
 tags:
 - name: Blocks
 paths:
@@ -140,6 +142,11 @@ paths:
                                 description: Sum of voting weight of missing signers
                                 type: integer
                           - type: 'null'
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
+    - url: https://api.testnet.hiro.so/
+      description: testnet
   /signer-metrics/v1/blocks/{height_or_hash}:
     get:
       operationId: getBlock
@@ -258,6 +265,11 @@ paths:
                           description: Sum of voting weight of missing signers
                           type: integer
                     - type: 'null'
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
+    - url: https://api.testnet.hiro.so/
+      description: testnet
   /extended/v1/block/:
     get:
       operationId: get_block_list
@@ -440,6 +452,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/block/by_height/{height}:
     get:
       operationId: get_block_by_height
@@ -590,6 +605,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/block/by_burn_block_height/{burn_block_height}:
     get:
       operationId: get_block_by_burn_block_height
@@ -740,6 +758,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/block/{hash}:
     get:
       operationId: get_block_by_hash
@@ -889,6 +910,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/block/by_burn_block_hash/{burn_block_hash}:
     get:
       operationId: get_block_by_burn_block_hash
@@ -1038,6 +1062,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v2/blocks/:
     get:
       operationId: get_blocks
@@ -1214,6 +1241,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v2/blocks/average-times:
     get:
       operationId: get_average_block_times
@@ -1261,6 +1291,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v2/blocks/{height_or_hash}:
     get:
       operationId: get_block
@@ -1392,6 +1425,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v2/blocks/{height_or_hash}/signer-signatures:
     get:
       operationId: get_signer_signatures_for_block
@@ -1480,6 +1516,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v2/block-tenures/{tenure_height}/blocks:
     get:
       operationId: get_tenure_blocks
@@ -1665,6 +1704,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /v3/blocks/{block_id}:
     get:
       summary: Get Nakamoto block by ID
@@ -1710,6 +1752,9 @@ paths:
           $ref: '#/components/responses/MethodNotAllowed'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v3/blocks/height/{block_height}:
     get:
       summary: Fetch a Nakamoto block by its height and optional tip
@@ -1742,6 +1787,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v3/tenures/info:
     get:
       summary: Fetch metadata about the ongoing Nakamoto tenure
@@ -1766,6 +1814,9 @@ paths:
               examples:
                 tenure-info:
                   $ref: ./components/examples/get-tenure-info.example.json
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v3/tenures/{block_id}:
     get:
       summary: Fetch a sequence of Nakamoto blocks in a tenure
@@ -1825,6 +1876,9 @@ paths:
           $ref: '#/components/responses/MethodNotAllowed'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v3/tenures/blocks/{consensus_hash}:
     get:
       summary: Get the list of Stacks blocks in a tenure
@@ -1861,6 +1915,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v3/tenures/blocks/hash/{burnchain_block_hash}:
     get:
       summary: Get the list of Nakamoto Stacks blocks in a tenure given Bitcoin block hash
@@ -1897,6 +1954,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v3/tenures/blocks/height/{burnchain_block_height}:
     get:
       summary: Get the list of Nakamoto Stacks blocks in a tenure given Bitcoin block height
@@ -1934,6 +1994,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v3/sortitions:
     get:
       summary: Get latest sortition information
@@ -1962,6 +2025,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v3/sortitions/latest_and_last:
     get:
       summary: Get latest and last winning sortitions
@@ -1990,6 +2056,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v3/sortitions/consensus/{consensus_hash}:
     get:
       summary: Get sortition by consensus hash
@@ -2026,6 +2095,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v3/sortitions/burn/{burn_header_hash}:
     get:
       summary: Get sortition by burn header hash
@@ -2062,6 +2134,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v3/sortitions/burn_height/{height}:
     get:
       summary: Get sortition by burn block height
@@ -2099,6 +2174,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v3/signer/{signer_pubkey}/{cycle_number}:
     get:
       summary: Get number of blocks signed by signer during a given reward cycle
@@ -2137,6 +2215,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v2/microblocks/confirmed/{block_id}:
     get:
       summary: Get stream of confirmed microblocks (Epoch 2.x)
@@ -2171,6 +2252,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v2/microblocks/{microblock_id}:
     get:
       summary: 'Get a stream of microblocks beginning
@@ -2204,6 +2288,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v2/microblocks/unconfirmed/{block_id}/{seq}:
     get:
       summary: Get stream of unconfirmed microblocks (Epoch 2.x)
@@ -2246,6 +2333,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v2/microblocks:
     post:
       summary: Submit a microblock (Epoch 2.x)
@@ -2284,6 +2374,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v2/headers/{quantity}:
     get:
       summary: Get recent 2.x block headers
@@ -2321,6 +2414,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v2/blocks/{block_id}:
     get:
       summary: Get Stacks 2.x block by ID
@@ -2358,6 +2454,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v3/tenures/fork_info/{start}/{stop}:
     get:
       summary: Get tenure fork information
@@ -2400,6 +2499,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v3/tenures/tip/{consensus_hash}:
     get:
       summary: Get tenure tip
@@ -2434,6 +2536,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v3/tenures/tip_metadata/{consensus_hash}:
     get:
       summary: Get tenure tip with metadata
@@ -2465,6 +2570,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v3/blocks/upload:
     post:
       summary: Upload a Nakamoto block
@@ -2516,6 +2624,9 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v3/blocks/replay/{block_id}:
     get:
       summary: Replay mining of a block and returns its content
@@ -2553,6 +2664,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v3/blocks/simulate/{block_id}:
     get:
       summary: Simulate mining of a block with the specified transactions and returns its content
@@ -2612,18 +2726,19 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
 components:
   schemas:
-    TenureInfo:
-      $ref: ./components/schemas/tenure-info.schema.yaml
-    TenureTipMetadata:
-      $ref: ./components/schemas/tenure-tip-metadata.schema.yaml
     BlockReplay:
       $ref: ./components/schemas/block-replay.schema.yaml
     TenureForkInfo:
       $ref: ./components/schemas/tenure-fork-info.schema.yaml
-    TenureTip:
-      $ref: ./components/schemas/tenure-tip.schema.yaml
+    TenureInfo:
+      $ref: ./components/schemas/tenure-info.schema.yaml
+    TenureTipMetadata:
+      $ref: ./components/schemas/tenure-tip-metadata.schema.yaml
     Sortitions:
       $ref: ./components/schemas/sortitions.schema.yaml
     TenureBlocks:
@@ -2634,7 +2749,16 @@ components:
       $ref: ./components/schemas/block-upload-response.schema.yaml
     SignerBlocksSigned:
       $ref: ./components/schemas/signer-blocks-signed.schema.yaml
+    TenureTip:
+      $ref: ./components/schemas/tenure-tip.schema.yaml
   responses:
+    Unauthorized:
+      description: Unauthorized. Invalid or missing authentication token.
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Unauthorized
     MethodNotAllowed:
       description: Method Not Allowed
       content:
@@ -2649,13 +2773,6 @@ components:
           schema:
             type: string
           example: Not found
-    Unauthorized:
-      description: Unauthorized. Invalid or missing authentication token.
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Unauthorized
     InternalServerError:
       description: Internal Server Error
       content:
@@ -2670,6 +2787,19 @@ components:
           schema:
             type: string
           example: Bad request
-externalDocs:
-  url: https://github.com/hirosystems/signer-metrics-api
-  description: Source Repository
+  securitySchemes:
+    rpcAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: 'Plain-text secret value that must exactly equal the node''s
+
+        configured password, which is set as `connection_options.auth_token`
+
+        in the node''s configuration file.
+
+        '
+x-refined-from:
+- hiro-signer-metrics-api-openapi.yaml
+- hiro-stacks-blockchain-api-openapi.yaml
+- hiro-stacks-node-rpc-api-openapi.yaml

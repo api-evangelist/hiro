@@ -1,13 +1,15 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Signer Metrics Accounts Signers API
-  description: Welcome to the API reference overview for the Signer Metrics API.
-  version: 1.0.3
+  title: Hiro Signers API
+  version: '1.0'
+  description: 'Operations tagged Signers across 2 of this provider''s published API definitions: hiro-signer-metrics-api-openapi.yaml, hiro-stacks-node-rpc-api-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.hiro.so/
   description: mainnet
 - url: https://api.testnet.hiro.so/
   description: testnet
+- url: http://localhost:20443
+  description: Local Stacks Node
 tags:
 - name: Signers
 paths:
@@ -131,6 +133,11 @@ paths:
                           anyOf:
                           - type: string
                           - type: 'null'
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
+    - url: https://api.testnet.hiro.so/
+      description: testnet
   /signer-metrics/v1/cycles/{cycle_number}/signers/{signer_id}:
     get:
       operationId: getPoxCycleSigner
@@ -227,6 +234,11 @@ paths:
                   error:
                     type: string
                     description: Error message when signer is not found
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
+    - url: https://api.testnet.hiro.so/
+      description: testnet
   /v3/stacker_set/{cycle_number}:
     get:
       summary: Fetch the stacker and signer set information for a given cycle.
@@ -291,6 +303,9 @@ paths:
               schema:
                 type: string
               example: No such file or directory
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
   /v3/signer/{signer_pubkey}/{cycle_number}:
     get:
       summary: Get number of blocks signed by signer during a given reward cycle
@@ -329,6 +344,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
 components:
   schemas:
     GetStackerSet:
@@ -357,6 +375,21 @@ components:
           schema:
             type: string
           example: Bad request
+  securitySchemes:
+    rpcAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: 'Plain-text secret value that must exactly equal the node''s
+
+        configured password, which is set as `connection_options.auth_token`
+
+        in the node''s configuration file.
+
+        '
 externalDocs:
   url: https://github.com/hirosystems/signer-metrics-api
   description: Source Repository
+x-refined-from:
+- hiro-signer-metrics-api-openapi.yaml
+- hiro-stacks-node-rpc-api-openapi.yaml

@@ -1,13 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Signer Metrics Accounts API
-  description: Welcome to the API reference overview for the Signer Metrics API.
-  version: 1.0.3
+  title: Hiro Accounts API
+  version: '1.0'
+  description: 'Operations tagged Accounts across 2 of this provider''s published API definitions: hiro-stacks-blockchain-api-openapi.yaml, hiro-stacks-node-rpc-api-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.hiro.so/
   description: mainnet
-- url: https://api.testnet.hiro.so/
-  description: testnet
+- url: http://localhost:20443
+  description: Local Stacks Node
 tags:
 - name: Accounts
   description: Read-only endpoints to obtain Stacks account details
@@ -162,6 +162,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/address/{principal}/balances:
     get:
       operationId: get_account_balance
@@ -344,6 +347,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/address/{principal}/transactions:
     get:
       operationId: get_account_transactions
@@ -4509,6 +4515,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/address/{principal}/{tx_id}/with_transfers:
     get:
       operationId: get_single_transaction_with_transfers
@@ -8684,6 +8693,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/address/{principal}/transactions_with_transfers:
     get:
       operationId: get_account_transactions_with_transfers
@@ -12916,6 +12928,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/address/{principal}/assets:
     get:
       operationId: get_account_assets
@@ -13259,6 +13274,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/address/{principal}/stx_inbound:
     get:
       operationId: get_account_inbound
@@ -13410,6 +13428,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v1/address/{principal}/nonces:
     get:
       operationId: get_account_nonces
@@ -13504,6 +13525,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v2/addresses/{principal}/balances/stx:
     get:
       operationId: get_principal_stx_balance
@@ -13602,6 +13626,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v2/addresses/{principal}/balances/ft:
     get:
       operationId: get_principal_ft_balances
@@ -13695,6 +13722,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /extended/v2/addresses/{principal}/balances/ft/{token}:
     get:
       operationId: get_principal_ft_balance
@@ -13758,6 +13788,9 @@ paths:
                     type: string
                 required:
                 - error
+    servers:
+    - url: https://api.hiro.so/
+      description: mainnet
   /v2/accounts/{principal}:
     get:
       summary: Get account info
@@ -13794,15 +13827,11 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:20443
+      description: Local Stacks Node
 components:
   responses:
-    InternalServerError:
-      description: Internal Server Error
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Internal Server Error
     NotFound:
       description: Not found
       content:
@@ -13810,6 +13839,13 @@ components:
           schema:
             type: string
           example: Not found
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Internal Server Error
     BadRequest:
       description: Bad request
       content:
@@ -13820,6 +13856,21 @@ components:
   schemas:
     AccountData:
       $ref: ./components/schemas/account-data.schema.yaml
+  securitySchemes:
+    rpcAuth:
+      type: apiKey
+      in: header
+      name: authorization
+      description: 'Plain-text secret value that must exactly equal the node''s
+
+        configured password, which is set as `connection_options.auth_token`
+
+        in the node''s configuration file.
+
+        '
 externalDocs:
-  url: https://github.com/hirosystems/signer-metrics-api
+  url: https://github.com/hirosystems/stacks-blockchain-api
   description: Source Repository
+x-refined-from:
+- hiro-stacks-blockchain-api-openapi.yaml
+- hiro-stacks-node-rpc-api-openapi.yaml
