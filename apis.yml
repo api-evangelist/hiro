@@ -296,7 +296,7 @@ apis:
   humanURL: https://docs.hiro.so/stacks/api
   baseURL: https://api.mainnet.hiro.so
   tags:
-  - Names
+  - Name
   tags_raw:
   - Names
   properties:
