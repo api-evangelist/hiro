@@ -255,24 +255,6 @@ apis:
     url: https://docs.hiro.so/stacks/token-metadata-api
   - type: Documentation
     url: https://docs.hiro.so/stacks/signer-metrics-api
-- aid: hiro:hiro-microblocks-api
-  name: Hiro Microblocks API
-  description: Read-only endpoints to obtain microblocks details
-  humanURL: https://docs.hiro.so/stacks/api
-  baseURL: https://api.mainnet.hiro.so
-  tags:
-  - Microblocks
-  properties:
-  - type: OpenAPI
-    url: openapi/hiro-microblocks-api-openapi.yml
-  - type: Documentation
-    url: https://docs.hiro.so/stacks/api
-  - type: Documentation
-    url: https://docs.hiro.so/stacks/rpc-api
-  - type: Documentation
-    url: https://docs.hiro.so/stacks/token-metadata-api
-  - type: Documentation
-    url: https://docs.hiro.so/stacks/signer-metrics-api
 - aid: hiro:hiro-mining-api
   name: Hiro Mining API
   description: Endpoints related to Stacks block production and mining.
@@ -503,6 +485,24 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/hiro-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/rpc-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/token-metadata-api
+  - type: Documentation
+    url: https://docs.hiro.so/stacks/signer-metrics-api
+- aid: hiro:hiro-micro-blocks-api
+  name: Hiro Micro Blocks API
+  description: Read-only endpoints to obtain microblocks details
+  humanURL: https://docs.hiro.so/stacks/chainhook
+  baseURL: https://api.platform.hiro.so
+  tags:
+  - Micro Blocks
+  properties:
+  - type: OpenAPI
+    url: openapi/hiro-micro-blocks-api-openapi.yml
   - type: Documentation
     url: https://docs.hiro.so/stacks/api
   - type: Documentation
