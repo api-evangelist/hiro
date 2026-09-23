@@ -246,7 +246,7 @@ paths:
   /extended/v1/stx_supply/legacy_format:
     get:
       operationId: get_total_stx_supply_legacy_format
-      summary: Get total and unlocked STX supply (results formatted the same as the legacy 1.0 API)
+      summary: Get total and unlocked STX supply (results formatted the same as the legacy 1.0…
       tags:
       - Info
       description: Retrieves total supply of STX tokens including those currently in circulation that have been unlocked.
@@ -487,7 +487,7 @@ paths:
       description: Local Stacks Node
   /v3/health:
     get:
-      summary: Query the health of the node.
+      summary: Query the health of the node
       description: 'Get node health information.
 
         A node is considered healthy if its Stacks tip height matches the maximum Stacks tip height observed among its connected peers.
@@ -500,9 +500,7 @@ paths:
 
         - `node_stacks_tip_height`: The current Stacks tip height of this node.
 
-        - `max_stacks_neighbor_address`: The address of the most advanced peer. Null if no peer data is available.
-
-        '
+        - `max_stacks_neighbor_address`: The address of the most advanced peer. Null if no peer data is available.'
       tags:
       - Info
       security: []
@@ -531,9 +529,7 @@ paths:
       - Info
       security: []
       operationId: getNetworkPeers
-      description: 'Get information about the node"s neighbor peers in the network.
-
-        '
+      description: Get information about the node"s neighbor peers in the network.
       responses:
         '200':
           description: List of neighbor peers
@@ -549,12 +545,12 @@ paths:
       description: Local Stacks Node
 components:
   schemas:
+    NetworkPeers:
+      $ref: ./components/schemas/network-peers.schema.yaml
     PoxInfo:
       $ref: ./components/schemas/pox-info.schema.yaml
     GetHealth:
       $ref: ./components/schemas/get-health.schema.yaml
-    NetworkPeers:
-      $ref: ./components/schemas/network-peers.schema.yaml
     NodeInfo:
       $ref: ./components/schemas/node-info.schema.yaml
   responses:

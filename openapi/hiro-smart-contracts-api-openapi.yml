@@ -21,7 +21,7 @@ paths:
       summary: Get contracts by trait
       tags:
       - Smart Contracts
-      description: Retrieves a list of contracts based on the following traits listed in JSON format -  functions, variables, maps, fungible tokens and non-fungible tokens
+      description: Retrieves a list of contracts based on the following traits listed in JSON format - functions, variables, maps, fungible tokens and non-fungible tokens
       parameters:
       - schema:
           type: string
@@ -625,7 +625,31 @@ paths:
       - Smart Contracts
       security: []
       operationId: getContractDataMapEntry
-      description: "Attempt to fetch data from a contract data map. The contract is\nidentified with [Stacks Address] and [Contract Name] in the URL path.\nThe map is identified with [Map Name].\n\nThe key to lookup in the map is supplied via the POST body. This should\nbe supplied as the hex string serialization of the key (which should be\na Clarity value). Note, this is a JSON string.\n\nThe response is a JSON object with the following properties:\n- `data`: The hex serialization of the map response. Note that map\n  responses are Clarity option types, for non-existent values, this is\n  a serialized none, and for all other responses, it is a serialized\n  (some ...) object.\n- `proof`: The hex serialization of the Merkle proof for the data.\n"
+      description: 'Attempt to fetch data from a contract data map. The contract is
+
+        identified with [Stacks Address] and [Contract Name] in the URL path.
+
+        The map is identified with [Map Name].
+
+
+        The key to lookup in the map is supplied via the POST body. This should
+
+        be supplied as the hex string serialization of the key (which should be
+
+        a Clarity value). Note, this is a JSON string.
+
+
+        The response is a JSON object with the following properties:
+
+        - `data`: The hex serialization of the map response. Note that map
+
+        responses are Clarity option types, for non-existent values, this is
+
+        a serialized none, and for all other responses, it is a serialized
+
+        (some ...) object.
+
+        - `proof`: The hex serialization of the Merkle proof for the data.'
       parameters:
       - $ref: ./components/parameters/deployer-address.yaml
       - $ref: ./components/parameters/contract-name.yaml
@@ -676,9 +700,7 @@ paths:
       operationId: getContractSource
       description: 'Returns the Clarity source code of a given contract, along with the
 
-        block height it was published in, and the MARF proof for the data.
-
-        '
+        block height it was published in, and the MARF proof for the data.'
       parameters:
       - $ref: ./components/parameters/deployer-address.yaml
       - $ref: ./components/parameters/contract-name.yaml
@@ -720,9 +742,7 @@ paths:
 
         - `sender` which should be a Stacks address or contract principal
 
-        - `arguments` which should be an array of hex-encoded Clarity values.
-
-        '
+        - `arguments` which should be an array of hex-encoded Clarity values.'
       tags:
       - Smart Contracts
       security: []
@@ -783,9 +803,7 @@ paths:
         - `arguments` which should be an array of hex-encoded Clarity values.
 
 
-        **This API endpoint requires a basic Authorization header.**
-
-        '
+        **This API endpoint requires a basic Authorization header.**'
       tags:
       - Smart Contracts
       security:
@@ -845,9 +863,7 @@ paths:
       summary: Get trait implementation details
       description: 'Determine whether or not a specified trait is implemented (either
 
-        explicitly or implicitly) within a given contract.
-
-        '
+        explicitly or implicitly) within a given contract.'
       tags:
       - Smart Contracts
       security: []
@@ -906,9 +922,7 @@ paths:
       operationId: getClarityMarfValue
       description: 'Attempt to fetch the value of a MARF key. The key is a 64-character
 
-        hex string representing the MARF node hash.
-
-        '
+        hex string representing the MARF node hash.'
       responses:
         '200':
           description: Success
@@ -952,9 +966,7 @@ paths:
         key is identified with [Clarity Metadata Key].
 
 
-        In the response, `data` is formatted as JSON.
-
-        '
+        In the response, `data` is formatted as JSON.'
       responses:
         '200':
           description: Success
@@ -1000,9 +1012,7 @@ paths:
         The constant is identified with [Constant Name].
 
 
-        In the response, `data` is the hex serialization of the constant value.
-
-        '
+        In the response, `data` is the hex serialization of the constant value.'
       responses:
         '200':
           description: Success
@@ -1040,9 +1050,7 @@ paths:
       operationId: getContractDataVariable
       description: 'Fetch a data variable from a smart contract.
 
-        Returns the raw hex-encoded value of the variable.
-
-        '
+        Returns the raw hex-encoded value of the variable.'
       parameters:
       - $ref: ./components/parameters/standard-principal.yaml
       - $ref: ./components/parameters/contract-name.yaml
@@ -1072,25 +1080,6 @@ paths:
     - url: http://localhost:20443
       description: Local Stacks Node
 components:
-  schemas:
-    ClarityMetadata:
-      $ref: ./components/schemas/clarity-metadata.schema.yaml
-    ClarityName:
-      $ref: ./components/schemas/clarity-name.schema.yaml
-    ContractInterface:
-      $ref: ./components/schemas/contract-interface.schema.yaml
-    ContractSource:
-      $ref: ./components/schemas/contract-source.schema.yaml
-    ReadOnlyFunctionResult:
-      $ref: ./components/schemas/read-only-function-result.schema.yaml
-    ReadOnlyFunctionArgs:
-      $ref: ./components/schemas/read-only-function-args.schema.yaml
-    ClarityData:
-      $ref: ./components/schemas/clarity-data.schema.yaml
-    ConstantValue:
-      $ref: ./components/schemas/constant-value.schema.yaml
-    IsTraitImplemented:
-      $ref: ./components/schemas/is-trait-implemented.schema.yaml
   responses:
     Unauthorized:
       description: Unauthorized. Invalid or missing authentication token.
@@ -1099,13 +1088,6 @@ components:
           schema:
             type: string
           example: Unauthorized
-    Timeout:
-      description: Timeout
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Timeout
     NotFound:
       description: Not found
       content:
@@ -1127,6 +1109,32 @@ components:
           schema:
             type: string
           example: Bad request
+    Timeout:
+      description: Timeout
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Timeout
+  schemas:
+    ReadOnlyFunctionArgs:
+      $ref: ./components/schemas/read-only-function-args.schema.yaml
+    ClarityMetadata:
+      $ref: ./components/schemas/clarity-metadata.schema.yaml
+    IsTraitImplemented:
+      $ref: ./components/schemas/is-trait-implemented.schema.yaml
+    ContractInterface:
+      $ref: ./components/schemas/contract-interface.schema.yaml
+    ConstantValue:
+      $ref: ./components/schemas/constant-value.schema.yaml
+    ClarityData:
+      $ref: ./components/schemas/clarity-data.schema.yaml
+    ContractSource:
+      $ref: ./components/schemas/contract-source.schema.yaml
+    ClarityName:
+      $ref: ./components/schemas/clarity-name.schema.yaml
+    ReadOnlyFunctionResult:
+      $ref: ./components/schemas/read-only-function-result.schema.yaml
   securitySchemes:
     rpcAuth:
       type: apiKey

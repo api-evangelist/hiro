@@ -2,9 +2,7 @@ openapi: 3.2.0
 info:
   title: Stacks 3.0+ RPC Atlas API
   version: 1.0.0
-  description: 'This is the documentation for the `stacks-node` RPC interface.
-
-    '
+  description: This is the documentation for the `stacks-node` RPC interface.
   license:
     name: CC-0
     url: https://creativecommons.org/publicdomain/zero/1.0/
@@ -25,9 +23,7 @@ paths:
       description: 'Get an attachment by its hash. Attachments are content stored in the Atlas network.
 
 
-        The attachment hash is a 40-character hex string (SHA-1 hash).
-
-        '
+        The attachment hash is a 40-character hex string (SHA-1 hash).'
       parameters:
       - name: hash
         in: path
@@ -56,9 +52,7 @@ paths:
       operationId: getAttachmentsInventory
       description: 'Get inventory of attachments for a given index block hash and page range.
 
-        This returns a bitfield indicating which attachments are available.
-
-        '
+        This returns a bitfield indicating which attachments are available.'
       parameters:
       - name: index_block_hash
         in: query
@@ -114,10 +108,10 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    AttachmentData:
-      $ref: ./components/schemas/attachment-data.schema.yaml
     AttachmentInventory:
       $ref: ./components/schemas/attachment-inventory.schema.yaml
+    AttachmentData:
+      $ref: ./components/schemas/attachment-data.schema.yaml
   responses:
     NotFound:
       description: Not found

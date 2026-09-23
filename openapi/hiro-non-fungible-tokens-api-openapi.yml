@@ -1,7 +1,10 @@
 openapi: 3.2.0
 info:
   title: Stacks Blockchain Non-Fungible Tokens API
-  description: "Welcome to the API reference overview for the [Stacks Blockchain API](https://docs.hiro.so/stacks-blockchain-api).\n\n      [Download Postman collection](https://hirosystems.github.io/stacks-blockchain-api/collection.json)"
+  description: 'Welcome to the API reference overview for the Stacks Blockchain API.
+
+
+    Download Postman collection'
   version: v8.14.2
 servers:
 - url: https://api.hiro.so/
@@ -19,7 +22,12 @@ paths:
       summary: Non-Fungible Token holdings
       tags:
       - Non-Fungible Tokens
-      description: "Retrieves the list of Non-Fungible Tokens owned by the given principal (STX address or Smart Contract ID).\n        Results can be filtered by one or more asset identifiers and can include metadata about the transaction that made the principal own each token.\n\n        More information on Non-Fungible Tokens on the Stacks blockchain can be found [here](https://docs.stacks.co/build/create-tokens/creating-a-nft)."
+      description: 'Retrieves the list of Non-Fungible Tokens owned by the given principal (STX address or Smart Contract ID).
+
+        Results can be filtered by one or more asset identifiers and can include metadata about the transaction that made the principal own each token.
+
+
+        More information on Non-Fungible Tokens on the Stacks blockchain can be found here.'
       parameters:
       - schema:
           anyOf:
@@ -4220,7 +4228,10 @@ paths:
       summary: Non-Fungible Token history
       tags:
       - Non-Fungible Tokens
-      description: "Retrieves all events relevant to a Non-Fungible Token. Useful to determine the ownership history of a particular asset.\n\n        More information on Non-Fungible Tokens on the Stacks blockchain can be found [here](https://docs.stacks.co/build/create-tokens/creating-a-nft)."
+      description: 'Retrieves all events relevant to a Non-Fungible Token. Useful to determine the ownership history of a particular asset.
+
+
+        More information on Non-Fungible Tokens on the Stacks blockchain can be found here.'
       parameters:
       - schema:
           type: string
@@ -8400,7 +8411,10 @@ paths:
       summary: Non-Fungible Token mints
       tags:
       - Non-Fungible Tokens
-      description: "Retrieves all mint events for a Non-Fungible Token asset class. Useful to determine which NFTs of a particular collection have been claimed.\n\n        More information on Non-Fungible Tokens on the Stacks blockchain can be found [here](https://docs.stacks.co/build/create-tokens/creating-a-nft)."
+      description: 'Retrieves all mint events for a Non-Fungible Token asset class. Useful to determine which NFTs of a particular collection have been claimed.
+
+
+        More information on Non-Fungible Tokens on the Stacks blockchain can be found here.'
       parameters:
       - schema:
           type: string

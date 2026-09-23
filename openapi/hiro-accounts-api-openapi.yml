@@ -21,7 +21,10 @@ paths:
       summary: Get account STX balance
       tags:
       - Accounts
-      description: "**NOTE:** This endpoint is deprecated in favor of [Get address STX balance](/api/get-principal-stx-balance).\n\n        Retrieves STX token balance for a given Address or Contract Identifier."
+      description: '**NOTE:** This endpoint is deprecated in favor of Get address STX balance.
+
+
+        Retrieves STX token balance for a given Address or Contract Identifier.'
       parameters:
       - schema:
           default: false
@@ -171,7 +174,10 @@ paths:
       summary: Get account balances
       tags:
       - Accounts
-      description: "**NOTE:** This endpoint is deprecated in favor of [Get address FT balances](/api/get-principal-ft-balances).\n\n        Retrieves total account balance information for a given Address or Contract Identifier. This includes the balances of STX Tokens, Fungible Tokens and Non-Fungible Tokens for the account."
+      description: '**NOTE:** This endpoint is deprecated in favor of Get address FT balances.
+
+
+        Retrieves total account balance information for a given Address or Contract Identifier. This includes the balances of STX Tokens, Fungible Tokens and Non-Fungible Tokens for the account.'
       parameters:
       - schema:
           default: false
@@ -356,7 +362,13 @@ paths:
       summary: Get account transactions
       tags:
       - Accounts
-      description: "**NOTE:** This endpoint is deprecated in favor of [Get address transactions](/api/get-address-transactions).\n\n        Retrieves a list of all Transactions for a given Address or Contract Identifier. More information on Transaction types can be found [here](https://docs.stacks.co/transactions/how-transactions-work#types).\n\n        If you need to actively monitor new transactions for an address or contract id, we highly recommend subscribing to [WebSockets or Socket.io](https://github.com/hirosystems/stacks-blockchain-api/tree/master/client) for real-time updates."
+      description: '**NOTE:** This endpoint is deprecated in favor of Get address transactions.
+
+
+        Retrieves a list of all Transactions for a given Address or Contract Identifier. More information on Transaction types can be found here.
+
+
+        If you need to actively monitor new transactions for an address or contract id, we highly recommend subscribing to WebSockets or Socket.io for real-time updates.'
       parameters:
       - schema:
           minimum: 0
@@ -4524,7 +4536,10 @@ paths:
       summary: Get account transaction information for specific transaction
       tags:
       - Accounts
-      description: "**NOTE:** This endpoint is deprecated in favor of [Get events for an address transaction](/api/get-address-transaction-events).\n\n        Retrieves transaction details for a given Transaction Id `tx_id`, for a given account or contract Identifier."
+      description: '**NOTE:** This endpoint is deprecated in favor of Get events for an address transaction.
+
+
+        Retrieves transaction details for a given Transaction Id `tx_id`, for a given account or contract Identifier.'
       parameters:
       - schema:
           anyOf:
@@ -8699,7 +8714,7 @@ paths:
   /extended/v1/address/{principal}/transactions_with_transfers:
     get:
       operationId: get_account_transactions_with_transfers
-      summary: Get account transactions including STX transfers for each transaction.
+      summary: Get account transactions including STX transfers for each transaction
       tags:
       - Accounts
       description: Retrieve all transactions for an account or contract identifier including STX transfers for each transaction.
@@ -13283,7 +13298,9 @@ paths:
       summary: Get inbound STX transfers
       tags:
       - Accounts
-      description: "Retrieves a list of STX transfers with memos to the given principal. This includes regular transfers from a stx-transfer transaction type,\n        and transfers from contract-call transactions a the `send-many-memo` bulk sending contract."
+      description: 'Retrieves a list of STX transfers with memos to the given principal. This includes regular transfers from a stx-transfer transaction type,
+
+        and transfers from contract-call transactions a the `send-many-memo` bulk sending contract.'
       parameters:
       - schema:
           minimum: 0
@@ -13804,9 +13821,7 @@ paths:
         Where balance is the hex encoding of a unsigned 128-bit integer (big-endian), nonce is a unsigned 64-bit integer, and the proofs are provided as hex strings.
 
 
-        For non-existent accounts, this does not 404, rather it returns an object with balance and nonce of 0.
-
-        '
+        For non-existent accounts, this does not 404, rather it returns an object with balance and nonce of 0.'
       parameters:
       - $ref: ./components/parameters/principal.yaml
       - $ref: ./components/parameters/proof.yaml
@@ -13832,13 +13847,6 @@ paths:
       description: Local Stacks Node
 components:
   responses:
-    NotFound:
-      description: Not found
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Not found
     InternalServerError:
       description: Internal Server Error
       content:
@@ -13846,6 +13854,13 @@ components:
           schema:
             type: string
           example: Internal Server Error
+    NotFound:
+      description: Not found
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Not found
     BadRequest:
       description: Bad request
       content:

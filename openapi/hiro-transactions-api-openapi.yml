@@ -9965,7 +9965,10 @@ paths:
       summary: Get mempool transactions
       tags:
       - Transactions
-      description: "Retrieves all transactions that have been recently broadcast to the mempool. These are pending transactions awaiting confirmation.\n\n        If you need to monitor new transactions, we highly recommend subscribing to [WebSockets or Socket.io](https://github.com/hirosystems/stacks-blockchain-api/tree/master/client) for real-time updates."
+      description: 'Retrieves all transactions that have been recently broadcast to the mempool. These are pending transactions awaiting confirmation.
+
+
+        If you need to monitor new transactions, we highly recommend subscribing to WebSockets or Socket.io for real-time updates.'
       parameters:
       - schema:
           pattern: ^[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{28,41}
@@ -12179,7 +12182,9 @@ paths:
       summary: Get statistics for mempool transactions
       tags:
       - Transactions
-      description: "Queries for transactions counts, age (by block height), fees (simple average), and size.\n        All results broken down by transaction type and percentiles (p25, p50, p75, p95)."
+      description: 'Queries for transactions counts, age (by block height), fees (simple average), and size.
+
+        All results broken down by transaction type and percentiles (p25, p50, p75, p95).'
       responses:
         '200':
           description: GET request that returns stats on mempool transactions
@@ -12308,7 +12313,9 @@ paths:
       summary: Transaction Events
       tags:
       - Transactions
-      description: "Retrieves the list of events filtered by principal (STX address or Smart Contract ID), transaction id or event types.\n        The list of event types is ('smart_contract_log', 'stx_lock', 'stx_asset', 'fungible_token_asset', 'non_fungible_token_asset')."
+      description: 'Retrieves the list of events filtered by principal (STX address or Smart Contract ID), transaction id or event types.
+
+        The list of event types is (''smart_contract_log'', ''stx_lock'', ''stx_asset'', ''fungible_token_asset'', ''non_fungible_token_asset'').'
       parameters:
       - schema:
           pattern: ^(0x)?[a-fA-F0-9]{64}$
@@ -18919,7 +18926,10 @@ paths:
       summary: Transactions by block hash
       tags:
       - Transactions
-      description: "**NOTE:** This endpoint is deprecated in favor of [Get transactions by block](/api/get-transactions-by-block).\n\n        Retrieves a list of all transactions within a block for a given block hash."
+      description: '**NOTE:** This endpoint is deprecated in favor of Get transactions by block.
+
+
+        Retrieves a list of all transactions within a block for a given block hash.'
       parameters:
       - schema:
           minimum: 0
@@ -23049,7 +23059,10 @@ paths:
       summary: Transactions by block height
       tags:
       - Transactions
-      description: "**NOTE:** This endpoint is deprecated in favor of [Get transactions by block](/api/get-transactions-by-block).\n\n        Retrieves all transactions within a block at a given height"
+      description: '**NOTE:** This endpoint is deprecated in favor of Get transactions by block.
+
+
+        Retrieves all transactions within a block at a given height'
       parameters:
       - schema:
           minimum: 0
@@ -33488,7 +33501,10 @@ paths:
       summary: Get address transactions
       tags:
       - Transactions
-      description: "Retrieves a paginated list of confirmed transactions sent or received by a STX address or Smart Contract ID, alongside the total amount of STX sent or received and the number of STX, FT and NFT transfers contained within each transaction.\n\n        More information on Transaction types can be found [here](https://docs.stacks.co/transactions/how-transactions-work#types)."
+      description: 'Retrieves a paginated list of confirmed transactions sent or received by a STX address or Smart Contract ID, alongside the total amount of STX sent or received and the number of STX, FT and NFT transfers contained within each transaction.
+
+
+        More information on Transaction types can be found here.'
       parameters:
       - schema:
           minimum: 0
@@ -37918,7 +37934,7 @@ paths:
       tags:
       - Transactions
       security: []
-      description: 'Broadcast raw transactions on the network. You can use the [@stacks/transactions](https://github.com/blockstack/stacks.js)
+      description: 'Broadcast raw transactions on the network. You can use the @stacks/transactions
 
         project to generate a raw transaction payload.
 
@@ -37933,9 +37949,7 @@ paths:
 
         - Fee validation
 
-        - Size limits
-
-        '
+        - Size limits'
       operationId: broadcastTransaction
       requestBody:
         required: true
@@ -37998,9 +38012,7 @@ paths:
       security: []
       description: 'Get a JSON with the transaction details including the `index_block_hash`,
 
-        the hex-encoded transaction body, and the `result`.
-
-        '
+        the hex-encoded transaction body, and the `result`.'
       operationId: getTransactionById
       parameters:
       - name: txid
@@ -38045,9 +38057,7 @@ paths:
       operationId: getUnconfirmedTransactionById
       description: 'Get an unconfirmed transaction by its transaction ID.
 
-        This looks in both the mempool and unconfirmed microblock stream.
-
-        '
+        This looks in both the mempool and unconfirmed microblock stream.'
       parameters:
       - name: txid
         in: path
@@ -38087,9 +38097,7 @@ paths:
       operationId: queryMempool
       description: 'Query the mempool for transactions that might be missing from the requesting node.
 
-        This endpoint supports pagination and streaming of transaction data.
-
-        '
+        This endpoint supports pagination and streaming of transaction data.'
       parameters:
       - name: page_id
         in: query

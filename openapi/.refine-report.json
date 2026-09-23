@@ -32,7 +32,9 @@
     "hiro-stackerdb-api-openapi.yml",
     "hiro-tokens-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -54,7 +56,9 @@
     "tag 'Info' spans 2 source specs (hiro-stacks-blockchain-api-openapi.yaml, hiro-stacks-node-rpc-api-openapi.yaml): per-path servers applied",
     "tag 'Microblocks' spans 2 source specs (hiro-stacks-blockchain-api-openapi.yaml, hiro-stacks-node-rpc-api-openapi.yaml): per-path servers applied",
     "tag 'Smart Contracts' spans 2 source specs (hiro-stacks-blockchain-api-openapi.yaml, hiro-stacks-node-rpc-api-openapi.yaml): per-path servers applied",
-    "tag 'Transactions' spans 2 source specs (hiro-stacks-blockchain-api-openapi.yaml, hiro-stacks-node-rpc-api-openapi.yaml): per-path servers applied"
+    "tag 'Transactions' spans 2 source specs (hiro-stacks-blockchain-api-openapi.yaml, hiro-stacks-node-rpc-api-openapi.yaml): per-path servers applied",
+    "superseded outputs removed: hiro-micro-blocks-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 26 total)"
   ],
   "skipped": [
     "hiro-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -67,7 +71,7 @@
     "hiro-fungible-tokens-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "hiro-info-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "hiro-mempool-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "hiro-microblocks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "hiro-micro-blocks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "hiro-mining-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "hiro-names-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "hiro-non-fungible-tokens-api-openapi.yml: previously refined output, superseded by openapi/_original/",

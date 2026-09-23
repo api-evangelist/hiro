@@ -1,7 +1,10 @@
 openapi: 3.2.0
 info:
   title: Stacks Blockchain Faucets API
-  description: "Welcome to the API reference overview for the [Stacks Blockchain API](https://docs.hiro.so/stacks-blockchain-api).\n\n      [Download Postman collection](https://hirosystems.github.io/stacks-blockchain-api/collection.json)"
+  description: 'Welcome to the API reference overview for the Stacks Blockchain API.
+
+
+    Download Postman collection'
   version: v8.14.2
 servers:
 - url: https://api.hiro.so/
@@ -16,7 +19,15 @@ paths:
       summary: Add regtest BTC tokens to address
       tags:
       - Faucets
-      description: "Add 0.01 BTC token to the specified regtest BTC address.\n\n        The endpoint returns the transaction ID, which you can use to view the transaction in a regtest Bitcoin block\n        explorer. The tokens are delivered once the transaction has been included in a block.\n\n        **Note:** This is a Bitcoin regtest-only endpoint. This endpoint will not work on the Bitcoin mainnet."
+      description: 'Add 0.01 BTC token to the specified regtest BTC address.
+
+
+        The endpoint returns the transaction ID, which you can use to view the transaction in a regtest Bitcoin block
+
+        explorer. The tokens are delivered once the transaction has been included in a block.
+
+
+        **Note:** This is a Bitcoin regtest-only endpoint. This endpoint will not work on the Bitcoin mainnet.'
       requestBody:
         content:
           application/json:
@@ -144,7 +155,26 @@ paths:
       summary: Get STX testnet tokens
       tags:
       - Faucets
-      description: "Add 500 STX tokens to the specified testnet address. Testnet STX addresses begin with `ST`. If the `stacking`\n        parameter is set to `true`, the faucet will add the required number of tokens for individual stacking to the\n        specified testnet address.\n\n        The endpoint returns the transaction ID, which you can use to view the transaction in the\n        [Stacks Explorer](https://explorer.hiro.so/?chain=testnet). The tokens are delivered once the transaction has\n        been included in an anchor block.\n\n        A common reason for failed faucet transactions is that the faucet has run out of tokens. If you are experiencing\n        failed faucet transactions to a testnet address, you can get help in [Discord](https://stacks.chat).\n\n        **Note:** This is a testnet only endpoint. This endpoint will not work on the mainnet."
+      description: 'Add 500 STX tokens to the specified testnet address. Testnet STX addresses begin with `ST`. If the `stacking`
+
+        parameter is set to `true`, the faucet will add the required number of tokens for individual stacking to the
+
+        specified testnet address.
+
+
+        The endpoint returns the transaction ID, which you can use to view the transaction in the
+
+        Stacks Explorer. The tokens are delivered once the transaction has
+
+        been included in an anchor block.
+
+
+        A common reason for failed faucet transactions is that the faucet has run out of tokens. If you are experiencing
+
+        failed faucet transactions to a testnet address, you can get help in Discord.
+
+
+        **Note:** This is a testnet only endpoint. This endpoint will not work on the mainnet.'
       requestBody:
         content:
           application/json:

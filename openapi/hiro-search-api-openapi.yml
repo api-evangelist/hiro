@@ -1,7 +1,10 @@
 openapi: 3.2.0
 info:
   title: Stacks Blockchain Search API
-  description: "Welcome to the API reference overview for the [Stacks Blockchain API](https://docs.hiro.so/stacks-blockchain-api).\n\n      [Download Postman collection](https://hirosystems.github.io/stacks-blockchain-api/collection.json)"
+  description: 'Welcome to the API reference overview for the Stacks Blockchain API.
+
+
+    Download Postman collection'
   version: v8.14.2
 servers:
 - url: https://api.hiro.so/

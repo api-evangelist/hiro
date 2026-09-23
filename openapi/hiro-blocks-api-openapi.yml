@@ -19,7 +19,6 @@ paths:
       summary: Aggregated signer information for most recent blocks
       tags:
       - Blocks
-      description: Aggregated signer information for most recent blocks
       parameters:
       - schema:
           type: integer
@@ -153,7 +152,6 @@ paths:
       summary: Aggregated signer information for a block
       tags:
       - Blocks
-      description: Aggregated signer information for a block
       parameters:
       - schema:
           anyOf:
@@ -276,7 +274,13 @@ paths:
       summary: Get recent blocks
       tags:
       - Blocks
-      description: "**NOTE:** This endpoint is deprecated in favor of [Get blocks](/api/get-blocks).\n\n          Retrieves a list of recently mined blocks\n\n          If you need to actively monitor new blocks, we highly recommend subscribing to [WebSockets or Socket.io](https://github.com/hirosystems/stacks-blockchain-api/tree/master/client) for real-time updates."
+      description: '**NOTE:** This endpoint is deprecated in favor of Get blocks.
+
+
+        Retrieves a list of recently mined blocks
+
+
+        If you need to actively monitor new blocks, we highly recommend subscribing to WebSockets or Socket.io for real-time updates.'
       parameters:
       - schema:
           minimum: 0
@@ -461,7 +465,10 @@ paths:
       summary: Get block by height
       tags:
       - Blocks
-      description: "**NOTE:** This endpoint is deprecated in favor of [Get block](/api/get-block).\n\n        Retrieves block details of a specific block at a given block height"
+      description: '**NOTE:** This endpoint is deprecated in favor of Get block.
+
+
+        Retrieves block details of a specific block at a given block height'
       parameters:
       - schema:
           minimum: 0
@@ -614,7 +621,10 @@ paths:
       summary: Get block by burnchain height
       tags:
       - Blocks
-      description: "**NOTE:** This endpoint is deprecated in favor of [Get blocks](/api/get-blocks).\n\n        Retrieves block details of a specific block for a given burn chain height"
+      description: '**NOTE:** This endpoint is deprecated in favor of Get blocks.
+
+
+        Retrieves block details of a specific block for a given burn chain height'
       parameters:
       - schema:
           minimum: 0
@@ -767,7 +777,10 @@ paths:
       summary: Get block by hash
       tags:
       - Blocks
-      description: "**NOTE:** This endpoint is deprecated in favor of [Get block](/api/get-block).\n        \n        Retrieves block details of a specific block for a given chain height. You can use the hash from your latest block ('get_block_list' API) to get your block details."
+      description: '**NOTE:** This endpoint is deprecated in favor of Get block.
+
+
+        Retrieves block details of a specific block for a given chain height. You can use the hash from your latest block (''get_block_list'' API) to get your block details.'
       parameters:
       - schema:
           type: string
@@ -919,7 +932,10 @@ paths:
       summary: Get block by burnchain block hash
       tags:
       - Blocks
-      description: "**NOTE:** This endpoint is deprecated in favor of [Get blocks](/api/get-blocks).\n\n        Retrieves block details of a specific block for a given burnchain block hash"
+      description: '**NOTE:** This endpoint is deprecated in favor of Get blocks.
+
+
+        Retrieves block details of a specific block for a given burnchain block hash'
       parameters:
       - schema:
           type: string
@@ -1721,9 +1737,7 @@ paths:
         with additional metadata including tenure information.
 
 
-        **Compatibility**: Works with Nakamoto blocks only. For Stacks 2.x blocks, use `/v2/blocks/{block_id}`.
-
-        '
+        **Compatibility**: Works with Nakamoto blocks only. For Stacks 2.x blocks, use `/v2/blocks/{block_id}`.'
       parameters:
       - name: block_id
         in: path
@@ -1801,9 +1815,7 @@ paths:
 
         sufficient to obtain and authenticate the highest complete tenure, as
 
-        well as obtain new tenure blocks.
-
-        '
+        well as obtain new tenure blocks.'
       responses:
         '200':
           description: Metadata about the ongoing tenure
@@ -1828,9 +1840,7 @@ paths:
 
         served in order from highest to lowest. The blocks will be encoded in
 
-        their SIP-003 wire format, and concatenated together.
-
-        '
+        their SIP-003 wire format, and concatenated together.'
       parameters:
       - name: block_id
         in: path
@@ -1888,9 +1898,7 @@ paths:
       operationId: getTenureBlocks
       description: 'Get the list of blocks in a tenure. The blocks will be
 
-        shown in order from highest to lowest.
-
-        '
+        shown in order from highest to lowest.'
       parameters:
       - name: consensus_hash
         in: path
@@ -1927,9 +1935,7 @@ paths:
       operationId: getTenureBlocksByHash
       description: 'Get the list of Nakamoto blocks in a tenure given the Bitcoin block hash. The blocks will be
 
-        shown in order from highest to lowest. This is only for Nakamoto blocks, Epoch2 ones will not be shown.
-
-        '
+        shown in order from highest to lowest. This is only for Nakamoto blocks, Epoch2 ones will not be shown.'
       parameters:
       - name: burnchain_block_hash
         in: path
@@ -1966,9 +1972,7 @@ paths:
       operationId: getTenureBlocksByHeight
       description: 'Get the list of Nakamoto blocks in a tenure given the Bitcoin block height. The blocks will be
 
-        shown in order from highest to lowest. This is only for Nakamoto blocks, Epoch2 ones will not be shown.
-
-        '
+        shown in order from highest to lowest. This is only for Nakamoto blocks, Epoch2 ones will not be shown.'
       parameters:
       - name: burnchain_block_height
         in: path
@@ -2006,9 +2010,7 @@ paths:
       operationId: getLatestSortitions
       description: 'Get sortition information about the latest burnchain block processed by this node.
 
-        Returns a single-element array with the latest sortition.
-
-        '
+        Returns a single-element array with the latest sortition.'
       responses:
         '200':
           description: Latest sortition information
@@ -2037,9 +2039,7 @@ paths:
       operationId: getLatestAndLastWinningSortitions
       description: 'Get sortition information about the latest burn block with a winning miner
 
-        AND the previous such burn block. Returns an array with two sortition objects.
-
-        '
+        AND the previous such burn block. Returns an array with two sortition objects.'
       responses:
         '200':
           description: Latest and last sortition information
@@ -2068,9 +2068,7 @@ paths:
       operationId: getSortitionByConsensusHash
       description: 'Get sortition information for a specific consensus hash.
 
-        Returns a single-element array with the matching sortition.
-
-        '
+        Returns a single-element array with the matching sortition.'
       parameters:
       - name: consensus_hash
         in: path
@@ -2107,9 +2105,7 @@ paths:
       operationId: getSortitionByBurnHeaderHash
       description: 'Get sortition information for a specific burn header hash.
 
-        Returns a single-element array with the matching sortition.
-
-        '
+        Returns a single-element array with the matching sortition.'
       parameters:
       - name: burn_header_hash
         in: path
@@ -2146,9 +2142,7 @@ paths:
       operationId: getSortitionByBurnBlockHeight
       description: 'Get sortition information for a specific burn block height.
 
-        Returns a single-element array with the matching sortition.
-
-        '
+        Returns a single-element array with the matching sortition.'
       parameters:
       - name: height
         in: path
@@ -2184,7 +2178,6 @@ paths:
       - Blocks
       security: []
       operationId: getSignerBlocksSigned
-      description: Get number of blocks signed by signer during a given reward cycle
       parameters:
       - name: signer_pubkey
         in: path
@@ -2227,9 +2220,7 @@ paths:
       operationId: getConfirmedMicroblocks
       description: 'Get microblocks that were confirmed by the given anchored block.
 
-        The microblocks are returned as a binary stream of concatenated microblock data.
-
-        '
+        The microblocks are returned as a binary stream of concatenated microblock data.'
       parameters:
       - name: block_id
         in: path
@@ -2257,11 +2248,7 @@ paths:
       description: Local Stacks Node
   /v2/microblocks/{microblock_id}:
     get:
-      summary: 'Get a stream of microblocks beginning
-
-        with the given microblock (Epoch 2.x).
-
-        '
+      summary: Get a stream of microblocks beginning with the given microblock (Epoch 2.x)
       tags:
       - Blocks
       security: []
@@ -2300,9 +2287,7 @@ paths:
       operationId: getUnconfirmedMicroblocks
       description: 'Get unconfirmed microblocks starting from a specific sequence number.
 
-        The microblocks are returned as a binary stream.
-
-        '
+        The microblocks are returned as a binary stream.'
       parameters:
       - name: block_id
         in: path
@@ -2347,9 +2332,7 @@ paths:
 
         The body **must** be the SIP-003 binary serialization of a `Microblock`
 
-        and sent with `Content-Type: application/octet-stream`.
-
-        '
+        and sent with `Content-Type: application/octet-stream`.'
       requestBody:
         required: true
         content:
@@ -2388,9 +2371,7 @@ paths:
 
         Stream (as a JSON array) up to `quantity` most recent anchored Stacks block headers.
 
-        The result is ordered from the current tip backwards.
-
-        '
+        The result is ordered from the current tip backwards.'
       parameters:
       - name: quantity
         in: path
@@ -2429,9 +2410,7 @@ paths:
         from the filesystem storage where traditional Stacks blocks are stored as individual files.
 
 
-        **Compatibility**: Works with all Stacks 2.x blocks. For Nakamoto blocks (Stacks 3.x+), use `/v3/blocks/{block_id}`.
-
-        '
+        **Compatibility**: Works with all Stacks 2.x blocks. For Nakamoto blocks (Stacks 3.x+), use `/v3/blocks/{block_id}`.'
       parameters:
       - name: block_id
         in: path
@@ -2466,9 +2445,7 @@ paths:
       operationId: getTenureForkInfo
       description: 'Get information about tenure forking between two consensus hashes.
 
-        This is used to identify conflicting tenures in the Nakamoto consensus.
-
-        '
+        This is used to identify conflicting tenures in the Nakamoto consensus.'
       parameters:
       - name: start
         in: path
@@ -2509,9 +2486,7 @@ paths:
       - Blocks
       security: []
       operationId: getTenureTip
-      description: 'Get the tip block of a tenure identified by consensus hash.
-
-        '
+      description: Get the tip block of a tenure identified by consensus hash.
       parameters:
       - name: consensus_hash
         in: path
@@ -2546,9 +2521,7 @@ paths:
       - Blocks
       security: []
       operationId: getTenureTipMetadata
-      description: 'Get the tip block and associated metadata of a tenure identified by consensus hash.
-
-        '
+      description: Get the tip block and associated metadata of a tenure identified by consensus hash.
       parameters:
       - name: consensus_hash
         in: path
@@ -2582,7 +2555,14 @@ paths:
       - rpcAuth: []
       - {}
       operationId: uploadNakamotoBlock
-      description: "Upload a Nakamoto block to the node for processing.\n\n- **Body** - must be the binary (SIP-003) serialization of a `NakamotoBlock`.\n- **Authentication** - only required when the query parameter `broadcast=1` is supplied.\n  In that case the caller **must** include an `Authorization` header.\n"
+      description: 'Upload a Nakamoto block to the node for processing.
+
+
+        - **Body** - must be the binary (SIP-003) serialization of a `NakamotoBlock`.
+
+        - **Authentication** - only required when the query parameter `broadcast=1` is supplied.
+
+        In that case the caller **must** include an `Authorization` header.'
       parameters:
       - name: broadcast
         in: query
@@ -2635,9 +2615,7 @@ paths:
       security:
       - rpcAuth: []
       operationId: blockReplay
-      description: 'Replay the mining of a block (no data is written in the MARF) and returns its content.
-
-        '
+      description: Replay the mining of a block (no data is written in the MARF) and returns its content.
       parameters:
       - name: block_id
         in: path
@@ -2669,15 +2647,13 @@ paths:
       description: Local Stacks Node
   /v3/blocks/simulate/{block_id}:
     get:
-      summary: Simulate mining of a block with the specified transactions and returns its content
+      summary: Simulate mining of a block with the specified transactions and returns its…
       tags:
       - Blocks
       security:
       - rpcAuth: []
       operationId: blockSimulate
-      description: 'Simulate the mining of a block (no data is written in the MARF) with specified transactions and returns its content.
-
-        '
+      description: Simulate the mining of a block (no data is written in the MARF) with specified transactions and returns its content.
       parameters:
       - name: block_id
         in: path
@@ -2733,24 +2709,24 @@ components:
   schemas:
     BlockReplay:
       $ref: ./components/schemas/block-replay.schema.yaml
-    TenureForkInfo:
-      $ref: ./components/schemas/tenure-fork-info.schema.yaml
-    TenureInfo:
-      $ref: ./components/schemas/tenure-info.schema.yaml
-    TenureTipMetadata:
-      $ref: ./components/schemas/tenure-tip-metadata.schema.yaml
-    Sortitions:
-      $ref: ./components/schemas/sortitions.schema.yaml
-    TenureBlocks:
-      $ref: ./components/schemas/tenure-blocks.schema.yaml
-    BlockHeaders:
-      $ref: ./components/schemas/block-headers.schema.yaml
     BlockUploadResponse:
       $ref: ./components/schemas/block-upload-response.schema.yaml
+    TenureForkInfo:
+      $ref: ./components/schemas/tenure-fork-info.schema.yaml
     SignerBlocksSigned:
       $ref: ./components/schemas/signer-blocks-signed.schema.yaml
+    TenureInfo:
+      $ref: ./components/schemas/tenure-info.schema.yaml
+    BlockHeaders:
+      $ref: ./components/schemas/block-headers.schema.yaml
+    TenureTipMetadata:
+      $ref: ./components/schemas/tenure-tip-metadata.schema.yaml
+    TenureBlocks:
+      $ref: ./components/schemas/tenure-blocks.schema.yaml
     TenureTip:
       $ref: ./components/schemas/tenure-tip.schema.yaml
+    Sortitions:
+      $ref: ./components/schemas/sortitions.schema.yaml
   responses:
     Unauthorized:
       description: Unauthorized. Invalid or missing authentication token.
@@ -2759,13 +2735,6 @@ components:
           schema:
             type: string
           example: Unauthorized
-    MethodNotAllowed:
-      description: Method Not Allowed
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: 'Method Not Allowed. Allowed: GET'
     NotFound:
       description: Not found
       content:
@@ -2773,6 +2742,13 @@ components:
           schema:
             type: string
           example: Not found
+    MethodNotAllowed:
+      description: Method Not Allowed
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: 'Method Not Allowed. Allowed: GET'
     InternalServerError:
       description: Internal Server Error
       content:

@@ -17,7 +17,6 @@ paths:
       summary: Signer information for most recent block proposals
       tags:
       - Blocks Proposals
-      description: Signer information for most recent block proposals
       parameters:
       - schema:
           type: integer
@@ -215,7 +214,6 @@ paths:
       summary: Signer information for most recent block proposals
       tags:
       - Blocks Proposals
-      description: Signer information for most recent block proposals
       parameters:
       - schema:
           type: integer

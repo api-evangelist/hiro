@@ -2,9 +2,7 @@ openapi: 3.2.0
 info:
   title: Stacks 3.0+ RPC Mining API
   version: 1.0.0
-  description: 'This is the documentation for the `stacks-node` RPC interface.
-
-    '
+  description: This is the documentation for the `stacks-node` RPC interface.
   license:
     name: CC-0
     url: https://creativecommons.org/publicdomain/zero/1.0/
@@ -23,9 +21,7 @@ paths:
       operationId: postBlockProposal
       description: 'Used by stackers to validate a proposed Stacks block from a miner.
 
-        **This API endpoint requires a basic Authorization header.**
-
-        '
+        **This API endpoint requires a basic Authorization header.**'
       security:
       - rpcAuth: []
       requestBody:
@@ -106,9 +102,7 @@ paths:
       operationId: uploadLegacyBlock
       description: 'Upload a Stacks block to the node for processing.
 
-        The block must be in binary format and associated with the given consensus hash.
-
-        '
+        The block must be in binary format and associated with the given consensus hash.'
       parameters:
       - name: consensus_hash
         in: path
@@ -147,10 +141,10 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    BlockProposalResponse:
-      $ref: ./components/schemas/block-proposal.schema.yaml
     BlockUploadResponse:
       $ref: ./components/schemas/block-upload-response.schema.yaml
+    BlockProposalResponse:
+      $ref: ./components/schemas/block-proposal.schema.yaml
   responses:
     Unauthorized:
       description: Unauthorized. Invalid or missing authentication token.

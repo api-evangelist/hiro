@@ -2,9 +2,7 @@ openapi: 3.2.0
 info:
   title: Stacks 3.0+ RPC Stacker DB API
   version: 1.0.0
-  description: 'This is the documentation for the `stacks-node` RPC interface.
-
-    '
+  description: This is the documentation for the `stacks-node` RPC interface.
   license:
     name: CC-0
     url: https://creativecommons.org/publicdomain/zero/1.0/
@@ -22,9 +20,7 @@ paths:
       - StackerDB
       security: []
       operationId: getStackerDbChunk
-      description: 'Get the latest version of a chunk of data from a StackerDB instance.
-
-        '
+      description: Get the latest version of a chunk of data from a StackerDB instance.
       parameters:
       - $ref: ./components/parameters/standard-principal.yaml
       - $ref: ./components/parameters/contract-name.yaml
@@ -57,9 +53,7 @@ paths:
       - StackerDB
       security: []
       operationId: getStackerDbChunkVersioned
-      description: 'Get a specific version of a chunk of data from a StackerDB instance.
-
-        '
+      description: Get a specific version of a chunk of data from a StackerDB instance.
       parameters:
       - $ref: ./components/parameters/standard-principal.yaml
       - $ref: ./components/parameters/contract-name.yaml
@@ -100,9 +94,7 @@ paths:
       - StackerDB
       security: []
       operationId: getStackerDbMetadata
-      description: 'Get metadata about a StackerDB instance, including slot information.
-
-        '
+      description: Get metadata about a StackerDB instance, including slot information.
       parameters:
       - $ref: ./components/parameters/standard-principal.yaml
       - $ref: ./components/parameters/contract-name.yaml
@@ -146,9 +138,7 @@ paths:
 
         detailed error information. Note that failed writes return HTTP 200 with
 
-        accepted: false, not HTTP error codes.
-
-        '
+        accepted: false, not HTTP error codes.'
       parameters:
       - $ref: ./components/parameters/standard-principal.yaml
       - $ref: ./components/parameters/contract-name.yaml
@@ -191,9 +181,7 @@ paths:
       - StackerDB
       security: []
       operationId: listStackerDbReplicas
-      description: 'Get a list of replicas for a StackerDB instance.
-
-        '
+      description: Get a list of replicas for a StackerDB instance.
       parameters:
       - $ref: ./components/parameters/standard-principal.yaml
       - $ref: ./components/parameters/contract-name.yaml
@@ -221,12 +209,12 @@ components:
   schemas:
     StackerDbMetadata:
       $ref: ./components/schemas/stackerdb-metadata.schema.yaml
-    StackerDbReplicas:
-      $ref: ./components/schemas/stackerdb-replicas.schema.yaml
-    StackerDbChunkAckData:
-      $ref: ./components/schemas/stackerdb-chunk-ack-data.schema.yaml
     StackerDbChunkData:
       $ref: ./components/schemas/stackerdb-chunk-data.schema.yaml
+    StackerDbChunkAckData:
+      $ref: ./components/schemas/stackerdb-chunk-ack-data.schema.yaml
+    StackerDbReplicas:
+      $ref: ./components/schemas/stackerdb-replicas.schema.yaml
   responses:
     NotFound:
       description: Not found

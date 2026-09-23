@@ -9,7 +9,7 @@ servers:
 - url: http://localhost:20443
   description: Local Stacks Node
 tags:
-- name: Microblocks
+- name: Micro Blocks
   description: Read-only endpoints to obtain microblocks details
   externalDocs:
     description: Stacks Documentation - Microblocks
@@ -20,8 +20,11 @@ paths:
       operationId: get_microblock_list
       summary: Get recent microblocks
       tags:
-      - Microblocks
-      description: "Retrieves a list of microblocks.\n\n          If you need to actively monitor new microblocks, we highly recommend subscribing to [WebSockets or Socket.io](https://github.com/hirosystems/stacks-blockchain-api/tree/master/client) for real-time updates."
+      - Micro Blocks
+      description: 'Retrieves a list of microblocks.
+
+
+        If you need to actively monitor new microblocks, we highly recommend subscribing to WebSockets or Socket.io for real-time updates.'
       parameters:
       - schema:
           minimum: 0
@@ -157,7 +160,7 @@ paths:
       operationId: get_microblock_by_hash
       summary: Get microblock
       tags:
-      - Microblocks
+      - Micro Blocks
       description: Retrieves a specific microblock by `hash`
       parameters:
       - schema:
@@ -261,7 +264,7 @@ paths:
       operationId: get_unanchored_txs
       summary: Get the list of current transactions that belong to unanchored microblocks
       tags:
-      - Microblocks
+      - Micro Blocks
       description: Retrieves transactions that have been streamed in microblocks but not yet accepted or rejected in an anchor block
       responses:
         '200':
@@ -4342,14 +4345,12 @@ paths:
     get:
       summary: Get stream of confirmed microblocks (Epoch 2.x)
       tags:
-      - Microblocks
+      - Micro Blocks
       security: []
       operationId: getConfirmedMicroblocks
       description: 'Get microblocks that were confirmed by the given anchored block.
 
-        The microblocks are returned as a binary stream of concatenated microblock data.
-
-        '
+        The microblocks are returned as a binary stream of concatenated microblock data.'
       parameters:
       - name: block_id
         in: path
@@ -4377,13 +4378,9 @@ paths:
       description: Local Stacks Node
   /v2/microblocks/{microblock_id}:
     get:
-      summary: 'Get a stream of microblocks beginning
-
-        with the given microblock (Epoch 2.x).
-
-        '
+      summary: Get a stream of microblocks beginning with the given microblock (Epoch 2.x)
       tags:
-      - Microblocks
+      - Micro Blocks
       security: []
       operationId: getMicroblockById
       parameters:
@@ -4415,14 +4412,12 @@ paths:
     get:
       summary: Get stream of unconfirmed microblocks (Epoch 2.x)
       tags:
-      - Microblocks
+      - Micro Blocks
       security: []
       operationId: getUnconfirmedMicroblocks
       description: 'Get unconfirmed microblocks starting from a specific sequence number.
 
-        The microblocks are returned as a binary stream.
-
-        '
+        The microblocks are returned as a binary stream.'
       parameters:
       - name: block_id
         in: path
@@ -4460,16 +4455,14 @@ paths:
     post:
       summary: Submit a microblock (Epoch 2.x)
       tags:
-      - Microblocks
+      - Micro Blocks
       security: []
       operationId: postMicroblock
       description: 'Submit a microblock to the node for validation and relay.
 
         The body **must** be the SIP-003 binary serialization of a `Microblock`
 
-        and sent with `Content-Type: application/octet-stream`.
-
-        '
+        and sent with `Content-Type: application/octet-stream`.'
       requestBody:
         required: true
         content:
@@ -4499,13 +4492,6 @@ paths:
       description: Local Stacks Node
 components:
   responses:
-    NotFound:
-      description: Not found
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Not found
     InternalServerError:
       description: Internal Server Error
       content:
@@ -4513,6 +4499,13 @@ components:
           schema:
             type: string
           example: Internal Server Error
+    NotFound:
+      description: Not found
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Not found
     BadRequest:
       description: Bad request
       content:

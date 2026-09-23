@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Token Metadata Tokens API
-  description: Welcome to the API reference overview for the [Token Metadata API](https://docs.hiro.so/token-metadata-api). Service that indexes metadata for every SIP-009, SIP-010, and SIP-013 Token in the Stacks blockchain and exposes it via REST API endpoints.
+  description: Welcome to the API reference overview for the Token Metadata API. Service that indexes metadata for every SIP-009, SIP-010, and SIP-013 Token in the Stacks blockchain and exposes it via REST API endpoints.
   version: v2.2.1
 servers:
 - url: https://api.hiro.so/
