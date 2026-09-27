@@ -544,30 +544,7 @@ paths:
     - url: http://localhost:20443
       description: Local Stacks Node
 components:
-  schemas:
-    NetworkPeers:
-      $ref: ./components/schemas/network-peers.schema.yaml
-    PoxInfo:
-      $ref: ./components/schemas/pox-info.schema.yaml
-    GetHealth:
-      $ref: ./components/schemas/get-health.schema.yaml
-    NodeInfo:
-      $ref: ./components/schemas/node-info.schema.yaml
   responses:
-    NotFound:
-      description: Not found
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Not found
-    InternalServerError:
-      description: Internal Server Error
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Internal Server Error
     BadRequest:
       description: Bad request
       content:
@@ -575,6 +552,29 @@ components:
           schema:
             type: string
           example: Bad request
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Internal Server Error
+    NotFound:
+      description: Not found
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Not found
+  schemas:
+    NodeInfo:
+      $ref: ./components/schemas/node-info.schema.yaml
+    PoxInfo:
+      $ref: ./components/schemas/pox-info.schema.yaml
+    GetHealth:
+      $ref: ./components/schemas/get-health.schema.yaml
+    NetworkPeers:
+      $ref: ./components/schemas/network-peers.schema.yaml
   securitySchemes:
     rpcAuth:
       type: apiKey

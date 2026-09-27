@@ -1080,28 +1080,26 @@ paths:
     - url: http://localhost:20443
       description: Local Stacks Node
 components:
+  schemas:
+    ReadOnlyFunctionResult:
+      $ref: ./components/schemas/read-only-function-result.schema.yaml
+    IsTraitImplemented:
+      $ref: ./components/schemas/is-trait-implemented.schema.yaml
+    ContractInterface:
+      $ref: ./components/schemas/contract-interface.schema.yaml
+    ClarityData:
+      $ref: ./components/schemas/clarity-data.schema.yaml
+    ConstantValue:
+      $ref: ./components/schemas/constant-value.schema.yaml
+    ClarityName:
+      $ref: ./components/schemas/clarity-name.schema.yaml
+    ClarityMetadata:
+      $ref: ./components/schemas/clarity-metadata.schema.yaml
+    ReadOnlyFunctionArgs:
+      $ref: ./components/schemas/read-only-function-args.schema.yaml
+    ContractSource:
+      $ref: ./components/schemas/contract-source.schema.yaml
   responses:
-    Unauthorized:
-      description: Unauthorized. Invalid or missing authentication token.
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Unauthorized
-    NotFound:
-      description: Not found
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Not found
-    InternalServerError:
-      description: Internal Server Error
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Internal Server Error
     BadRequest:
       description: Bad request
       content:
@@ -1109,6 +1107,13 @@ components:
           schema:
             type: string
           example: Bad request
+    Unauthorized:
+      description: Unauthorized. Invalid or missing authentication token.
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Unauthorized
     Timeout:
       description: Timeout
       content:
@@ -1116,25 +1121,20 @@ components:
           schema:
             type: string
           example: Timeout
-  schemas:
-    ReadOnlyFunctionArgs:
-      $ref: ./components/schemas/read-only-function-args.schema.yaml
-    ClarityMetadata:
-      $ref: ./components/schemas/clarity-metadata.schema.yaml
-    IsTraitImplemented:
-      $ref: ./components/schemas/is-trait-implemented.schema.yaml
-    ContractInterface:
-      $ref: ./components/schemas/contract-interface.schema.yaml
-    ConstantValue:
-      $ref: ./components/schemas/constant-value.schema.yaml
-    ClarityData:
-      $ref: ./components/schemas/clarity-data.schema.yaml
-    ContractSource:
-      $ref: ./components/schemas/contract-source.schema.yaml
-    ClarityName:
-      $ref: ./components/schemas/clarity-name.schema.yaml
-    ReadOnlyFunctionResult:
-      $ref: ./components/schemas/read-only-function-result.schema.yaml
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Internal Server Error
+    NotFound:
+      description: Not found
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Not found
   securitySchemes:
     rpcAuth:
       type: apiKey

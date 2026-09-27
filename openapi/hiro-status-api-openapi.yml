@@ -57,7 +57,7 @@ paths:
       description: testnet
   /metadata/v1/:
     get:
-      operationId: getApiStatus
+      operationId: getMetadataV1
       summary: API Status
       tags:
       - Status
@@ -97,6 +97,8 @@ paths:
                           - '0x1234567890abcdef1234567890abcdef1234567890abcdef'
                           type: string
                     - type: 'null'
+      x-operation-id-source: normalized
+      x-operation-id-original: getApiStatus
     servers:
     - url: https://api.hiro.so/
       description: mainnet

@@ -140,33 +140,7 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
-  schemas:
-    BlockUploadResponse:
-      $ref: ./components/schemas/block-upload-response.schema.yaml
-    BlockProposalResponse:
-      $ref: ./components/schemas/block-proposal.schema.yaml
   responses:
-    Unauthorized:
-      description: Unauthorized. Invalid or missing authentication token.
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Unauthorized
-    NotFound:
-      description: Not found
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Not found
-    InternalServerError:
-      description: Internal Server Error
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Internal Server Error
     BadRequest:
       description: Bad request
       content:
@@ -174,6 +148,32 @@ components:
           schema:
             type: string
           example: Bad request
+    Unauthorized:
+      description: Unauthorized. Invalid or missing authentication token.
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Unauthorized
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Internal Server Error
+    NotFound:
+      description: Not found
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Not found
+  schemas:
+    BlockUploadResponse:
+      $ref: ./components/schemas/block-upload-response.schema.yaml
+    BlockProposalResponse:
+      $ref: ./components/schemas/block-proposal.schema.yaml
   securitySchemes:
     rpcAuth:
       type: apiKey

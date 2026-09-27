@@ -2707,27 +2707,34 @@ paths:
       description: Local Stacks Node
 components:
   schemas:
-    BlockReplay:
-      $ref: ./components/schemas/block-replay.schema.yaml
     BlockUploadResponse:
       $ref: ./components/schemas/block-upload-response.schema.yaml
-    TenureForkInfo:
-      $ref: ./components/schemas/tenure-fork-info.schema.yaml
-    SignerBlocksSigned:
-      $ref: ./components/schemas/signer-blocks-signed.schema.yaml
+    TenureTip:
+      $ref: ./components/schemas/tenure-tip.schema.yaml
+    BlockReplay:
+      $ref: ./components/schemas/block-replay.schema.yaml
     TenureInfo:
       $ref: ./components/schemas/tenure-info.schema.yaml
-    BlockHeaders:
-      $ref: ./components/schemas/block-headers.schema.yaml
+    Sortitions:
+      $ref: ./components/schemas/sortitions.schema.yaml
     TenureTipMetadata:
       $ref: ./components/schemas/tenure-tip-metadata.schema.yaml
     TenureBlocks:
       $ref: ./components/schemas/tenure-blocks.schema.yaml
-    TenureTip:
-      $ref: ./components/schemas/tenure-tip.schema.yaml
-    Sortitions:
-      $ref: ./components/schemas/sortitions.schema.yaml
+    BlockHeaders:
+      $ref: ./components/schemas/block-headers.schema.yaml
+    SignerBlocksSigned:
+      $ref: ./components/schemas/signer-blocks-signed.schema.yaml
+    TenureForkInfo:
+      $ref: ./components/schemas/tenure-fork-info.schema.yaml
   responses:
+    BadRequest:
+      description: Bad request
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Bad request
     Unauthorized:
       description: Unauthorized. Invalid or missing authentication token.
       content:
@@ -2735,13 +2742,6 @@ components:
           schema:
             type: string
           example: Unauthorized
-    NotFound:
-      description: Not found
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Not found
     MethodNotAllowed:
       description: Method Not Allowed
       content:
@@ -2756,13 +2756,13 @@ components:
           schema:
             type: string
           example: Internal Server Error
-    BadRequest:
-      description: Bad request
+    NotFound:
+      description: Not found
       content:
         text/plain:
           schema:
             type: string
-          example: Bad request
+          example: Not found
   securitySchemes:
     rpcAuth:
       type: apiKey
