@@ -38139,6 +38139,13 @@ paths:
     - url: http://localhost:20443
       description: Local Stacks Node
 components:
+  schemas:
+    UnconfirmedTransaction:
+      $ref: ./components/schemas/unconfirmed-transaction.schema.yaml
+    TransactionInfo:
+      $ref: ./components/schemas/get-transaction.schema.yaml
+    TransactionSubmissionError:
+      $ref: ./components/schemas/transaction-submission-error.schema.yaml
   responses:
     BadRequest:
       description: Bad request
@@ -38161,13 +38168,6 @@ components:
           schema:
             type: string
           example: Not found
-  schemas:
-    TransactionSubmissionError:
-      $ref: ./components/schemas/transaction-submission-error.schema.yaml
-    UnconfirmedTransaction:
-      $ref: ./components/schemas/unconfirmed-transaction.schema.yaml
-    TransactionInfo:
-      $ref: ./components/schemas/get-transaction.schema.yaml
   securitySchemes:
     rpcAuth:
       type: apiKey

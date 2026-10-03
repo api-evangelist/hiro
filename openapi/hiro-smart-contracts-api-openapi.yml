@@ -1081,39 +1081,25 @@ paths:
       description: Local Stacks Node
 components:
   schemas:
-    ReadOnlyFunctionResult:
-      $ref: ./components/schemas/read-only-function-result.schema.yaml
-    IsTraitImplemented:
-      $ref: ./components/schemas/is-trait-implemented.schema.yaml
-    ContractInterface:
-      $ref: ./components/schemas/contract-interface.schema.yaml
-    ClarityData:
-      $ref: ./components/schemas/clarity-data.schema.yaml
-    ConstantValue:
-      $ref: ./components/schemas/constant-value.schema.yaml
-    ClarityName:
-      $ref: ./components/schemas/clarity-name.schema.yaml
-    ClarityMetadata:
-      $ref: ./components/schemas/clarity-metadata.schema.yaml
-    ReadOnlyFunctionArgs:
-      $ref: ./components/schemas/read-only-function-args.schema.yaml
     ContractSource:
       $ref: ./components/schemas/contract-source.schema.yaml
+    IsTraitImplemented:
+      $ref: ./components/schemas/is-trait-implemented.schema.yaml
+    ReadOnlyFunctionResult:
+      $ref: ./components/schemas/read-only-function-result.schema.yaml
+    ConstantValue:
+      $ref: ./components/schemas/constant-value.schema.yaml
+    ClarityData:
+      $ref: ./components/schemas/clarity-data.schema.yaml
+    ClarityMetadata:
+      $ref: ./components/schemas/clarity-metadata.schema.yaml
+    ContractInterface:
+      $ref: ./components/schemas/contract-interface.schema.yaml
+    ClarityName:
+      $ref: ./components/schemas/clarity-name.schema.yaml
+    ReadOnlyFunctionArgs:
+      $ref: ./components/schemas/read-only-function-args.schema.yaml
   responses:
-    BadRequest:
-      description: Bad request
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Bad request
-    Unauthorized:
-      description: Unauthorized. Invalid or missing authentication token.
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Unauthorized
     Timeout:
       description: Timeout
       content:
@@ -1121,13 +1107,13 @@ components:
           schema:
             type: string
           example: Timeout
-    InternalServerError:
-      description: Internal Server Error
+    Unauthorized:
+      description: Unauthorized. Invalid or missing authentication token.
       content:
         text/plain:
           schema:
             type: string
-          example: Internal Server Error
+          example: Unauthorized
     NotFound:
       description: Not found
       content:
@@ -1135,6 +1121,20 @@ components:
           schema:
             type: string
           example: Not found
+    BadRequest:
+      description: Bad request
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Bad request
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Internal Server Error
   securitySchemes:
     rpcAuth:
       type: apiKey

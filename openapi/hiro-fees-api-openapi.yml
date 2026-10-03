@@ -260,10 +260,10 @@ paths:
       description: Local Stacks Node
 components:
   schemas:
-    FeeTransactionResponse:
-      $ref: ./components/schemas/fee-transaction-response.schema.yaml
     FeeTransactionRequest:
       $ref: ./components/schemas/fee-transaction-request.schema.yaml
+    FeeTransactionResponse:
+      $ref: ./components/schemas/fee-transaction-response.schema.yaml
     FeeTransactionError:
       $ref: ./components/schemas/fee-transaction-error.schema.yaml
   responses:
