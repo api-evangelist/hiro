@@ -1080,33 +1080,7 @@ paths:
     - url: http://localhost:20443
       description: Local Stacks Node
 components:
-  schemas:
-    ContractSource:
-      $ref: ./components/schemas/contract-source.schema.yaml
-    IsTraitImplemented:
-      $ref: ./components/schemas/is-trait-implemented.schema.yaml
-    ReadOnlyFunctionResult:
-      $ref: ./components/schemas/read-only-function-result.schema.yaml
-    ConstantValue:
-      $ref: ./components/schemas/constant-value.schema.yaml
-    ClarityData:
-      $ref: ./components/schemas/clarity-data.schema.yaml
-    ClarityMetadata:
-      $ref: ./components/schemas/clarity-metadata.schema.yaml
-    ContractInterface:
-      $ref: ./components/schemas/contract-interface.schema.yaml
-    ClarityName:
-      $ref: ./components/schemas/clarity-name.schema.yaml
-    ReadOnlyFunctionArgs:
-      $ref: ./components/schemas/read-only-function-args.schema.yaml
   responses:
-    Timeout:
-      description: Timeout
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Timeout
     Unauthorized:
       description: Unauthorized. Invalid or missing authentication token.
       content:
@@ -1114,13 +1088,6 @@ components:
           schema:
             type: string
           example: Unauthorized
-    NotFound:
-      description: Not found
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Not found
     BadRequest:
       description: Bad request
       content:
@@ -1135,6 +1102,39 @@ components:
           schema:
             type: string
           example: Internal Server Error
+    NotFound:
+      description: Not found
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Not found
+    Timeout:
+      description: Timeout
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Timeout
+  schemas:
+    ClarityData:
+      $ref: ./components/schemas/clarity-data.schema.yaml
+    ClarityMetadata:
+      $ref: ./components/schemas/clarity-metadata.schema.yaml
+    ClarityName:
+      $ref: ./components/schemas/clarity-name.schema.yaml
+    ContractSource:
+      $ref: ./components/schemas/contract-source.schema.yaml
+    ContractInterface:
+      $ref: ./components/schemas/contract-interface.schema.yaml
+    ConstantValue:
+      $ref: ./components/schemas/constant-value.schema.yaml
+    IsTraitImplemented:
+      $ref: ./components/schemas/is-trait-implemented.schema.yaml
+    ReadOnlyFunctionArgs:
+      $ref: ./components/schemas/read-only-function-args.schema.yaml
+    ReadOnlyFunctionResult:
+      $ref: ./components/schemas/read-only-function-result.schema.yaml
   securitySchemes:
     rpcAuth:
       type: apiKey

@@ -2706,28 +2706,14 @@ paths:
     - url: http://localhost:20443
       description: Local Stacks Node
 components:
-  schemas:
-    TenureTipMetadata:
-      $ref: ./components/schemas/tenure-tip-metadata.schema.yaml
-    BlockHeaders:
-      $ref: ./components/schemas/block-headers.schema.yaml
-    Sortitions:
-      $ref: ./components/schemas/sortitions.schema.yaml
-    BlockReplay:
-      $ref: ./components/schemas/block-replay.schema.yaml
-    TenureForkInfo:
-      $ref: ./components/schemas/tenure-fork-info.schema.yaml
-    TenureTip:
-      $ref: ./components/schemas/tenure-tip.schema.yaml
-    SignerBlocksSigned:
-      $ref: ./components/schemas/signer-blocks-signed.schema.yaml
-    BlockUploadResponse:
-      $ref: ./components/schemas/block-upload-response.schema.yaml
-    TenureBlocks:
-      $ref: ./components/schemas/tenure-blocks.schema.yaml
-    TenureInfo:
-      $ref: ./components/schemas/tenure-info.schema.yaml
   responses:
+    MethodNotAllowed:
+      description: Method Not Allowed
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: 'Method Not Allowed. Allowed: GET'
     Unauthorized:
       description: Unauthorized. Invalid or missing authentication token.
       content:
@@ -2742,20 +2728,6 @@ components:
           schema:
             type: string
           example: Bad request
-    MethodNotAllowed:
-      description: Method Not Allowed
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: 'Method Not Allowed. Allowed: GET'
-    NotFound:
-      description: Not found
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Not found
     InternalServerError:
       description: Internal Server Error
       content:
@@ -2763,6 +2735,34 @@ components:
           schema:
             type: string
           example: Internal Server Error
+    NotFound:
+      description: Not found
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Not found
+  schemas:
+    BlockHeaders:
+      $ref: ./components/schemas/block-headers.schema.yaml
+    TenureTip:
+      $ref: ./components/schemas/tenure-tip.schema.yaml
+    TenureForkInfo:
+      $ref: ./components/schemas/tenure-fork-info.schema.yaml
+    TenureInfo:
+      $ref: ./components/schemas/tenure-info.schema.yaml
+    BlockReplay:
+      $ref: ./components/schemas/block-replay.schema.yaml
+    SignerBlocksSigned:
+      $ref: ./components/schemas/signer-blocks-signed.schema.yaml
+    BlockUploadResponse:
+      $ref: ./components/schemas/block-upload-response.schema.yaml
+    TenureBlocks:
+      $ref: ./components/schemas/tenure-blocks.schema.yaml
+    Sortitions:
+      $ref: ./components/schemas/sortitions.schema.yaml
+    TenureTipMetadata:
+      $ref: ./components/schemas/tenure-tip-metadata.schema.yaml
   securitySchemes:
     rpcAuth:
       type: apiKey

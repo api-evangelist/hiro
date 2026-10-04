@@ -206,15 +206,6 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
-  schemas:
-    StackerDbChunkAckData:
-      $ref: ./components/schemas/stackerdb-chunk-ack-data.schema.yaml
-    StackerDbMetadata:
-      $ref: ./components/schemas/stackerdb-metadata.schema.yaml
-    StackerDbChunkData:
-      $ref: ./components/schemas/stackerdb-chunk-data.schema.yaml
-    StackerDbReplicas:
-      $ref: ./components/schemas/stackerdb-replicas.schema.yaml
   responses:
     BadRequest:
       description: Bad request
@@ -237,6 +228,15 @@ components:
           schema:
             type: string
           example: Not found
+  schemas:
+    StackerDbChunkAckData:
+      $ref: ./components/schemas/stackerdb-chunk-ack-data.schema.yaml
+    StackerDbReplicas:
+      $ref: ./components/schemas/stackerdb-replicas.schema.yaml
+    StackerDbChunkData:
+      $ref: ./components/schemas/stackerdb-chunk-data.schema.yaml
+    StackerDbMetadata:
+      $ref: ./components/schemas/stackerdb-metadata.schema.yaml
   securitySchemes:
     rpcAuth:
       type: apiKey

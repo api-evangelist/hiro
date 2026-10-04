@@ -549,10 +549,10 @@ components:
       $ref: ./components/schemas/network-peers.schema.yaml
     GetHealth:
       $ref: ./components/schemas/get-health.schema.yaml
-    PoxInfo:
-      $ref: ./components/schemas/pox-info.schema.yaml
     NodeInfo:
       $ref: ./components/schemas/node-info.schema.yaml
+    PoxInfo:
+      $ref: ./components/schemas/pox-info.schema.yaml
   responses:
     BadRequest:
       description: Bad request

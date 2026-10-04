@@ -262,10 +262,10 @@ components:
   schemas:
     FeeTransactionRequest:
       $ref: ./components/schemas/fee-transaction-request.schema.yaml
-    FeeTransactionResponse:
-      $ref: ./components/schemas/fee-transaction-response.schema.yaml
     FeeTransactionError:
       $ref: ./components/schemas/fee-transaction-error.schema.yaml
+    FeeTransactionResponse:
+      $ref: ./components/schemas/fee-transaction-response.schema.yaml
   responses:
     InternalServerError:
       description: Internal Server Error
