@@ -13846,17 +13846,7 @@ paths:
     - url: http://localhost:20443
       description: Local Stacks Node
 components:
-  schemas:
-    AccountData:
-      $ref: ./components/schemas/account-data.schema.yaml
   responses:
-    BadRequest:
-      description: Bad request
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Bad request
     InternalServerError:
       description: Internal Server Error
       content:
@@ -13871,6 +13861,16 @@ components:
           schema:
             type: string
           example: Not found
+    BadRequest:
+      description: Bad request
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Bad request
+  schemas:
+    AccountData:
+      $ref: ./components/schemas/account-data.schema.yaml
   securitySchemes:
     rpcAuth:
       type: apiKey

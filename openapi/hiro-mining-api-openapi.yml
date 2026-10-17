@@ -141,20 +141,6 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   responses:
-    Unauthorized:
-      description: Unauthorized. Invalid or missing authentication token.
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Unauthorized
-    BadRequest:
-      description: Bad request
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Bad request
     InternalServerError:
       description: Internal Server Error
       content:
@@ -162,6 +148,13 @@ components:
           schema:
             type: string
           example: Internal Server Error
+    Unauthorized:
+      description: Unauthorized. Invalid or missing authentication token.
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Unauthorized
     NotFound:
       description: Not found
       content:
@@ -169,6 +162,13 @@ components:
           schema:
             type: string
           example: Not found
+    BadRequest:
+      description: Bad request
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Bad request
   schemas:
     BlockUploadResponse:
       $ref: ./components/schemas/block-upload-response.schema.yaml

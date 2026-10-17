@@ -345,19 +345,7 @@ paths:
     - url: http://localhost:20443
       description: Local Stacks Node
 components:
-  schemas:
-    GetStackerSet:
-      $ref: ./components/schemas/get-stacker-set.schema.yaml
-    SignerBlocksSigned:
-      $ref: ./components/schemas/signer-blocks-signed.schema.yaml
   responses:
-    BadRequest:
-      description: Bad request
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Bad request
     InternalServerError:
       description: Internal Server Error
       content:
@@ -372,6 +360,18 @@ components:
           schema:
             type: string
           example: Not found
+    BadRequest:
+      description: Bad request
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Bad request
+  schemas:
+    SignerBlocksSigned:
+      $ref: ./components/schemas/signer-blocks-signed.schema.yaml
+    GetStackerSet:
+      $ref: ./components/schemas/get-stacker-set.schema.yaml
   securitySchemes:
     rpcAuth:
       type: apiKey

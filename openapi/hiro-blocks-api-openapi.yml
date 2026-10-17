@@ -2707,27 +2707,6 @@ paths:
       description: Local Stacks Node
 components:
   responses:
-    MethodNotAllowed:
-      description: Method Not Allowed
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: 'Method Not Allowed. Allowed: GET'
-    Unauthorized:
-      description: Unauthorized. Invalid or missing authentication token.
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Unauthorized
-    BadRequest:
-      description: Bad request
-      content:
-        text/plain:
-          schema:
-            type: string
-          example: Bad request
     InternalServerError:
       description: Internal Server Error
       content:
@@ -2735,6 +2714,20 @@ components:
           schema:
             type: string
           example: Internal Server Error
+    Unauthorized:
+      description: Unauthorized. Invalid or missing authentication token.
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Unauthorized
+    MethodNotAllowed:
+      description: Method Not Allowed
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: 'Method Not Allowed. Allowed: GET'
     NotFound:
       description: Not found
       content:
@@ -2742,27 +2735,34 @@ components:
           schema:
             type: string
           example: Not found
+    BadRequest:
+      description: Bad request
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: Bad request
   schemas:
     BlockHeaders:
       $ref: ./components/schemas/block-headers.schema.yaml
-    TenureTip:
-      $ref: ./components/schemas/tenure-tip.schema.yaml
-    TenureForkInfo:
-      $ref: ./components/schemas/tenure-fork-info.schema.yaml
-    TenureInfo:
-      $ref: ./components/schemas/tenure-info.schema.yaml
     BlockReplay:
       $ref: ./components/schemas/block-replay.schema.yaml
-    SignerBlocksSigned:
-      $ref: ./components/schemas/signer-blocks-signed.schema.yaml
-    BlockUploadResponse:
-      $ref: ./components/schemas/block-upload-response.schema.yaml
-    TenureBlocks:
-      $ref: ./components/schemas/tenure-blocks.schema.yaml
-    Sortitions:
-      $ref: ./components/schemas/sortitions.schema.yaml
     TenureTipMetadata:
       $ref: ./components/schemas/tenure-tip-metadata.schema.yaml
+    Sortitions:
+      $ref: ./components/schemas/sortitions.schema.yaml
+    TenureForkInfo:
+      $ref: ./components/schemas/tenure-fork-info.schema.yaml
+    SignerBlocksSigned:
+      $ref: ./components/schemas/signer-blocks-signed.schema.yaml
+    TenureBlocks:
+      $ref: ./components/schemas/tenure-blocks.schema.yaml
+    TenureInfo:
+      $ref: ./components/schemas/tenure-info.schema.yaml
+    BlockUploadResponse:
+      $ref: ./components/schemas/block-upload-response.schema.yaml
+    TenureTip:
+      $ref: ./components/schemas/tenure-tip.schema.yaml
   securitySchemes:
     rpcAuth:
       type: apiKey
