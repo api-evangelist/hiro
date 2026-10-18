@@ -299,6 +299,8 @@ apis:
   humanURL: https://docs.hiro.so/stacks/api
   baseURL: https://api.mainnet.hiro.so
   tags:
+  - NFT
+  tags_raw:
   - Non-Fungible Tokens
   properties:
   - type: OpenAPI
